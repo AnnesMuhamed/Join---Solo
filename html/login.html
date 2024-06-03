@@ -8,44 +8,10 @@
     <script src="script.js"></script>
     
 </head>
-<body onload="includeHTML()">
-     <div id="overlay">
-        <div id="logo-container">
-            <img src="/img/logo.png" alt="Logo" id="main-logo">
-        </div>
-        <div class="signup-container">
-            <span class="not-a-user">Not a Join user?</span>
-            <button class="signup-button">Sign up</button>
-        </div>
-    </div>
-    <div id="login-page" class="hidden">
-        <div>
-            <h1 class="login-headline">Log in</h1>
-            <img class="blue-line" src="/img/Vector 5.png" alt="">
-        </div>
-        <div>
-            <form>
-                <div class="input-container">
-                    <input type="email" id="username" minlength="9" placeholder="Email"  required>
-                    <img src="/img/mail.png" alt="" class="input-icon">
-                </div>
-                <div class="input-container">
-                    <input type="password" id="password" minlength="4" placeholder="Password" required>
-                    <img src="/img/lock.png" alt="" class="input-icon">
-                </div>
-                <label class="option" for="option"><input type="checkbox" name="option" id="">Remember me</label>
-            </form>
-        </div>
-        <div class="button-container">
-            <button type="submit" class="login-button">Log in</button>
-            <button type="submit" class="guest-button">Guest Log in</button>
-        </div>
+<body onload="initialize()">
+     <div id="sectionLogin">
         
-    </div>
-    <div class="link-container">
-        <a class="policy-notice" href="#">Privacy Policy</a>
-        <a class="policy-notice" href="#">Legal notice</a>
-    </div>
+     </div>
     <script src="/js/login.js"></script>
     
 </body>

@@ -10,6 +10,14 @@ body, html {
   font-family: 'circular';
 }
 
+#sectionLogin {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #overlay {
   position: absolute;
   width: 1440px;
@@ -24,11 +32,11 @@ body, html {
 .signup-container {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   position: fixed;
-  width: 279px;
+  width: 1200px;
   height: 49px;
   top: 67px;
-  left: 1400px;
   gap: 35px;
 }
 
@@ -56,10 +64,12 @@ body, html {
 
 #logo-container {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  position: fixed;
   width: 274px;
   height: 334.07px;
+  top: 80px;
   transition: all 100ms ease-in-out;
 }
 
@@ -76,13 +86,18 @@ body, html {
 }
 
 .show {
-  display: block;
+  display: flex;
 }
 
 .move-to-corner {
   position: fixed;
   top: 10px;
   left: 10px;
+  width: 100.03px;
+  height: 121.97px;
+}
+
+.move-to-corner #main-logo {
   width: 100.03px;
   height: 121.97px;
 }
@@ -132,6 +147,15 @@ form {
   position: relative;
 }
 
+input[type="email"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  padding-right: 40px; /* Platz für das Icon */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
 .input-icon {
   position: absolute;
   right: 10px;
@@ -140,15 +164,6 @@ form {
   width: 20px;
   height: 16px;
   pointer-events: none;
-}
-
-input[type="email"], input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  padding-right: 40px; /* Platz für das Icon */
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
 }
 
 #username {
@@ -179,7 +194,8 @@ input[type="email"], input[type="password"] {
 
 .button-container {
   display: flex;
-  width: 322px;
+  justify-content: center;
+  width: 380px;
   height: 48px;
   gap: 35px;
 }
@@ -215,13 +231,19 @@ input[type="email"], input[type="password"] {
 }
 
 .link-container {
+  display: none; /* Verstecke den Link-Container standardmäßig */
+  justify-content: center;
   display: flex;
   position: fixed;
-  width: 246px;
+  width: 100%;
   height: 35px;
   top: 949px;
   gap: 16px;
   opacity: 0.5;
+}
+
+.link-container.show {
+  display: flex; /* Zeige den Link-Container an, wenn die Klasse 'show' hinzugefügt wird */
 }
 
 .policy-notice {
