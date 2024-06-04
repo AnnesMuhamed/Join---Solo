@@ -8,7 +8,9 @@ function init() {
 
     <div class="container">
         <div class="header-container">
-            <img src="/img/arrow-left-line.png" alt="Zurück" class="back-arrow" onclick="href=login.html">
+        <a href="login.html">    
+        <img src="/img/arrow-left-line.png" alt="Zurück" class="back-arrow" onclick="href=login.html">
+        </a>
             <div class="header">
                 Sign Up
             </div>
@@ -37,6 +39,10 @@ function init() {
             </div>
             <button type="submit" class="sign-up-button">Sign Up</button>
         </form>
+    </div>
+    <div class="link-container">
+        <a class="policy-notice" href="#">Privacy Policy</a>
+        <a class="policy-notice" href="#">Legal notice</a>
     </div>
     `;
 }
