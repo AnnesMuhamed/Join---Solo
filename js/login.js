@@ -13,7 +13,7 @@ function loginPage() {
             <img class="blue-line" src="/img/Vector 5.png" alt="">
         </div>
         <form>
-            <label class="input-container">
+            <label class="input-container" >
                 <input type="email" id="username" minlength="9" placeholder="Email" required>
                 <img src="/img/mail.png" alt="Email Icon" class="input-icon">
             </label>
@@ -32,7 +32,7 @@ function loginPage() {
     </div>
     <div class="signup-container hidden">
         <span class="not-a-user">Not a Join user?</span>
-        <button class="signup-button">Sign up</button>
+        <a href="sign-up.html"><button class="signup-button">Sign up</button></a>
     </div>
     <div class="link-container hidden">
         <a class="policy-notice" href="#">Privacy Policy</a>
@@ -63,7 +63,6 @@ function initialize() {
         
         signupContainer.classList.remove('hidden');
         linkContainer.classList.remove('hidden');
-        linkContainer.classList.remove('hidden');
 
 
         
@@ -72,5 +71,5 @@ function initialize() {
             overlay.style.height = '0';
             overlay.style.overflow = 'hidden';
         }, 500);
-    }, 3200); 
+    }, 3000); 
 }
