@@ -10,30 +10,29 @@
 
 <body>
 
-    <div class="container">
-        <nav class="sidebar">
-            <div class="logo">
-                <img src="/img/template/templateLogoJoin.png" class="logo-img">
+    <div class="container-template">
+        <div class="header">
+            <span class="headline">Kanban Project Management Tool</span>
+            <div class="header-right">
+                <img src="/img/template/help.png" class="help-button" onClick="window.open('/html/help.html');"><span
+                    class="user" onclick="openSubMenu()">CK</span>
             </div>
-            <ul class="menu-icons">
-                <li><img src="/img/template/summary.png">Summary</li>
-                <li><img src="/img/template/task.png">Add Task</li>
-                <li><img src="/img/template/board.png">Board</li>
-                <li><img src="/img/template/contacts.png">Contacts</li>
-            </ul>
-            <div class="sidebar-footer">
-                <span onClick="window.open('/html/privacy-policy.html');">Privacy Policy</span>
-                <span onClick="window.open('/html/legal-notice.html');">Legal notice</span>
+        </div>
+        <nav class="sidebar">
+            <img src="/img/template/templateLogoJoin.png" class="sidebar-logo">
+            <div class="menu">
+                <button class="menu-button summary" onclick="#"><img src="/img/template/summary.png">Summary</button>
+                <button class="menu-button add-task" onclick="#"><img src="/img/template/task.png">Add Task</button>
+                <button class="menu-button board" onclick="#"><img src="/img/template/board.png">Board</button>
+                <button class="menu-button contact" onclick="#"><img src="/img/template/contacts.png">Contacts</button>
+            </div>
+            <div class="sidebar-bottom">
+                <button class="menu-button privacy-policy" onClick="window.open('/html/privacy-policy.html');">Privacy Policy</button>
+                <button class="menu-button legal-notice" onClick="window.open('/html/legal-notice.html');">Legal Notice</button>
             </div>
         </nav>
     </div>
-    <div class="header">
-        <span class="headline">Kanban Project Management Tool</span>
-        <div class="profile">
-            <img src="/img/template/help.png" class="help-button" onClick="window.open('/html/help.html');"><span
-                class="user">SM</span>
-        </div>
-    </div>
+
 
 </body>
 
