@@ -64,11 +64,11 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
+    width: 100%;
 }
 
 .container-template {
     display: flex;
-    flex-direction: column;
 }
 
 .header {
