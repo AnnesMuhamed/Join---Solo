@@ -1,35 +1,29 @@
 body {
+    margin: 0; 
     font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19.2px;
-    margin: 20px;
+    width: 1440px;
+    height: 1024px;
 }
 
-h1 {
-    font-size: 2em;
-    margin-bottom: 20px;
+.main-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    top: 206px;
+    left: 96px;
+    gap: 30px;
 }
 
-h2 {
-    font-size: 1.5em;
-    margin: 10px 0;
+.headline-p {
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 73.2px;
 }
 
 .join {
     color: #82CCEC;
 }
 
-.number-and-headline {
+.number-and-headline{
     display: flex;
-    align-items: center;
-    margin: 20px 0;
-}
-
-.number-and-headline .number {
-    margin-right: 10px;
-}
-
-p {
-    margin: 10px 0;
 }
