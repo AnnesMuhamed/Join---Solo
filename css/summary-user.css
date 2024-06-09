@@ -284,6 +284,7 @@ body {
     animation-timing-function: ease-out;
     animation-duration: 80ms;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .card-one:hover {
@@ -359,6 +360,7 @@ body {
     animation-timing-function: ease-out;
     animation-duration: 80ms;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .card-two:hover {
@@ -435,6 +437,7 @@ body {
     background: #FFFFFF;
     box-shadow: 0px 0px 4px 0px #0000001A;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .second-card-section:hover {
@@ -538,6 +541,7 @@ body {
     background: #FFFFFF;
     box-shadow: 0px 0px 4px 0px #0000001A;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .card-four:hover, .card-five:hover, .card-six:hover {
