@@ -252,12 +252,13 @@ body {
     font-weight: 400;
     font-size: 27px;
     line-height: 32.4px;
+    position: absolute;
 }
 
 .summary-cards {
     display: flex;
     flex-direction: column;
-    position: fixed;
+    position: absolute;
     width: 560px;
     height: 562px;
     top: 335px;
@@ -533,7 +534,6 @@ body {
     align-items: center;
     justify-content: center;
     width: 168px;
-    height: 168px;
     top: 1px;
     padding: 25px;
     gap: 13px;
