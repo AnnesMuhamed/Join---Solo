@@ -228,7 +228,7 @@ body {
 
 .summary-headline {
     display: flex;
-    position: fixed;
+    position: absolute;
     width: 625px;
     height: 73px;
     top: 206px;
@@ -252,7 +252,6 @@ body {
     font-weight: 400;
     font-size: 27px;
     line-height: 32.4px;
-    position: absolute;
 }
 
 .summary-cards {
