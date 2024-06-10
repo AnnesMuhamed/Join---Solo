@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help</title>
     <link rel="stylesheet" href="/css/template.css">
+    <link rel="stylesheet" href="/css/help.css">
     <script src="/js/script.js" defer></script>
+    <script src="/js/help.js"></script>
 </head>
 
 <body>
@@ -35,14 +37,12 @@
                 <button class="menu-button legal-notice font-size"
                     onClick="window.open('/html/legal-notice.html');">Legal Notice</button>
             </div>
-
-
         </nav>
 
         <div class="main-container">
 
             <div class="headline-and-arrow">
-                <p class="headline-p">Help</p> <img class="arrow" src="/img/help/back-arrow-help.png">
+                <p class="headline-p">Help</p> <img onclick="goBack()" class="arrow" src="/img/help/back-arrow-help.png">
             </div>
 
             <div class="span-container">

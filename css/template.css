@@ -106,6 +106,10 @@ body {
 .help-button {
     width: 32px;
     height: 32px;
+    cursor: pointer;
+}
+.help-button:hover{
+    scale: 1.2;
 }
 
 .user {
@@ -114,6 +118,7 @@ body {
     width: 56px;
     height: 56px;
     gap: 16px;
+    cursor: pointer;
 }
 
 .sidebar {

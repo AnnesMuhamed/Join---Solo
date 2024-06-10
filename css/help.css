@@ -1,9 +1,4 @@
-body {
-    margin: 0; 
-    font-family: 'Inter', sans-serif;
-    width: 1440px;
-    height: 1024px;
-}
+
 
 .main-container {
     position: relative;
@@ -14,12 +9,13 @@ body {
     gap: 30px;
 }
 
-.headline-and-arrow{
+.headline-and-arrow {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-.arrow{
+.arrow {
     width: 21.33px;
     height: 20.74px;
 }
@@ -35,6 +31,12 @@ body {
     color: #82CCEC;
 }
 
-.number-and-headline{
+.number-and-headline {
     display: flex;
+}
+
+.span-container {
+    overflow: auto;
+    max-width: 1440px;
+    height: 928px;
 }
