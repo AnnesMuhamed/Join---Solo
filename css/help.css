@@ -1,12 +1,17 @@
-
-
 .main-container {
-    position: relative;
+    height: 1024px;
+    width: 1342px;
     display: flex;
+    position: relative;
     flex-direction: column;
     top: 206px;
     left: 96px;
     gap: 30px;
+    overflow: auto;
+}
+
+.span-container {
+    gap: 24px;
 }
 
 .headline-and-arrow {
@@ -20,11 +25,33 @@
     height: 20.74px;
 }
 
-.headline-p {
+.arrow:hover {
+    scale: 1.2;
+}
+
+.headline-main {
     font-size: 61px;
     font-weight: 700;
     line-height: 73.2px;
     margin: 0;
+}
+
+.sub-headline {
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 32.4px;
+}
+
+.sub-sub-headline {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.number {
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 32.4px;
 }
 
 .join {
@@ -33,10 +60,7 @@
 
 .number-and-headline {
     display: flex;
-}
-
-.span-container {
-    overflow: auto;
-    max-width: 1440px;
-    height: 928px;
+    width: auto;
+    height: 61px;
+    gap: 35px;
 }
