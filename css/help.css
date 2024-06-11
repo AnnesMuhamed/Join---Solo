@@ -25,6 +25,10 @@
     height: 20.74px;
 }
 
+.help-button {
+    display: none;
+}
+
 .arrow:hover {
     transform: scale(1.2);
     cursor: pointer;
