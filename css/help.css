@@ -27,6 +27,7 @@
 
 .arrow:hover {
     transform: scale(1.2);
+    cursor: pointer;
 }
 
 .headline-main {
@@ -79,4 +80,8 @@ ul {
     display: flex;
     align-items: flex-start;
     gap: 35px;
+}
+
+p {
+    margin-top: 0;
 }
