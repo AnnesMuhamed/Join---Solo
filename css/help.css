@@ -26,7 +26,7 @@
 }
 
 .arrow:hover {
-    scale: 1.2;
+    transform: scale(1.2);
 }
 
 .headline-main {
@@ -60,7 +60,23 @@
 
 .number-and-headline {
     display: flex;
-    width: auto;
-    height: 61px;
+    align-items: center;
+    gap: 35px;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.li-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.li-flexbox {
+    display: flex;
+    align-items: flex-start;
     gap: 35px;
 }
