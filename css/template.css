@@ -175,7 +175,7 @@ body {
 
 .menu-button:hover {
     cursor: pointer;
-    background-color: #091931;
+    background-color: rgb(42, 61, 89);
 }
 
 .sidebar-bottom {
