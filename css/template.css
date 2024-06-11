@@ -1,13 +1,13 @@
 @font-face {
     font-family: 'Inter';
-    font-weight: 400;
-    src: url('/fonts/Inter/static/Inter-Regular.ttf') format('truetype');
+    font-weight: 100;
+    src: url('/fonts/Inter/static/Inter-Thin.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Inter';
-    font-weight: 700;
-    src: url('/fonts/Inter/static/Inter-Bold.ttf') format('truetype');
+    font-weight: 200;
+    src: url('/fonts/Inter/static/Inter-ExtraLight.ttf') format('truetype');
 }
 
 @font-face {
@@ -18,20 +18,8 @@
 
 @font-face {
     font-family: 'Inter';
-    font-weight: 800;
-    src: url('/fonts/Inter/static/Inter-ExtraBold.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Inter';
-    font-weight: 900;
-    src: url('/fonts/Inter/static/Inter-Black.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'Inter';
-    font-weight: 200;
-    src: url('/fonts/Inter/static/Inter-ExtraLight.ttf') format('truetype');
+    font-weight: 400;
+    src: url('/fonts/Inter/static/Inter-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -48,8 +36,20 @@
 
 @font-face {
     font-family: 'Inter';
-    font-weight: 100;
-    src: url('/fonts/Inter/static/Inter-Thin.ttf') format('truetype');
+    font-weight: 700;
+    src: url('/fonts/Inter/static/Inter-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 800;
+    src: url('/fonts/Inter/static/Inter-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 900;
+    src: url('/fonts/Inter/static/Inter-Black.ttf') format('truetype');
 }
 
 @font-face {
@@ -67,7 +67,6 @@ body {
     width: 1440px;
     height: 1024px;
     background-color: #F6F7F8;
-    ;
 }
 
 .container-template {
@@ -94,8 +93,7 @@ body {
 }
 
 .headline {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400px;
+    font-weight: 400;
     font-size: 20px;
     line-height: 24px;
     width: 319px;
@@ -117,7 +115,7 @@ body {
 }
 
 .help-button:hover {
-    scale: 1.2;
+    transform: scale(1.1);
 }
 
 .user {
@@ -131,12 +129,11 @@ body {
 
 .sidebar {
     display: flex;
-    align-items: center;
     flex-direction: column;
     justify-content: space-between;
     width: 232px;
     height: 896px;
-    padding: 64px 0px 64px 0px;
+    padding: 64px 0;
     background-color: #2A3647;
     z-index: 1;
 }
@@ -144,11 +141,13 @@ body {
 .sidebar-logo {
     width: 100.03px;
     height: 121.97px;
+    padding-bottom: 114px;
 }
 
 .top-sidebar-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .menu {
@@ -159,46 +158,19 @@ body {
     gap: 15px;
 }
 
-.summary {
-    display: flex;
-    align-items: center;
-    width: 232px;
-    height: 46px;
-    padding: 8px 56px 8px 56px;
-    gap: 8px;
-}
-
-.add-task {
-    display: flex;
-    align-items: center;
-    width: 232px;
-    height: 46px;
-    padding: 8px 56px 8px 56px;
-    gap: 8px;
-}
-
-.board {
-    display: flex;
-    align-items: center;
-    width: 232px;
-    height: 46px;
-    padding: 8px 56px 8px 56px;
-    gap: 8px;
-}
-
-.contact {
-    display: flex;
-    align-items: center;
-    width: 232px;
-    height: 46px;
-    padding: 8px 56px 8px 56px;
-    gap: 8px;
-}
-
 .menu-button {
+    display: flex;
+    align-items: center;
+    width: 232px;
+    height: 46px;
+    padding: 8px 56px;
+    gap: 8px;
     background-color: #2A3647;
     border: none;
     color: white;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
 }
 
 .menu-button:hover {
@@ -216,30 +188,14 @@ body {
     color: white;
 }
 
-.privacy-policy {
-    display: flex;
-    align-items: center;
-    width: 232px;
-    height: 46px;
-    padding: 8px 56px 8px 56px;
-    gap: 8px;
-    font-size: 16px;
-    font-weight: 400;
-}
-
+.privacy-policy,
 .legal-notice {
     display: flex;
     align-items: center;
     width: 232px;
     height: 46px;
-    padding: 8px 56px 8px 56px;
+    padding: 8px 56px;
     gap: 8px;
     font-size: 16px;
     font-weight: 400;
-}
-
-.font-size {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19.2;
 }
