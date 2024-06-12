@@ -1,0 +1,302 @@
+@font-face {
+  font-family: 'Inter';
+  font-weight: 400;
+  src: url('fonts/Inter/static/Inter-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 700;
+  src: url('fonts/Inter/static/Inter-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 300;
+  src: url('fonts/Inter/static/Inter-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 800;
+  src: url('fonts/Inter/static/Inter-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 900;
+  src: url('fonts/Inter/static/Inter-Black.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 200;
+  src: url('fonts/Inter/static/Inter-ExtraLight.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 500;
+  src: url('fonts/Inter/static/Inter-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 600;
+  src: url('fonts/Inter/static/Inter-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 100;
+  src: url('fonts/Inter/static/Inter-Thin.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: normal;
+  font-style: italic;
+  src: url('fonts/Inter/static/Inter-VariableFont_slnt,wght.ttf') format('truetype');
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background: #F6F7F8;
+  font-family: 'Inter', sans-serif;
+}
+
+#sectionLogin {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#overlay {
+  position: absolute;
+  width: 1440px;
+  height: 1024px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #F6F7F8;
+  transition: opacity 500ms ease-in-out;
+
+}
+
+.signup-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: fixed;
+  width: 1200px;
+  height: 49px;
+  top: 67px;
+  gap: 35px;
+  transition: opacity 500ms ease-in-out;
+}
+
+.not-a-user {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+
+.signup-button {
+  width: 91px;
+  height: 49px;
+  padding: 12px 14px 14px 14px;
+  gap: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19.2px;
+  text-align: left;
+  background: #2A3647;
+  color: white;
+  cursor: pointer;
+}
+
+#logo-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 274px;
+  height: 334.07px;
+  top: 80px;
+  transition: all 100ms ease-in-out;
+}
+
+#main-logo {
+  width: 274px;
+  height: 334.07px;
+  transition: all 100ms ease-in-out;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: flex;
+}
+
+.move-to-corner {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: 100.03px;
+  height: 121.97px;
+}
+
+.move-to-corner #main-logo {
+  width: 100.03px;
+  height: 121.97px;
+}
+
+#login-page {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 30px;
+  width: 652px;
+  height: 493px;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0px 0px 14px 3px #0000000A;
+  background-color: white;
+}
+
+.login-headline {
+  font-weight: 700;
+  font-size: 61px;
+  display: block;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.blue-line {
+  margin-left: 22px;
+  width: 135px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-container {
+  position: relative;
+}
+
+input[type="email"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.input-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 16px;
+  pointer-events: none;
+}
+
+#username {
+  width: 380px;
+  padding: 12px 21px 12px 21px;
+  gap: 10px;
+  border-radius: 10px;
+  border: 1px solid;
+  opacity: 0.5;
+  box-sizing: border-box;
+}
+
+#password {
+  width: 380px;
+  padding: 12px 21px 12px 21px;
+  gap: 10px;
+  border-radius: 10px;
+  border: 1px solid;
+  opacity: 0.5;
+  box-sizing: border-box;
+}
+
+.option {
+  display: flex;
+  padding: 15px;
+  gap: 8px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  width: 380px;
+  height: 48px;
+  gap: 35px;
+}
+
+.login-button {
+  width: 110px;
+  height: 48px;
+  padding: 9px 18px 10px 22px;
+  gap: 10px;
+  border-radius: 8px;
+  background: #2A3647;
+  color: white;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 25.2px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.guest-button {
+  width: 177px;
+  height: 48px;
+  padding: 9px 18px 10px 22px;
+  gap: 10px;
+  border-radius: 8px;
+  border: 1px;
+  color: #2A3647;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 25.2px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.link-container {
+  display: none;
+  justify-content: center;
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 35px;
+  top: 949px;
+  gap: 16px;
+  opacity: 0.5;
+  transition: opacity 500ms ease-in-out;
+}
+
+.link-container.show {
+  display: flex;
+}
+
+.policy-notice {
+  text-decoration: none;
+  color: #A8A8A8;
+}
