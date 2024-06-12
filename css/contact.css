@@ -1,0 +1,277 @@
+@font-face {
+    font-family: 'Inter';
+    font-weight: 400;
+    src: url('/fonts/Inter/static/Inter-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 700;
+    src: url('/fonts/Inter/static/Inter-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 300;
+    src: url('/fonts/Inter/static/Inter-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 800;
+    src: url('/fonts/Inter/static/Inter-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 900;
+    src: url('/fonts/Inter/static/Inter-Black.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 200;
+    src: url('/fonts/Inter/static/Inter-ExtraLight.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 500;
+    src: url('/fonts/Inter/static/Inter-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 600;
+    src: url('/fonts/Inter/static/Inter-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 100;
+    src: url('/fonts/Inter/static/Inter-Thin.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: normal;
+    font-style: italic;
+    src: url('/fonts/Inter/static/Inter-VariableFont_slnt,wght.ttf') format('truetype');
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    width: 100%;
+    background-color: #F6F7F8;
+    ;
+}
+
+.container-template {
+    display: flex;
+}
+
+.header {
+    width: 1440px;
+    height: 96px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px 20px 348px;
+    z-index: 0;
+    position: absolute;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.headline {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400px;
+    font-size: 20px;
+    line-height: 24px;
+    width: 319px;
+    height: 24px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    width: 104px;
+    height: 56px;
+    gap: 16px;
+}
+
+.help-button {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+.help-button:hover{
+    scale: 1.2;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    gap: 16px;
+    cursor: pointer;
+}
+
+.sidebar {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 232px;
+    height: 1024px;
+    padding: 64px 0px 64px 0px;
+    background-color: #2A3647;
+    z-index: 1;
+}
+
+.sidebar-logo {
+    width: 100.03px;
+    height: 121.97px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    width: 232px;
+    height: 229px;
+    gap: 15px;
+}
+
+.summary {
+    display: flex;
+    align-items: center;
+    width: 232px;
+    height: 46px;
+    padding: 8px 56px 8px 56px;
+    gap: 8px;
+}
+
+.add-task {
+    display: flex;
+    align-items: center;
+    width: 232px;
+    height: 46px;
+    padding: 8px 56px 8px 56px;
+    gap: 8px;
+}
+
+.board {
+    display: flex;
+    align-items: center;
+    width: 232px;
+    height: 46px;
+    padding: 8px 56px 8px 56px;
+    gap: 8px;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    width: 232px;
+    height: 46px;
+    padding: 8px 56px 8px 56px;
+    gap: 8px;
+}
+
+.menu-button {
+    background-color: #2A3647;
+    border: none;
+    color: white;
+}
+
+.menu-button:hover {
+    cursor: pointer;
+    background-color: #091931;
+}
+
+.sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 4px;
+    color: white;
+}
+
+.privacy-policy {
+    display: flex;
+    align-items: center;
+    width: 232px;
+    height: 46px;
+    padding: 8px 56px 8px 56px;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+.legal-notice {
+    display: flex;
+    align-items: center;
+    width: 232px;
+    height: 46px;
+    padding: 8px 56px 8px 56px;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.font-size{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2;
+}
+
+/* Contact */
+
+#contactSection {
+    width: 456px;
+    height: 928px;
+    position: absolute;
+    top: 96px;
+    left: 232px;
+    border: 1px solid #000;
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#contactSection button {
+    margin-bottom: 16px;
+}
+
+.contact-list-container {
+    width: 400px;
+    height: 800px; /* height reduced to fit within #contactSection */
+    overflow-y: auto;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 35px;
+}
+
+.contact-item {
+    width: 352px;
+    height: 78px;
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-item div {
+    margin: 4px 0;
+}
+
