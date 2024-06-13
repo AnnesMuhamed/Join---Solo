@@ -1,5 +1,10 @@
-body{
+body,
+html {
     scroll-behavior: smooth;
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
 }
 
 .privacy-policy-section {
