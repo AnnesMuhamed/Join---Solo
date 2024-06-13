@@ -221,3 +221,31 @@ body {
     line-height: 19.2px;
     text-align: left;
 }
+
+.contacts-headline {
+    display: flex;
+    position: absolute;
+    width: 625px;
+    height: 73px;
+    top: 206px;
+    left: 743px;
+    gap: 30px;
+    align-items: center;
+}
+
+.stroke-image {
+    height: 59px;
+    border: 3px;
+}
+
+.first-headline {
+    font-weight: 700;
+    font-size: 61px;
+    line-height: 73.2;
+}
+
+.second-headline {
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 32.4px;
+}

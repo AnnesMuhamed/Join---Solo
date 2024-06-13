@@ -68,10 +68,15 @@ function renderContacts() {
         <div class="contact-list-container">
             ${alphabetSections.join('')}
         </div>
-
+        <div class="contacts-headline">
+            <span class="first-headline">Contacts</span>
+            <img class="stroke-image" src="/img/high-stroke.png" alt="">
+            <span class="second-headline">Better with a team</span>
+        </div>
     `;
 }
 
 function addNewContact() {
     alert("Neuen Kontakt hinzufügen");
 }
+
