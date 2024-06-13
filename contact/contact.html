@@ -19,6 +19,46 @@
     ></aside>
 
     <div id="contactSection" class="content"></div>
+    
+    <div id="addContact">
+        <div id="contactLeft">
+            <div id="joinLogoContainer">
+                <!-- Join Logo here -->
+                <img src="/img/logo.png" alt="Join Logo">
+            </div>
+            <div id="addContactTextContainer">
+                <span id="addContactHeader">Add contact</span>
+                <span id="addContactSubheader">Add details below</span>
+                <div id="blueLine"></div>
+            </div>
+        </div>
+        <div id="contactRight">
+            <div id="closeButtonContainer">
+                <button id="closeButton" onclick="closeContactForm()">X</button>
+            </div>
+            <div id="inputFields">
+                <div class="inputField">
+                    <label for="name"></label>
+                    <input type="text" id="name" placeholder="Name">
+                    <span class="icon"></span>
+                </div>
+                <div class="inputField">
+                    <label for="email"></label>
+                    <input type="email" id="email" placeholder="Email">
+                    <span class="icon"></span>
+                </div>
+                <div class="inputField">
+                    <label for="phone"></label>
+                    <input type="tel" id="phone" placeholder="Phone">
+                    <span class="icon"></span>
+                </div>
+            </div>
+            <div id="buttons">
+                <button class="cancelButton" onclick="closeContactForm()">Cancel</button>
+                <button class="createButton">Create contact</button>
+            </div>
+        </div>
+    </div>
   </body>
 </html>
 

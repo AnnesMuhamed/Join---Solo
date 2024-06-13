@@ -61,7 +61,7 @@ function renderContacts() {
     });
 
     contactSection.innerHTML = `
-        <button onclick="addNewContact()" class="add-contact-button">
+        <button onclick="openContactForm()" class="add-contact-button">
             <span class="button-text">Add a new contact</span>
             <img src="/img/person_add.png" alt="Add Icon" class="button-icon">
         </button>
@@ -76,7 +76,11 @@ function renderContacts() {
     `;
 }
 
-function addNewContact() {
-    alert("Neuen Kontakt hinzufügen");
+function openContactForm() {
+    document.getElementById('addContact').classList.add('show');
+}
+
+function closeContactForm() {
+    document.getElementById('addContact').classList.remove('show');
 }
 
