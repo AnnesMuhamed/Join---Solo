@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="/templates-new/template.css" />
+		<link rel="stylesheet" href="summary-user.css">
+		<script src="summary.js"></script>
+		<title>Summary User</title>
+	</head>
+	<body onload="includeHTML()">
+		<header
+				class="header"
+				w3-include-html="../templates-new/header.html"
+				></header>
+		<aside
+				class="sidebar"
+				w3-include-html="../templates-new/sidebar.html"
+				></aside>
+
+		<section class="content">
+			<div class="summary-headline">
+				<span class="first-headline">Join 360</span>
+				<img class="stroke-image" src="/img/high-stroke.png" alt="">
+				<span class="second-headline">Key Metrics a Glance</span>
+			</div>
+			<div class="summary-cards">
+				<div class="first-card-section">
+					<div class="card-one">
+						<div class="edit">
+							<div class="edit-circle">
+								<img class="edit-image" src="/img/edit.png" alt="">   
+							</div>
+						</div>
+						<div class="todo-container">
+							<span class="todo-number">1</span>
+							<span>To-do</span>
+						</div>
+					</div>
+					<div class="card-two">
+						<div class="hook">
+							<div class="hook-circle">
+								<img class="hook-image" src="/img/hook.png" alt="">
+							</div>
+						</div>
+						<div class="done-container">
+							<span class="done-number">1</span>
+							<span>Done</span>
+						</div>
+					</div>
+				</div>
+				<div class="second-card-section">
+					<div class="card-three">
+						<div>
+							<img src="/img/Frame 59.png" alt="">
+						</div>
+						<div class="urgent-container">
+							<span class="one-urgent">1</span>
+							<span class="urgent">Urgent</span>
+						</div>
+					</div>
+
+					<div>
+						<img src="/img/high-stroke-gray.png" alt="">
+					</div>
+					<div class="date-container">
+						<span class="date">October 16, 2022</span>
+						<span>Upcoming deadline</span>
+					</div>
+
+				</div>
+				<div class="third-card-section">
+					<div class="card-four">
+						<span class="number">5</span>
+						<span class="card-underline">Tasks in Board</span>
+					</div>
+					<div class="card-five">
+						<span class="number">2</span>
+						<span class="card-underline">Tasks In Progress</span>
+					</div>
+					<div class="card-six">
+						<span class="number">2</span>
+						<span class="card-underline">Awaiting Feedback</span>
+					</div>
+				</div>
+			</div>
+			<div class="greet">
+				<span class="gm">Good morning,</span>
+				<span class="sofia">Sofia Müller</span>
+			</div>
+			</div>
+		</section>
+	</body>
+</html>
