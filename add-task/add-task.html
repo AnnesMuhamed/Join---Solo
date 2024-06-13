@@ -24,6 +24,38 @@
 				></aside>
 
 		<section id="add-task-section" class="content">
+			<h1>Add Task</h1>
+			<form class="add-task-form">
+				<div class="definition">
+					<label for="title">Title</label>
+					<input type="text" id="title" name="title" placeholder="Enter a title">
+					<label for="description">Description</label>
+					<textarea type="text" id="description" name="description">
+					</textarea>
+					<label for="assignment">Assigned to</label>
+					<select type="text" id="assignment" name="assignment"></select>
+				</div>
+				<svg height="100" width="2" class="seperator">
+					<line x1="1" y1="0" x2="1" y2="100" style="stroke:rgb(0,0,0);stroke-width: 2;"/>
+				</svg>
+				<div class="properties">
+					<label for="date">Title</label>
+					<input type="date" id="date" name="date">
+					<label for="radio-button-group">Prio</label>
+					<div id="radio-button-group" class="radio-button-group">
+						<input type="radio" id="prio-high" name="prios" value="1" class="radio-button">
+						<label for="prio-high" class="radio-label">HIGH</label>
+						<input type="radio" id="prio-med" name="prios" value="2" class="radio-button">
+						<label for="prio-med" class="radio-label">MEDIUM</label>
+						<input type="radio" id="prio-low" name="prios" value="2" class="radio-button">
+						<label for="prio-low" class="radio-label">LOW</label>
+					</div>
+					<label for="category">Category</label>
+					<select type="text" id="category" name="category"></select>
+					<label for="subtasks">Subtasks</label>
+					<input type="text" id="subtasks" name="subtasks" placeholder="Add new subtask">
+				</div>
+			</form>
 		</section><!--add-task-section-->
 	</body>
 </html>

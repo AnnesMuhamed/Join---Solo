@@ -1,0 +1,50 @@
+.add-task-form {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.definition {
+	display: flex;
+	flex-direction: column;
+}
+
+.properties {
+	display: flex;
+	flex-direction: column;
+}
+
+.vline {
+	background: linear-gradient(#000, #000) no-repeat center/2px 100%;
+}
+
+.radio-button-group {
+	display: flex;
+}
+
+.radio-button {
+	display: none;
+}
+
+.radio-label {
+	padding: 10px 20px;
+	margin: 5px;
+	border: 1px solid #007bff;
+	background-color: #007bff;
+	color: white;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 5px;
+}
+
+.radio-label:hover {
+	background-color: black;
+}
+
+.radio-button:checked + .radio-label {
+	background-color: #0056b3;
+}
+
+.radio-button:not(checked) + .radio-label {
+	background-color: #007bff;
+}
