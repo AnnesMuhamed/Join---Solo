@@ -2,6 +2,13 @@
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
+	margin-left: 96px;
+}
+
+.add-task-headline {
+	font-size: 61px;
+	margin-left: 96px;
+	margin-top: 110px;
 }
 
 .definition {
@@ -12,10 +19,6 @@
 .properties {
 	display: flex;
 	flex-direction: column;
-}
-
-.vline {
-	background: linear-gradient(#000, #000) no-repeat center/2px 100%;
 }
 
 .radio-button-group {
