@@ -1,11 +1,16 @@
-body, html {
+body,
+html {
     overflow: auto !important;
-    scrollbar-width: none !important; /* Firefox */
-    -ms-overflow-style: none !important;  /* Internet Explorer 10+ */
+    scrollbar-width: none !important;
+    /* Firefox */
+    -ms-overflow-style: none !important;
+    /* Internet Explorer 10+ */
 }
 
-body::-webkit-scrollbar, html::-webkit-scrollbar {
-    display: none !important; /* Chrome, Safari, Opera */
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+    display: none !important;
+    /* Chrome, Safari, Opera */
 }
 
 .main-container {
@@ -13,14 +18,18 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
     flex-direction: column;
     padding-top: 110px;
     padding-left: 96px;
+    padding-right: 96px;
     gap: 30px;
     overflow: auto;
-    scrollbar-width: none;    /* Firefox */
-    -ms-overflow-style: none;    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
 }
 
 .main-container::-webkit-scrollbar {
-    display: none;    /* Chrome, Safari, Opera */
+    display: none;
+    /* Chrome, Safari, Opera */
 }
 
 .span-container {
@@ -36,6 +45,13 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
 .arrow {
     width: 21.33px;
     height: 20.74px;
+}
+
+.arrow:hover {
+    transform: scale(1.05);
+    background-color: rgb(233, 233, 233);
+    border-radius: 50%;
+    padding: 1px;
 }
 
 .help-button {
