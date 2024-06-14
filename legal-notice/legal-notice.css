@@ -9,10 +9,11 @@ html {
 
 .pl {
     padding-left: 96px;
+    padding-right: 96px;
 }
 
 .font-color {
-    color: #82CCEC;
+    color: #29ABE2;
 }
 
 .headline-p {
@@ -25,4 +26,19 @@ html {
     font-weight: 700;
     font-size: 27px;
     line-height: 32.4px;
+}
+
+.text-format {
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: #29ABE2;
+}
+
+a:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
