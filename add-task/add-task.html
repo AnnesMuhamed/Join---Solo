@@ -25,11 +25,11 @@
 
 		<section id="add-task-section" class="content">
 			<h1 class="add-task-headline">Add Task</h1>
-			<form class="add-task-form">
+			<form id="add-task-form" class="add-task-form">
 				<div class="definition">
 					<div class="d-flex-col">
 						<label for="title">Title</label>
-						<input class="title definition-entry-field" type="text" id="title" name="title" placeholder="Enter a title">
+						<input class="title definition-entry-field" type="text" id="title" name="title" placeholder="Enter a title" required>
 					</div>
 					<div class="d-flex-col">
 						<label for="description">Description</label>
@@ -47,7 +47,7 @@
 				<div class="properties">
 					<div class="d-flex-col">
 						<label for="date">Due date</label>
-						<input class="properties-entry-field due-date" type="date" id="date" name="date">
+						<input class="properties-entry-field due-date" type="date" id="date" name="date" required>
 					</div>
 					<div class="d-flex-col">
 						<label for="radio-button-group">Prio</label>
@@ -62,7 +62,7 @@
 					</div>
 					<div class="d-flex-col">
 						<label for="category">Category</label>
-						<select class="category properties-entry-field" type="text" id="category" name="category"></select>
+						<select class="category properties-entry-field" type="text" id="category" name="category" required></select>
 					</div>
 					<div class="d-flex-col">
 						<label for="subtasks">Subtasks</label>
@@ -70,6 +70,16 @@
 					</div>
 				</div>
 			</form>
+			<div id="buttons" class="buttons">
+				<span id="requirement" class="requirement">
+					<span style="color: red;">*</span>
+					This field is required
+				</span>
+				<div class="btn-container">
+					<button class="add-task-btn clear-btn">Clear</button>
+					<button class="add-task-btn create-task-btn" form="add-task-form" type="submit">Create Task</button>
+				</div>
+			</div>
 		</section><!--add-task-section-->
 	</body>
 </html>

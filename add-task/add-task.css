@@ -1,14 +1,14 @@
+.add-task-headline {
+	font-size: 61px;
+	margin-left: 96px;
+	margin-top: 110px;
+}
+
 .add-task-form {
 	display: flex;
 	align-items: center;
 	margin-left: 96px;
 	gap: 40px;
-}
-
-.add-task-headline {
-	font-size: 61px;
-	margin-left: 96px;
-	margin-top: 110px;
 }
 
 .definition {
@@ -99,6 +99,45 @@
 
 .radio-button:not(checked) + .radio-label {
 	background-color: white;
+}
+
+.buttons {
+	margin-top: 128px;
+	margin-left: 96px;
+	display: flex;
+	justify-content: space-between;
+	width: 962px;
+}
+
+.requirement {
+	display: flex;
+	align-items: flex-end;
+}
+
+.btn-container {
+	display: flex;
+	gap: 16px;
+}
+
+.add-task-btn {
+	height: 56px;
+	border-radius: 10px;
+	padding: 16px;
+	cursor: pointer;
+}
+
+.clear-btn {
+	width: 110px;
+	background-color: #f6f7f8;
+	border: 1px solid #2a3647;
+	color: #2a3647;
+}
+
+.create-task-btn {
+	width: 183px;
+	background-color: #2a3647;
+	border: none;
+	color: #FFFFFF;
 }
 
 .d-flex-col {
