@@ -1,8 +1,8 @@
 .add-task-form {
 	display: flex;
-	justify-content: space-evenly;
 	align-items: center;
 	margin-left: 96px;
+	gap: 40px;
 }
 
 .add-task-headline {
@@ -14,15 +14,63 @@
 .definition {
 	display: flex;
 	flex-direction: column;
+	height: 424px;
+	width: 440px;
+	gap: 40px;
+}
+
+.definition-entry-field {
+	border-radius: 10px;
+	border: 1px solid #D1D1D1;
+}
+
+.title {
+	height: 24px;
+	padding: 12px 21px 12px 21px;
+}
+
+.description {
+	height: 84px;
+	padding: 18px 16px 18px 16px;
+}
+
+.assignment-selector {
+	height: 48px;
+	padding: 12px 16px 12px 16px;
 }
 
 .properties {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
+	height: 424px;
+	width: 440px;
+}
+
+.properties-entry-field {
+	border-radius: 10px;
+	border: 1px solid #D1D1D1;
+}
+
+.due-date {
+	height: 24px;
+	padding: 12px 16px 12px 16px;
+}
+
+.category {
+	height: 48px;
+	padding: 12px 16px 12px 16px;
+}
+
+.subtasks {
+	height: 24px;
+	padding: 12px 16px 12px 16px;
 }
 
 .radio-button-group {
 	display: flex;
+	gap: 16px;
+	justify-content: space-between;
 }
 
 .radio-button {
@@ -30,14 +78,15 @@
 }
 
 .radio-label {
-	padding: 10px 20px;
-	margin: 5px;
-	border: 1px solid #007bff;
-	background-color: #007bff;
-	color: white;
+	display: flex;
+	padding: 16px 10px 16px 10px;
+	width: 116px;
+	height: 24px;
 	cursor: pointer;
-	text-align: center;
-	border-radius: 5px;
+	align-items: center;
+	justify-content: space-evenly;
+	border-radius: 10px;
+	box-shadow: 0 0 4px 0 #0000004A;
 }
 
 .radio-label:hover {
@@ -49,5 +98,11 @@
 }
 
 .radio-button:not(checked) + .radio-label {
-	background-color: #007bff;
+	background-color: white;
+}
+
+.d-flex-col {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
 }

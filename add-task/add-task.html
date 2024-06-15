@@ -27,33 +27,47 @@
 			<h1 class="add-task-headline">Add Task</h1>
 			<form class="add-task-form">
 				<div class="definition">
-					<label for="title">Title</label>
-					<input type="text" id="title" name="title" placeholder="Enter a title">
-					<label for="description">Description</label>
-					<textarea type="text" id="description" name="description">
-					</textarea>
-					<label for="assignment">Assigned to</label>
-					<select type="text" id="assignment" name="assignment"></select>
+					<div class="d-flex-col">
+						<label for="title">Title</label>
+						<input class="title definition-entry-field" type="text" id="title" name="title" placeholder="Enter a title">
+					</div>
+					<div class="d-flex-col">
+						<label for="description">Description</label>
+						<textarea class="description definition-entry-field" type="text" id="description" name="description">
+						</textarea>
+					</div>
+					<div class="d-flex-col">
+						<label for="assignment">Assigned to</label>
+						<select class="assignment-selector definition-entry-field" type="text" id="assignment" name="assignment"></select>
+					</div>
 				</div>
 				<svg height="424px" width="2" class="seperator">
 					<line x1="1" y1="0" x2="1" y2="424" style="stroke: #D1D1D1;stroke-width: 1;"/>
 				</svg>
 				<div class="properties">
-					<label for="date">Title</label>
-					<input type="date" id="date" name="date">
-					<label for="radio-button-group">Prio</label>
-					<div id="radio-button-group" class="radio-button-group">
-						<input type="radio" id="prio-high" name="prios" value="1" class="radio-button">
-						<label for="prio-high" class="radio-label">HIGH</label>
-						<input type="radio" id="prio-med" name="prios" value="2" class="radio-button">
-						<label for="prio-med" class="radio-label">MEDIUM</label>
-						<input type="radio" id="prio-low" name="prios" value="2" class="radio-button">
-						<label for="prio-low" class="radio-label">LOW</label>
+					<div class="d-flex-col">
+						<label for="date">Due date</label>
+						<input class="properties-entry-field due-date" type="date" id="date" name="date">
 					</div>
-					<label for="category">Category</label>
-					<select type="text" id="category" name="category"></select>
-					<label for="subtasks">Subtasks</label>
-					<input type="text" id="subtasks" name="subtasks" placeholder="Add new subtask">
+					<div class="d-flex-col">
+						<label for="radio-button-group">Prio</label>
+						<div id="radio-button-group" class="radio-button-group">
+							<input type="radio" id="prio-high" name="prios" value="1" class="radio-button">
+							<label for="prio-high" class="radio-label">HIGH</label>
+							<input type="radio" id="prio-med" name="prios" value="2" class="radio-button">
+							<label for="prio-med" class="radio-label">MEDIUM</label>
+							<input type="radio" id="prio-low" name="prios" value="2" class="radio-button">
+							<label for="prio-low" class="radio-label">LOW</label>
+						</div>
+					</div>
+					<div class="d-flex-col">
+						<label for="category">Category</label>
+						<select class="category properties-entry-field" type="text" id="category" name="category"></select>
+					</div>
+					<div class="d-flex-col">
+						<label for="subtasks">Subtasks</label>
+						<input class="subtasks properties-entry-field" type="text" id="subtasks" name="subtasks" placeholder="Add new subtask">
+					</div>
 				</div>
 			</form>
 		</section><!--add-task-section-->
