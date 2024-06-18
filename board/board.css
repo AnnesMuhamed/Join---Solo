@@ -14,7 +14,7 @@
 .headline-add-task-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     width: 1208px;
     height: 232px;
 }
