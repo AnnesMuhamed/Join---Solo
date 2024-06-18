@@ -89,7 +89,7 @@
     height: 24px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .column-title {
@@ -105,12 +105,11 @@
 .card-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .board-column {
     width: 246px;
     height: 696px;
-    background-color: aqua;
     overflow: auto;
 }
