@@ -27,13 +27,18 @@
                 </div>
             </div>
             <div class="column-headers">
-                <h3>To do</h3><img src="/img/board/plus-button.png" alt="add icon">
-                <h3>In Progress</h3><img src="/img/board/plus-button.png" alt="add icon">
-                <h3>Await feedback</h3><img src="/img/board/plus-button.png" alt="add icon">
-                <h3>Done</h3><img src="/img/board/plus-button.png" alt="add icon">
+                <span class="column-title">To do <img src="/img/board/plus-button.png" alt="add icon"></span>
+                <span class="column-title">In Progress <img src="/img/board/plus-button.png" alt="add icon"></span>
+                <span class="column-title">Await feedback <img src="/img/board/plus-button.png" alt="add icon"></span>
+                <span class="column-title">Done</span>
             </div>
         </div>
-        <div class="card-container"></div>
+        <div class="card-container">
+            <div class="column-todo board-column"></div>
+            <div class="column-in-progress board-column"></div>
+            <div class="column-await-feedback board-column"></div>
+            <div class="column-done board-column"></div>
+        </div>
     </section>
 </body>
 

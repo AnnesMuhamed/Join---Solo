@@ -90,3 +90,25 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.column-title {
+    width: 244px;
+    height: 24px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.board-column {
+    width: 246px;
+    height: 696px;
+    background-color: aqua;
+    overflow: auto;
+}
