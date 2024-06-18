@@ -423,6 +423,7 @@ body {
 .greet {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     width: 385px;
     height: 136px;
     gap: 3px;
