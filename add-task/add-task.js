@@ -1,10 +1,9 @@
 'use strict';
 const BASE_URL = '';
-let path = '';
+let path = '/tasks';
 
 
 let priority = null;
-let task = null;
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -88,7 +87,7 @@ function saveToLocalStorage(task) {
 
 
 function createTask() {
-	task = {
+	let task = {
 	'title': getTitle(),
 	'description': getDescription(),
 	'assignment': getAssignment(),
@@ -98,6 +97,19 @@ function createTask() {
 	'subtasks': getSubtask(),
 	};
 	saveToLocalStorage(task);
+}
+
+
+function clearForm() {
+	let elements = document.querySelectorAll('input:not([type="radio"]), select[type="text"], textarea');
+	let radios = document.querySelectorAll('input[type="radio"]');
+	elements.forEach(element => {
+		element.value = '';
+	});
+	radios.forEach(radio => {
+		radio.checked = false;
+		priority = null;
+	});
 }
 
 
