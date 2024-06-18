@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			if(this === lastChecked) {
 				this.checked = false;
 				lastChecked = null;
+				priority = null;
 			} else {
 				lastChecked = this;
 			}
@@ -72,6 +73,12 @@ function getCategory() {
 function getSubtask() {
 	let subtask = document.getElementById('subtasks');
 	return subtask.value;
+}
+
+
+function getPriority(id) {
+	let radioButton = document.getElementById(`${id}`);
+	priority = radioButton.value;
 }
 
 
