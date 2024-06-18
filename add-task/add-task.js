@@ -3,6 +3,27 @@ const BASE_URL = '';
 let path = '';
 
 
+let priority = null;
+let task = null;
+
+
+document.addEventListener('DOMContentLoaded', function() {
+	const radioButtons = document.querySelectorAll('input[type="radio"]');
+	let lastChecked = null;
+
+	radioButtons.forEach(radio => {
+		radio.addEventListener('click', function() {
+			if(this === lastChecked) {
+				this.checked = false;
+				lastChecked = null;
+			} else {
+				lastChecked = this;
+			}
+		});
+	});
+});
+
+
 async function includeHTML() {
 	let includeElements = document.querySelectorAll("[w3-include-html]");
 	for (let i = 0; i < includeElements.length; i++) {
@@ -15,6 +36,61 @@ async function includeHTML() {
 			element.innerHTML = "Page not found";
 		}
 	}
+}
+
+
+function getTitle() {
+	let title = document.getElementById('title');
+	return title.value;
+}
+
+
+function getDescription() {
+	let description = document.getElementById('description');
+	return description.value;
+}
+
+
+function getAssignment() {
+	let assignment = document.getElementById('assignment');
+	return assignment.value;
+}
+
+
+function getDate() {
+	let date = document.getElementById('date');
+	return date.value;
+}
+
+
+function getCategory() {
+	let category = document.getElementById('category');
+	return category.value;
+}
+
+
+function getSubtask() {
+	let subtask = document.getElementById('subtasks');
+	return subtask.value;
+}
+
+
+function saveToLocalStorage(task) {
+	localStorage.setItem('task', JSON.stringify(task));
+}
+
+
+function createTask() {
+	task = {
+	'title': getTitle(),
+	'description': getDescription(),
+	'assignment': getAssignment(),
+	'date': getDate(),
+	'priority': priority,
+	'category': getCategory(),
+	'subtasks': getSubtask(),
+	};
+	saveToLocalStorage(task);
 }
 
 
