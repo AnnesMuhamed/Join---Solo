@@ -1,3 +1,33 @@
+const BASE_URL = "https://join-232-default-rtdb.europe-west1.firebasedatabase.app/";
+
+function onloadFunc() {
+    console.log("test");
+    loadData();
+}
+
+async function loadData(path = "") {
+    let response = await fetch(BASE_URL + path + ".json");
+    return responseToJson = await response.json();
+}
+
+async function postData(path = "", data = {}) {
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    return responseToJson = await response.json();
+}
+
+async function deleteData(path = "") {
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "DELETE",
+    });
+    return responseToJson = await response.json();
+}
+
 function loginPage() {
     let logInPage = document.getElementById('sectionLogin');
 
@@ -12,8 +42,8 @@ function loginPage() {
             <h1 class="login-headline">Log in</h1>
             <img class="blue-line" src="/img/Vector 5.png" alt="">
         </div>
-        <form>
-            <label class="input-container" >
+        <form id="login-form">
+            <label class="input-container">
                 <input type="email" id="username" minlength="9" placeholder="Email" required>
                 <img src="/img/mail.png" alt="Email Icon" class="input-icon">
             </label>
@@ -39,6 +69,19 @@ function loginPage() {
         <a class="policy-notice" href="#">Legal notice</a>
     </div>
     `;
+
+    document.getElementById('login-form').addEventListener('submit', async (event) => {
+        event.preventDefault(); // Verhindert das Standardformular-Absendeverhalten
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        const data = { username, password };
+        await postData('contacts', data);
+
+        // Optional: Leere die Felder nach dem Absenden
+        document.getElementById('login-form').reset();
+    });
 }
 
 function initialize() {
@@ -51,25 +94,16 @@ function initialize() {
         const signupContainer = document.querySelector('.signup-container');
         const linkContainer = document.querySelector('.link-container');
 
-       
         overlay.style.opacity = 1;
-
-       
         logoContainer.classList.add('move-to-corner');
-
-        
         loginPage.style.display = 'flex';
-
-        
         signupContainer.classList.remove('hidden');
         linkContainer.classList.remove('hidden');
 
-
-        
         setTimeout(() => {
             overlay.style.width = '0';
             overlay.style.height = '0';
             overlay.style.overflow = 'hidden';
         }, 500);
-    }, 3000); 
+    }, 3000);
 }
