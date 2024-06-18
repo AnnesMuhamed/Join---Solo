@@ -65,6 +65,11 @@ body {
 
 /* Summary */
 
+.content {
+    padding-top: 100px;
+    padding-left: 96px;
+}
+
 .summary-headline {
     display: flex;
     width: 625px;
@@ -102,6 +107,8 @@ body {
     width: 560px;
     height: 168px;
     gap: 32px;
+    padding-bottom: 28px;
+    padding-top: 28px;
 }
 
 .card-one {
@@ -354,9 +361,12 @@ body {
     height: 170px;
     padding: 1px;
     gap: 32px;
+    padding-top: 28px;
 }
 
-.card-four, .card-five, .card-six {
+.card-four,
+.card-five,
+.card-six {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -372,13 +382,19 @@ body {
     cursor: pointer;
 }
 
-.card-four:hover, .card-five:hover, .card-six:hover {
+.card-four:hover,
+.card-five:hover,
+.card-six:hover {
     background: #2A3647;
     transform: scale(1.05);
 }
 
-.card-four:hover .number, .card-five:hover .number, .card-six:hover .number,
-.card-four:hover .card-underline, .card-five:hover .card-underline, .card-six:hover .card-underline {
+.card-four:hover .number,
+.card-five:hover .number,
+.card-six:hover .number,
+.card-four:hover .card-underline,
+.card-five:hover .card-underline,
+.card-six:hover .card-underline {
     color: #FFFFFF;
 }
 
@@ -410,6 +426,7 @@ body {
     width: 385px;
     height: 136px;
     gap: 3px;
+    padding-left: 120px;
 }
 
 
