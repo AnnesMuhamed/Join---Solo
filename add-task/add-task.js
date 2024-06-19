@@ -1,6 +1,6 @@
 'use strict';
-const BASE_URL = '';
-let path = '/tasks';
+const BASE_URL = 'https://join-232-default-rtdb.europe-west1.firebasedatabase.app/';
+let path = 'tasks';
 
 
 let priority = null;
@@ -86,17 +86,30 @@ function saveToLocalStorage(task) {
 }
 
 
-function createTask() {
+function createTaskJson() {
 	let task = {
-	'title': getTitle(),
-	'description': getDescription(),
-	'assignment': getAssignment(),
-	'date': getDate(),
-	'priority': priority,
-	'category': getCategory(),
-	'subtasks': getSubtask(),
+		'title': getTitle(),
+		'description': getDescription(),
+		'assignment': getAssignment(),
+		'date': getDate(),
+		'priority': priority,
+		'category': getCategory(),
+		'subtasks': getSubtask(),
 	};
-	saveToLocalStorage(task);
+	return task;
+}
+
+
+async function createTask(event) {
+	event.preventDefault();
+	let task = createTaskJson();
+	try {
+		let json = await postData(path, task);
+		console.log(json);
+		event.target.submit();
+	} catch (error) {
+		console.error('Error while sending data:', error);
+	}
 }
 
 
@@ -120,15 +133,15 @@ async function loadData(path='') {
 }
 
 
-async function postData(path='', data={}) {
-	let response = await fetch(`${BASE_URL}${path}.json`, {
-		method: 'POST',
+async function postData(path="", data={}) {
+	let response = await fetch(BASE_URL + path + ".json",{
+		method: "POST",
 		header: {
-			'Content-Type': 'application/json',
+			"Content-Type": "application/json",
 		},
 		body: JSON.stringify(data)
 	});
-	responseToJson = await response.json();
+	let responseToJson = await response.json();
 	return responseToJson;
 }
 
