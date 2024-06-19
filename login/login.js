@@ -63,7 +63,7 @@ function loginPage() {
     const passwordInput = document.getElementById('password');
     const loginButton = document.querySelector('.login-button');
 
-    // Event Listener, um Login-Button zu aktivieren/deaktivieren
+    
     function validateInputs() {
         if (usernameInput.value.trim() !== "" && passwordInput.value.trim() !== "") {
             loginButton.disabled = false;
@@ -82,11 +82,11 @@ function loginPage() {
         const password = passwordInput.value;
         const rememberMe = document.getElementById('option').checked;
 
-        // Laden aller Benutzer aus Firebase
+        
         const users = await loadData('contacts');
         let userFound = null;
 
-        // Überprüfen, ob die Anmeldedaten übereinstimmen
+        
         for (const userId in users) {
             const user = users[userId];
             if (user.username === username && user.password === password) {
@@ -96,13 +96,12 @@ function loginPage() {
         }
 
         if (userFound) {
-            // Benutzer gefunden: Speichere Benutzerdaten und leite weiter
             if (rememberMe) {
                 localStorage.setItem('loggedInUser', JSON.stringify(userFound));
             } else {
                 sessionStorage.setItem('loggedInUser', JSON.stringify(userFound));
             }
-            window.location.href = '/summary/summary-user.html'; // Passe den Pfad an, falls erforderlich
+            window.location.href = '/summary/summary-user.html';
             } else {
             alert('Falscher Benutzername oder Passwort');
         }

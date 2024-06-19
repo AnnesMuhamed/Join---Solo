@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (user) {
       document.querySelector('.greet .sofia').textContent = user.username;
   } else {
-      // Kein Benutzer eingeloggt: leite zur Login-Seite weiter
-      window.location.href = '/login/login.html'; // Passe den Pfad an, falls erforderlich
+    window.location.href = '/login/login.html';
   }
 });
