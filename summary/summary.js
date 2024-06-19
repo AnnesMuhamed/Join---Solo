@@ -13,3 +13,16 @@ async function includeHTML() {
   }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  let user = JSON.parse(localStorage.getItem('loggedInUser'));
+  if (!user) {
+      user = JSON.parse(sessionStorage.getItem('loggedInUser'));
+  }
+
+  if (user) {
+      document.querySelector('.greet .sofia').textContent = user.username;
+  } else {
+      // Kein Benutzer eingeloggt: leite zur Login-Seite weiter
+      window.location.href = '/login/login.html'; // Passe den Pfad an, falls erforderlich
+  }
+});

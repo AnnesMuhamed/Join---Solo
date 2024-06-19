@@ -1,13 +1,8 @@
 const BASE_URL = "https://join-232-default-rtdb.europe-west1.firebasedatabase.app/";
 
-function onloadFunc() {
-    console.log("test");
-    loadData();
-}
-
 async function loadData(path = "") {
     let response = await fetch(BASE_URL + path + ".json");
-    return responseToJson = await response.json();
+    return await response.json();
 }
 
 async function postData(path = "", data = {}) {
@@ -18,14 +13,7 @@ async function postData(path = "", data = {}) {
         },
         body: JSON.stringify(data)
     });
-    return responseToJson = await response.json();
-}
-
-async function deleteData(path = "") {
-    let response = await fetch(BASE_URL + path + ".json", {
-        method: "DELETE",
-    });
-    return responseToJson = await response.json();
+    return await response.json();
 }
 
 function loginPage() {
@@ -34,7 +22,7 @@ function loginPage() {
     logInPage.innerHTML = `
     <div id="overlay">
         <div id="logo-container">
-            <img src="/img/logo.png" alt="Logo" id="main-logo">
+            <img src="/img/loginLogo.png" alt="Logo" id="main-logo">
         </div>
     </div>
     <div id="login-page" class="hidden">
@@ -55,7 +43,7 @@ function loginPage() {
                 <input type="checkbox" name="option" id="option"> Remember me
             </label>
             <div class="button-container">
-                <button type="submit" class="login-button">Log in</button>
+                <button type="submit" class="login-button" disabled>Log in</button>
                 <button type="button" class="guest-button">Guest Log in</button>
             </div>
         </form>
@@ -70,17 +58,54 @@ function loginPage() {
     </div>
     `;
 
-    document.getElementById('login-form').addEventListener('submit', async (event) => {
-        event.preventDefault(); // Verhindert das Standardformular-Absendeverhalten
+    const loginForm = document.getElementById('login-form');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const loginButton = document.querySelector('.login-button');
 
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+    // Event Listener, um Login-Button zu aktivieren/deaktivieren
+    function validateInputs() {
+        if (usernameInput.value.trim() !== "" && passwordInput.value.trim() !== "") {
+            loginButton.disabled = false;
+        } else {
+            loginButton.disabled = true;
+        }
+    }
 
-        const data = { username, password };
-        await postData('contacts', data);
+    usernameInput.addEventListener('input', validateInputs);
+    passwordInput.addEventListener('input', validateInputs);
 
-        // Optional: Leere die Felder nach dem Absenden
-        document.getElementById('login-form').reset();
+    loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const username = usernameInput.value;
+        const password = passwordInput.value;
+        const rememberMe = document.getElementById('option').checked;
+
+        // Laden aller Benutzer aus Firebase
+        const users = await loadData('contacts');
+        let userFound = null;
+
+        // Überprüfen, ob die Anmeldedaten übereinstimmen
+        for (const userId in users) {
+            const user = users[userId];
+            if (user.username === username && user.password === password) {
+                userFound = { ...user, id: userId };
+                break;
+            }
+        }
+
+        if (userFound) {
+            // Benutzer gefunden: Speichere Benutzerdaten und leite weiter
+            if (rememberMe) {
+                localStorage.setItem('loggedInUser', JSON.stringify(userFound));
+            } else {
+                sessionStorage.setItem('loggedInUser', JSON.stringify(userFound));
+            }
+            window.location.href = '/summary/summary-user.html'; // Passe den Pfad an, falls erforderlich
+            } else {
+            alert('Falscher Benutzername oder Passwort');
+        }
     });
 }
 

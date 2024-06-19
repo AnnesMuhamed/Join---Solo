@@ -422,12 +422,14 @@ body {
 
 
 .greet {
+    position: absolute;
     display: flex;
     flex-direction: column;
     width: 385px;
     height: 136px;
     gap: 3px;
-    padding-left: 120px;
+    top: 547.5px;
+    left: 968px;
 }
 
 .gm {
