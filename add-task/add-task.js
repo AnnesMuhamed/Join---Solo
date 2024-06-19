@@ -81,11 +81,6 @@ function getPriority(id) {
 }
 
 
-function saveToLocalStorage(task) {
-	localStorage.setItem('task', JSON.stringify(task));
-}
-
-
 function createTaskJson() {
 	let task = {
 		'title': getTitle(),
