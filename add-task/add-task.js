@@ -4,6 +4,7 @@ let path = 'tasks';
 
 
 let priority = null;
+let subtasks = '';
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -69,11 +70,30 @@ function getCategory() {
 }
 
 
+function extendJson(originalJson, newProperties) {
+	return {...originalJson, ...newProperties};
+}
+
+
 function getSubtask() {
 	let subtask = document.getElementById('subtasks');
 	return subtask.value;
 }
 
+function addSubtask(subtask) {
+	if(subtasks.length > 0) {
+		subtasks += `,${subtask}`;
+	} else {
+		subtasks += subtask;
+	}
+}
+
+function renderSubtask() {
+	let unsortedList = document.getElementById('subtask-list');
+	let subtask = getSubtask();
+	addSubtask(subtask);
+	unsortedList.innerHTML += `<li>${subtask}</li>`;
+}
 
 function getPriority(id) {
 	let radioButton = document.getElementById(`${id}`);
@@ -89,7 +109,7 @@ function createTaskJson() {
 		'date': getDate(),
 		'priority': priority,
 		'category': getCategory(),
-		'subtasks': getSubtask(),
+		'subtasks': subtasks,
 	};
 	return task;
 }
