@@ -1,58 +1,46 @@
 const BASE_URL = "https://join-232-default-rtdb.europe-west1.firebasedatabase.app/";
 
-function onloadFunc() {
-    console.log("test");
-    loadData();
+async function loadData(path = "") {
+    let response = await fetch(BASE_URL + path + ".json");
+    return await response.json();
 }
 
-async function loadData(path= "") {
-    let response = await fetch(BASE_URL + path + ".json");
-    return responseToJson = await response.json();
-    
-}
- 
-async function postData(path="", data={}) {
-    let response = await fetch(BASE_URL + path + ".json",{
+async function postData(path = "", data = {}) {
+    let response = await fetch(BASE_URL + path + ".json", {
         method: "POST",
-        header: {
+        headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(data)
     });
-return responseToJson = await response.json();
- 
+    return await response.json();
 }
- 
-async function deleteData(path="") {
-let response = await fetch(BASE_URL + path + ".json",{
-    method: "DELETE",
-});
-return responseToJson = await response.json();
- 
-}
-
 
 function init() {
     let signUp = document.getElementById('sectionSignUp');
 
     signUp.innerHTML = `
     <div class="logo-container">
-        <img src="/img/logo.png" alt="Logo" class="main-logo">
+        <img src="/img/loginLogo.png" alt="Logo" class="main-logo">
     </div>
 
     <div class="container">
         <div class="header-container">
-        <a href="login.html">    
-        <img src="/img/arrow-left-line.png" alt="Zurück" class="back-arrow" onclick="href=login.html">
+        <a href="/login/login.html">    
+        <img src="/img/arrow-left-line.png" alt="Zurück" class="back-arrow">
         </a>
             <div class="header">
                 Sign Up
             </div>
         </div>
         <div class="divider"></div>
-        <form class="form">
+        <form id="sign-up-form" class="form">
             <label class="input-container">
-                <input type="text" id="name" placeholder="Name" minlength="2" required>
+                <input type="text" id="first-name" placeholder="First Name" minlength="2" required>
+                <img src="/img/person.png" alt="Name Icon" class="input-icon">
+            </label>
+            <label class="input-container">
+                <input type="text" id="last-name" placeholder="Last Name" minlength="2" required>
                 <img src="/img/person.png" alt="Name Icon" class="input-icon">
             </label>
             <label class="input-container">
@@ -79,4 +67,32 @@ function init() {
         <a class="policy-notice" href="#">Legal notice</a>
     </div>
     `;
+
+    const signUpForm = document.getElementById('sign-up-form');
+    signUpForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const firstName = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirm-password').value;
+
+        if (password !== confirmPassword) {
+            alert("Passwort stimmit nicht überein");
+            return;
+        }
+
+        await createUser(firstName, lastName, email, password);
+        alert("Benutzer erfolgreich erstellt!");
+        window.location.href = '/login/login.html';
+    });
 }
+
+async function createUser(firstName, lastName, email, password) {
+    const newUser = { firstName, lastName, username: email, password };
+    await postData('contacts', newUser);
+}
+
+
+document.addEventListener('DOMContentLoaded', init);

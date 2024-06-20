@@ -50,7 +50,7 @@ function loginPage() {
     </div>
     <div class="signup-container hidden">
         <span class="not-a-user">Not a Join user?</span>
-        <a href="sign-up.html"><button class="signup-button">Sign up</button></a>
+        <a href="../sign-up/sign-up.html"><button class="signup-button">Sign up</button></a>
     </div>
     <div class="link-container hidden">
         <a class="policy-notice" href="#">Privacy Policy</a>
@@ -78,7 +78,7 @@ function loginPage() {
     loginForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        const username = usernameInput.value;
+        const email = usernameInput.value;
         const password = passwordInput.value;
         const rememberMe = document.getElementById('option').checked;
 
@@ -89,20 +89,21 @@ function loginPage() {
         
         for (const userId in users) {
             const user = users[userId];
-            if (user.username === username && user.password === password) {
+            if (user.username === email && user.password === password) {
                 userFound = { ...user, id: userId };
                 break;
             }
         }
 
         if (userFound) {
+        
             if (rememberMe) {
                 localStorage.setItem('loggedInUser', JSON.stringify(userFound));
             } else {
                 sessionStorage.setItem('loggedInUser', JSON.stringify(userFound));
             }
-            window.location.href = '/summary/summary-user.html';
-            } else {
+            window.location.href = '../summary/summary-user.html'; // Passe den Pfad an, falls erforderlich
+        } else {
             alert('Falscher Benutzername oder Passwort');
         }
     });
@@ -131,3 +132,6 @@ function initialize() {
         }, 500);
     }, 3000);
 }
+
+
+document.addEventListener('DOMContentLoaded', initialize);

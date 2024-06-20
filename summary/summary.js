@@ -20,8 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (user) {
-      document.querySelector('.greet .sofia').textContent = user.username;
+      const userName = `${user.firstName} ${user.lastName}`;
+      document.querySelector('.greet .sofia').textContent = userName;
   } else {
-    window.location.href = '/login/login.html';
+      
+      window.location.href = '/sign-up/sign-up.html';
   }
 });
+
+
+
+
+

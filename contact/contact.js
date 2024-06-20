@@ -1,27 +1,22 @@
-let contacts = [
-    { firstName: 'Anton', lastName: 'Adler', email: 'anton@gmc.com', initials: 'AA' },
-    { firstName: 'Berta', lastName: 'Baumann', email: 'berta@gmc.com', initials: 'BB' },
-    { firstName: 'Cäsar', lastName: 'Cramer', email: 'caesar@gmc.com', initials: 'CC' },
-    { firstName: 'Dora', lastName: 'Dürr', email: 'dora@gmc.com', initials: 'DD' },
-    { firstName: 'Emil', lastName: 'Eckert', email: 'emil@gmc.com', initials: 'EE' },
-    { firstName: 'Friedrich', lastName: 'Fischer', email: 'friedrich@gmc.com', initials: 'FF' },
-    { firstName: 'Gustav', lastName: 'Gärtner', email: 'gustav@gmc.com', initials: 'GG' },
-    { firstName: 'Heinrich', lastName: 'Hoffmann', email: 'heinrich@gmc.com', initials: 'HH' },
-    { firstName: 'Ida', lastName: 'Illner', email: 'ida@gmc.com', initials: 'II' },
-    { firstName: 'Julius', lastName: 'Jäger', email: 'julius@gmc.com', initials: 'JJ' }
-];
+const BASE_URL = "https://join-232-default-rtdb.europe-west1.firebasedatabase.app/";
+
+async function loadData(path = "") {
+    let response = await fetch(BASE_URL + path + ".json");
+    return await response.json();
+}
+
 let alphabetSections = [];
 
-function onloadFunction() {
+async function onloadFunction() {
   includeHTML();
-  renderContacts();
+  await renderContacts();
 }
 
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
   for (let i = 0; i < includeElements.length; i++) {
     const element = includeElements[i];
-    let file = element.getAttribute("w3-include-html"); // "includes/header.html"
+    let file = element.getAttribute("w3-include-html");
     let resp = await fetch(file);
     if (resp.ok) {
       element.innerHTML = await resp.text();
@@ -31,11 +26,18 @@ async function includeHTML() {
   }
 }
 
-function renderContacts() {
+async function renderContacts() {
+    let contacts = await loadData('contacts');
     let contactSection = document.getElementById('contactSection');
     let currentLetter = '';
 
-    contacts.forEach(contact => {
+    let contactsArray = Object.values(contacts);
+
+    contactsArray.sort((a, b) => a.lastName.localeCompare(b.lastName));
+
+    alphabetSections = [];
+
+    contactsArray.forEach(contact => {
         let firstLetter = contact.lastName.charAt(0).toUpperCase();
         if (firstLetter !== currentLetter) {
             currentLetter = firstLetter;
@@ -48,14 +50,13 @@ function renderContacts() {
         alphabetSections.push(`
             <div class="separator"></div>
             <div class="contact-item">
-                <div class="initials-container">${contact.initials}</div>
+                <div class="initials-container">${getInitials(contact.firstName, contact.lastName)}</div>
                 <div class="contact-info-item">
                     <div class="contact-info">
                         <div class="contact-names">${contact.firstName} ${contact.lastName}</div>
-                        <div class="contact-email">${contact.email}</div>
+                        <div class="contact-email">${contact.username}</div>
                     </div>
                 </div>
-                
             </div>
         `);
     });
@@ -76,6 +77,10 @@ function renderContacts() {
     `;
 }
 
+function getInitials(firstName, lastName) {
+    return `${firstName.charAt(0).toUpperCase()}${lastName.charAt(0).toUpperCase()}`;
+}
+
 function openContactForm() {
     document.getElementById('addContact').classList.add('show');
 }
@@ -84,3 +89,4 @@ function closeContactForm() {
     document.getElementById('addContact').classList.remove('show');
 }
 
+document.addEventListener('DOMContentLoaded', onloadFunction);
