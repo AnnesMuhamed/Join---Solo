@@ -5,25 +5,36 @@ async function loadData(path = "") {
     return await response.json();
 }
 
+async function postData(path = "", data = {}) {
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    return await response.json();
+}
+
 let alphabetSections = [];
 
 async function onloadFunction() {
-  includeHTML();
-  await renderContacts();
+    await includeHTML();
+    await renderContacts();
 }
 
 async function includeHTML() {
-  let includeElements = document.querySelectorAll("[w3-include-html]");
-  for (let i = 0; i < includeElements.length; i++) {
-    const element = includeElements[i];
-    let file = element.getAttribute("w3-include-html");
-    let resp = await fetch(file);
-    if (resp.ok) {
-      element.innerHTML = await resp.text();
-    } else {
-      element.innerHTML = "Page not found";
+    let includeElements = document.querySelectorAll("[w3-include-html]");
+    for (let i = 0; i < includeElements.length; i++) {
+        const element = includeElements[i];
+        let file = element.getAttribute("w3-include-html");
+        let resp = await fetch(file);
+        if (resp.ok) {
+            element.innerHTML = await resp.text();
+        } else {
+            element.innerHTML = "Page not found";
+        }
     }
-  }
 }
 
 async function renderContacts() {
@@ -32,6 +43,8 @@ async function renderContacts() {
     let currentLetter = '';
 
     let contactsArray = Object.values(contacts);
+
+    contactsArray = contactsArray.filter(contact => contact && contact.lastName);
 
     contactsArray.sort((a, b) => a.lastName.localeCompare(b.lastName));
 
@@ -49,7 +62,7 @@ async function renderContacts() {
         }
         alphabetSections.push(`
             <div class="separator"></div>
-            <div class="contact-item">
+            <div class="contact-item" onclick="contactPopUp('${contact.firstName}', '${contact.lastName}', '${contact.username}', '${contact.phone}')">
                 <div class="initials-container">${getInitials(contact.firstName, contact.lastName)}</div>
                 <div class="contact-info-item">
                     <div class="contact-info">
@@ -87,6 +100,70 @@ function openContactForm() {
 
 function closeContactForm() {
     document.getElementById('addContact').classList.remove('show');
+}
+
+async function createContact() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+
+    if (!name || !email || !phone) {
+        alert('Bitte alle Felder ausfüllen');
+        return;
+    }
+
+    const [firstName, lastName] = name.split(' ');
+    if (!lastName) {
+        alert('Bitte geben Sie sowohl Vor- als auch Nachnamen ein');
+        return;
+    }
+    const newContact = { firstName, lastName, username: email, phone };
+
+    await postData('contacts', newContact);
+    await renderContacts();
+    closeContactForm();
+}
+
+function contactPopUp(firstName, lastName, email, phone) {
+    const popUpSection = document.getElementById('popup-section');
+    popUpSection.innerHTML = `
+        <div class="popup-container">
+            <div class="first-container">
+                <div class="popup-initiale-container">
+                    <div class="initiale-circle">
+                        <span class="popup-initiale">${getInitials(firstName, lastName)}</span>
+                    </div>
+                </div>
+                <div class="button-name-container">
+                    <span class="popup-name">${firstName} ${lastName}</span>
+                    <div class="popup-button-container">
+                        <button class="popup-buttons"><img src="/img/edit-black.png" alt="">Edit</button>
+                        <button class="popup-buttons"><img src="/img/delete.png" alt="">Delete</button>
+                    </div>
+                </div>
+            </div>
+            <div class="popup-contact-info">
+                <span class="popup-headline">Contact Information</span>
+            </div>
+            <div class="popup-email-phone">
+                <div class="popup-email">
+                    <span class="popup-name-span">Email</span>
+                    <span class="popup-email-span">${email}</span>
+                </div>
+                <div class="popup-phone">
+                    <span class="popup-phone-span">Phone</span>
+                    <span class="popup-phoneNr-span">${phone}</span>
+                </div>
+            </div>
+        </div>
+    `;
+    
+}
+
+function closeContactPopUp() {
+    const popUpSection = document.getElementById('popup-section');
+    popUpSection.classList.add('show');
+    popUpSection.classList.remove('show');
 }
 
 document.addEventListener('DOMContentLoaded', onloadFunction);

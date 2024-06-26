@@ -83,7 +83,7 @@ function loginPage() {
         const rememberMe = document.getElementById('option').checked;
 
         
-        const users = await loadData('contacts');
+        const users = await loadData('user');
         let userFound = null;
 
         

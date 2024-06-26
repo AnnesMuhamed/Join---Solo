@@ -1,10 +1,5 @@
 const BASE_URL = "https://join-232-default-rtdb.europe-west1.firebasedatabase.app/";
 
-async function loadData(path = "") {
-    let response = await fetch(BASE_URL + path + ".json");
-    return await response.json();
-}
-
 async function postData(path = "", data = {}) {
     let response = await fetch(BASE_URL + path + ".json", {
         method: "POST",
@@ -15,6 +10,13 @@ async function postData(path = "", data = {}) {
     });
     return await response.json();
 }
+
+async function loadData(path = "") {
+    let response = await fetch(BASE_URL + path + ".json");
+    return await response.json();
+}
+
+
 
 function init() {
     let signUp = document.getElementById('sectionSignUp');
@@ -91,7 +93,7 @@ function init() {
 
 async function createUser(firstName, lastName, email, password) {
     const newUser = { firstName, lastName, username: email, password };
-    await postData('contacts', newUser);
+    await postData('user', newUser);
 }
 
 
