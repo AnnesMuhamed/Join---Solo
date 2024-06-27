@@ -16,6 +16,13 @@ async function postData(path = "", data = {}) {
     return await response.json();
 }
 
+async function deleteData(path = "") {
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "DELETE",
+    });
+    return await response.json();
+}
+
 let alphabetSections = [];
 
 async function onloadFunction() {
@@ -42,7 +49,7 @@ async function renderContacts() {
     let contactSection = document.getElementById('contactSection');
     let currentLetter = '';
 
-    let contactsArray = Object.values(contacts);
+    let contactsArray = Object.entries(contacts).map(([id, contact]) => ({ id, ...contact }));
 
     contactsArray = contactsArray.filter(contact => contact && contact.lastName);
 
@@ -62,7 +69,7 @@ async function renderContacts() {
         }
         alphabetSections.push(`
             <div class="separator"></div>
-            <div class="contact-item" onclick="contactPopUp('${contact.firstName}', '${contact.lastName}', '${contact.username}', '${contact.phone}')">
+            <div class="contact-item" onclick="contactPopUp('${contact.id}', '${contact.firstName}', '${contact.lastName}', '${contact.username}', '${contact.phone}')">
                 <div class="initials-container">${getInitials(contact.firstName, contact.lastName)}</div>
                 <div class="contact-info-item">
                     <div class="contact-info">
@@ -124,7 +131,7 @@ async function createContact() {
     closeContactForm();
 }
 
-function contactPopUp(firstName, lastName, email, phone) {
+function contactPopUp(id, firstName, lastName, email, phone) {
     const popUpSection = document.getElementById('popup-section');
     popUpSection.innerHTML = `
         <div class="popup-container">
@@ -137,8 +144,14 @@ function contactPopUp(firstName, lastName, email, phone) {
                 <div class="button-name-container">
                     <span class="popup-name">${firstName} ${lastName}</span>
                     <div class="popup-button-container">
-                        <button class="popup-buttons"><img src="/img/edit-black.png" alt="">Edit</button>
-                        <button class="popup-buttons"><img src="/img/delete.png" alt="">Delete</button>
+                        <button class="popup-buttons">
+                            <img src="/img/edit-black.png" alt="">
+                            <span class="edit">Edit</span>
+                        </button>
+                        <button class="popup-buttons" onclick="deleteContact('${id}')">
+                            <img src="/img/delete.png" alt="">
+                            <span class="delete">Delete</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -157,12 +170,17 @@ function contactPopUp(firstName, lastName, email, phone) {
             </div>
         </div>
     `;
-    
+    popUpSection.classList.add('show');
+}
+
+async function deleteContact(id) {
+    await deleteData(`contacts/${id}`);
+    await renderContacts();
+    closeContactPopUp();
 }
 
 function closeContactPopUp() {
     const popUpSection = document.getElementById('popup-section');
-    popUpSection.classList.add('show');
     popUpSection.classList.remove('show');
 }
 

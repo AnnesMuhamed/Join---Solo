@@ -613,7 +613,7 @@ body {
 }
 
 .popup-name {
-    width: 287px;
+    width: 450px;
     height: 56px;
     font-family: Inter;
     font-size: 47px;
@@ -643,6 +643,25 @@ body {
     padding-block: 0px;
     padding-inline: 0px;
     border-width: 0px;
+}
+
+.edit {
+    width: 30px;
+    height: 19px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    text-align: left;
+
+}
+
+.delete {
+    width: 49px;
+    height: 19px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    text-align: left;
 }
 
 .popup-contact-info {
