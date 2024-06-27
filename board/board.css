@@ -65,6 +65,7 @@
     font-size: 21px;
     font-weight: 700;
     line-height: 25.2px;
+    transition: all 0.1s ease;
 }
 
 .add-button:hover {
@@ -77,7 +78,7 @@
 
 .add-button-img-column {
     filter: grayscale(100%);
-    transition: filter 0.1s ease;
+    transition: all 0.1s ease;
 }
 
 .add-button-img-column:hover {

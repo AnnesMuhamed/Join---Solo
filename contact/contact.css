@@ -80,6 +80,7 @@ body {
     gap: 16px;
     animation-timing-function: ease-out;
     animation-duration: 300ms;
+    transition: all 0.1s ease;
 }
 
 .add-contact-button:hover {

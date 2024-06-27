@@ -231,6 +231,7 @@ transform: scale(1.1);
     text-align: center;
     cursor: pointer;
     border: none;
+    transition: all 0.1s ease;
 }
 
 .sign-up-button:hover {
