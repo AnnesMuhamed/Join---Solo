@@ -58,8 +58,8 @@ function init() {
                 <img src="/img/lock.png" alt="Password Icon" class="input-icon">
             </label>
             <div class="checkbox-container">
-                <input type="checkbox" id="accept-policy" required>
-                <label for="accept-policy">I accept the <a href="#" class="privacy-policy">Privacy policy</a></label>
+                <input type="checkbox" id="accept-policy" class="checkbox-hover-design" required>
+                <label for="accept-policy">I accept the <a href="/privacy-policy/privacy-policy.html" class="privacy-policy checkbox-hover-design">Privacy policy</a></label>
             </div>
             <button type="submit" class="sign-up-button">Sign Up</button>
         </form>

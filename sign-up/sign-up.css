@@ -208,6 +208,10 @@ body {
     line-height: 19.2px;
 }
 
+.checkbox-hover-design:hover {
+transform: scale(1.1);
+}
+
 .privacy-policy {
     color: #29ABE2;
     text-decoration: none;
