@@ -13,3 +13,6 @@ async function includeHTML() {
   }
 }
 
+function goBack() {
+  window.history.back();
+}
