@@ -82,6 +82,12 @@ body {
     animation-duration: 300ms;
 }
 
+.add-contact-button:hover {
+    background-color: #29ABE2;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    border-color: #29ABE2;
+}
+
 .add-contact-button .button-text {
     color: white;
     font-size: 16px;
