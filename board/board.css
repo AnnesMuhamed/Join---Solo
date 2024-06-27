@@ -70,7 +70,8 @@
 .add-button:hover {
     cursor: pointer;
     background-color: #29ABE2;
-    border: none;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    border-color: #29ABE2;
 }
 
 
