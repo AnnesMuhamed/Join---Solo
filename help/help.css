@@ -48,7 +48,8 @@ html::-webkit-scrollbar {
 }
 
 .arrow:hover {
-    transform: scale(1.05);
+    width: 23.93px;
+    height: 20.74px;
     background-color: rgb(233, 233, 233);
     border-radius: 50%;
     padding: 1px;
