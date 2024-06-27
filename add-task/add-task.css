@@ -121,11 +121,11 @@
 	background-color: black;
 }
 
-.radio-button:checked + .radio-label {
+.radio-button:checked+.radio-label {
 	background-color: #0056b3;
 }
 
-.radio-button:not(checked) + .radio-label {
+.radio-button:not(checked)+.radio-label {
 	background-color: white;
 }
 
@@ -170,6 +170,13 @@
 	background-color: #f6f7f8;
 	border: 1px solid #2a3647;
 	color: #2a3647;
+	transition: all 0.1s ease;
+}
+
+.clear-btn:hover {
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+	border-color: #29ABE2;
+	color: #29ABE2;
 }
 
 .create-task-btn {
@@ -177,6 +184,13 @@
 	background-color: #2a3647;
 	border: none;
 	color: #FFFFFF;
+	transition: all 0.1s ease;
+}
+
+.create-task-btn:hover {
+	background-color: #29ABE2;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+	border-color: #29ABE2;
 }
 
 .d-flex-col {
