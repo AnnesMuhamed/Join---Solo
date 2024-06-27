@@ -538,7 +538,7 @@ body {
 
 .createButton:hover {
     background: #29ABE2;
-    border: none;
+    border-color: none;
     box-shadow: 0px 4px 0px 0px #0000001A;
 }
 

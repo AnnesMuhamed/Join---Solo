@@ -230,7 +230,9 @@ body {
 }
 
 .sign-up-button:hover {
-    background: #1e2833;
+    background-color: #29ABE2;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    border-color: #29ABE2;
 }
 
 .link-container {
