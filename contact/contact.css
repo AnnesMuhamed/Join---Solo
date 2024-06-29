@@ -292,7 +292,27 @@ body {
     transition: all 0.5s ease-in-out;
 }
 
+#editContact {
+    width: 1212px;
+    height: 592px;
+    position: absolute;
+    top: 513px;
+    left: 143%;
+    transform: translate(-50%, -50%);
+    border-radius: 30px;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+}
+
 #addContact.show {
+    left: 716px;
+    z-index: 1;
+}
+
+#editContact.show {
     left: 716px;
     z-index: 1;
 }
@@ -476,6 +496,17 @@ body {
     left: 742px;
 }
 
+#editButtons {
+    position: absolute;
+    width: 249px;
+    height: 57px;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    top: 440px;
+    left: 742px;
+}
+
 .cancelButton {
     display: flex;
     width: 126px;
@@ -489,6 +520,24 @@ body {
 }
 
 .cancelButton:hover {
+    border: 3px solid #29ABE2;
+    color: #29ABE2;
+    box-shadow: 0px 4px 0px 0px #0000001A;
+}
+
+.editCancelButton {
+    display: flex;
+    width: 113px;
+    height: 57px;
+    padding: 16px;
+    gap: 4px;
+    border-radius: 10px;
+    border: 1px solid #2A3647;
+    background: #FFFFFF;
+    cursor: pointer;
+}
+
+.editCancelButton:hover {
     border: 3px solid #29ABE2;
     color: #29ABE2;
     box-shadow: 0px 4px 0px 0px #0000001A;
@@ -531,6 +580,31 @@ body {
 }
 
 .createButton:hover {
+    background: #29ABE2;
+    border: none;
+    box-shadow: 0px 4px 0px 0px #0000001A;
+}
+
+.saveButton {
+    width: 111px;
+    height: 57px;
+    padding: 16px;
+    gap: 4px;
+    border-radius: 10px;
+    background: #2A3647;
+    color: #FFFFFF;
+    font-family: Inter;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 25.2px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.saveButton:hover {
     background: #29ABE2;
     border: none;
     box-shadow: 0px 4px 0px 0px #0000001A;

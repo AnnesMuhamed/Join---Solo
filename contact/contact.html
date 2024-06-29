@@ -67,6 +67,51 @@
       </div>
     </div>
 
+    <div id="editContact" class="add-contact-form">
+      <div id="contactLeft">
+          <div id="joinLogoContainer">
+              <img class="addcontact-logo" src="/img/logo.png" alt="Join Logo">
+          </div>
+          <div id="addContactTextContainer">
+              <span id="addContactHeader">Edit contact</span>
+              <div id="blueLine"></div>
+          </div>
+      </div>
+      <div id="closeButtonContainer">
+        <button id="closeButton" onclick="closeEditForm()">X</button>
+    </div>
+    <div class="person-container">
+      <img class="person-icon" src="/img/person.png" alt="">
+    </div>
+    <div id="inputFields">
+        <div class="inputField">
+            <label for="name"></label>
+            <input type="text" id="name" placeholder="Name">
+            <img class="inputField-icon-name" src="/img/gray-person.png" alt="">
+        </div>
+        <div class="inputField">
+            <label for="email"></label>
+            <input type="email" id="email" placeholder="Email">
+            <img class="inputField-icon-email" src="/img/mail.png" alt="">
+        </div>
+        <div class="inputField">
+            <label for="phone"></label>
+            <input type="tel" id="phone" placeholder="Phone">
+            <img class="inputField-icon-tel" src="/img/call.png" alt="">
+        </div>
+    </div>
+    <div id="editButtons">
+        <button class="editCancelButton" onclick="closeEditForm()">
+          <span class="cancel">Cancel</span>
+          <img class="x-png" src="/img/x.png" alt="">
+        </button>
+        <button class="saveButton" onclick="createContact()">
+          <span class="create-contact">Save</span>
+          <img class="hook-png" src="/img/hook.png" alt="">
+        </button>
+    </div>
+  </div>
+
     
 
 

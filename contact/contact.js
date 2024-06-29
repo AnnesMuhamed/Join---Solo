@@ -146,7 +146,7 @@ function contactPopUp(id, firstName, lastName, email, phone) {
                     <div class="popup-button-container">
                         <button class="popup-buttons">
                             <img src="/img/edit-black.png" alt="">
-                            <span class="edit">Edit</span>
+                            <span class="edit" onclick="openEditContact()">Edit</span>
                         </button>
                         <button class="popup-buttons" onclick="deleteContact('${id}')">
                             <img src="/img/delete.png" alt="">
@@ -171,6 +171,14 @@ function contactPopUp(id, firstName, lastName, email, phone) {
         </div>
     `;
     popUpSection.classList.add('show');
+}
+
+function openEditContact() {
+    document.getElementById('editContact').classList.add('show');
+}
+
+function closeEditForm() {
+    document.getElementById('editContact').classList.remove('show');
 }
 
 async function deleteContact(id) {
