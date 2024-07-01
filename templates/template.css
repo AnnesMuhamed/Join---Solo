@@ -61,7 +61,6 @@
 
 body {
   font-family: "Inter", sans-serif;
-  margin: 0;
   height: 100vh;
   display: grid;
   max-width: 1440px;
@@ -180,6 +179,7 @@ body {
 }
 
 .header-right {
+  position: relative;
   display: flex;
   align-items: center;
   width: 104px;
@@ -209,4 +209,30 @@ body {
 .content {
   grid-area: content;
   background-color: #f6f7f8;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  background-color: #2a3647;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #091931;
+}
+
+.show {
+  display: block;
 }
