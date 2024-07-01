@@ -9,32 +9,16 @@
 		<script src="./script.js"></script>
 	</head>
 
-	<body onload="startFunction()">
+	<body onload="initFunc()">
 		<h1>Dropdown Checkboxes</h1>
-		<form>
-			<div class="multiselect">
-				<div class="select-box" onclick="showCheckboxes()">
-					<select>
-						<option>Select an option</option>
-					</select>
-					<div class="over-select"></div>
-				</div>
-				<div id="checkboxes">
-					<label for="one">
-						<span>1st Checkbox</span>
-						<input type="checkbox" id="one">
-					</label>
-					<label for="two">
-						<span>2nd Checkbox</span>
-						<input type="checkbox" id="second">
-					</label>
-					<label for="three">
-						<span>3rd Checkbox</span>
-						<input type="checkbox" id="three">
-					</label>
-				</div>
-			</div>
-		</form>
+		<div class="select-box" onclick="showCheckboxes()">
+			<select>
+				<option>Select an option</option>
+			</select>
+			<div class="over-select"></div>
+		</div>
+		<div id="checkboxes">
+		</div>
 		<div class="test-box">
 		</div>
 	</body>

@@ -8,6 +8,8 @@
 
 .select-box {
 	position: relative;
+	width: 100%;
+	max-width: 400px;
 }
 
 .select-box select {
@@ -29,7 +31,8 @@
 	position: absolute;
 	background-color: white;
 	z-index: 1000;
-	width: 200px;
+	width: 100%;
+	max-width: 400px;
 }
 
 #checkboxes label {
