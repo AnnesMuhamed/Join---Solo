@@ -1,0 +1,52 @@
+.d-none {
+	display: none;
+}
+
+.multiselect {
+	width: 200px;
+}
+
+.select-box {
+	position: relative;
+	width: 100%;
+	max-width: 400px;
+}
+
+.select-box select {
+	width: 100%;
+	font-weight: bold;
+}
+
+.over-select {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+
+#checkboxes {
+	display: none;
+	border: 1px solid #dadada;
+	position: absolute;
+	background-color: white;
+	z-index: 1000;
+	width: 100%;
+	max-width: 400px;
+}
+
+#checkboxes label {
+	padding: 4px 8px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#checkboxes label:hover {
+	background-color: #1e90ff;
+}
+
+.test-box {
+	height: 100px;
+	width: 100%;
+	background-color: red;
+}
