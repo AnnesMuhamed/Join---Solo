@@ -26,6 +26,10 @@
 #checkboxes {
 	display: none;
 	border: 1px solid #dadada;
+	position: absolute;
+	background-color: white;
+	z-index: 1000;
+	width: 200px;
 }
 
 #checkboxes label {
