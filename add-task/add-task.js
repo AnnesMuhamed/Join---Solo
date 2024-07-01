@@ -1,5 +1,4 @@
 'use strict';
-const BASE_URL = 'https://join-232-default-rtdb.europe-west1.firebasedatabase.app/';
 let path = 'tasks';
 
 

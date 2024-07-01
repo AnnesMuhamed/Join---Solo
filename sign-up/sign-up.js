@@ -1,5 +1,3 @@
-const BASE_URL = "https://join-232-default-rtdb.europe-west1.firebasedatabase.app/";
-
 async function postData(path = "", data = {}) {
     let response = await fetch(BASE_URL + path + ".json", {
         method: "POST",

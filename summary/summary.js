@@ -18,8 +18,6 @@ function init() {
   loadUserData();
 }
 
-const BASE_URL = "https://join-232-default-rtdb.europe-west1.firebasedatabase.app/";
-
 function loadUserData() {
   let user = JSON.parse(localStorage.getItem('loggedInUser'));
   if (!user) {
