@@ -208,6 +208,10 @@ body {
     line-height: 19.2px;
 }
 
+.checkbox-hover-design:hover {
+transform: scale(1.1);
+}
+
 .privacy-policy {
     color: #29ABE2;
     text-decoration: none;
@@ -227,10 +231,13 @@ body {
     text-align: center;
     cursor: pointer;
     border: none;
+    transition: all 0.1s ease;
 }
 
 .sign-up-button:hover {
-    background: #1e2833;
+    background-color: #29ABE2;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    border-color: #29ABE2;
 }
 
 .link-container {

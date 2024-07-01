@@ -65,18 +65,20 @@
     font-size: 21px;
     font-weight: 700;
     line-height: 25.2px;
+    transition: all 0.1s ease;
 }
 
 .add-button:hover {
     cursor: pointer;
     background-color: #29ABE2;
-    border: none;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    border-color: #29ABE2;
 }
 
 
 .add-button-img-column {
     filter: grayscale(100%);
-    transition: filter 0.1s ease;
+    transition: all 0.1s ease;
 }
 
 .add-button-img-column:hover {

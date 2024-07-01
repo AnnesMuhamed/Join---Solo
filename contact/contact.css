@@ -80,6 +80,13 @@ body {
     gap: 16px;
     animation-timing-function: ease-out;
     animation-duration: 300ms;
+    transition: all 0.1s ease;
+}
+
+.add-contact-button:hover {
+    background-color: #29ABE2;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    border-color: #29ABE2;
 }
 
 .add-contact-button .button-text {
@@ -308,7 +315,7 @@ body {
 }
 
 #addContact.show {
-    left: 716px;
+    left: 717px;
     z-index: 1;
 }
 
@@ -409,7 +416,7 @@ body {
     top: 204px;
     left: 550px;
     border-radius: 70px;
-    background: #D1D1D1;
+    background: cadetblue;
     border: 3px solid #FFFFFF;
     box-shadow: 0px 0px 4px 0px #0000001A;
 }
@@ -581,7 +588,7 @@ body {
 
 .createButton:hover {
     background: #29ABE2;
-    border: none;
+    border-color: none;
     box-shadow: 0px 4px 0px 0px #0000001A;
 }
 
@@ -611,7 +618,7 @@ body {
 }
 
 .create-contact {
-    width: 154px;
+    width: 85px;
     height: 25px;
     font-size: 21px;
     font-weight: 700;
@@ -664,17 +671,17 @@ body {
 }
 
 .popup-initiale {
+    display: flex;
     position: absolute;
-    width: 80px;
-    height: 28.57px;
-    top: 32.71px;
-    left: 20px;
-    font-family: Inter;
+    width: 120px;
+    height: 120px;
     font-size: 47px;
     font-weight: 500;
     line-height: 56.4px;
     text-align: center;
     color: #FFFFFF;
+    justify-content: center;
+    align-items: center;
 }
 
 .button-name-container {
@@ -719,13 +726,23 @@ body {
     border-width: 0px;
 }
 
+.popup-buttons:hover {
+    color: #29ABE2;
+}
+
 .edit {
-    width: 30px;
-    height: 19px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19.2px;
-    text-align: left;
+    
+    width: 81px;
+    height: 24px;
+    gap: 8px;
+
+
+}
+
+.edit-icon:hover {
+    width: 83px;
+    height: 24px;
+    gap: 8px;
 
 }
 
@@ -736,6 +753,10 @@ body {
     font-weight: 400;
     line-height: 19.2px;
     text-align: left;
+}
+
+.delete-icon:hover {
+    color: #29ABE2;
 }
 
 .popup-contact-info {
@@ -821,4 +842,18 @@ body {
     font-weight: 400;
     line-height: 19.2px;
     text-align: left;
+}
+
+#editFormInitials {
+    display: flex;
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    font-size: 47px;
+    font-weight: 500;
+    line-height: 56.4px;
+    text-align: center;
+    color: white;
+    align-items: center;
+    justify-content: center;
 }

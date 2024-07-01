@@ -109,7 +109,7 @@ body {
   color: white;
 }
 
-.menu-button:hover {
+.menu-button-design:hover {
   cursor: pointer;
   background-color: #091931;
 }
@@ -149,6 +149,11 @@ body {
   font-weight: 400;
 }
 
+.menu-button-lower-design:hover {
+  color: #29ABE2;
+  background-color: none !important;
+}
+
 .font-size {
   font-family: "Inter", sans-serif;
   font-size: 16px;
@@ -184,9 +189,13 @@ body {
 }
 
 .help-button {
-  width: 32px;
-  height: 32px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
+}
+
+.help-button:hover {
+  transform: scale(1.2);
 }
 
 .user {

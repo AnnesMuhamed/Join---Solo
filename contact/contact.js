@@ -23,6 +23,17 @@ async function deleteData(path = "") {
     return await response.json();
 }
 
+async function updateData(path = "", data = {}) {
+    let response = await fetch(BASE_URL + path + ".json", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    return await response.json();
+}
+
 let alphabetSections = [];
 
 async function onloadFunction() {
@@ -131,6 +142,45 @@ async function createContact() {
     closeContactForm();
 }
 
+async function saveContact() {
+    const id = document.getElementById('editContactId').value;
+    const name = document.getElementById('editName').value;
+    const email = document.getElementById('editEmail').value;
+    const phone = document.getElementById('editPhone').value;
+
+    if (!name || !email || !phone) {
+        alert('Bitte alle Felder ausfüllen');
+        return;
+    }
+
+    const [firstName, lastName] = name.split(' ');
+    if (!lastName) {
+        alert('Bitte geben Sie sowohl Vor- als auch Nachnamen ein');
+        return;
+    }
+    const updateContact = { firstName, lastName, username: email, phone };
+    
+    await updateData(`contacts/${id}`, updateContact);
+    await renderContacts();
+    closeEditForm();
+
+    // Aktualisiere die Initialen im Popup
+    const popUpSection = document.getElementById('popup-section');
+    const initialsSpan = popUpSection.querySelector('.popup-initiale');
+    initialsSpan.textContent = getInitials(firstName, lastName);
+
+    // Aktualisiere auch den Namen im Popup
+    const nameSpan = popUpSection.querySelector('.popup-name');
+    nameSpan.textContent = `${firstName} ${lastName}`;
+
+    // Aktualisiere auch die Email und Telefonnummer im Popup
+    const emailSpan = popUpSection.querySelector('.popup-email-span');
+    emailSpan.textContent = email;
+
+    const phoneSpan = popUpSection.querySelector('.popup-phoneNr-span');
+    phoneSpan.textContent = phone;
+}
+
 function contactPopUp(id, firstName, lastName, email, phone) {
     const popUpSection = document.getElementById('popup-section');
     popUpSection.innerHTML = `
@@ -144,12 +194,12 @@ function contactPopUp(id, firstName, lastName, email, phone) {
                 <div class="button-name-container">
                     <span class="popup-name">${firstName} ${lastName}</span>
                     <div class="popup-button-container">
-                        <button class="popup-buttons">
-                            <img src="/img/edit-black.png" alt="">
-                            <span class="edit" onclick="openEditContact()">Edit</span>
+                        <button class="popup-buttons" onclick="openEditContact('${id}', '${firstName}', '${lastName}', '${email}', '${phone}')">
+                            <img class="edit-icon" src="/img/edit-black.png" alt="">
+                            <span class="edit">Edit</span>
                         </button>
                         <button class="popup-buttons" onclick="deleteContact('${id}')">
-                            <img src="/img/delete.png" alt="">
+                            <img class="delete-icon" src="/img/delete.png" alt="">
                             <span class="delete">Delete</span>
                         </button>
                     </div>
@@ -170,11 +220,26 @@ function contactPopUp(id, firstName, lastName, email, phone) {
             </div>
         </div>
     `;
+    document.getElementById('editContactId').value = id;
+    document.getElementById('editName').value = `${firstName} ${lastName}`;
+    document.getElementById('editEmail').value = email;
+    document.getElementById('editPhone').value = phone;
     popUpSection.classList.add('show');
 }
 
-function openEditContact() {
-    document.getElementById('editContact').classList.add('show');
+function openEditContact(id, firstName, lastName, email, phone) {
+    const editContactDiv = document.getElementById('editContact');
+    editContactDiv.classList.add('show');
+
+    // Setze die Initialen im editContact-Formular
+    const initials = getInitials(firstName, lastName);
+    document.getElementById('editFormInitials').textContent = initials;
+
+    // Setze die Werte der Eingabefelder
+    document.getElementById('editContactId').value = id;
+    document.getElementById('editName').value = `${firstName} ${lastName}`;
+    document.getElementById('editEmail').value = email;
+    document.getElementById('editPhone').value = phone;
 }
 
 function closeEditForm() {
@@ -193,3 +258,7 @@ function closeContactPopUp() {
 }
 
 document.addEventListener('DOMContentLoaded', onloadFunction);
+
+function getInitials(firstName, lastName) {
+    return `${firstName.charAt(0).toUpperCase()}${lastName.charAt(0).toUpperCase()}`;
+}
