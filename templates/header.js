@@ -1,16 +1,13 @@
 const BASE_URL = "https://join-232-default-rtdb.europe-west1.firebasedatabase.app/";
 
-
 async function loadData(path = "") {
     let response = await fetch(BASE_URL + path + ".json");
     return await response.json();
 }
 
-
 function getInitials(firstName, lastName) {
     return `${firstName.charAt(0).toUpperCase()}${lastName.charAt(0).toUpperCase()}`;
 }
-
 
 async function displayUserInitials(userID) {
     try {
@@ -25,6 +22,5 @@ async function displayUserInitials(userID) {
         console.error("Fehler beim Laden der Benutzerdaten:", error);
     }
 }
-
 
 displayUserInitials('user123');
