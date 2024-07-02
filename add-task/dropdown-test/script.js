@@ -7,6 +7,7 @@ let contacts = null;
 document.addEventListener('DOMContentLoaded', function() {
 	initFunc();
 	document.body.addEventListener('click', collapseCheckboxes);
+	document.body.addEventListener('click', assignContacts);
 });
 
 
@@ -39,6 +40,19 @@ function getContactsIds() {
 
 function getInitials(id) {
 	return `${contacts[id]['firstName'].charAt(0)}${contacts[id]['lastName'].charAt(0)}`;
+}
+
+
+function assignContacts(event) {
+	let assignments = document.getElementById('assigned-contacts');
+	if(event.target.type === 'checkbox') {
+		let checkboxId = this.id;
+		console.log(checkboxId);
+		let initials = getInitials(checkboxId);
+		assignments.innerHTML += `
+			<span>${initials}</span>
+		`;
+	}
 }
 
 
