@@ -27,7 +27,6 @@ function toggleDropdown() {
     document.getElementById("user-dropdown").classList.toggle("show");
 }
 
-// Close the dropdown if the user clicks outside of it
 window.onclick = function (event) {
     if (!event.target.matches('#user')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
