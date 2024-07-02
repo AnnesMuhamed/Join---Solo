@@ -6,6 +6,7 @@ let contacts = null;
 
 document.addEventListener('DOMContentLoaded', function() {
 	initFunc();
+	document.body.addEventListener('click', showCheckboxes);
 	document.body.addEventListener('click', collapseCheckboxes);
 	document.body.addEventListener('click', assignContacts);
 });
@@ -46,12 +47,16 @@ function getInitials(id) {
 function assignContacts(event) {
 	let assignments = document.getElementById('assigned-contacts');
 	if(event.target.type === 'checkbox') {
-		let checkboxId = this.id;
-		console.log(checkboxId);
+		let checkboxId = event.target.id;
 		let initials = getInitials(checkboxId);
-		assignments.innerHTML += `
-			<span>${initials}</span>
+		let initialsElement = document.getElementById(`${checkboxId}-${initials}`);
+		if(initialsElement) {
+			initialsElement.remove();
+		} else {
+			assignments.innerHTML += `
+				<span id="${checkboxId}-${initials}">${initials}</span>
 		`;
+		}
 	}
 }
 
@@ -61,6 +66,16 @@ function filterCheckboxes(id) {
 	let inputValue = filter.value.toLowerCase();
 	let fullName = `${contacts[id].firstName.toLowerCase()} ${contacts[id].lastName.toLowerCase()}`;
 	return (fullName.includes(inputValue));
+}
+
+
+function checkboxState(id, initials) {
+	let assignedContact = document.getElementById(`${id}-${initials}`);
+	console.log(assignedContact);
+	if(assignedContact) {
+		let checkbox = document.getElementById(`${id}`);
+		checkbox.checked = true;
+	}
 }
 
 
@@ -81,18 +96,21 @@ function renderCheckboxes() {
 				<input type="checkbox" id="${id}">
 			</label>
 		`;
+		checkboxState(id, initials);
 	}
 }
 
 
-function showCheckboxes() {
+function showCheckboxes(event) {
 	let checkboxes = document.getElementById('checkboxes');
-	if (!expanded) {
-		checkboxes.style.display = 'block';
-		expanded = true;
-	} else {
-		checkboxes.style.display = 'none';
-		expanded = false;
+	if(event.target.closest('.select-box')) {
+		if (!expanded) {
+			checkboxes.style.display = 'block';
+			expanded = true;
+		} else {
+			checkboxes.style.display = 'none';
+			expanded = false;
+		}
 	}
 }
 
