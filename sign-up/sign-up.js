@@ -36,11 +36,7 @@ function init() {
         <div class="divider"></div>
         <form id="sign-up-form" class="form">
             <label class="input-container">
-                <input type="text" id="first-name" placeholder="First Name" minlength="2" required>
-                <img src="/img/person.png" alt="Name Icon" class="input-icon">
-            </label>
-            <label class="input-container">
-                <input type="text" id="last-name" placeholder="Last Name" minlength="2" required>
+                <input type="text" id="first-name" placeholder="First Name Last Name" minlength="2" required>
                 <img src="/img/person.png" alt="Name Icon" class="input-icon">
             </label>
             <label class="input-container">
@@ -72,14 +68,21 @@ function init() {
     signUpForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        const firstName = document.getElementById('first-name').value;
-        const lastName = document.getElementById('last-name').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirm-password').value;
+        const name = document.getElementById('first-name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const confirmPassword = document.getElementById('confirm-password').value.trim();
 
         if (password !== confirmPassword) {
             alert("Passwort stimmit nicht überein");
+            return;
+        }
+
+        const [firstName, ...lastNameParts] = name.split(' ');
+        const lastName = lastNameParts.join(' ');
+
+        if (!lastName) {
+            alert('Bitte geben Sie sowohl Vor- als auch Nachnamen ein');
             return;
         }
 
@@ -92,7 +95,10 @@ function init() {
 async function createUser(firstName, lastName, email, password) {
     const newUser = { firstName, lastName, username: email, password };
     await postData('user', newUser);
+    await postData('contacts', newUser);
 }
+
+document.addEventListener('DOMContentLoaded', init);
 
 
 document.addEventListener('DOMContentLoaded', init);
