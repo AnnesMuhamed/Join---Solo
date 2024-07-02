@@ -93,14 +93,14 @@ async function renderContacts() {
     contactSection.innerHTML = `
         <button onclick="openContactForm()" class="add-contact-button">
             <span class="button-text">Add a new contact</span>
-            <img src="/img/person_add.png" alt="Add Icon" class="button-icon">
+            <img src="../img/person_add.png" alt="Add Icon" class="button-icon">
         </button>
         <div class="contact-list-container">
             ${alphabetSections.join('')}
         </div>
         <div class="contacts-headline">
             <span class="first-headline">Contacts</span>
-            <img class="stroke-image" src="/img/high-stroke.png" alt="">
+            <img class="stroke-image" src="../img/high-stroke.png" alt="">
             <span class="second-headline">Better with a team</span>
         </div>
     `;
@@ -193,11 +193,11 @@ function contactPopUp(id, firstName, lastName, email, phone) {
                     <span class="popup-name">${firstName} ${lastName}</span>
                     <div class="popup-button-container">
                         <button class="popup-buttons" onclick="openEditContact('${id}', '${firstName}', '${lastName}', '${email}', '${phone}')">
-                            <img class="edit-icon" src="/img/edit-black.png" alt="">
+                            <img class="edit-icon" src="../img/edit-black.png" alt="">
                             <span class="edit">Edit</span>
                         </button>
                         <button class="popup-buttons" onclick="deleteContact('${id}')">
-                            <img class="delete-icon" src="/img/delete.png" alt="">
+                            <img class="delete-icon" src="../img/delete.png" alt="">
                             <span class="delete">Delete</span>
                         </button>
                     </div>
