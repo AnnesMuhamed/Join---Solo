@@ -6,9 +6,13 @@ let contacts = null;
 
 document.addEventListener('DOMContentLoaded', function() {
 	initFunc();
+	let searchInput = document.getElementById('search');
 	document.body.addEventListener('click', showCheckboxes);
 	document.body.addEventListener('click', collapseCheckboxes);
 	document.body.addEventListener('click', assignContacts);
+	searchInput.addEventListener('keyup', function() {
+		renderCheckboxes();
+	});
 });
 
 
