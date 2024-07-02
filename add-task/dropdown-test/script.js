@@ -71,10 +71,9 @@ function filterCheckboxes(id) {
 
 function checkboxState(id, initials) {
 	let assignedContact = document.getElementById(`${id}-${initials}`);
-	console.log(assignedContact);
 	if(assignedContact) {
 		let checkbox = document.getElementById(`${id}`);
-		checkbox.checked = true;
+		checkbox.setAttribute('checked', 'checked');
 	}
 }
 
@@ -120,7 +119,6 @@ function collapseCheckboxes(event) {
 	let search = document.getElementById('search');
 	if(!event.target.closest('.wrapper')) {
 		search.value = '';
-		renderCheckboxes();
 		checkboxes.style.display = 'none';
 		expanded = false;
 	}
