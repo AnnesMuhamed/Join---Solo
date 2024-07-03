@@ -66,8 +66,13 @@ body {
 }
 
 body.modal-open {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.1);
     overflow: hidden; /* Verhindert Scrollen, wenn das Modal geöffnet ist */
+}
+
+.inactive {
+    background-color: rgba(0, 0, 0, 0.1);
+    pointer-events: none; /* Verhindert Interaktion */
 }
 
 /* Contact */
@@ -86,6 +91,11 @@ body.modal-open {
     animation-timing-function: ease-out;
     animation-duration: 300ms;
     transition: all 0.1s ease;
+}
+
+.add-contact-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .add-contact-button:hover {
@@ -622,7 +632,6 @@ body.modal-open {
 }
 
 .create-contact {
-    width: 85px;
     height: 25px;
     font-size: 21px;
     font-weight: 700;

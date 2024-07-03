@@ -91,7 +91,7 @@ async function renderContacts() {
     });
 
     contactSection.innerHTML = `
-        <button onclick="openContactForm()" class="add-contact-button">
+        <button id="addContactButton" onclick="openContactForm()" class="add-contact-button">
             <span class="button-text">Add a new contact</span>
             <img src="../img/person_add.png" alt="Add Icon" class="button-icon">
         </button>
@@ -113,10 +113,19 @@ function getInitials(firstName, lastName) {
 function openContactForm() {
     document.getElementById('addContact').classList.add('show');
     document.body.classList.add('modal-open');
+    document.getElementById('addContactButton').disabled = true;
+    document.getElementById('addContactButton').classList.add('disabled');
+    document.querySelector('.header').classList.add('inactive');
+    document.querySelector('.sidebar').classList.add('inactive');
 }
 
 function closeContactForm() {
     document.getElementById('addContact').classList.remove('show');
+    document.body.classList.remove('modal-open');
+    document.getElementById('addContactButton').disabled = false;
+    document.getElementById('addContactButton').classList.remove('disabled');
+    document.querySelector('.header').classList.remove('inactive');
+    document.querySelector('.sidebar').classList.remove('inactive');
 }
 
 async function createContact() {
@@ -227,14 +236,16 @@ function contactPopUp(id, firstName, lastName, email, phone) {
 }
 
 function openEditContact(id, firstName, lastName, email, phone) {
-    const editContactDiv = document.getElementById('editContact');
-    editContactDiv.classList.add('show');
-
-    // Setze die Initialen im editContact-Formular
+    document.getElementById('editContact').classList.add('show');
+    document.body.classList.add('modal-open');
+    document.getElementById('addContactButton').disabled = true;
+    document.getElementById('addContactButton').classList.add('disabled');
+    document.querySelector('.header').classList.add('inactive');
+    document.querySelector('.sidebar').classList.add('inactive');
+    
     const initials = getInitials(firstName, lastName);
-    document.getElementById('editFormInitials').textContent = initials;
 
-    // Setze die Werte der Eingabefelder
+    document.getElementById('editFormInitials').textContent = initials;
     document.getElementById('editContactId').value = id;
     document.getElementById('editName').value = `${firstName} ${lastName}`;
     document.getElementById('editEmail').value = email;
@@ -243,6 +254,11 @@ function openEditContact(id, firstName, lastName, email, phone) {
 
 function closeEditForm() {
     document.getElementById('editContact').classList.remove('show');
+    document.body.classList.remove('modal-open');
+    document.getElementById('addContactButton').disabled = false;
+    document.getElementById('addContactButton').classList.remove('disabled');
+    document.querySelector('.header').classList.remove('inactive');
+    document.querySelector('.sidebar').classList.remove('inactive');
 }
 
 async function deleteContact(id) {
