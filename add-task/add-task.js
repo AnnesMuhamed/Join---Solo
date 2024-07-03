@@ -178,12 +178,6 @@ function getDescription() {
 }
 
 
-function getAssignment() {
-	let assignment = document.getElementById('assignment');
-	return assignment.value;
-}
-
-
 function getDate() {
 	let date = document.getElementById('date');
 	return date.value;
@@ -251,7 +245,7 @@ function createTaskJson() {
 	let task = {
 		'title': getTitle(),
 		'description': getDescription(),
-		'assignment': getAssignment(),
+		'assignment': assignedContacts,
 		'date': getDate(),
 		'priority': priority,
 		'category': getCategory(),
