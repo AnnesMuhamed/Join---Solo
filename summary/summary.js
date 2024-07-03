@@ -14,8 +14,7 @@ async function includeHTML() {
 }
 
 function init() {
-  includeHTML()
-  loadUserData();
+  includeHTML().then(loadUserData);
 }
 
 function loadUserData() {
@@ -27,32 +26,22 @@ function loadUserData() {
   if (user) {
       const userName = `${user.firstName} ${user.lastName}`;
       document.querySelector('.greet .sofia').textContent = userName;
+      displayUserInitials(user.firstName, user.lastName);
   } else {
       window.location.href = '/sign-up/sign-up.html';
   }
 }
 
-document.addEventListener('DOMContentLoaded', init);
-
 function getInitials(firstName, lastName) {
   return `${firstName.charAt(0).toUpperCase()}${lastName.charAt(0).toUpperCase()}`;
 }
 
-// async function displayUserInitials(userID) {
-//   try {
-//       let user = await loadData(`users/${userID}`);
-//       if (user) {
-//           let initials = getInitials(user.firstName, user.lastName);
-//           document.getElementById('user').innerText = initials;
-//       } else {
-//           console.error("Benutzer nicht gefunden");
-//       }
-//   } catch (error) {
-//       console.error("Fehler beim Laden der Benutzerdaten:", error);
-//   }
-// }
+function displayUserInitials(firstName, lastName) {
+  const initials = getInitials(firstName, lastName);
+  const userDiv = document.getElementById('user');
+  userDiv.textContent = initials;
+}
 
-
-
+document.addEventListener('DOMContentLoaded', init);
 
 
