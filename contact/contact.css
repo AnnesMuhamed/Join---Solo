@@ -65,6 +65,11 @@ body {
 
 }
 
+body.modal-open {
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden; /* Verhindert Scrollen, wenn das Modal geöffnet ist */
+}
+
 /* Contact */
 
 .add-contact-button {

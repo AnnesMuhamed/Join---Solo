@@ -112,6 +112,7 @@ function getInitials(firstName, lastName) {
 
 function openContactForm() {
     document.getElementById('addContact').classList.add('show');
+    document.body.classList.add('modal-open');
 }
 
 function closeContactForm() {
