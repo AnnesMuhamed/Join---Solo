@@ -210,11 +210,6 @@ function getCategory() {
 }
 
 
-function extendJson(originalJson, newProperties) {
-	return {...originalJson, ...newProperties};
-}
-
-
 function getSubtask() {
 	let subtask = document.getElementById('subtasks');
 	return subtask.value;
@@ -350,10 +345,3 @@ async function postData(path="", data={}) {
 }
 
 
-async function deleteData(path='') {
-	let response = await fetch(`${BASE_URL}${path}.json`, {
-		method: 'DELETE',
-	});
-	responseToJson = await response.json();
-	return responseToJson;
-}
