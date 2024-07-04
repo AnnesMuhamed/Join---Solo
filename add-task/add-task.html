@@ -79,7 +79,7 @@
 						<label for="subtasks">Subtasks</label>
 						<div class="subtask-container">
 							<input class="subtasks properties-entry-field" type="text" id="subtasks" name="subtasks" placeholder="Add new subtask">
-							<button id="add-subtask-button" class="add-subtask-button" type="button" onclick="renderSubtask()">+</button>
+							<button id="add-subtask-button" class="add-subtask-button" type="button">+</button>
 						</div>
 					</div>
 				</div>
@@ -94,8 +94,8 @@
 					This field is required
 				</span>
 				<div class="btn-container">
-					<button class="add-task-btn clear-btn" onclick="clearForm()">Clear</button>
-					<button class="add-task-btn create-task-btn" form="add-task-form" type="submit">Create Task</button>
+					<button id="clear-btn" class="add-task-btn clear-btn">Clear</button>
+					<button id="create-btn" class="add-task-btn create-task-btn" form="add-task-form" type="submit">Create Task</button>
 				</div>
 			</div>
 		</section><!--add-task-section-->

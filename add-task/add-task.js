@@ -15,12 +15,20 @@ let assignedContacts = '';
 document.addEventListener('DOMContentLoaded', function() {
 	initFunc();
 	let searchInput = document.getElementById('search');
+	let subTaskButton = document.getElementById('add-subtask-button');
+	let clearButton = document.getElementById('clear-btn');
 	document.body.addEventListener('click', showCheckboxes);
 	document.body.addEventListener('click', collapseCheckboxes);
 	document.body.addEventListener('click', assignContacts);
 	document.body.addEventListener('submit', createTask);
+	subTaskButton.addEventListener('click', function() {
+		renderSubtask();
+	});
 	searchInput.addEventListener('keyup', function() {
 		renderCheckboxes();
+	});
+	clearButton.addEventListener('click', function() {
+		clearForm();
 	});
 	radioButtonsSelectState();
 });
@@ -160,7 +168,7 @@ function radioButtonsSelectState() {
 				lastChecked = null;
 				priority = null;
 			} else {
-				getPriority(event.target.id);
+				getPriority(this.id);
 				lastChecked = this;
 			}
 		});
@@ -272,12 +280,22 @@ async function createTask(event) {
 function clearForm() {
 	let elements = document.querySelectorAll('input:not([type="radio"]), select[type="text"], textarea');
 	let radios = document.querySelectorAll('input[type="radio"]');
+	let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+	let divs = document.querySelectorAll('#assigned-contacts, #subtask-list');
 	elements.forEach(element => {
 		element.value = '';
 	});
 	radios.forEach(radio => {
 		radio.checked = false;
 		priority = null;
+	});
+	checkboxes.forEach(checkbox => {
+		checkbox.checked = false;
+		assignedContacts = '';
+	});
+	divs.forEach(div => {
+		div.innerHTML = '';
+		subtasks = '';
 	});
 }
 
