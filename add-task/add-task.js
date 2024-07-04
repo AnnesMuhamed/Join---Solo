@@ -14,24 +14,34 @@ let assignedContacts = '';
 
 document.addEventListener('DOMContentLoaded', function() {
 	initFunc();
+	setupEventListeners();
+	radioButtonsSelectState();
+});
+
+
+function setupEventListeners() {
 	let searchInput = document.getElementById('search');
 	let subTaskButton = document.getElementById('add-subtask-button');
 	let clearButton = document.getElementById('clear-btn');
-	document.body.addEventListener('click', showCheckboxes);
-	document.body.addEventListener('click', collapseCheckboxes);
-	document.body.addEventListener('click', assignContacts);
+
+	//Event delegation for body-click
+	document.body.addEventListener('click', handleBodyClicks);
+
+	//Event listener for specific elements
+	subTaskButton.addEventListener('click', renderSubtask);
+	searchInput.addEventListener('keyup', renderCheckboxes);
+	clearButton.addEventListener('click', clearForm);
+
+	//Event listener for submit
 	document.body.addEventListener('submit', createTask);
-	subTaskButton.addEventListener('click', function() {
-		renderSubtask();
-	});
-	searchInput.addEventListener('keyup', function() {
-		renderCheckboxes();
-	});
-	clearButton.addEventListener('click', function() {
-		clearForm();
-	});
-	radioButtonsSelectState();
-});
+}
+
+
+function handleBodyClicks(event) {
+	showCheckboxes(event);
+	collapseCheckboxes(event);
+	assignContacts(event);
+}
 
 
 async function initFunc() {
@@ -277,26 +287,46 @@ async function createTask(event) {
 }
 
 
-function clearForm() {
+function clearInputElements() {
 	let elements = document.querySelectorAll('input:not([type="radio"]), select[type="text"], textarea');
-	let radios = document.querySelectorAll('input[type="radio"]');
-	let checkboxes = document.querySelectorAll('input[type="checkbox"]');
-	let divs = document.querySelectorAll('#assigned-contacts, #subtask-list');
 	elements.forEach(element => {
 		element.value = '';
 	});
+}
+
+
+function clearRadioButtons() {
+	let radios = document.querySelectorAll('input[type="radio"]');
 	radios.forEach(radio => {
 		radio.checked = false;
-		priority = null;
 	});
+	priority = null;
+}
+
+
+function clearCheckboxes() {
+	let checkboxes = document.querySelectorAll('input[type="checkbox"]');
 	checkboxes.forEach(checkbox => {
 		checkbox.checked = false;
-		assignedContacts = '';
 	});
+	assignedContacts = '';
+}
+
+
+function clearDivs() {
+	let divs = document.querySelectorAll('#assigned-contacts, #subtask-list');
 	divs.forEach(div => {
 		div.innerHTML = '';
-		subtasks = '';
 	});
+	subtasks = '';
+}
+
+
+function clearForm() {
+	clearInputElements();
+	clearRadioButtons();
+	clearCheckboxes();
+	clearDivs();
 }
 
 
