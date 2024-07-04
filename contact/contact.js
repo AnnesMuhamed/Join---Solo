@@ -59,16 +59,18 @@ async function renderContacts() {
     let currentLetter = '';
 
     let contactsArray = Object.entries(contacts).map(([id, contact]) => ({ id, ...contact }));
-
     contactsArray = contactsArray.filter(contact => contact && contact.lastName);
 
     contactsArray.sort((a, b) => a.lastName.localeCompare(b.lastName));
 
     alphabetSections = [];
 
-    contactsArray.forEach(contact => {
+    contactsArray.forEach((contact, index) => {
         let firstLetter = contact.lastName.charAt(0).toUpperCase();
         if (firstLetter !== currentLetter) {
+            if (currentLetter !== '') {
+                alphabetSections.push(`<div class="separator"></div>`);
+            }
             currentLetter = firstLetter;
             alphabetSections.push(`
                 <div class="alphabet-container">
@@ -77,8 +79,7 @@ async function renderContacts() {
             `);
         }
         alphabetSections.push(`
-            <div class="separator"></div>
-            <div class="contact-item" onclick="contactPopUp('${contact.id}', '${contact.firstName}', '${contact.lastName}', '${contact.username}', '${contact.phone}')">
+            <div class="contact-item" onclick="highlightContact(this); contactPopUp('${contact.id}', '${contact.firstName}', '${contact.lastName}', '${contact.username}', '${contact.phone}')">
                 <div class="initials-container">${getInitials(contact.firstName, contact.lastName)}</div>
                 <div class="contact-info-item">
                     <div class="contact-info">
@@ -110,22 +111,12 @@ function getInitials(firstName, lastName) {
     return `${firstName.charAt(0).toUpperCase()}${lastName.charAt(0).toUpperCase()}`;
 }
 
-function openContactForm() {
-    document.getElementById('addContact').classList.add('show');
-    document.body.classList.add('modal-open');
-    document.getElementById('addContactButton').disabled = true;
-    document.getElementById('addContactButton').classList.add('disabled');
-    document.querySelector('.header').classList.add('inactive');
-    document.querySelector('.sidebar').classList.add('inactive');
-}
-
-function closeContactForm() {
-    document.getElementById('addContact').classList.remove('show');
-    document.body.classList.remove('modal-open');
-    document.getElementById('addContactButton').disabled = false;
-    document.getElementById('addContactButton').classList.remove('disabled');
-    document.querySelector('.header').classList.remove('inactive');
-    document.querySelector('.sidebar').classList.remove('inactive');
+function highlightContact(element) {
+    const contactItems = document.querySelectorAll('.contact-item');
+    contactItems.forEach(item => {
+        item.classList.remove('highlighted');
+    });
+    element.classList.add('highlighted');
 }
 
 async function createContact() {
@@ -172,16 +163,16 @@ async function saveContact() {
     await renderContacts();
     closeEditForm();
 
-    // Aktualisiere die Initialen im Popup
+    
     const popUpSection = document.getElementById('popup-section');
     const initialsSpan = popUpSection.querySelector('.popup-initiale');
     initialsSpan.textContent = getInitials(firstName, lastName);
 
-    // Aktualisiere auch den Namen im Popup
+    
     const nameSpan = popUpSection.querySelector('.popup-name');
     nameSpan.textContent = `${firstName} ${lastName}`;
 
-    // Aktualisiere auch die Email und Telefonnummer im Popup
+    
     const emailSpan = popUpSection.querySelector('.popup-email-span');
     emailSpan.textContent = email;
 
@@ -235,8 +226,29 @@ function contactPopUp(id, firstName, lastName, email, phone) {
     popUpSection.classList.add('show');
 }
 
+function openContactForm() {
+    document.getElementById('addContact').classList.add('show');
+    document.getElementById('overlay').style.display = 'block';
+    document.body.classList.add('modal-open');
+    document.getElementById('addContactButton').disabled = true;
+    document.getElementById('addContactButton').classList.add('disabled');
+    document.querySelector('.header').classList.add('inactive');
+    document.querySelector('.sidebar').classList.add('inactive');
+}
+
+function closeContactForm() {
+    document.getElementById('addContact').classList.remove('show');
+    document.getElementById('overlay').style.display = 'none';
+    document.body.classList.remove('modal-open');
+    document.getElementById('addContactButton').disabled = false;
+    document.getElementById('addContactButton').classList.remove('disabled');
+    document.querySelector('.header').classList.remove('inactive');
+    document.querySelector('.sidebar').classList.remove('inactive');
+}
+
 function openEditContact(id, firstName, lastName, email, phone) {
     document.getElementById('editContact').classList.add('show');
+    document.getElementById('overlay').style.display = 'block';
     document.body.classList.add('modal-open');
     document.getElementById('addContactButton').disabled = true;
     document.getElementById('addContactButton').classList.add('disabled');
@@ -254,6 +266,7 @@ function openEditContact(id, firstName, lastName, email, phone) {
 
 function closeEditForm() {
     document.getElementById('editContact').classList.remove('show');
+    document.getElementById('overlay').style.display = 'none';
     document.body.classList.remove('modal-open');
     document.getElementById('addContactButton').disabled = false;
     document.getElementById('addContactButton').classList.remove('disabled');
@@ -273,7 +286,3 @@ function closeContactPopUp() {
 }
 
 document.addEventListener('DOMContentLoaded', onloadFunction);
-
-function getInitials(firstName, lastName) {
-    return `${firstName.charAt(0).toUpperCase()}${lastName.charAt(0).toUpperCase()}`;
-}
