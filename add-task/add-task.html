@@ -26,7 +26,7 @@
 
 		<section id="add-task-section" class="content">
 			<h1 class="add-task-headline">Add Task</h1>
-			<form id="add-task-form" class="add-task-form" onsubmit="createTask(event)">
+			<form id="add-task-form" class="add-task-form">
 				<div class="definition">
 					<div class="d-flex-col">
 						<label for="title">Title</label>
@@ -59,11 +59,11 @@
 					<div class="d-flex-col">
 						<label for="radio-button-group">Prio</label>
 						<div id="radio-button-group" class="radio-button-group">
-							<input type="radio" id="prio-high" name="prios" value="3" class="radio-button" onclick="getPriority(this.id)">
+							<input type="radio" id="prio-high" name="prios" value="3" class="radio-button">
 							<label for="prio-high" class="radio-label">HIGH</label>
-							<input type="radio" id="prio-med" name="prios" value="2" class="radio-button" onclick="getPriority(this.id)">
+							<input type="radio" id="prio-med" name="prios" value="2" class="radio-button">
 							<label for="prio-med" class="radio-label">MEDIUM</label>
-							<input type="radio" id="prio-low" name="prios" value="1" class="radio-button" onclick="getPriority(this.id)">
+							<input type="radio" id="prio-low" name="prios" value="1" class="radio-button">
 							<label for="prio-low" class="radio-label">LOW</label>
 						</div>
 					</div>

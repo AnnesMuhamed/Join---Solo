@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.body.addEventListener('click', showCheckboxes);
 	document.body.addEventListener('click', collapseCheckboxes);
 	document.body.addEventListener('click', assignContacts);
+	document.body.addEventListener('submit', createTask);
 	searchInput.addEventListener('keyup', function() {
 		renderCheckboxes();
 	});
@@ -159,6 +160,7 @@ function radioButtonsSelectState() {
 				lastChecked = null;
 				priority = null;
 			} else {
+				getPriority(event.target.id);
 				lastChecked = this;
 			}
 		});
@@ -260,7 +262,6 @@ async function createTask(event) {
 	let task = createTaskJson();
 	try {
 		let json = await postData(pathTasks, task);
-		console.log(json);
 		event.target.submit();
 	} catch (error) {
 		console.error('Error while sending data:', error);
