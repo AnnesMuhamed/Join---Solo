@@ -283,9 +283,18 @@ async function createTask(event) {
 
 
 function clearInputElements() {
-	let elements = document.querySelectorAll('input:not([type="radio"]), select[type="text"], textarea');
+	let elements = document.querySelectorAll('input:not([type="radio"]), textarea');
 	elements.forEach(element => {
 		element.value = '';
+	});
+}
+
+
+function clearSelectElements() {
+	let elements = document.querySelectorAll('select[type="text"]');
+	elements.forEach(element => {
+		element.selectedIndex = 0;
+		element.classList.remove('invalid');
 	});
 }
 
@@ -319,6 +328,7 @@ function clearDivs() {
 
 function clearForm() {
 	clearInputElements();
+	clearSelectElements();
 	clearRadioButtons();
 	clearCheckboxes();
 	clearDivs();

@@ -1,3 +1,33 @@
+body {
+	color: #2a3647;
+}
+
+select {
+	background-color: #FFF;
+	font-family: Inter, sans-serif;
+	font-weight: 400;
+	font-size: 20px;
+	color: #2a3647;
+}
+
+input:focus, textarea:focus, select:focus {
+	outline: none;
+	border: 1px solid #29abe2;
+}
+
+::placeholder {
+	font-family: Inter, sans-serif;
+	font-weight: 400;
+	font-size: 20px;
+	color: #D1D1D1;
+}
+
+#date {
+	font-family: Inter, sans-serif;
+	font-weight: 400;
+	font-size: 20px;
+}
+
 .add-task-headline {
 	font-size: 61px;
 	margin-left: 96px;
@@ -122,10 +152,15 @@
 	border-radius: 0 10px 10px 0;
 }
 
-.subtask-container:focus-within #subtasks,
+.subtask-container:focus-within #subtasks {
+	border-width: 1px;
+	border-right: none;
+	border-color: #29abe2;
+}
 .subtask-container:focus-within #add-subtask-button {
 	border-width: 1px;
-	border-color: black;
+	border-left: none;
+	border-color: #29abe2;
 }
 
 .radio-button-group {
