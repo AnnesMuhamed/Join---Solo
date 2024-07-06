@@ -42,7 +42,9 @@ function loginPage() {
             </label>
             <div class="button-container">
                 <button type="submit" class="login-button" disabled>Log in</button>
-                <button type="button" class="guest-button">Guest Log in</button>
+                <a href="../summary/summary-guest.html">
+                    <button type="button" class="guest-button">Guest Log in</button>
+                </a>
             </div>
         </form>
     </div>

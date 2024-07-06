@@ -169,6 +169,15 @@ body.modal-open {
     height: 32px;
 }
 
+.pop-up {
+    width: 751px;
+    height: 926px;
+}
+
+.contacts {
+    display: flex;
+}
+
 #contactSection {
     width: 456px;
     height: 928px;
@@ -306,11 +315,10 @@ body.modal-open {
 
 .contacts-headline {
     display: flex;
-    position: absolute;
     width: 625px;
     height: 73px;
-    top: 206px;
-    left: 743px;
+    margin-top: 100px;
+    margin-left: 50px;
     gap: 30px;
     align-items: center;
 }
@@ -700,11 +708,10 @@ body.modal-open {
 /* Popup */
 
 #popup-section {
-    position: absolute;
-    top: 311px;
-    left: 968px;
     width: 461px;
     height: 361px;
+    margin-top: 30px;
+    margin-left: 50px;
 }
 
 .popup-container {
@@ -800,6 +807,7 @@ body.modal-open {
     align-items: center;
     width: 81px;
     height: 24px;
+    font-size: 16px;
     gap: 8px;
 }
 

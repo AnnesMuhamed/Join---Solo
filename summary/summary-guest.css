@@ -66,6 +66,7 @@ body {
 /* Summary */
 
 .content {
+    display: flex;
     padding-top: 100px;
     padding-left: 96px;
 }
@@ -138,7 +139,11 @@ body {
 }
 
 .card-one:hover .edit-image {
-    filter: invert(29%) sepia(56%) saturate(403%) hue-rotate(168deg) brightness(96%) contrast(95%);
+    filter: brightness(0) saturate(1000%) invert(59%) sepia(45%) saturate(3434%) hue-rotate(161deg) brightness(95%) contrast(89%);
+}
+
+.edit-image:hover {
+    filter: brightness(0) saturate(1000%) invert(59%) sepia(45%) saturate(3434%) hue-rotate(161deg) brightness(95%) contrast(89%);
 }
 
 .card-one:hover .todo-container span,
@@ -426,8 +431,8 @@ body {
     justify-content: center;
     width: 385px;
     height: 136px;
+    margin-top: 313px;
     gap: 3px;
-    padding-left: 120px;
 }
 
 
