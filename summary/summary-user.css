@@ -66,6 +66,7 @@ body {
 /* Summary */
 
 .content {
+    display: flex;
     padding-top: 100px;
     padding-left: 96px;
 }
@@ -422,14 +423,13 @@ body {
 
 
 .greet {
-    position: absolute;
     display: flex;
     flex-direction: column;
-    width: 385px;
+    justify-content: center;
+    width: 485px;
     height: 136px;
+    margin-top: 313px;
     gap: 3px;
-    top: 547.5px;
-    left: 1200px;
 }
 
 .gm {
@@ -442,7 +442,7 @@ body {
 }
 
 .sofia {
-    width: 385px;
+    width: 485px;
     height: 77px;
     font-size: 64px;
     font-weight: 700;
