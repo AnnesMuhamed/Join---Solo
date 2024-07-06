@@ -58,6 +58,29 @@
     font-style: italic;
     src: url('/fonts/Inter/static/Inter-VariableFont_slnt,wght.ttf') format('truetype');
 }
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+    border: 3px solid #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+body {
+    scrollbar-width: thin;
+}
 
 body {
     font-family: 'Inter', sans-serif;
@@ -807,6 +830,7 @@ body.modal-open {
     align-items: center;
     width: 81px;
     height: 24px;
+    font-weight: 400;
     font-size: 16px;
     gap: 8px;
 }
