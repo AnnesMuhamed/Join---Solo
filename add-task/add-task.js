@@ -96,7 +96,7 @@ function assignContacts(event) {
 			removeContacts(checkboxId);
 		} else {
 			assignments.innerHTML += `
-				<span id="${checkboxId}-${initials}">${initials}</span>
+				<span class="initials-span" id="${checkboxId}-${initials}">${initials}</span>
 		`;
 			addContacts(checkboxId);
 		}
@@ -133,7 +133,7 @@ function renderCheckboxes() {
 		}
 		checkboxes.innerHTML += `
 			<label for="${id}">
-				<span>${initials}</span>
+				<span class="initials-span">${initials}</span>
 				<span>${contacts[id]['firstName']} ${contacts[id]['lastName']}</span>
 				<input type="checkbox" id="${id}">
 			</label>
