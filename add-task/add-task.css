@@ -45,6 +45,10 @@ input:focus, textarea:focus, select:focus {
 	border: 1px solid #29abe2;
 }
 
+input::invalid {
+	border: 1px solid red;
+}
+
 ::placeholder {
 	font-family: Inter, sans-serif;
 	font-weight: 400;
