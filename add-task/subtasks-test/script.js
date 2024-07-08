@@ -10,8 +10,57 @@ function setupEventListeners() {
 
 	//Event listener for specific elements
 	subTaskButton.addEventListener('click', confirmOrCancel);
+
+	subtasksMutationObserver();
 }
 
+function subtasksMutationObserver() {
+	let targetNode = document.getElementById('subtask-buttons-container');
+	const config = {childList: true};
+	const callback = function(mutationsList, observer) {
+		for(let mutation of mutationsList) {
+			if(mutation.type === 'childList') {
+				mutation.addedNodes.forEach(node => {
+					if(node.id === 'check-subtask-button') {
+						node.addEventListener('click', renderSubtask);
+					} else if (node.id === 'clear-subtask-button') {
+						node.addEventListener('click', clearSubtaskInput);
+					} else {
+						node.addEventListener('click', confirmOrCancel);
+					}
+				});
+			}
+		}
+	};
+	const observer = new MutationObserver(callback);
+	observer.observe(targetNode, config);
+}
+
+function inlineSubtaskButton(type) {
+	return (`
+		<button id="${type}-subtask-button" class="in-line-btn" type="button">
+			<img src="/img/add-task/${type}.png"/>
+		</button>
+	`);
+}
+
+function verticalSeparator(width, height) {
+	return (`
+		<svg width="${width}" height="${height}">
+			<line x1="0" y1="0" x2="0" y2="${height}" stroke="#D1D1D1" stroke-width="1"/>
+		</svg>
+	`);
+}
+
+function clearSubtaskInput() {
+	let subtaskButtonContainer = document.getElementById('subtask-buttons-container');
+	let subtask = document.getElementById('subtasks');
+	subtask.value = '';
+	subtaskButtonContainer.innerHTML = '';
+	subtaskButtonContainer.innerHTML = `
+		${inlineSubtaskButton(type='add')}
+	`;
+}
 
 function confirmOrCancel() {
 	let subtaskButtonContainer = document.getElementById('subtask-buttons-container');
@@ -19,15 +68,9 @@ function confirmOrCancel() {
 	if(subtask.value) {
 		subtaskButtonContainer.innerHTML = '';
 		subtaskButtonContainer.innerHTML = `
-						<button id="cancel-subtask-button" class="in-line-btn" type="button">
-							<img src="/img/add-task/clear.png"/>
-						</button>
-						<svg width="1px" height="24px">
-							<line x1="0" y1="0" x2="0" y2="24px" stroke="#D1D1D1" stroke-width="1"/>
-						</svg>
-						<button id="confirm-subtask-button" class="in-line-btn" type="button">
-							<img src="/img/add-task/check.png"/>
-						</button>
+			${inlineSubtaskButton(type='clear')}
+			${verticalSeparator(width='1px', height='24px')}
+			${inlineSubtaskButton(type='check')}
 	`;
 	}
 }
@@ -42,6 +85,7 @@ function renderSubtask() {
 	let subtask = getSubtask();
 	addSubtask(subtask);
 	unsortedList.innerHTML += `<li>${subtask}</li>`;
+	clearSubtaskInput();
 }
 
 function addSubtask(subtask) {
