@@ -9,7 +9,7 @@ function setupEventListeners() {
 	let subTaskButton = document.getElementById('add-subtask-button');
 
 	//Event listener for specific elements
-	subTaskButton.addEventListener('click', confirmOrCancel);
+	subTaskButton.addEventListener('click', confirmOrCancelSubtask);
 
 	subtasksMutationObserver();
 }
@@ -36,7 +36,7 @@ function attachEventListener(node) {
 	} else if (node.id === 'clear-subtask-button') {
 		node.addEventListener('click', clearSubtaskInput);
 	} else {
-		node.addEventListener('click', confirmOrCancel);
+		node.addEventListener('click', confirmOrCancelSubtask);
 	}
 }
 
@@ -66,7 +66,7 @@ function clearSubtaskInput() {
 	`;
 }
 
-function confirmOrCancel() {
+function confirmOrCancelSubtask() {
 	let subtaskButtonContainer = document.getElementById('subtask-buttons-container');
 	let subtask = document.getElementById('subtasks');
 	if(subtask.value) {
@@ -88,7 +88,7 @@ function renderSubtask() {
 	let unsortedList = document.getElementById('subtask-list');
 	let subtask = getSubtask();
 	addSubtask(subtask);
-	unsortedList.innerHTML += `<li>${subtask}</li>`;
+	unsortedList.innerHTML += `<li class="subtask-list-element">${subtask}</li>`;
 	clearSubtaskInput();
 }
 
