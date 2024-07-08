@@ -41,15 +41,10 @@ async function onloadFunction() {
 
 async function includeHTML() {
     let includeElements = document.querySelectorAll("[w3-include-html]");
-    for (let i = 0; i < includeElements.length; i++) {
-        const element = includeElements[i];
+    for (let element of includeElements) {
         let file = element.getAttribute("w3-include-html");
         let resp = await fetch(file);
-        if (resp.ok) {
-            element.innerHTML = await resp.text();
-        } else {
-            element.innerHTML = "Page not found";
-        }
+        element.innerHTML = resp.ok ? await resp.text() : "Page not found";
     }
 }
 
@@ -60,12 +55,11 @@ async function renderContacts() {
 
     let contactsArray = Object.entries(contacts).map(([id, contact]) => ({ id, ...contact }));
     contactsArray = contactsArray.filter(contact => contact && contact.lastName);
-
     contactsArray.sort((a, b) => a.lastName.localeCompare(b.lastName));
 
     alphabetSections = [];
 
-    contactsArray.forEach((contact, index) => {
+    for (let contact of contactsArray) {
         let firstLetter = contact.lastName.charAt(0).toUpperCase();
         if (firstLetter !== currentLetter) {
             if (currentLetter !== '') {
@@ -89,7 +83,7 @@ async function renderContacts() {
                 </div>
             </div>
         `);
-    });
+    }
 
     contactSection.innerHTML = `
         <button id="addContactButton" onclick="openContactForm()" class="add-contact-button">
@@ -99,7 +93,6 @@ async function renderContacts() {
         <div class="contact-list-container">
             ${alphabetSections.join('')}
         </div>
-        
     `;
 }
 
@@ -108,11 +101,10 @@ function getInitials(firstName, lastName) {
 }
 
 function highlightContact(element) {
-    const contactItems = document.querySelectorAll('.contact-item');
-    contactItems.forEach(item => {
-        item.classList.remove('highlighted');
-    });
+    document.querySelectorAll('.contact-item').forEach(item => item.classList.remove('highlighted'));
     element.classList.add('highlighted');
+    document.getElementById('popup-section').classList.add('show');
+    document.getElementById('popup-section').classList.remove('show');
 }
 
 async function createContact() {
@@ -159,21 +151,15 @@ async function saveContact() {
     await renderContacts();
     closeEditForm();
 
-    
+    updatePopUpDetails(firstName, lastName, email, phone);
+}
+
+function updatePopUpDetails(firstName, lastName, email, phone) {
     const popUpSection = document.getElementById('popup-section');
-    const initialsSpan = popUpSection.querySelector('.popup-initiale');
-    initialsSpan.textContent = getInitials(firstName, lastName);
-
-    
-    const nameSpan = popUpSection.querySelector('.popup-name');
-    nameSpan.textContent = `${firstName} ${lastName}`;
-
-    
-    const emailSpan = popUpSection.querySelector('.popup-email-span');
-    emailSpan.textContent = email;
-
-    const phoneSpan = popUpSection.querySelector('.popup-phoneNr-span');
-    phoneSpan.textContent = phone;
+    popUpSection.querySelector('.popup-initiale').textContent = getInitials(firstName, lastName);
+    popUpSection.querySelector('.popup-name').textContent = `${firstName} ${lastName}`;
+    popUpSection.querySelector('.popup-email-span').textContent = email;
+    popUpSection.querySelector('.popup-phoneNr-span').textContent = phone;
 }
 
 function contactPopUp(id, firstName, lastName, email, phone) {
@@ -215,59 +201,64 @@ function contactPopUp(id, firstName, lastName, email, phone) {
             </div>
         </div>
     `;
+    setEditFormValues(id, firstName, lastName, email, phone);
+    popUpSection.classList.add('show');
+    movePopupToPosition(popUpSection);
+}
+
+function setEditFormValues(id, firstName, lastName, email, phone) {
     document.getElementById('editContactId').value = id;
     document.getElementById('editName').value = `${firstName} ${lastName}`;
     document.getElementById('editEmail').value = email;
     document.getElementById('editPhone').value = phone;
-    popUpSection.classList.add('show');
+}
+
+function movePopupToPosition(popupElement) {
+   
 }
 
 function openContactForm() {
-    document.getElementById('addContact').classList.add('show');
-    document.getElementById('overlay').style.display = 'block';
-    document.body.classList.add('modal-open');
-    document.getElementById('addContactButton').disabled = true;
-    document.getElementById('addContactButton').classList.add('disabled');
-    document.querySelector('.header').classList.add('inactive');
-    document.querySelector('.sidebar').classList.add('inactive');
+    openForm('addContact');
 }
 
 function closeContactForm() {
-    document.getElementById('addContact').classList.remove('show');
-    document.getElementById('overlay').style.display = 'none';
-    document.body.classList.remove('modal-open');
-    document.getElementById('addContactButton').disabled = false;
-    document.getElementById('addContactButton').classList.remove('disabled');
-    document.querySelector('.header').classList.remove('inactive');
-    document.querySelector('.sidebar').classList.remove('inactive');
+    closeForm('addContact');
 }
 
 function openEditContact(id, firstName, lastName, email, phone) {
-    document.getElementById('editContact').classList.add('show');
-    document.getElementById('overlay').style.display = 'block';
-    document.body.classList.add('modal-open');
-    document.getElementById('addContactButton').disabled = true;
-    document.getElementById('addContactButton').classList.add('disabled');
-    document.querySelector('.header').classList.add('inactive');
-    document.querySelector('.sidebar').classList.add('inactive');
-    
-    const initials = getInitials(firstName, lastName);
-
-    document.getElementById('editFormInitials').textContent = initials;
-    document.getElementById('editContactId').value = id;
-    document.getElementById('editName').value = `${firstName} ${lastName}`;
-    document.getElementById('editEmail').value = email;
-    document.getElementById('editPhone').value = phone;
+    openForm('editContact');
+    setEditFormValues(id, firstName, lastName, email, phone);
 }
 
 function closeEditForm() {
-    document.getElementById('editContact').classList.remove('show');
+    closeForm('editContact');
+}
+
+function openForm(formId) {
+    document.getElementById(formId).classList.add('show');
+    document.getElementById('overlay').style.display = 'block';
+    document.body.classList.add('modal-open');
+    disableAddContactButton(true);
+    setInactiveState(true);
+}
+
+function closeForm(formId) {
+    document.getElementById(formId).classList.remove('show');
     document.getElementById('overlay').style.display = 'none';
     document.body.classList.remove('modal-open');
-    document.getElementById('addContactButton').disabled = false;
-    document.getElementById('addContactButton').classList.remove('disabled');
-    document.querySelector('.header').classList.remove('inactive');
-    document.querySelector('.sidebar').classList.remove('inactive');
+    disableAddContactButton(false);
+    setInactiveState(false);
+}
+
+function disableAddContactButton(disable) {
+    const button = document.getElementById('addContactButton');
+    button.disabled = disable;
+    button.classList.toggle('disabled', disable);
+}
+
+function setInactiveState(inactive) {
+    document.querySelector('.header').classList.toggle('inactive', inactive);
+    document.querySelector('.sidebar').classList.toggle('inactive', inactive);
 }
 
 async function deleteContact(id) {
@@ -277,8 +268,8 @@ async function deleteContact(id) {
 }
 
 function closeContactPopUp() {
-    const popUpSection = document.getElementById('popup-section');
-    popUpSection.classList.remove('show');
+    document.getElementById('popup-section').classList.remove('show');
 }
 
 document.addEventListener('DOMContentLoaded', onloadFunction);
+
