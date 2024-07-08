@@ -84,7 +84,6 @@ body {
 
 body {
     font-family: 'Inter', sans-serif;
-    background: #F6F7F8;
     overflow-x: hidden;
 }
 
@@ -198,6 +197,7 @@ body.modal-open {
 }
 
 .contacts {
+    background: #F6F7F8;
     display: flex;
 }
 
