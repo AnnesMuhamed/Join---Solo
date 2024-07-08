@@ -21,19 +21,23 @@ function subtasksMutationObserver() {
 		for(let mutation of mutationsList) {
 			if(mutation.type === 'childList') {
 				mutation.addedNodes.forEach(node => {
-					if(node.id === 'check-subtask-button') {
-						node.addEventListener('click', renderSubtask);
-					} else if (node.id === 'clear-subtask-button') {
-						node.addEventListener('click', clearSubtaskInput);
-					} else {
-						node.addEventListener('click', confirmOrCancel);
-					}
+					attachEventListener(node);
 				});
 			}
 		}
 	};
 	const observer = new MutationObserver(callback);
 	observer.observe(targetNode, config);
+}
+
+function attachEventListener(node) {
+	if(node.id === 'check-subtask-button') {
+		node.addEventListener('click', renderSubtask);
+	} else if (node.id === 'clear-subtask-button') {
+		node.addEventListener('click', clearSubtaskInput);
+	} else {
+		node.addEventListener('click', confirmOrCancel);
+	}
 }
 
 function inlineSubtaskButton(type) {
