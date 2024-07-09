@@ -88,7 +88,7 @@ function renderSubtask() {
 	let unsortedList = document.getElementById('subtask-list');
 	let subtask = getSubtask();
 	addSubtask(subtask);
-	unsortedList.innerHTML += `<li class="subtask-list-element">${subtask}</li>`;
+	unsortedList.innerHTML += `<li class="subtask-list-element"><span>${subtask}</span></li>`;
 	clearSubtaskInput();
 }
 

@@ -74,7 +74,7 @@ body {
 .subtask-list {
 	list-style-type: none;
 	margin: 0;
-	padding: 6px 16px;
+	padding: 6px 0;
 	width: 100%;
 /*	padding-top: 16px;*/
 /*	padding-left: 580px;*/
@@ -85,21 +85,26 @@ body {
 	align-items: center;
 	position: relative;
 	padding: 6px 16px;
+	box-sizing: border-box;
+}
+
+.subtask-list-element span {
+	padding-left: 16px;
 }
 
 .subtask-list-element::before {
 	content: "•";
 	position: absolute;
-	left: 0;
+	left: 16px;
 	color: inherit;
-}
-
-.subtask-list-element:hover::before {
-	background-color: #EEEEEE;
 }
 
 .subtask-list-element:hover {
 	border-radius: 10px;
+	background-color: #EEEEEE;
+}
+
+.subtask-list-element:hover::before {
 	background-color: #EEEEEE;
 }
 

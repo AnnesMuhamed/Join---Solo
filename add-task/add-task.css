@@ -231,15 +231,48 @@ input::invalid {
 }
 
 .subtask-list-container {
+	display: flex;
 	height: 128px;
-	width: 962px;
+	max-width: 963px;
+	width: 100%;
 	margin-left: 96px;
+	overflow: auto;
 }
 
 .subtask-list {
+	list-style-type: none;
 	margin: 0;
-	padding-top: 16px;
-	padding-left: 580px;
+	padding: 6px 0;
+	width: 100%;
+	padding-left: 522px;
+}
+
+.subtask-list-element {
+	display: flex;
+	align-items: center;
+	position: relative;
+	padding: 6px 16px;
+	box-sizing: border-box;
+}
+
+.subtask-list-element span {
+	padding-left: 16px;
+}
+
+.subtask-list-element::before {
+	content: "•";
+	position: absolute;
+	left: 16px;
+	color: inherit;
+}
+
+.subtask-list-element:hover {
+	border-radius: 10px;
+	background-color: #EEEEEE;
+}
+
+.subtask-list-element:hover::before {
+	background-color: #EEEEEE;
 }
 
 .radio-button-group {
