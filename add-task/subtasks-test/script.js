@@ -7,9 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function setupEventListeners() {
 	let subTaskButton = document.getElementById('add-subtask-button');
+	let subtasksList = document.getElementById('subtask-list');
 
 	//Event listener for specific elements
 	subTaskButton.addEventListener('click', confirmOrCancelSubtask);
+	subtasksList.addEventListener('dblclick', handleDoubleClick);
 
 	subtasksMutationObserver();
 }
@@ -99,4 +101,56 @@ function addSubtask(subtask) {
 		subtasks += subtask;
 	}
 }
+
+
+function createInputElement(value) {
+	const input = document.createElement('input');
+	input.type = 'text';
+	input.style = 'box-sizing: border-box; width: 100%; padding: 6px 16px;'
+	input.value = value;
+	return input;
+}
+
+
+function attachInputEventListeners(input, li, span) {
+	input.addEventListener('blur', () => handleInputBlur(input, li, span));
+	input.addEventListener('keypress', (event) => handleInputKeyPress(event, input));
+}
+
+
+function handleInputBlur(input, li, span) {
+	span.textContent = input.value;
+	input.remove();
+	li.classList.remove('hidden');
+	li.classList.add('subtask-list-element');
+	li.appendChild(span);
+}
+
+
+function handleInputKeyPress(event, input) {
+	if(event.key === 'Enter') {
+		input.blur();
+	}
+}
+
+
+function replaceLiWithInput(li, input) {
+	li.classList.add('hidden');
+	const inputLi = document.createElement('li');
+	inputLi.appendChild(input);
+	li.parentNode.insertBefore(inputLi, li);
+	input.focus;
+}
+
+
+function handleDoubleClick(event) {
+	if(event.target.tagName === 'SPAN') {
+		const li = event.target.parentElement;
+		const span = event.target;
+		const input = createInputElement(span.textContent);
+		attachInputEventListeners(input, li, span);
+		replaceLiWithInput(li, input);
+	}
+}
+
 

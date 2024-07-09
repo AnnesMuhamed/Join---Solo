@@ -108,4 +108,6 @@ body {
 	background-color: #EEEEEE;
 }
 
-
+.hidden {
+	display: none;
+}
