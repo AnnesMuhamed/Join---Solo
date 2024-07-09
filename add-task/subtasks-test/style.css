@@ -1,3 +1,8 @@
+body {
+	max-width: 440px;
+	margin: 0 auto;
+}
+
 .d-flex-col {
 	display: flex;
 	flex-direction: column;
@@ -59,21 +64,43 @@
 }
 
 .subtask-list-container {
+	display: flex;
 	height: 128px;
-	width: 962px;
-	margin-left: 96px;
+	max-width: 440px;
+	width: 100%;
+/*	margin-left: 96px;*/
 }
 
 .subtask-list {
+	list-style-type: none;
 	margin: 0;
-	padding-top: 16px;
-	padding-left: 580px;
+	padding: 6px 16px;
+	width: 100%;
+/*	padding-top: 16px;*/
+/*	padding-left: 580px;*/
+}
+
+.subtask-list-element {
+	display: flex;
+	align-items: center;
+	position: relative;
+	padding: 6px 16px;
+}
+
+.subtask-list-element::before {
+	content: "•";
+	position: absolute;
+	left: 0;
+	color: inherit;
+}
+
+.subtask-list-element:hover::before {
+	background-color: #EEEEEE;
 }
 
 .subtask-list-element:hover {
 	border-radius: 10px;
 	background-color: #EEEEEE;
-	height: 32px;
-	padding: 4px 16px;
 }
+
 
