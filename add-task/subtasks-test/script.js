@@ -50,10 +50,10 @@ function inlineSubtaskButton(type) {
 	`);
 }
 
-function verticalSeparator(width, height) {
+function verticalSeparator(width, height, stroke) {
 	return (`
 		<svg width="${width}" height="${height}">
-			<line x1="0" y1="0" x2="0" y2="${height}" stroke="#D1D1D1" stroke-width="1"/>
+			<line x1="0" y1="0" x2="0" y2="${height}" stroke="${stroke}" stroke-width="1"/>
 		</svg>
 	`);
 }
@@ -75,7 +75,7 @@ function confirmOrCancelSubtask() {
 		subtaskButtonContainer.innerHTML = '';
 		subtaskButtonContainer.innerHTML = `
 			${inlineSubtaskButton(type='clear')}
-			${verticalSeparator(width='1px', height='24px')}
+			${verticalSeparator(width='1px', height='24px', '#D1D1D1')}
 			${inlineSubtaskButton(type='check')}
 	`;
 	}
@@ -90,7 +90,16 @@ function renderSubtask() {
 	let unsortedList = document.getElementById('subtask-list');
 	let subtask = getSubtask();
 	addSubtask(subtask);
-	unsortedList.innerHTML += `<li class="subtask-list-element"><span>${subtask}</span></li>`;
+	unsortedList.innerHTML += `
+								<li id="${subtask}" class="subtask-list-element">
+									<span>${subtask}</span>
+									<div id="subtaskli-buttons-container">
+										${inlineSubtaskButton('edit')}
+										${verticalSeparator('1px', '24px', '#A8A8A8')}
+										${inlineSubtaskButton('delete')}
+									</div>
+								</li>
+							`;
 	clearSubtaskInput();
 }
 
@@ -100,6 +109,31 @@ function addSubtask(subtask) {
 	} else {
 		subtasks += subtask;
 	}
+}
+
+
+function subtasksStringReplacement(id, replacement) {
+	let subtasksList = subtasks.split(',');
+	let idx = subtasksList.indexOf(id);
+	subtasksList[idx] = replacement;
+	subtasks = subtasksList.join(',')
+}
+
+
+function editSubtasks() {
+	let listedSubtasks = document.querySelectorAll('LI');
+	listedSubtasks.forEach((element) => {
+		if(element.innerHTML === '') {
+			element.remove();
+		} else {
+			let id = element.id;
+			let newString = element.firstChild.textContent;
+			if(newString != id) {
+				subtasksStringReplacement(id, newString);
+				element.id = newString;
+			}
+		}
+	});
 }
 
 
@@ -124,12 +158,14 @@ function handleInputBlur(input, li, span) {
 	li.classList.remove('hidden');
 	li.classList.add('subtask-list-element');
 	li.appendChild(span);
+	editSubtasks();
 }
 
 
 function handleInputKeyPress(event, input) {
 	if(event.key === 'Enter') {
 		input.blur();
+		editSubtasks();
 	}
 }
 
@@ -148,8 +184,8 @@ function handleDoubleClick(event) {
 		const li = event.target.parentElement;
 		const span = event.target;
 		const input = createInputElement(span.textContent);
-		attachInputEventListeners(input, li, span);
 		replaceLiWithInput(li, input);
+		attachInputEventListeners(input, li, span);
 	}
 }
 

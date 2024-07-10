@@ -31,6 +31,13 @@ body {
 	outline: none;
 }
 
+#subtaskli-buttons-container {
+	display: flex;
+	align-items: center;
+	height: 16px;
+	padding: 16px 12px 16px 12px;
+}
+
 .add-subtask-button {
 	display: flex;
 	align-items: center;
@@ -83,6 +90,7 @@ body {
 .subtask-list-element {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	position: relative;
 	padding: 6px 16px;
 	box-sizing: border-box;
@@ -99,8 +107,18 @@ body {
 	color: inherit;
 }
 
-.subtask-list-element:hover {
+.subtask-list-element:hover,
+.subtask-list-element:focus-within {
 	border-radius: 10px;
+	background-color: #EEEEEE;
+}
+
+.subtask-list-element:hover #subtaskli-buttons-container button,
+.subtask-list-element:focus-within #subtaskli-buttons-container button {
+	background-color: #EEEEEE;
+}
+
+#subtaskli-buttons-container button:hover {
 	background-color: #EEEEEE;
 }
 
