@@ -91,19 +91,14 @@ body.modal-open {
     overflow: hidden;
 }
 
-.inactive {
-    background: rgba(0, 0, 0, 0.1);
-    pointer-events: none;
-}
-
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
     height: 1024px;
-    background: #2A3647;
-    opacity: 0.9;
     display: none;
 }
 
@@ -117,7 +112,7 @@ body.modal-open {
     padding: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: left 0.5s ease;
-    z-index: 999;
+    z-index: 5;
     display: none;
 }
 

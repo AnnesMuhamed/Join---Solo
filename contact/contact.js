@@ -239,7 +239,6 @@ function openForm(formId) {
     document.getElementById('overlay').style.display = 'block';
     document.body.classList.add('modal-open');
     disableAddContactButton(true);
-    setInactiveState(true);
 }
 
 function closeForm(formId) {
@@ -247,7 +246,6 @@ function closeForm(formId) {
     document.getElementById('overlay').style.display = 'none';
     document.body.classList.remove('modal-open');
     disableAddContactButton(false);
-    setInactiveState(false);
 }
   
 
@@ -255,11 +253,6 @@ function disableAddContactButton(disable) {
     const button = document.getElementById('addContactButton');
     button.disabled = disable;
     button.classList.toggle('disabled', disable);
-}
-
-function setInactiveState(inactive) {
-    document.querySelector('.header').classList.toggle('inactive', inactive);
-    document.querySelector('.sidebar').classList.toggle('inactive', inactive);
 }
 
 async function deleteContact(id) {
