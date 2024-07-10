@@ -618,14 +618,25 @@ body.modal-open {
     background: #FFFFFF;
     cursor: pointer;
     transition: all 0.1s ease;
-    filter: grayscale(100%);
 }
 
 .cancelButton:hover {
-    filter: brightness(0) saturate(1000%) invert(59%) sepia(45%) saturate(3434%) hue-rotate(161deg) brightness(95%) contrast(89%);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
     border-color: #29ABE2;
     color: #29ABE2;
+}
+
+.x-png {
+    position: relative;
+    width: 10.49px;
+    height: 10.49px;
+    top: 6.76px;
+    left: 6.76px;
+    filter: grayscale(100%);
+}
+
+.x-png:hover {
+    filter: brightness(0) saturate(1000%) invert(59%) sepia(45%) saturate(3434%) hue-rotate(161deg) brightness(95%) contrast(89%);
 }
 
 .editCancelButton {
@@ -656,18 +667,7 @@ body.modal-open {
     text-align: left;
 }
 
-.x-png {
-    position: relative;
-    width: 10.49px;
-    height: 10.49px;
-    top: 6.76px;
-    left: 6.76px;
-    filter: grayscale(100%);
-}
 
-.x-png:hover {
-    filter: brightness(0) saturate(1000%) invert(59%) sepia(45%) saturate(3434%) hue-rotate(161deg) brightness(95%) contrast(89%);
-}
 
 .createButton {
     width: 214px;
@@ -701,6 +701,7 @@ body.modal-open {
     padding: 16px;
     gap: 4px;
     border-radius: 10px;
+    border: none;
     background: #2A3647;
     color: #FFFFFF;
     font-family: Inter;
