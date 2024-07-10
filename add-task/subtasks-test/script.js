@@ -50,6 +50,14 @@ function inlineSubtaskButton(type) {
 	`);
 }
 
+function inSubtaskListButton(type) {
+	return (`
+		<button class="${type}-subtask-button in-line-btn" type="button">
+			<img src="/img/add-task/${type}.png"/>
+		</button>
+	`);
+}
+
 function verticalSeparator(width, height, stroke) {
 	return (`
 		<svg width="${width}" height="${height}">
@@ -93,10 +101,10 @@ function renderSubtask() {
 	unsortedList.innerHTML += `
 								<li id="${subtask}" class="subtask-list-element">
 									<span>${subtask}</span>
-									<div id="subtaskli-buttons-container">
-										${inlineSubtaskButton('edit')}
+									<div class="subtaskli-buttons-container">
+										${inSubtaskListButton('edit')}
 										${verticalSeparator('1px', '24px', '#A8A8A8')}
-										${inlineSubtaskButton('delete')}
+										${inSubtaskListButton('delete')}
 									</div>
 								</li>
 							`;
@@ -121,17 +129,20 @@ function subtasksStringReplacement(id, replacement) {
 
 
 function editSubtasks() {
-	let listedSubtasks = document.querySelectorAll('LI');
-	listedSubtasks.forEach((element) => {
+	let listedSubtasks = document.querySelectorAll('li.subtask-list-element');
+	subtasks = Array.from(listedSubtasks).map(element => {
+		let span = element.querySelector('span');
+		return span.textContent;
+	}).join(',');
+	removeEmptyListElements();
+}
+
+
+function removeEmptyListElements() {
+	let listElements = document.querySelectorAll('LI');
+	listElements.forEach((element) => {
 		if(element.innerHTML === '') {
 			element.remove();
-		} else {
-			let id = element.id;
-			let newString = element.firstChild.textContent;
-			if(newString != id) {
-				subtasksStringReplacement(id, newString);
-				element.id = newString;
-			}
 		}
 	});
 }
@@ -146,18 +157,19 @@ function createInputElement(value) {
 }
 
 
-function attachInputEventListeners(input, li, span) {
-	input.addEventListener('blur', () => handleInputBlur(input, li, span));
+function attachInputEventListeners(input, li, span, buttonsContainer) {
+	input.addEventListener('blur', () => handleInputBlur(input, li, span, buttonsContainer));
 	input.addEventListener('keypress', (event) => handleInputKeyPress(event, input));
 }
 
 
-function handleInputBlur(input, li, span) {
+function handleInputBlur(input, li, span, buttonsContainer) {
 	span.textContent = input.value;
 	input.remove();
 	li.classList.remove('hidden');
 	li.classList.add('subtask-list-element');
 	li.appendChild(span);
+	li.appendChild(buttonsContainer);
 	editSubtasks();
 }
 
@@ -183,9 +195,10 @@ function handleDoubleClick(event) {
 	if(event.target.tagName === 'SPAN') {
 		const li = event.target.parentElement;
 		const span = event.target;
+		const buttonsContainer = li.querySelector('.subtaskli-buttons-container');
 		const input = createInputElement(span.textContent);
 		replaceLiWithInput(li, input);
-		attachInputEventListeners(input, li, span);
+		attachInputEventListeners(input, li, span, buttonsContainer);
 	}
 }
 

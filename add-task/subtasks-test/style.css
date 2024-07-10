@@ -31,7 +31,7 @@ body {
 	outline: none;
 }
 
-#subtaskli-buttons-container {
+.subtaskli-buttons-container {
 	display: flex;
 	align-items: center;
 	height: 16px;
@@ -113,12 +113,12 @@ body {
 	background-color: #EEEEEE;
 }
 
-.subtask-list-element:hover #subtaskli-buttons-container button,
-.subtask-list-element:focus-within #subtaskli-buttons-container button {
+.subtask-list-element:hover .subtaskli-buttons-container button,
+.subtask-list-element:focus-within .subtaskli-buttons-container button {
 	background-color: #EEEEEE;
 }
 
-#subtaskli-buttons-container button:hover {
+.subtaskli-buttons-container button:hover {
 	background-color: #EEEEEE;
 }
 
