@@ -228,6 +228,7 @@ function closeContactForm() {
 function openEditContact(id, firstName, lastName, email, phone) {
     openForm('editContact');
     setEditFormValues(id, firstName, lastName, email, phone);
+    document.getElementById('editFormInitials').textContent = getInitials(firstName, lastName);
 }
 
 function closeEditForm() {
