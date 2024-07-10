@@ -249,6 +249,7 @@ function closeForm(formId) {
     disableAddContactButton(false);
     setInactiveState(false);
 }
+  
 
 function disableAddContactButton(disable) {
     const button = document.getElementById('addContactButton');
