@@ -15,6 +15,11 @@ async function displayUserInitials(userID) {
         if (user) {
             let initials = getInitials(user.firstName, user.lastName);
             document.querySelector('.header-right .user').innerText = initials;
+            if (user.role !== "guest") {
+                document.getElementById('logout-link').style.display = 'block';
+            } else {
+                document.getElementById('logout-link').style.display = 'none';
+            }
         } else {
             console.error("Benutzer nicht gefunden");
         }
@@ -39,4 +44,4 @@ window.onclick = function (event) {
     }
 }
 
-displayUserInitials('user123');
+displayUserInitials('#user');
