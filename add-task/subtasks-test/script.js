@@ -11,15 +11,20 @@ function setupEventListeners() {
 
 	//Event listener for specific elements
 	subTaskButton.addEventListener('click', confirmOrCancelSubtask);
-	subtasksList.addEventListener('dblclick', handleDoubleClick);
+	subtasksList.addEventListener('dblclick', subtasksHandleDoubleClick);
+	subtasksList.addEventListener('click', subtasksHandleEditClick);
+	subtasksList.addEventListener('click', subtasksHandleDeleteClick);
+	subtasksList.addEventListener('mouseover', showHideSubtaskLiButtonsContainer);
+	subtasksList.addEventListener('mouseout', showHideSubtaskLiButtonsContainer);
 
 	subtasksMutationObserver();
 }
 
+
 function subtasksMutationObserver() {
 	let targetNode = document.getElementById('subtask-buttons-container');
 	const config = {childList: true};
-	const callback = function(mutationsList, observer) {
+	const callback = function(mutationsList) {
 		for(let mutation of mutationsList) {
 			if(mutation.type === 'childList') {
 				mutation.addedNodes.forEach(node => {
@@ -32,6 +37,7 @@ function subtasksMutationObserver() {
 	observer.observe(targetNode, config);
 }
 
+
 function attachEventListener(node) {
 	if(node.id === 'check-subtask-button') {
 		node.addEventListener('click', renderSubtask);
@@ -42,21 +48,24 @@ function attachEventListener(node) {
 	}
 }
 
+
 function inlineSubtaskButton(type) {
 	return (`
 		<button id="${type}-subtask-button" class="in-line-btn" type="button">
-			<img src="/img/add-task/${type}.png"/>
+			<img src="./img/add-task/${type}.png"/>
 		</button>
 	`);
 }
 
+
 function inSubtaskListButton(type) {
 	return (`
 		<button class="${type}-subtask-button in-line-btn" type="button">
-			<img src="/img/add-task/${type}.png"/>
+			<img src="./img/add-task/${type}.png"/>
 		</button>
 	`);
 }
+
 
 function verticalSeparator(width, height, stroke) {
 	return (`
@@ -65,6 +74,7 @@ function verticalSeparator(width, height, stroke) {
 		</svg>
 	`);
 }
+
 
 function clearSubtaskInput() {
 	let subtaskButtonContainer = document.getElementById('subtask-buttons-container');
@@ -75,6 +85,7 @@ function clearSubtaskInput() {
 		${inlineSubtaskButton(type='add')}
 	`;
 }
+
 
 function confirmOrCancelSubtask() {
 	let subtaskButtonContainer = document.getElementById('subtask-buttons-container');
@@ -89,10 +100,12 @@ function confirmOrCancelSubtask() {
 	}
 }
 
+
 function getSubtask() {
 	let subtask = document.getElementById('subtasks');
 	return subtask.value;
 }
+
 
 function renderSubtask() {
 	let unsortedList = document.getElementById('subtask-list');
@@ -113,6 +126,18 @@ function renderSubtask() {
 	clearSubtaskInput();
 }
 
+
+function showHideSubtaskLiButtonsContainer(event) {
+	if(event.target.closest('.subtask-list-element')) {
+		if(event.type === 'mouseover') {
+			console.log('Maus im Haus!');
+		} else if(event.type === 'mouseout') {
+			console.log('Maus ist raus!');
+		}
+	}
+}
+
+
 function addSubtask(subtask) {
 	if(subtasks.length > 0) {
 		subtasks += `,${subtask}`;
@@ -132,10 +157,14 @@ function subtasksStringReplacement(id, replacement) {
 
 function editSubtasks() {
 	let listedSubtasks = document.querySelectorAll('li.subtask-list-element');
-	subtasks = Array.from(listedSubtasks).map(element => {
-		let span = element.querySelector('span');
-		return span.textContent;
-	}).join(',');
+	if(!listedSubtasks) {
+		subtasks = '';
+	} else {
+		subtasks = Array.from(listedSubtasks).map(element => {
+			let span = element.querySelector('span');
+			return span.textContent;
+		}).join(',');
+	}
 	removeEmptyListElements();
 }
 
@@ -165,22 +194,22 @@ function attachInputEventListeners(input, li, span, buttonsContainer) {
 }
 
 
+function handleInputKeyPress(event, input) {
+	if(event.key === 'Enter') {
+		input.blur();
+	}
+}
+
+
 function handleInputBlur(input, li, span, buttonsContainer) {
 	span.textContent = input.value;
 	input.remove();
 	li.classList.remove('hidden');
 	li.classList.add('subtask-list-element');
+	li.id = span.textContent;
 	li.appendChild(span);
 	li.appendChild(buttonsContainer);
 	editSubtasks();
-}
-
-
-function handleInputKeyPress(event, input) {
-	if(event.key === 'Enter') {
-		input.blur();
-		editSubtasks();
-	}
 }
 
 
@@ -193,7 +222,7 @@ function replaceLiWithInput(li, input) {
 }
 
 
-function handleDoubleClick(event) {
+function subtasksHandleDoubleClick(event) {
 	if(event.target.tagName === 'SPAN') {
 		const li = event.target.parentElement;
 		const span = event.target;
@@ -205,3 +234,22 @@ function handleDoubleClick(event) {
 }
 
 
+function subtasksHandleEditClick(event) {
+	if(event.target.closest('.edit-subtask-button')) {
+		const li = event.target.closest('li');
+		const span = li.querySelector('span');;
+		const buttonsContainer = li.querySelector('.subtaskli-buttons-container');
+		const input = createInputElement(span.textContent);
+		replaceLiWithInput(li, input);
+		attachInputEventListeners(input, li, span, buttonsContainer);
+	}
+}
+
+
+function subtasksHandleDeleteClick(event) {
+	if(event.target.closest('.delete-subtask-button')) {
+		const li = event.target.closest('li');
+		li.remove();
+		editSubtasks();
+	}
+}
