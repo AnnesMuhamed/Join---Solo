@@ -98,16 +98,18 @@ function renderSubtask() {
 	let unsortedList = document.getElementById('subtask-list');
 	let subtask = getSubtask();
 	addSubtask(subtask);
-	unsortedList.innerHTML += `
-								<li id="${subtask}" class="subtask-list-element">
-									<span>${subtask}</span>
-									<div class="subtaskli-buttons-container">
-										${inSubtaskListButton('edit')}
-										${verticalSeparator('1px', '24px', '#A8A8A8')}
-										${inSubtaskListButton('delete')}
-									</div>
-								</li>
+	let newListElement = document.createElement('li');
+	newListElement.id = subtask;
+	newListElement.classList.add('subtask-list-element');
+	newListElement.innerHTML += `
+								<span>${subtask}</span>
+								<div class="subtaskli-buttons-container">
+									${inSubtaskListButton('edit')}
+									${verticalSeparator('1px', '24px', '#A8A8A8')}
+									${inSubtaskListButton('delete')}
+								</div>
 							`;
+	unsortedList.appendChild(newListElement);
 	clearSubtaskInput();
 }
 
