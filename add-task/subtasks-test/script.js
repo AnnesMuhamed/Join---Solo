@@ -14,8 +14,8 @@ function setupEventListeners() {
 	subtasksList.addEventListener('dblclick', subtasksHandleDoubleClick);
 	subtasksList.addEventListener('click', subtasksHandleEditClick);
 	subtasksList.addEventListener('click', subtasksHandleDeleteClick);
-	subtasksList.addEventListener('mouseover', showHideSubtaskLiButtonsContainer);
-	subtasksList.addEventListener('mouseout', showHideSubtaskLiButtonsContainer);
+	subtasksList.addEventListener('mouseenter', showHideSubtaskLiButtonsContainer);
+	subtasksList.addEventListener('mouseleave', showHideSubtaskLiButtonsContainer);
 
 	subtasksMutationObserver();
 }
@@ -128,10 +128,11 @@ function renderSubtask() {
 
 
 function showHideSubtaskLiButtonsContainer(event) {
-	if(event.target.closest('.subtask-list-element')) {
-		if(event.type === 'mouseover') {
+	let targetElement = event.target.classList.contains('subtask-list-element');
+	if(targetElement) {
+		if(event.type === 'mouseenter') {
 			console.log('Maus im Haus!');
-		} else if(event.type === 'mouseout') {
+		} else if(event.type === 'mouseleave') {
 			console.log('Maus ist raus!');
 		}
 	}
