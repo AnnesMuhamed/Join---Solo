@@ -116,7 +116,7 @@ function renderSubtask() {
 	newListElement.classList.add('subtask-list-element');
 	newListElement.innerHTML += `
 								<span>${subtask}</span>
-								<div class="subtaskli-buttons-container">
+								<div class="subtaskli-buttons-container hidden">
 									${inSubtaskListButton('edit')}
 									${verticalSeparator('1px', '24px', '#A8A8A8')}
 									${inSubtaskListButton('delete')}
@@ -128,13 +128,15 @@ function renderSubtask() {
 
 
 function showHideSubtaskLiButtonsContainer(event) {
-	let targetElement = event.target.classList.contains('subtask-list-element');
+	let targetElement = event.target.closest('.subtask-list-element');
 	if(targetElement) {
-		let container = targetElement.querySelector('subtaskli-buttons-container');
-		if(event.type === 'mouseenter') {
-			container.classList.remove('hidden');
-		} else if(event.type === 'mouseleave') {
-			container.classList.add('hidden');
+		let container = targetElement.querySelector('.subtaskli-buttons-container');
+		if(container) {
+			if(event.type === 'mouseenter') {
+				container.classList.remove('hidden');
+			} else if(event.type === 'mouseleave') {
+				container.classList.add('hidden');
+			}
 		}
 	}
 }
