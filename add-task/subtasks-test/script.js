@@ -14,8 +14,8 @@ function setupEventListeners() {
 	subtasksList.addEventListener('dblclick', subtasksHandleDoubleClick);
 	subtasksList.addEventListener('click', subtasksHandleEditClick);
 	subtasksList.addEventListener('click', subtasksHandleDeleteClick);
-	subtasksList.addEventListener('mouseenter', showHideSubtaskLiButtonsContainer);
-	subtasksList.addEventListener('mouseleave', showHideSubtaskLiButtonsContainer);
+	subtasksList.addEventListener('mouseenter', showHideSubtaskLiButtonsContainer, true);
+	subtasksList.addEventListener('mouseleave', showHideSubtaskLiButtonsContainer, true);
 
 	subtasksMutationObserver();
 }
@@ -130,10 +130,11 @@ function renderSubtask() {
 function showHideSubtaskLiButtonsContainer(event) {
 	let targetElement = event.target.classList.contains('subtask-list-element');
 	if(targetElement) {
+		let container = targetElement.querySelector('subtaskli-buttons-container');
 		if(event.type === 'mouseenter') {
-			console.log('Maus im Haus!');
+			container.classList.remove('hidden');
 		} else if(event.type === 'mouseleave') {
-			console.log('Maus ist raus!');
+			container.classList.add('hidden');
 		}
 	}
 }
@@ -238,7 +239,7 @@ function subtasksHandleDoubleClick(event) {
 function subtasksHandleEditClick(event) {
 	if(event.target.closest('.edit-subtask-button')) {
 		const li = event.target.closest('li');
-		const span = li.querySelector('span');;
+		const span = li.querySelector('span');
 		const buttonsContainer = li.querySelector('.subtaskli-buttons-container');
 		const input = createInputElement(span.textContent);
 		replaceLiWithInput(li, input);
