@@ -46,8 +46,9 @@ function loginPage() {
                     <button type="button" class="guest-button">Guest Log in</button>
                 </a>
             </div>
-        </form>
-    </div>
+        </form> 
+    </div>    
+   
     <div class="signup-container hidden">
         <span class="not-a-user">Not a Join user?</span>
         <a href="../sign-up/sign-up.html"><button class="signup-button">Sign up</button></a>
@@ -63,7 +64,7 @@ function loginPage() {
     const passwordInput = document.getElementById('password');
     const loginButton = document.querySelector('.login-button');
 
-    
+
     function validateInputs() {
         if (usernameInput.value.trim() !== "" && passwordInput.value.trim() !== "") {
             loginButton.disabled = false;
@@ -82,11 +83,11 @@ function loginPage() {
         const password = passwordInput.value;
         const rememberMe = document.getElementById('option').checked;
 
-        
+
         const users = await loadData('user');
         let userFound = null;
 
-        
+
         for (const userId in users) {
             const user = users[userId];
             if (user.username === email && user.password === password) {
@@ -96,7 +97,7 @@ function loginPage() {
         }
 
         if (userFound) {
-        
+
             if (rememberMe) {
                 localStorage.setItem('loggedInUser', JSON.stringify(userFound));
             } else {
