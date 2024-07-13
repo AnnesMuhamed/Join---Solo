@@ -20,29 +20,29 @@ function loginPage() {
     logInPage.innerHTML = `
     <div id="overlay">
         <div id="logo-container">
-            <img src="/img/loginLogo.png" alt="Logo" id="main-logo">
+            <img src="./img/loginLogo.png" alt="Logo" id="main-logo">
         </div>
     </div>
     <div id="login-page" class="hidden">
         <div>
             <h1 class="login-headline">Log in</h1>
-            <img class="blue-line" src="/img/Vector 5.png" alt="">
+            <img class="blue-line" src="./img/Vector 5.png" alt="">
         </div>
         <form id="login-form">
             <label class="input-container">
                 <input type="email" id="username" minlength="9" placeholder="Email" required>
-                <img src="/img/mail.png" alt="Email Icon" class="input-icon">
+                <img src="./img/mail.png" alt="Email Icon" class="input-icon">
             </label>
             <label class="input-container">
                 <input type="password" id="password" minlength="4" placeholder="Password" required>
-                <img src="/img/lock.png" alt="Password Icon" class="input-icon">
+                <img src="./img/lock.png" alt="Password Icon" class="input-icon">
             </label>
             <label class="option" for="option">
                 <input type="checkbox" name="option" id="option"> Remember me
             </label>
             <div class="button-container">
                 <button type="submit" class="login-button" disabled>Log in</button>
-                <a href="../summary/summary-guest.html">
+                <a href="./summary/summary-guest.html">
                     <button type="button" class="guest-button">Guest Log in</button>
                 </a>
             </div>
@@ -50,7 +50,7 @@ function loginPage() {
     </div>
     <div class="signup-container hidden">
         <span class="not-a-user">Not a Join user?</span>
-        <a href="../sign-up/sign-up.html"><button class="signup-button">Sign up</button></a>
+        <a href="./sign-up/sign-up.html"><button class="signup-button">Sign up</button></a>
     </div>
     <div class="link-container hidden">
         <a class="policy-notice" href="#">Privacy Policy</a>
@@ -102,7 +102,7 @@ function loginPage() {
             } else {
                 sessionStorage.setItem('loggedInUser', JSON.stringify(userFound));
             }
-            window.location.href = '../summary/summary-user.html'; // Passe den Pfad an, falls erforderlich
+            window.location.href = './summary/summary-user.html'; // Passe den Pfad an, falls erforderlich
         } else {
             alert('Falscher Benutzername oder Passwort');
         }

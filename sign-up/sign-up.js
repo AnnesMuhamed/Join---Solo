@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', init);
+
 async function postData(path = "", data = {}) {
     let response = await fetch(BASE_URL + path + ".json", {
         method: "POST",
@@ -21,13 +23,13 @@ function init() {
 
     signUp.innerHTML = `
     <div class="logo-container">
-        <img src="/img/loginLogo.png" alt="Logo" class="main-logo">
+        <img src="../img/loginLogo.png" alt="Logo" class="main-logo">
     </div>
 
     <div class="container">
         <div class="header-container">
-        <a href="/login/login.html">    
-        <img src="/img/arrow-left-line.png" alt="Zurück" class="back-arrow">
+        <a href="../index.html">    
+        <img src="../img/arrow-left-line.png" alt="Zurück" class="back-arrow">
         </a>
             <div class="header">
                 Sign Up
@@ -37,23 +39,23 @@ function init() {
         <form id="sign-up-form" class="form">
             <label class="input-container">
                 <input type="text" id="first-name" placeholder="First Name Last Name" minlength="2" required>
-                <img src="/img/person.png" alt="Name Icon" class="input-icon">
+                <img src="../img/person.png" alt="Name Icon" class="input-icon">
             </label>
             <label class="input-container">
                 <input type="email" id="email" placeholder="Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" required>
-                <img src="/img/mail.png" alt="Email Icon" class="input-icon">
+                <img src="../img/mail.png" alt="Email Icon" class="input-icon">
             </label>
             <label class="input-container">
                 <input type="password" id="password" placeholder="Password" minlength="4" required>
-                <img src="/img/lock.png" alt="Password Icon" class="input-icon">
+                <img src="../img/lock.png" alt="Password Icon" class="input-icon">
             </label>
             <label class="input-container">
                 <input type="password" id="confirm-password" placeholder="Confirm Password" minlength="4" required>
-                <img src="/img/lock.png" alt="Password Icon" class="input-icon">
+                <img src="../img/lock.png" alt="Password Icon" class="input-icon">
             </label>
             <div class="checkbox-container">
                 <input type="checkbox" id="accept-policy" class="checkbox-hover-design" required>
-                <label for="accept-policy">I accept the <a href="/privacy-policy/privacy-policy.html" class="privacy-policy checkbox-hover-design">Privacy policy</a></label>
+                <label for="accept-policy">I accept the <a href="../privacy-policy/privacy-policy.html" class="privacy-policy checkbox-hover-design">Privacy policy</a></label>
             </div>
             <button type="submit" class="sign-up-button">Sign Up</button>
         </form>
@@ -88,7 +90,7 @@ function init() {
 
         await createUser(firstName, lastName, email, password);
         alert("Benutzer erfolgreich erstellt!");
-        window.location.href = '/login/login.html';
+        window.location.href = '../login/login.html';
     });
 }
 
@@ -98,7 +100,3 @@ async function createUser(firstName, lastName, email, password) {
     await postData('contacts', newUser);
 }
 
-document.addEventListener('DOMContentLoaded', init);
-
-
-document.addEventListener('DOMContentLoaded', init);

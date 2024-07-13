@@ -14,15 +14,70 @@ let assignedContacts = '';
 
 document.addEventListener('DOMContentLoaded', function() {
 	initFunc();
-	let searchInput = document.getElementById('search');
-	document.body.addEventListener('click', showCheckboxes);
-	document.body.addEventListener('click', collapseCheckboxes);
-	document.body.addEventListener('click', assignContacts);
-	searchInput.addEventListener('keyup', function() {
-		renderCheckboxes();
-	});
+	setupEventListeners();
 	radioButtonsSelectState();
 });
+
+
+function setupEventListeners() {
+	let searchInput = document.getElementById('search');
+	let subTaskButton = document.getElementById('add-subtask-button');
+	let subtasksList = document.getElementById('subtask-list');
+	let clearButton = document.getElementById('clear-btn');
+
+	//Event delegation for body-click
+	document.body.addEventListener('click', handleBodyClicks);
+
+	//Event listener for specific elements
+	subTaskButton.addEventListener('click', confirmOrCancelSubtask);
+	subtasksList.addEventListener('dblclick', subtasksHandleDoubleClick);
+	subtasksList.addEventListener('click', subtasksHandleEditClick);
+	subtasksList.addEventListener('click', subtasksHandleDeleteClick);
+	subtasksList.addEventListener('mouseenter', showHideSubtaskLiButtonsContainer, true);
+	subtasksList.addEventListener('mouseleave', showHideSubtaskLiButtonsContainer, true);
+	searchInput.addEventListener('keyup', renderCheckboxes);
+	clearButton.addEventListener('click', clearForm);
+
+	subtasksMutationObserver();
+
+	//Event listener for submit
+	document.body.addEventListener('submit', createTask);
+}
+
+
+function handleBodyClicks(event) {
+	showCheckboxes(event);
+	collapseCheckboxes(event);
+	assignContacts(event);
+}
+
+
+function subtasksMutationObserver() {
+	let targetNode = document.getElementById('subtask-buttons-container');
+	const config = {childList: true};
+	const callback = function(mutationsList) {
+		for(let mutation of mutationsList) {
+			if(mutation.type === 'childList') {
+				mutation.addedNodes.forEach(node => {
+					attachEventListener(node);
+				});
+			}
+		}
+	};
+	const observer = new MutationObserver(callback);
+	observer.observe(targetNode, config);
+}
+
+
+function attachEventListener(node) {
+	if(node.id === 'check-subtask-button') {
+		node.addEventListener('click', renderSubtask);
+	} else if (node.id === 'clear-subtask-button') {
+		node.addEventListener('click', clearSubtaskInput);
+	} else {
+		node.addEventListener('click', confirmOrCancelSubtask);
+	}
+}
 
 
 async function initFunc() {
@@ -77,7 +132,7 @@ function assignContacts(event) {
 			removeContacts(checkboxId);
 		} else {
 			assignments.innerHTML += `
-				<span id="${checkboxId}-${initials}">${initials}</span>
+				<span class="initials-span" id="${checkboxId}-${initials}">${initials}</span>
 		`;
 			addContacts(checkboxId);
 		}
@@ -114,7 +169,7 @@ function renderCheckboxes() {
 		}
 		checkboxes.innerHTML += `
 			<label for="${id}">
-				<span>${initials}</span>
+				<span class="initials-span">${initials}</span>
 				<span>${contacts[id]['firstName']} ${contacts[id]['lastName']}</span>
 				<input type="checkbox" id="${id}">
 			</label>
@@ -159,6 +214,7 @@ function radioButtonsSelectState() {
 				lastChecked = null;
 				priority = null;
 			} else {
+				getPriority(this.id);
 				lastChecked = this;
 			}
 		});
@@ -178,12 +234,6 @@ function getDescription() {
 }
 
 
-function getAssignment() {
-	let assignment = document.getElementById('assignment');
-	return assignment.value;
-}
-
-
 function getDate() {
 	let date = document.getElementById('date');
 	return date.value;
@@ -193,11 +243,6 @@ function getDate() {
 function getCategory() {
 	let category = document.getElementById('category');
 	return category.value;
-}
-
-
-function extendJson(originalJson, newProperties) {
-	return {...originalJson, ...newProperties};
 }
 
 
@@ -226,6 +271,93 @@ function removeContacts(contactId) {
 }
 
 
+function inlineSubtaskButton(type) {
+	return (`
+		<button id="${type}-subtask-button" class="in-line-btn" type="button">
+			<img src="../img/add-task/${type}.png"/>
+		</button>
+	`);
+}
+
+
+function inSubtaskListButton(type) {
+	return (`
+		<button class="${type}-subtask-button in-line-btn" type="button">
+			<img src="../img/add-task/${type}.png"/>
+		</button>
+	`);
+}
+
+
+function verticalSeparator(width, height, stroke) {
+	return (`
+		<svg width="${width}" height="${height}">
+			<line x1="0" y1="0" x2="0" y2="${height}" stroke="${stroke}" stroke-width="1"/>
+		</svg>
+	`);
+}
+
+
+function clearSubtaskInput() {
+	let subtaskButtonContainer = document.getElementById('subtask-buttons-container');
+	let subtask = document.getElementById('subtasks');
+	subtask.value = '';
+	subtaskButtonContainer.innerHTML = '';
+	subtaskButtonContainer.innerHTML = `
+		${inlineSubtaskButton('add')}
+	`;
+}
+
+
+function confirmOrCancelSubtask() {
+	let subtaskButtonContainer = document.getElementById('subtask-buttons-container');
+	let subtask = document.getElementById('subtasks');
+	if(subtask.value) {
+		subtaskButtonContainer.innerHTML = '';
+		subtaskButtonContainer.innerHTML = `
+			${inlineSubtaskButton('clear')}
+			${verticalSeparator('1px', '24px', '#D1D1D1')}
+			${inlineSubtaskButton('check')}
+	`;
+	}
+}
+
+
+function renderSubtask() {
+	let unsortedList = document.getElementById('subtask-list');
+	let subtask = getSubtask();
+	addSubtask(subtask);
+	let newListElement = document.createElement('li');
+	newListElement.id = subtask;
+	newListElement.classList.add('subtask-list-element');
+	newListElement.innerHTML += `
+								<span>${subtask}</span>
+								<div class="subtaskli-buttons-container hidden">
+									${inSubtaskListButton('edit')}
+									${verticalSeparator('1px', '24px', '#A8A8A8')}
+									${inSubtaskListButton('delete')}
+								</div>
+							`;
+	unsortedList.appendChild(newListElement);
+	clearSubtaskInput();
+}
+
+
+function showHideSubtaskLiButtonsContainer(event) {
+	let targetElement = event.target.closest('.subtask-list-element');
+	if(targetElement) {
+		let container = targetElement.querySelector('.subtaskli-buttons-container');
+		if(container) {
+			if(event.type === 'mouseenter') {
+				container.classList.remove('hidden');
+			} else if(event.type === 'mouseleave') {
+				container.classList.add('hidden');
+			}
+		}
+	}
+}
+
+
 function addSubtask(subtask) {
 	if(subtasks.length > 0) {
 		subtasks += `,${subtask}`;
@@ -234,12 +366,114 @@ function addSubtask(subtask) {
 	}
 }
 
-function renderSubtask() {
-	let unsortedList = document.getElementById('subtask-list');
-	let subtask = getSubtask();
-	addSubtask(subtask);
-	unsortedList.innerHTML += `<li>${subtask}</li>`;
+
+function subtasksStringReplacement(id, replacement) {
+	let subtasksList = subtasks.split(',');
+	let idx = subtasksList.indexOf(id);
+	subtasksList[idx] = replacement;
+	subtasks = subtasksList.join(',')
 }
+
+
+function editSubtasks() {
+	let listedSubtasks = document.querySelectorAll('li.subtask-list-element');
+	if(!listedSubtasks) {
+		subtasks = '';
+	} else {
+		subtasks = Array.from(listedSubtasks).map(element => {
+			let span = element.querySelector('span');
+			return span.textContent;
+		}).join(',');
+	}
+	removeEmptyListElements();
+}
+
+
+function removeEmptyListElements() {
+	let listElements = document.querySelectorAll('LI');
+	listElements.forEach((element) => {
+		if(element.innerHTML === '') {
+			element.remove();
+		}
+	});
+}
+
+
+function createInputElement(value) {
+	const input = document.createElement('input');
+	input.type = 'text';
+	input.style = 'box-sizing: border-box; width: 100%; padding: 6px 16px;'
+	input.value = value;
+	return input;
+}
+
+
+function attachInputEventListeners(input, li, span, buttonsContainer) {
+	input.addEventListener('blur', () => handleInputBlur(input, li, span, buttonsContainer));
+	input.addEventListener('keypress', (event) => handleInputKeyPress(event, input));
+}
+
+
+function handleInputKeyPress(event, input) {
+	if(event.key === 'Enter') {
+		input.blur();
+	}
+}
+
+
+function handleInputBlur(input, li, span, buttonsContainer) {
+	span.textContent = input.value;
+	input.remove();
+	li.classList.remove('hidden');
+	li.classList.add('subtask-list-element');
+	li.id = span.textContent;
+	li.appendChild(span);
+	li.appendChild(buttonsContainer);
+	editSubtasks();
+}
+
+
+function replaceLiWithInput(li, input) {
+	li.classList.add('hidden');
+	const inputLi = document.createElement('li');
+	inputLi.appendChild(input);
+	li.parentNode.insertBefore(inputLi, li);
+	input.focus;
+}
+
+
+function subtasksHandleDoubleClick(event) {
+	if(event.target.tagName === 'SPAN') {
+		const li = event.target.parentElement;
+		const span = event.target;
+		const buttonsContainer = li.querySelector('.subtaskli-buttons-container');
+		const input = createInputElement(span.textContent);
+		replaceLiWithInput(li, input);
+		attachInputEventListeners(input, li, span, buttonsContainer);
+	}
+}
+
+
+function subtasksHandleEditClick(event) {
+	if(event.target.closest('.edit-subtask-button')) {
+		const li = event.target.closest('li');
+		const span = li.querySelector('span');
+		const buttonsContainer = li.querySelector('.subtaskli-buttons-container');
+		const input = createInputElement(span.textContent);
+		replaceLiWithInput(li, input);
+		attachInputEventListeners(input, li, span, buttonsContainer);
+	}
+}
+
+
+function subtasksHandleDeleteClick(event) {
+	if(event.target.closest('.delete-subtask-button')) {
+		const li = event.target.closest('li');
+		li.remove();
+		editSubtasks();
+	}
+}
+
 
 function getPriority(id) {
 	let radioButton = document.getElementById(`${id}`);
@@ -251,7 +485,7 @@ function createTaskJson() {
 	let task = {
 		'title': getTitle(),
 		'description': getDescription(),
-		'assignment': getAssignment(),
+		'assignment': assignedContacts,
 		'date': getDate(),
 		'priority': priority,
 		'category': getCategory(),
@@ -266,7 +500,6 @@ async function createTask(event) {
 	let task = createTaskJson();
 	try {
 		let json = await postData(pathTasks, task);
-		console.log(json);
 		event.target.submit();
 	} catch (error) {
 		console.error('Error while sending data:', error);
@@ -274,16 +507,57 @@ async function createTask(event) {
 }
 
 
-function clearForm() {
-	let elements = document.querySelectorAll('input:not([type="radio"]), select[type="text"], textarea');
-	let radios = document.querySelectorAll('input[type="radio"]');
+function clearInputElements() {
+	let elements = document.querySelectorAll('input:not([type="radio"]), textarea');
 	elements.forEach(element => {
 		element.value = '';
 	});
+}
+
+
+function clearSelectElements() {
+	let elements = document.querySelectorAll('select[type="text"]');
+	elements.forEach(element => {
+		element.selectedIndex = 0;
+		element.classList.remove('invalid');
+	});
+}
+
+
+function clearRadioButtons() {
+	let radios = document.querySelectorAll('input[type="radio"]');
 	radios.forEach(radio => {
 		radio.checked = false;
-		priority = null;
 	});
+	priority = null;
+}
+
+
+function clearCheckboxes() {
+	let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+	checkboxes.forEach(checkbox => {
+		checkbox.checked = false;
+	});
+	assignedContacts = '';
+}
+
+
+function clearDivs() {
+	let divs = document.querySelectorAll('#assigned-contacts, #subtask-list');
+	divs.forEach(div => {
+		div.innerHTML = '';
+	});
+	subtasks = '';
+}
+
+
+function clearForm() {
+	clearInputElements();
+	clearSubtaskInput();
+	clearSelectElements();
+	clearRadioButtons();
+	clearCheckboxes();
+	clearDivs();
 }
 
 
@@ -307,10 +581,3 @@ async function postData(path="", data={}) {
 }
 
 
-async function deleteData(path='') {
-	let response = await fetch(`${BASE_URL}${path}.json`, {
-		method: 'DELETE',
-	});
-	responseToJson = await response.json();
-	return responseToJson;
-}

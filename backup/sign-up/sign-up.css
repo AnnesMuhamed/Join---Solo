@@ -1,0 +1,258 @@
+@font-face {
+    font-family: 'Inter';
+    font-weight: 400;
+    src: url('fonts/Inter/static/Inter-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 700;
+    src: url('fonts/Inter/static/Inter-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 300;
+    src: url('fonts/Inter/static/Inter-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 800;
+    src: url('fonts/Inter/static/Inter-ExtraBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 900;
+    src: url('fonts/Inter/static/Inter-Black.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 200;
+    src: url('fonts/Inter/static/Inter-ExtraLight.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 500;
+    src: url('fonts/Inter/static/Inter-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 600;
+    src: url('fonts/Inter/static/Inter-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: 100;
+    src: url('fonts/Inter/static/Inter-Thin.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-weight: normal;
+    font-style: italic;
+    src: url('fonts/Inter/static/Inter-VariableFont_slnt,wght.ttf') format('truetype');
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #F6F7F8;
+}
+
+#sectionSignUp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.logo-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: fixed;
+    width: 100.03px;
+    height: 121.97px;
+    top: 80px;
+    left: 77px;
+}
+
+.main-logo {
+    position: fixed;
+    width: 100.03px;
+    height: 121.97px;
+    top: 80px;
+    left: 77px;
+
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 598px;
+    height: 630px;
+    padding: 48px 88px;
+    gap: 32px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 14px 3px #0000000A;
+    background: #fff;
+}
+
+.header-container {
+    position: relative;
+    width: 100%;
+    height: 89px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.back-arrow {
+    position: absolute;
+    left: 0;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.header {
+    width: 315px;
+    height: 73px;
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 73.2px;
+    text-align: center;
+}
+
+.divider {
+    height: 3px;
+    background: #29ABE2;
+    width: 170px;
+    right: 687px;
+    border-radius: 3px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    width: 422px;
+    height: 326px;
+}
+
+.input-container {
+    display: flex;
+    position: relative;
+    width: 422px;
+    height: 48px;
+    gap: 8px;
+}
+
+.input-container input {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    height: 22px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #D1D1D1;
+    background: #FFFFFF;
+    opacity: 0.5;
+    font-size: 20px;
+}
+
+.input-icon {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    pointer-events: none;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 231px;
+    height: 24px;
+    padding: 22px;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+    padding: 4px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.checkbox-container label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    line-height: 19.2px;
+}
+
+.checkbox-hover-design:hover {
+transform: scale(1.1);
+}
+
+.privacy-policy {
+    color: #29ABE2;
+    text-decoration: none;
+}
+
+.sign-up-button {
+    width: 126px;
+    height: 55px;
+    padding: 15px;
+    gap: 10px;
+    border-radius: 8px;
+    background: #2A3647;
+    color: white;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 25.2px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    transition: all 0.1s ease;
+}
+
+.sign-up-button:hover {
+    background-color: #29ABE2;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    border-color: #29ABE2;
+}
+
+.link-container {
+    justify-content: center;
+    display: flex;
+    position: relative;
+    top: 150px;
+    width: 100%;
+    height: 35px;
+    gap: 16px;
+    opacity: 0.5;
+    transition: opacity 500ms ease-in-out;
+}
+
+.policy-notice {
+    text-decoration: none;
+    color: #A8A8A8;
+}

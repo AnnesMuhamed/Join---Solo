@@ -1,3 +1,10 @@
+document.addEventListener('DOMContentLoaded', init);
+
+
+function init() {
+  includeHTML().then(loadUserData);
+}
+
 'use strict';
 async function includeHTML() {
   let includeElements = document.querySelectorAll("[w3-include-html]");
@@ -13,10 +20,6 @@ async function includeHTML() {
   }
 }
 
-function init() {
-  includeHTML().then(loadUserData);
-}
-
 function loadUserData() {
   let user = JSON.parse(localStorage.getItem('loggedInUser'));
   if (!user) {
@@ -27,8 +30,6 @@ function loadUserData() {
       const userName = `${user.firstName} ${user.lastName}`;
       document.querySelector('.greet .sofia').textContent = userName;
       displayUserInitials(user.firstName, user.lastName);
-  } else {
-      window.location.href = '/sign-up/sign-up.html';
   }
 }
 
@@ -41,7 +42,4 @@ function displayUserInitials(firstName, lastName) {
   const userDiv = document.getElementById('user');
   userDiv.textContent = initials;
 }
-
-document.addEventListener('DOMContentLoaded', init);
-
 

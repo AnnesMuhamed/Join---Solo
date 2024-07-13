@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/templates/template.css" />
+    <link rel="stylesheet" href="contact.css" />
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png">
+    <script src="contact.js"></script>
+    <script src="../templates/header.js"></script>
+    <title>Contact</title>
+  </head>
+  <body onload="onloadFunction()">
+    <header
+      class="header"
+      w3-include-html="../templates/header.html"
+    ></header>
+    <aside
+      class="sidebar"
+      w3-include-html="../templates/sidebar.html"
+    ></aside>
+    <div id="overlay" class="overlay"></div>
+    
+    <div class="contacts">
+      <div id="contactSection" class="content"></div>
+        <div class="pop-up">
+          <div class="contacts-headline">
+            <span class="first-headline">Contacts</span>
+            <img class="stroke-image" src="../img/high-stroke.png" alt="">
+            <span class="second-headline">Better with a team</span>
+          </div>
+          <div id="popup-section"></div> 
+        </div>
+    </div>
+    
+    <div id="addContact" class="add-contact-form">
+        <div id="contactLeft">
+            <div id="joinLogoContainer">
+                <img class="addcontact-logo" src="/img/logo.png" alt="Join Logo">
+            </div>
+            <div id="addContactTextContainer">
+                <span id="addContactHeader">Add contact</span>
+                <span id="addContactSubheader">Tasks are better with a team</span>
+                <div id="blueLine"></div>
+            </div>
+        </div>
+        <div id="closeButtonContainer">
+          <button id="closeButton" onclick="closeContactForm()">X</button>
+      </div>
+      <div class="person-container">
+        <img class="person-icon" src="/img/person.png" alt="">
+      </div>
+      <div id="inputFields">
+          <div class="inputField">
+              <label for="name"></label>
+              <input type="text" id="name" placeholder="Name">
+              <img class="inputField-icon-name" src="/img/gray-person.png" alt="">
+          </div>
+          <div class="inputField">
+              <label for="email"></label>
+              <input type="email" id="email" placeholder="Email">
+              <img class="inputField-icon-email" src="/img/mail.png" alt="">
+          </div>
+          <div class="inputField">
+              <label for="phone"></label>
+              <input type="tel" id="phone" placeholder="Phone">
+              <img class="inputField-icon-tel" src="/img/call.png" alt="">
+          </div>
+      </div>
+      <div id="buttons">
+          <button class="cancelButton" onclick="closeContactForm()">
+            <span class="cancel">Cancel</span>
+            <img class="x-png" src="/img/x.png" alt="">
+          </button>
+          <button class="createButton" onclick="createContact()">
+            <span class="create-contact">Create contact</span>
+            <img class="hook-png" src="/img/hook.png" alt="">
+          </button>
+      </div>
+    </div>
+
+    <div id="editContact" class="add-contact-form">
+      <div id="contactLeft">
+          <div id="joinLogoContainer">
+              <img class="addcontact-logo" src="/img/logo.png" alt="Join Logo">
+          </div>
+          <div id="addContactTextContainer">
+              <span id="addContactHeader">Edit contact</span>
+              <div id="blueLine"></div>
+          </div>
+      </div>
+      <div id="closeButtonContainer">
+        <button id="closeButton" onclick="closeEditForm()">X</button>
+      </div>
+      <div class="person-container" id="personContainer">
+        <span id="editFormInitials"></span>
+      </div>
+      <div id="inputFields">
+          <div class="inputField">
+              <label for="name"></label>
+              <input type="text" id="editName" placeholder="Name">
+              <img class="inputField-icon-name" src="../img/gray-person.png" alt="">
+          </div>
+          <div class="inputField">
+              <label for="email"></label>
+              <input type="email" id="editEmail" placeholder="Email">
+              <img class="inputField-icon-email" src="../img/mail.png" alt="">
+          </div>
+          <div class="inputField">
+              <label for="phone"></label>
+              <input type="tel" id="editPhone" placeholder="Phone">
+              <img class="inputField-icon-tel" src="../img/call.png" alt="">
+          </div>
+      </div>
+      <input type="hidden" id="editContactId">
+      <div id="editButtons">
+          <button class="editCancelButton" onclick="closeEditForm()">
+            <span class="cancel">Cancel</span>
+            <img class="x-png" src="../img/x.png" alt="">
+          </button>
+          <button class="saveButton" onclick="saveContact()">
+            <span class="create-contact">Save</span>
+            <img class="hook-png" src="../img/hook.png" alt="">
+          </button>
+      </div>
+    </div>
+    
+
+    
+
+  </body>
+</html>
