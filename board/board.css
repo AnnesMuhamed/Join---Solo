@@ -112,6 +112,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 12px;
 }
 
 .column-title {
@@ -130,10 +131,31 @@
     justify-content: space-between;
 }
 
-.board-column {
-    width: 246px;
+.drag-area {
+    display: flex;
+    flex-direction: column;
+    width: 252px;
     height: 696px;
-    overflow: auto;
+    gap: 10px;
+}
+
+.delete {
+    width: 49px;
+    height: 19px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    text-align: left;
+}
+
+.todo {
+    width: 246px;
+    height: 263px;
+    padding: 16px;
+    gap: 10px;
+    border-radius: 24px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
 }
 
 /* Cards */
@@ -507,11 +529,3 @@
     border: 1px solid #D1D1D1;
 }
 
-.delete {
-    width: 49px;
-    height: 19px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19.2px;
-    text-align: left;
-}

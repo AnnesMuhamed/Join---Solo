@@ -13,7 +13,7 @@
     <title>Board</title>
 </head>
 
-<body onload="includeHTML()">
+<body onload="updateHTML()">
     <header class="header" w3-include-html="../templates/header.html"></header>
     <aside class="sidebar" w3-include-html="../templates/sidebar.html"></aside>
 
@@ -41,10 +41,10 @@
             </div>
         </div>
         <div class="card-container">
-            <div class="column-todo board-column"></div>
-            <div class="column-in-progress board-column"></div>
-            <div class="column-await-feedback board-column"></div>
-            <div class="column-done board-column"></div>
+            <div class="column-todo drag-area" id="open" ondrop="moveTo('open')" ondragleave="removeHighlight('open')" ondragover="allowDrop(event); highlight('open')"></div>
+            <div class="column-in-progress drag-area" id="closed" ondrop="moveTo('closed')" ondragleave="removeHighlight('closed')" ondragover="allowDrop(event); highlight('closed')"></div>
+            <div class="column-await-feedback drag-area" id="open" ondrop="moveTo('open')" ondragleave="removeHighlight('open')" ondragover="allowDrop(event); highlight('open')"></div>
+            <div class="column-done drag-area" id="closed" ondrop="moveTo('closed')" ondragleave="removeHighlight('closed')" ondragover="allowDrop(event); highlight('closed')"></div>
         </div>
     </section>
 
