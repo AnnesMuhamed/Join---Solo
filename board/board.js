@@ -13,10 +13,6 @@ async function includeHTML() {
   }
 }
 
-function updateHTML() {
-  includeHTML();
-}
-
 let todos = [{
   'id': 0,
   'title': 'User Story',
@@ -51,6 +47,7 @@ function updateHTML() {
       const element = closed[index];
       document.getElementById('closed').innerHTML += generateTodoHTML(element);
   }
+  includeHTML();
 }
 
 function startDragging(id) {
