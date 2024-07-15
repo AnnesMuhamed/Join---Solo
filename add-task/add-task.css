@@ -31,9 +31,7 @@ select {
 	color: #2a3647;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
+input:focus, textarea:focus, select:focus {
 	outline: none;
 	border: 1px solid #29abe2;
 }
@@ -259,6 +257,7 @@ input::invalid {
 	align-items: center;
 	justify-content: space-between;
 	position: relative;
+	height: 40px;
 	padding: 6px 16px;
 	box-sizing: border-box;
 }
@@ -377,9 +376,6 @@ input::invalid {
 	border: 1px solid #2a3647;
 	color: #2a3647;
 	transition: all 0.1s ease;
-	font-weight: 400;
-	font-size: 20px;
-	line-height: 24px;
 }
 
 .clear-btn:hover {
@@ -394,9 +390,6 @@ input::invalid {
 	border: none;
 	color: #FFFFFF;
 	transition: all 0.1s ease;
-	font-weight: 700;
-	font-size: 21px;
-	line-height: 25.2px;
 }
 
 .create-task-btn:hover {

@@ -19,6 +19,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+async function initFunc() {
+	await loadContacts();
+	await includeHTML();
+	renderCheckboxes();
+}
+
+
 function setupEventListeners() {
 	let searchInput = document.getElementById('search');
 	let subTaskButton = document.getElementById('add-subtask-button');
@@ -77,13 +84,6 @@ function attachEventListener(node) {
 	} else {
 		node.addEventListener('click', confirmOrCancelSubtask);
 	}
-}
-
-
-async function initFunc() {
-	await loadContacts();
-	includeHTML();
-	renderCheckboxes();
 }
 
 
