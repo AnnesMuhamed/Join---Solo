@@ -17,6 +17,11 @@
     <header class="header" w3-include-html="../templates/header.html"></header>
     <aside class="sidebar" w3-include-html="../templates/sidebar.html"></aside>
 
+    <div id="overlay" class="overlay"></div>
+    <div id="newTask" class="new-task">
+        <button onclick="closeAddTaskForm()" class="close-btn"><img class="close-button-icon" src="/img/close.png" alt=""></button>
+    </div>
+
     <section class="board-main-container">
         <div class="headline-add-task-container">
             <div class="headline-and-input">
@@ -27,7 +32,7 @@
                         <div class="placeholder"></div>
                         <img src="../img/board/search.icon.png" alt="Search" class="search-icon">
                     </div>
-                    <button class="add-button">Add task +</button>
+                    <button onclick="openAddTaskForm()" class="add-button">Add task +</button>
                 </div>
             </div>
             <div class="column-headers">
