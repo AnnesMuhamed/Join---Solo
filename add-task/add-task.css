@@ -348,6 +348,10 @@ input::invalid {
 	width: 962px;
 }
 
+.required {
+	display: flex;
+}
+
 .requirement {
 	display: flex;
 	align-items: flex-end;
