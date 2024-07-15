@@ -36,7 +36,7 @@ let currentDraggedElement;
 
 function updateHTML() {
   let open = todos.filter(t => t['category'] == 'open');
-
+  includeHTML();
   document.getElementById('open').innerHTML = '';
 
   for (let index = 0; index < open.length; index++) {
@@ -52,7 +52,6 @@ function updateHTML() {
       const element = closed[index];
       document.getElementById('closed').innerHTML += generateTodoHTML(element);
   }
-  includeHTML();
 }
 
 function startDragging(id) {
@@ -69,7 +68,6 @@ function allowDrop(ev) {
 
 function moveTo(category) {
   todos[currentDraggedElement]['category'] = category;
-  updateHTML();
 }
 
 function highlight(id) {
@@ -80,3 +78,24 @@ function removeHighlight(id) {
   document.getElementById(id).classList.remove('drag-area-highlight');
 }
 
+function openAddTaskForm() {
+  openForm('newTask');
+}
+
+function openForm(formId) {
+  document.getElementById(formId).classList.add('show');
+  document.getElementById('overlay').style.display = 'block';
+  document.body.classList.add('modal-open');
+}
+
+function closeAddTaskForm() {
+  closeForm('newTask');
+}
+
+function closeForm(formId) {
+  document.getElementById(formId).classList.remove('show');
+  document.getElementById('overlay').style.display = 'none';
+  document.body.classList.remove('modal-open');
+}
+
+document.addEventListener("DOMContentLoaded", updateHTML);
