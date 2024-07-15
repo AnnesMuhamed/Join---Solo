@@ -19,6 +19,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+async function initFunc() {
+	await loadContacts();
+	await includeHTML();
+	renderCheckboxes();
+}
+
+
 function setupEventListeners() {
 	let searchInput = document.getElementById('search');
 	let subTaskButton = document.getElementById('add-subtask-button');
@@ -77,13 +84,6 @@ function attachEventListener(node) {
 	} else {
 		node.addEventListener('click', confirmOrCancelSubtask);
 	}
-}
-
-
-async function initFunc() {
-	await loadContacts();
-	includeHTML();
-	renderCheckboxes();
 }
 
 
@@ -211,14 +211,45 @@ function radioButtonsSelectState() {
 		radio.addEventListener('click', function() {
 			if(this === lastChecked) {
 				this.checked = false;
+				resetRadioImg(this);
 				lastChecked = null;
 				priority = null;
 			} else {
+				if(lastChecked != this) {
+					radioButtons.forEach(radio => {
+						resetRadioImg(radio);
+					});
+				}
+				changeRadioImg(this);
 				getPriority(this.id);
 				lastChecked = this;
 			}
 		});
 	});
+}
+
+
+function changeRadioImg(radio) {
+	let img = radio.nextElementSibling.querySelector('img');
+	if(radio.value === '3') {
+		img.src = '../img/add-task/prio-high-selected.png';
+	} else if(radio.value === '2') {
+		img.src = '../img/add-task/prio-med-selected.png';
+	} else if(radio.value === '1') {
+		img.src = '../img/add-task/prio-low-selected.png';
+	}
+}
+
+
+function resetRadioImg(radio) {
+	let img = radio.nextElementSibling.querySelector('img');
+	if(radio.value === '3') {
+		img.src = '../img/add-task/prio-high.png';
+	} else if(radio.value === '2') {
+		img.src = '../img/add-task/prio-med.png';
+	} else if(radio.value === '1') {
+		img.src = '../img/add-task/prio-low.png';
+	}
 }
 
 

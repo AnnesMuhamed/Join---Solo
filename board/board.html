@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="board.css">
     <link rel="icon" type="image/x-icon" href="../img/favicon.png">
     <script src="../templates/header.js"></script>
-    <script src="board.js"></script>
+    <script src="board.js" defer></script>
     <title>Board</title>
 </head>
 
@@ -46,10 +46,16 @@
             </div>
         </div>
         <div class="card-container">
-            <div class="column-todo drag-area" id="open" ondrop="moveTo('open')" ondragleave="removeHighlight('open')" ondragover="allowDrop(event); highlight('open')"></div>
-            <div class="column-in-progress drag-area" id="closed" ondrop="moveTo('closed')" ondragleave="removeHighlight('closed')" ondragover="allowDrop(event); highlight('closed')"></div>
-            <div class="column-await-feedback drag-area" id="open" ondrop="moveTo('open')" ondragleave="removeHighlight('open')" ondragover="allowDrop(event); highlight('open')"></div>
-            <div class="column-done drag-area" id="closed" ondrop="moveTo('closed')" ondragleave="removeHighlight('closed')" ondragover="allowDrop(event); highlight('closed')"></div>
+            <div class="column-todo drag-area" id="to-do" ondrop="moveTo(event, 'to-do')"
+                ondragleave="removeHighlight('to-do')" ondragover="allowDrop(event); highlight('to-do')"></div>
+            <div class="column-in-progress drag-area" id="in-progress" ondrop="moveTo(event, 'in-progress')"
+                ondragleave="removeHighlight('in-progress')" ondragover="allowDrop(event); highlight('in-progress')">
+            </div>
+            <div class="column-await-feedback drag-area" id="await-feedback" ondrop="moveTo(event, 'await-feedback')"
+                ondragleave="removeHighlight('await-feedback')"
+                ondragover="allowDrop(event); highlight('await-feedback')"></div>
+            <div class="column-done drag-area" id="done" ondrop="moveTo(event, 'done')"
+                ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')"></div>
         </div>
     </section>
 
@@ -93,11 +99,11 @@
             <span class="subtasks-span">Subtasks</span>
             <div class="checkbox">
                 <label class="option1" for="option">
-                    <input type="checkbox" name="option" id="option"> 
+                    <input type="checkbox" name="option" id="option">
                     <span class="recipe-span">Implement Recipe Recommendation</span>
                 </label>
                 <label class="option2" for="option">
-                    <input type="checkbox" name="option" id="option"> 
+                    <input type="checkbox" name="option" id="option">
                     <span class="layout-span">Start Page Layout</span>
                 </label>
             </div>
@@ -157,11 +163,11 @@
             <span class="subtasks-span">Subtasks</span>
             <div class="checkbox">
                 <label class="option1" for="option">
-                    <input type="checkbox" name="option" id="option"> 
+                    <input type="checkbox" name="option" id="option">
                     <span class="recipe-span">Establish CSS Methodology</span>
                 </label>
                 <label class="option2" for="option">
-                    <input type="checkbox" name="option" id="option"> 
+                    <input type="checkbox" name="option" id="option">
                     <span class="layout-span">Setup Base Styles</span>
                 </label>
             </div>
@@ -182,4 +188,5 @@
         </div>
     </div>
 </body>
+
 </html>

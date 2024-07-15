@@ -257,6 +257,7 @@ input::invalid {
 	align-items: center;
 	justify-content: space-between;
 	position: relative;
+	height: 40px;
 	padding: 6px 16px;
 	box-sizing: border-box;
 }
@@ -325,8 +326,16 @@ input::invalid {
 	background-color: black;
 }
 
-.radio-button:checked+.radio-label {
-	background-color: #0056b3;
+#prio-high:checked+.radio-label {
+	background-color: #FF3D00;
+}
+
+#prio-med:checked+.radio-label {
+	background-color: #FFA800;
+}
+
+#prio-low:checked+.radio-label {
+	background-color: #7AE229;
 }
 
 .radio-button:not(checked)+.radio-label {
@@ -338,6 +347,10 @@ input::invalid {
 	display: flex;
 	justify-content: space-between;
 	width: 962px;
+}
+
+.required {
+	display: flex;
 }
 
 .requirement {
