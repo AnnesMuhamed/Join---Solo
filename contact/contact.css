@@ -184,11 +184,17 @@ body.modal-open {
     
 }
 
-.contact-item:hover {
+.contact-info-item.highlighted {
+    background-color:  #2A3647;
+    color: #fff;
+    
+}
+
+.contact-item:not(.highlighted):hover {
     background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
 }
 
-.contact-info-item:hover {
+.contact-info-item:not(.highlighted):hover {
     background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
 }
 

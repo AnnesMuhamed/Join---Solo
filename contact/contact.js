@@ -112,8 +112,11 @@ function getInitials(firstName, lastName) {
 }
 
 function highlightContact(element) {
+    let contactInfoItem = element.querySelector('.contact-info-item');
     document.querySelectorAll('.contact-item').forEach(item => item.classList.remove('highlighted'));
+    document.querySelectorAll('.contact-info-item').forEach(item => item.classList.remove('highlighted'));
     element.classList.add('highlighted');
+    contactInfoItem.classList.add('highlighted');
     document.getElementById('popup-section').classList.add('show');
     document.getElementById('popup-section').classList.remove('show');
 }
