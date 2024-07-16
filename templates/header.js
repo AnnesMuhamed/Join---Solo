@@ -26,6 +26,7 @@ async function displayUserInitials(userID) {
     } catch (error) {
         console.error("Fehler beim Laden der Benutzerdaten:", error);
     }
+    await displayUserInitials('#user');
 }
 
 function toggleDropdown() {
@@ -42,6 +43,6 @@ window.onclick = function (event) {
             }
         }
     }
+    
 }
 
-displayUserInitials('#user');

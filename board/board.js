@@ -35,47 +35,52 @@ let todos = [{
 let currentDraggedElement;
 
 function updateHTML() {
-  let open = todos.filter(t => t['category'] == 'open');
+  const categories = ['to-do', 'in-progress', 'await-feedback', 'done'];
+
+  categories.forEach(category => {
+    let tasks = todos.filter(t => t['category'] === category);
+    document.getElementById(category).innerHTML = '';
+
+    for (let index = 0; index < tasks.length; index++) {
+      const element = tasks[index];
+      document.getElementById(category).innerHTML += generateTodoHTML(element);
+    }
+  });
+
   includeHTML();
-  document.getElementById('open').innerHTML = '';
-
-  for (let index = 0; index < open.length; index++) {
-      const element = open[index];
-      document.getElementById('open').innerHTML += generateTodoHTML(element);
-  }
-
-  let closed = todos.filter(t => t['category'] == 'closed');
-
-  document.getElementById('closed').innerHTML = '';
-
-  for (let index = 0; index < closed.length; index++) {
-      const element = closed[index];
-      document.getElementById('closed').innerHTML += generateTodoHTML(element);
-  }
-}
-
-function startDragging(id) {
-  currentDraggedElement = id;
-}
-
-function generateTodoHTML(element) {
-  return `<div draggable="true" ondragstart="startDragging(${element['id']})" class="todo">${element['title']}</div>`;
 }
 
 function allowDrop(ev) {
-    ev.preventDefault();
+  ev.preventDefault();
 }
 
-function moveTo(category) {
-  todos[currentDraggedElement]['category'] = category;
+function highlight(category) {
+  document.getElementById(category).classList.add('highlight');
 }
 
-function highlight(id) {
-  document.getElementById(id).classList.add('drag-area-highlight');
+function removeHighlight(category) {
+  document.getElementById(category).classList.remove('highlight');
 }
 
-function removeHighlight(id) {
-  document.getElementById(id).classList.remove('drag-area-highlight');
+function moveTo(ev, category) {
+  ev.preventDefault();
+  const todoId = ev.dataTransfer.getData("text");
+  const todoIndex = todos.findIndex(t => t.id == todoId);
+  if (todoIndex > -1) {
+    todos[todoIndex].category = category;
+    updateHTML();
+  }
+}
+
+function generateTodoHTML(todo) {
+  return `<div class="todo-card" draggable="true" ondragstart="drag(event)" id="${todo.id}">
+              <h3>${todo.title}</h3>
+          </div>`;
+          updateHTML();
+}
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
 }
 
 function openAddTaskForm() {
@@ -98,4 +103,10 @@ function closeForm(formId) {
   document.body.classList.remove('modal-open');
 }
 
+function initialize() {
+  includeHTML();
+  updateHTML();
+}
+
 document.addEventListener("DOMContentLoaded", updateHTML);
+
