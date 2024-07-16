@@ -113,9 +113,9 @@ input::invalid {
 	top: 702px;
 	background-color: white;
 	z-index: 1;
+	height: 22%;
 	width: 100%;
 	max-width: 440px;
-	height: 336px;
 	overflow-y: auto;
 }
 
