@@ -1,37 +1,36 @@
 body {
     padding: 0;
-    margin: 0;
+    margin: auto;
     font-family: 'Inter', sans-serif;
-    background: #F6F7F8;
+    
+    max-width: 1440px;
+    max-height: 1024px;
 }
 
 #sectionSignUp {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100vh;
     flex-direction: column;
+    width: 1440px;
+    height: 1024px;
+    background: #F6F7F8;
 }
 
 .logo-container {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
-    position: fixed;
-    width: 100.03px;
+    position: relative;
+    width: 100%;
     height: 121.97px;
-    top: 80px;
+    top: 19px;
     left: 77px;
 }
 
 .main-logo {
-    position: fixed;
+    
     width: 100.03px;
     height: 121.97px;
-    top: 80px;
-    left: 77px;
-
 }
 
 .container {
@@ -40,11 +39,12 @@ body {
     flex-direction: column;
     width: 598px;
     height: 630px;
-    padding: 48px 88px;
+    padding: 48px;
     gap: 32px;
     border-radius: 30px;
     box-shadow: 0px 0px 14px 3px #0000000A;
     background: #fff;
+    margin-bottom: 95px;
 }
 
 .header-container {
@@ -126,7 +126,7 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    width: 231px;
+    width: 242px;
     height: 24px;
     padding: 22px;
 }
@@ -182,13 +182,14 @@ transform: scale(1.1);
 .link-container {
     justify-content: center;
     display: flex;
-    position: relative;
-    top: 150px;
-    width: 100%;
+    position: absolute;
+    top: 949px;
+    width: 246px;
     height: 35px;
     gap: 16px;
     opacity: 0.5;
     transition: opacity 500ms ease-in-out;
+    align-items: center;
 }
 
 .policy-notice {
