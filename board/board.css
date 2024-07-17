@@ -409,6 +409,7 @@ body.modal-open {
 
 .date-container {
     display: flex;
+    align-items: center;
     width: 445px;
     height: 24px;
     gap: 25px;
