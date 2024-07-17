@@ -90,7 +90,7 @@ function init() {
 
         await createUser(firstName, lastName, email, password);
         alert("Benutzer erfolgreich erstellt!");
-        window.location.href = '../login/login.html';
+        window.location.href = '../index.html';
     });
 }
 
