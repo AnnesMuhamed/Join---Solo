@@ -53,8 +53,8 @@ function loginPage() {
         <a href="./sign-up/sign-up.html"><button class="signup-button">Sign up</button></a>
     </div>
     <div class="link-container hidden">
-        <a class="policy-notice" href="#">Privacy Policy</a>
-        <a class="policy-notice" href="#">Legal notice</a>
+        <a class="policy-notice" href="../privacy-policy/privacy-policy-external.html">Privacy Policy</a>
+        <a class="policy-notice" href="../legal-notice/legal-notice-external.html">Legal notice</a>
     </div>
     `;
 
@@ -126,9 +126,11 @@ function initialize() {
         linkContainer.classList.remove('hidden');
 
         setTimeout(() => {
-            overlay.style.width = '0';
-            overlay.style.height = '0';
-            overlay.style.overflow = 'hidden';
+            overlay.style.width = '1440px';
+            overlay.style.height = '1024px';
+            overlay.style.display = 'hidden';
+            overlay.style.alignItems = 'flex-start';
+            overlay.style.justifyContent = 'flex-start';
         }, 500);
     }, 3000);
 }

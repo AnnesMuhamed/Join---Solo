@@ -1,18 +1,19 @@
 body,
 html {
-  margin: 0;
+  margin: auto;
   padding: 0;
-  width: 100%;
-  background: #F6F7F8;
   font-family: 'Inter', sans-serif;
+  max-width: 1440px;
+  max-height: 1024px;
 }
 
 #sectionLogin {
-  width: 100%;
-  height: 100vh;
+  width: 1440px;
+  height: 1024px;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #F6F7F8;
 }
 
 #overlay {
@@ -74,7 +75,6 @@ html {
   justify-content: center;
   width: 274px;
   height: 334.07px;
-  top: 80px;
   transition: all 100ms ease-in-out;
 }
 
@@ -93,9 +93,9 @@ html {
 }
 
 .move-to-corner {
-  position: fixed;
-  top: 10px;
-  left: 10px;
+  position: absolute;
+  top: 80px;
+  left: 77px;
   width: 100.03px;
   height: 121.97px;
 }
@@ -107,10 +107,8 @@ html {
 
 #login-page {
   display: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: fixed;
+  top: 265.5px;
   border-radius: 30px;
   width: 652px;
   height: 493px;
@@ -246,7 +244,7 @@ input[type="password"] {
   justify-content: center;
   display: flex;
   position: fixed;
-  width: 100%;
+  width: 246px;
   height: 35px;
   top: 949px;
   gap: 16px;
