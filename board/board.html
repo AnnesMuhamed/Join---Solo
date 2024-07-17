@@ -23,6 +23,9 @@
     </div>
 
     <section class="board-main-container">
+
+        
+
         <div class="headline-add-task-container">
             <div class="headline-and-input">
                 <span class="headline-board">Board</span>
@@ -57,136 +60,139 @@
             <div class="column-done drag-area" id="done" ondrop="moveTo(event, 'done')"
                 ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')"></div>
         </div>
+
+        <div id="userStoryCard" class="user-story-card">
+
+            <div class="closeButton-container">
+                <div class="userstory-span-container">
+                    <span id="userStoryTitle" class="userstory-span">User Story</span>
+                </div>
+                <button onclick="closeUserStory()" class="close-userstory-btn"><img class="closeImg" src="../img/close.png" alt=""></button>
+            </div>
+    
+            <h1 class="userstory-headline">Kochwelt Page & Recipe Recommender</h1>
+            <h5 class="userstory-underline">Build start page with recipe recommendation.</h5>
+    
+            <div class="date-container">
+                <span class="due-date">Due date:</span>
+                <span class="date">10/05/2023</span>
+            </div>
+    
+            <div class="priority-container">
+                <span class="priority-span">Priority:</span>
+                <div class="medium-container">
+                    <span class="medium-span">Medium</span>
+                    <img class="prioImg" src="../img/Prio media.png" alt="">
+                </div>
+            </div>
+    
+            <div class="assignedTo-container">
+                <span class="assignedTo-span">Assigned To:</span>
+                <div class="contact-container">
+                    <!-- <div class="initials-container" style="background-color: ${color};">${getInitials(contact.firstName, contact.lastName)}</div> -->
+                    <div class="contact">
+                        <div class="initials-container">AA</div>
+                        <span class="contact-name">Anton Adler</span>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="subtasks-container">
+                <span class="subtasks-span">Subtasks</span>
+                <div class="checkbox">
+                    <label class="option1" for="option">
+                        <input type="checkbox" name="option" id="option">
+                        <span class="recipe-span">Implement Recipe Recommendation</span>
+                    </label>
+                    <label class="option2" for="option">
+                        <input type="checkbox" name="option" id="option">
+                        <span class="layout-span">Start Page Layout</span>
+                    </label>
+                </div>
+            </div>
+    
+            <div class="delete-edit-container">
+                <button class="popup-buttons" onclick="deleteContact()">
+                    <img class="delete-icon" src="../img/delete.png" alt="">
+                    <span class="delete">Delete</span>
+                </button>
+    
+                <img class="gray-stroke" src="../img/high-stroke-gray.png" alt="">
+    
+                <button class="popup-buttons" onclick="openEditContact()">
+                    <img class="edit-icon" src="../img/edit-black.png" alt="">
+                    <span class="edit">Edit</span>
+                </button>
+            </div>
+        </div>
+        <div class="technical-task">
+
+            <div class="closeButton-container">
+                <div class="technicalTask-span-container">
+                    <span class="technical-span">Technical Task</span>
+                </div>
+                <button class="close-userstory-btn"><img class="closeImg" src="../img/close.png" alt=""></button>
+            </div>
+    
+            <h1 class="userstory-headline">CSS Architecture Planning</h1>
+            <h5 class="userstory-underline">Define CSS naming conventions and structure.</h5>
+    
+            <div class="date-container">
+                <span class="due-date">Due date:</span>
+                <span class="date">10/05/2023</span>
+            </div>
+    
+            <div class="priority-container">
+                <span class="priority-span">Priority:</span>
+                <div class="urgent-container">
+                    <span class="urgent-span">Urgent</span>
+                    <img class="prioImg-technical" src="../img/prio-high.png" alt="">
+                </div>
+            </div>
+    
+            <div class="assignedTo-container">
+                <span class="assignedTo-span">Assigned To:</span>
+                <div class="contact-container">
+                    <!-- <div class="initials-container" style="background-color: ${color};">${getInitials(contact.firstName, contact.lastName)}</div> -->
+                    <div class="contact">
+                        <div class="initials-container">AA</div>
+                        <span class="contact-name">Anton Adler</span>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="subtasks-container">
+                <span class="subtasks-span">Subtasks</span>
+                <div class="checkbox">
+                    <label class="option1" for="option">
+                        <input type="checkbox" name="option" id="option">
+                        <span class="recipe-span">Establish CSS Methodology</span>
+                    </label>
+                    <label class="option2" for="option">
+                        <input type="checkbox" name="option" id="option">
+                        <span class="layout-span">Setup Base Styles</span>
+                    </label>
+                </div>
+            </div>
+    
+            <div class="delete-edit-container">
+                <button class="popup-buttons" onclick="deleteContact()">
+                    <img class="delete-icon" src="../img/delete.png" alt="">
+                    <span class="delete">Delete</span>
+                </button>
+    
+                <img class="gray-stroke" src="../img/high-stroke-gray.png" alt="">
+    
+                <button class="popup-buttons" onclick="openEditContact()">
+                    <img class="edit-icon" src="../img/edit-black.png" alt="">
+                    <span class="edit">Edit</span>
+                </button>
+            </div>
+        </div>
     </section>
 
-    <div class="user-story-card">
-
-        <div class="closeButton-container">
-            <div class="userstory-span-container">
-                <span class="userstory-span">User Story</span>
-            </div>
-            <button class="close-userstory-btn"><img class="closeImg" src="../img/close.png" alt=""></button>
-        </div>
-
-        <h1 class="userstory-headline">Kochwelt Page & Recipe Recommender</h1>
-        <h5 class="userstory-underline">Build start page with recipe recommendation.</h5>
-
-        <div class="date-container">
-            <span class="due-date">Due date:</span>
-            <span class="date">10/05/2023</span>
-        </div>
-
-        <div class="priority-container">
-            <span class="priority-span">Priority:</span>
-            <div class="medium-container">
-                <span class="medium-span">Medium</span>
-                <img class="prioImg" src="../img/Prio media.png" alt="">
-            </div>
-        </div>
-
-        <div class="assignedTo-container">
-            <span class="assignedTo-span">Assigned To:</span>
-            <div class="contact-container">
-                <!-- <div class="initials-container" style="background-color: ${color};">${getInitials(contact.firstName, contact.lastName)}</div> -->
-                <div class="contact">
-                    <div class="initials-container">AA</div>
-                    <span class="contact-name">Anton Adler</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="subtasks-container">
-            <span class="subtasks-span">Subtasks</span>
-            <div class="checkbox">
-                <label class="option1" for="option">
-                    <input type="checkbox" name="option" id="option">
-                    <span class="recipe-span">Implement Recipe Recommendation</span>
-                </label>
-                <label class="option2" for="option">
-                    <input type="checkbox" name="option" id="option">
-                    <span class="layout-span">Start Page Layout</span>
-                </label>
-            </div>
-        </div>
-
-        <div class="delete-edit-container">
-            <button class="popup-buttons" onclick="deleteContact()">
-                <img class="delete-icon" src="../img/delete.png" alt="">
-                <span class="delete">Delete</span>
-            </button>
-
-            <img class="gray-stroke" src="../img/high-stroke-gray.png" alt="">
-
-            <button class="popup-buttons" onclick="openEditContact()">
-                <img class="edit-icon" src="../img/edit-black.png" alt="">
-                <span class="edit">Edit</span>
-            </button>
-        </div>
-    </div>
-    <div class="technical-task">
-
-        <div class="closeButton-container">
-            <div class="technicalTask-span-container">
-                <span class="technical-span">Technical Task</span>
-            </div>
-            <button class="close-userstory-btn"><img class="closeImg" src="../img/close.png" alt=""></button>
-        </div>
-
-        <h1 class="userstory-headline">CSS Architecture Planning</h1>
-        <h5 class="userstory-underline">Define CSS naming conventions and structure.</h5>
-
-        <div class="date-container">
-            <span class="due-date">Due date:</span>
-            <span class="date">10/05/2023</span>
-        </div>
-
-        <div class="priority-container">
-            <span class="priority-span">Priority:</span>
-            <div class="urgent-container">
-                <span class="urgent-span">Urgent</span>
-                <img class="prioImg-technical" src="../img/prio-high.png" alt="">
-            </div>
-        </div>
-
-        <div class="assignedTo-container">
-            <span class="assignedTo-span">Assigned To:</span>
-            <div class="contact-container">
-                <!-- <div class="initials-container" style="background-color: ${color};">${getInitials(contact.firstName, contact.lastName)}</div> -->
-                <div class="contact">
-                    <div class="initials-container">AA</div>
-                    <span class="contact-name">Anton Adler</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="subtasks-container">
-            <span class="subtasks-span">Subtasks</span>
-            <div class="checkbox">
-                <label class="option1" for="option">
-                    <input type="checkbox" name="option" id="option">
-                    <span class="recipe-span">Establish CSS Methodology</span>
-                </label>
-                <label class="option2" for="option">
-                    <input type="checkbox" name="option" id="option">
-                    <span class="layout-span">Setup Base Styles</span>
-                </label>
-            </div>
-        </div>
-
-        <div class="delete-edit-container">
-            <button class="popup-buttons" onclick="deleteContact()">
-                <img class="delete-icon" src="../img/delete.png" alt="">
-                <span class="delete">Delete</span>
-            </button>
-
-            <img class="gray-stroke" src="../img/high-stroke-gray.png" alt="">
-
-            <button class="popup-buttons" onclick="openEditContact()">
-                <img class="edit-icon" src="../img/edit-black.png" alt="">
-                <span class="edit">Edit</span>
-            </button>
-        </div>
-    </div>
+    
+    
 </body>
 
 </html>

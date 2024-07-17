@@ -73,10 +73,11 @@ function moveTo(ev, category) {
 }
 
 function generateTodoHTML(todo) {
-  return `<div class="todo-card" draggable="true" ondragstart="drag(event)" id="${todo.id}">
-              <h3>${todo.title}</h3>
-          </div>`;
-          updateHTML();
+  return `
+    <div onclick="openUserStory('${todo.id}')" class="todo-card" draggable="true" ondragstart="drag(event)" id="${todo.id}">
+        <h3 class="tasks-cards-headline">${todo.title}</h3>
+    </div>
+    `;   
 }
 
 function drag(ev) {
@@ -99,6 +100,19 @@ function closeAddTaskForm() {
 
 function closeForm(formId) {
   document.getElementById(formId).classList.remove('show');
+  document.getElementById('overlay').style.display = 'none';
+  document.body.classList.remove('modal-open');
+}
+
+function openUserStory() {
+    document.getElementById('userStoryCard').classList.add('show');
+    document.getElementById('overlay').style.display = 'block';
+    document.body.classList.add('modal-open');
+  
+}
+
+function closeUserStory() {
+  document.getElementById('userStoryCard').classList.remove('show');
   document.getElementById('overlay').style.display = 'none';
   document.body.classList.remove('modal-open');
 }
