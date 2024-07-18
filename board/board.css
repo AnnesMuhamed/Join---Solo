@@ -143,6 +143,7 @@ body.modal-open {
 .add-button-img-column {
     filter: grayscale(100%);
     transition: all 0.1s ease;
+	cursor: pointer;
 }
 
 .add-button-img-column:hover {
