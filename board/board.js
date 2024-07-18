@@ -31,11 +31,11 @@ let todos = [{
 let currentDraggedElement;
 
 function updateHTML() {
-  const categories = ['open', 'closed', 'in-progress', 'done'];
+  const categories = ['open', 'closed', 'in-progress', 'done']; // 'categories' Generiert ein Array mit Vier containern. 
   
   categories.forEach(category => {
-      let elements = todos.filter(t => t['category'] == category);
-      document.getElementById(category).innerHTML = '';
+      let elements = todos.filter(t => t['category'] == category); // 'element' Filtert die Kategorien aus dem Array
+      document.getElementById(category).innerHTML = ''; // Container wird geleert
       for (let index = 0; index < elements.length; index++) {
           const element = elements[index];
           document.getElementById(category).innerHTML += generateTodoHTML(element);
@@ -44,11 +44,11 @@ function updateHTML() {
   includeHTML();
 }
 
-function startDragging(id) {
+function startDragging(id) { // durch verschiebung werden die ids gespeichert.
   currentDraggedElement = id;
 }
 
-function generateTodoHTML(element) {
+function generateTodoHTML(element) { // Generiert html bzw. todo karten
   return `
     <div onclick="openUserStory('${element.id}')" class="todo-card" draggable="true" ondragstart="startDragging(${element['id']})" ${element['title']}">
         <h3 class="tasks-cards-headline">${element.title}</h3>
@@ -56,13 +56,13 @@ function generateTodoHTML(element) {
     `;   
 }
 
-function allowDrop(ev) {
+function allowDrop(ev) { // erlaubt das hinzufügen von elementen bzw. karten
   ev.preventDefault();
 }
 
-function moveTo(category) {
+function moveTo(category) { // erlaubt das verschiebend er karten 
   todos[currentDraggedElement]['category'] = category;
-  updateHTML();
+  updateHTML();  // Aktualisert dann den html code bzw. rendert
 }
 
 function openAddTaskForm() {
