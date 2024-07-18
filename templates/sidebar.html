@@ -2,43 +2,31 @@
   <div class="sidebar-top">
     <img src="../img/template/templateLogoJoin.png" class="sidebar-logo" />
     <div class="menu">
-      <button
-        class="menu-button menu-button-design font-size"
-        onclick="window.location.href = '../summary/summary-guest.html';"
-      >
+      <button id="summary" class="menu-button menu-button-design font-size current-toggle"
+        onclick="window.location.href = '../summary/summary-guest.html';">
         <img src="../img/template/summary.png" />Summary
       </button>
-      <button
-        class="menu-button menu-button-design font-size"
-        onclick="window.location.href = '../add-task/add-task.html';"
-      >
+      <button id="addTask" class="menu-button menu-button-design font-size"
+        onclick="window.location.href = '../add-task/add-task.html';">
         <img src="../img/template/task.png" />Add Task
       </button>
-      <button
-        class="menu-button menu-button-design font-size"
-        onclick="window.location.href = '../board/board.html';"
-      >
+      <button id="board" class="menu-button menu-button-design font-size"
+        onclick="window.location.href = '../board/board.html';">
         <img src="../img/template/board.png" />Board
       </button>
-      <button
-        class="menu-button menu-button-design font-size"
-        onclick="window.location.href = '../contact/contact.html';"
-      >
+      <button id="contacts" class="menu-button menu-button-design font-size"
+        onclick="window.location.href = '../contact/contact.html';">
         <img src="../img/template/contacts.png" />Contacts
       </button>
     </div>
   </div>
   <div class="sidebar-bottom">
-    <button
-      class="menu-button ,menu-button-design menu-button-lower-design font-size"
-      onClick="window.location.href = '../privacy-policy/privacy-policy.html';"
-    >
+    <button id="privacyPolicy" class="menu-button menu-button-design menu-button-lower-design font-size"
+      onclick="window.location.href = '../privacy-policy/privacy-policy.html';">
       Privacy Policy
     </button>
-    <button
-      class="menu-button menu-button-lower-design font-size"
-      onClick="window.location.href = '../legal-notice/legal-notice.html';"
-    >
+    <button id="legalNotice" class="menu-button menu-button-lower-design font-size"
+      onclick="window.location.href = '../legal-notice/legal-notice.html';">
       Legal Notice
     </button>
   </div>

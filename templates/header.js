@@ -26,7 +26,6 @@ async function displayUserInitials(userID) {
     } catch (error) {
         console.error("Fehler beim Laden der Benutzerdaten:", error);
     }
-    await displayUserInitials('#user');
 }
 
 function toggleDropdown() {
@@ -43,6 +42,23 @@ window.onclick = function (event) {
             }
         }
     }
-    
 }
+
+// Example usage
+displayUserInitials('userID'); // Replace 'userID' with the actual user ID to be used
+
+document.addEventListener('DOMContentLoaded', function () {
+    let currentButton = document.querySelector('.menu-button.current-toggle');
+
+    let menuButtons = document.querySelectorAll('.menu-button');
+    menuButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            if (currentButton !== button) {
+                currentButton.classList.remove('current-toggle');
+                button.classList.add('current-toggle');
+                currentButton = button;
+            }
+        });
+    });
+});
 
