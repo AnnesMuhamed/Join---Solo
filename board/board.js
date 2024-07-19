@@ -20,12 +20,14 @@ async function loadData(path = "") {
 
 let todos = [{
   'id': 0,
-  'title': 'Putzen',
-  'category': 'open'
+  'title': 'Technical Task',
+  'category': 'open',
+  'type': 'technical'
 }, {
   'id': 1,
-  'title': 'Kochen',
-  'category': 'closed'
+  'title': 'User Story',
+  'category': 'closed',
+  'type': 'user-story'
 }];
 
 let currentDraggedElement;
@@ -48,21 +50,42 @@ function startDragging(id) { // durch verschiebung werden die ids gespeichert.
   currentDraggedElement = id;
 }
 
-function generateTodoHTML(element) { // Generiert html bzw. todo karten
-  return `
-    <div onclick="openUserStory('${element.id}')" class="todo-card" draggable="true" ondragstart="startDragging(${element['id']})" ${element['title']}">
-        <h3 class="tasks-cards-headline">${element.title}</h3>
-    </div>
-    `;   
+function generateTodoHTML(element) {  // Generiert html bzw. todo karten
+  if (element.type === 'technical') {
+      return `
+          <div onclick="openUserStory('${element.id}')" class="todo-card technical" draggable="true" ondragstart="startDragging(${element.id})">
+            <div class="under-container">    
+              <div class="technical-cards-headline-container">
+                <span class="cards-headline">${element.title}</span>
+              </div>
+            </div>
+          </div>
+      `;
+  } else if (element.type === 'user-story') {
+      return `
+          <div onclick="openUserStory('${element.id}')" class="todo-card user-story" draggable="true" ondragstart="startDragging(${element.id})">
+            <div class="under-container">    
+              <div class="user-cards-headline-container">
+                <span class="cards-headline">${element.title}</span>
+              </div>
+            </div>
+          </div>
+      `;
+  }
 }
 
 function allowDrop(ev) { // erlaubt das hinzufügen von elementen bzw. karten
   ev.preventDefault();
 }
 
-function moveTo(category) { // erlaubt das verschiebend er karten 
-  todos[currentDraggedElement]['category'] = category;
-  updateHTML();  // Aktualisert dann den html code bzw. rendert
+function moveTo(category) {
+  let element = todos.find(todo => todo.id === currentDraggedElement);
+  element.category = category;
+  updateHTML();
+}
+
+function openUserStory(id) {
+  alert('User Story ID: ' + id);
 }
 
 function openAddTaskForm() {
