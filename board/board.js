@@ -53,7 +53,7 @@ function startDragging(id) { // durch verschiebung werden die ids gespeichert.
 function generateTodoHTML(element) {  // Generiert html bzw. todo karten
   if (element.type === 'technical') {
       return `
-          <div onclick="openUserStory('${element.id}')" class="todo-card technical" draggable="true" ondragstart="startDragging(${element.id})">
+          <div onclick="openTechnicalTask('${element.id}')" class="todo-card technical" draggable="true" ondragstart="startDragging(${element.id})">
             <div class="under-container">    
               <div class="technical-cards-headline-container">
                 <span class="cards-headline">${element.title}</span>
@@ -109,14 +109,25 @@ function closeForm(formId) {
 }
 
 function openUserStory() {
-    document.getElementById('userStoryCard').classList.add('show');
-    document.getElementById('overlay').style.display = 'block';
-    document.body.classList.add('modal-open');
-  
+  document.getElementById('userStoryCard').classList.add('show');
+  document.getElementById('overlay').style.display = 'block';
+  document.body.classList.add('modal-open');
 }
 
 function closeUserStory() {
   document.getElementById('userStoryCard').classList.remove('show');
+  document.getElementById('overlay').style.display = 'none';
+  document.body.classList.remove('modal-open');
+}
+
+function openTechnicalTask() {
+  document.getElementById('technicalTask').classList.add('show');
+  document.getElementById('overlay').style.display = 'block';
+  document.body.classList.add('modal-open');
+}
+
+function closeTechnicalTask() {
+  document.getElementById('technicalTask').classList.remove('show');
   document.getElementById('overlay').style.display = 'none';
   document.body.classList.remove('modal-open');
 }

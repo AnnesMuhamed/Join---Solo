@@ -326,6 +326,14 @@ body.modal-open {
     z-index: 1;
 }
 
+.technical-task.show {
+    left: 50%;
+    top: 33%;
+    transform: translateX(-50%) translateY(-50%);
+    display: flex;
+    z-index: 1;
+}
+
 .closeButton-container {
     display: flex;
     justify-content: space-between;
@@ -405,7 +413,7 @@ body.modal-open {
     gap: 25px;
 }
 
-.due-date-storycard {
+.due-date-storycard, .due-date-technicalTask {
     width: 92px;
     height: 24px;
     font-size: 20px;

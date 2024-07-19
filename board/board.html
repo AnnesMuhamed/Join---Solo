@@ -234,10 +234,10 @@
         </div>
       </div>
       <div class="card-container">
-        <div class="drag-area" id="open" ondrop="moveTo('open')" ondragleave="removeHighlight('open')" ondragover="allowDrop(event); highlight('open')"></div>
-        <div class="drag-area" id="closed" ondrop="moveTo('closed')" ondragleave="removeHighlight('closed')" ondragover="allowDrop(event); highlight('closed')"></div>
-        <div class="drag-area" id="in-progress" ondrop="moveTo('in-progress')" ondragleave="removeHighlight('in-progress')" ondragover="allowDrop(event); highlight('in-progress')"></div>
-        <div class="drag-area" id="done" ondrop="moveTo('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')"></div>
+        <div class="drag-area" id="open" ondrop="moveTo('open')" ondragover="allowDrop(event);"></div>
+        <div class="drag-area" id="closed" ondrop="moveTo('closed')" ondragover="allowDrop(event);"></div>
+        <div class="drag-area" id="in-progress" ondrop="moveTo('in-progress')" ondragover="allowDrop(event);"></div>
+        <div class="drag-area" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event);"></div>
       </div>
     <div id="userStoryCard" class="user-story-card">
 
@@ -303,20 +303,20 @@
             </button>
         </div>
     </div>
-    <div class="technical-task">
+    <div id="technicalTask" class="technical-task">
 
         <div class="closeButton-container">
             <div class="technicalTask-span-container">
                 <span class="technical-span">Technical Task</span>
             </div>
-            <button class="close-userstory-btn"><img class="closeImg" src="../img/close.png" alt=""></button>
+            <button onclick="closeTechnicalTask()"  class="close-userstory-btn"><img class="closeImg" src="../img/close.png" alt=""></button>
         </div>
 
         <h1 class="userstory-headline">CSS Architecture Planning</h1>
         <h5 class="userstory-underline">Define CSS naming conventions and structure.</h5>
 
         <div class="date-container">
-            <span class="due-date">Due date:</span>
+            <span class="due-date-technicalTask">Due date:</span>
             <span class="date">10/05/2023</span>
         </div>
 
@@ -328,15 +328,16 @@
             </div>
         </div>
 
-        <!-- <div class="assignedTo-container">
-            <span class="assignedTo-span">Assigned To:</span>
-            <div class="contact-container">
-                <div class="contact">
-                    <div class="initials-container">AA</div>
-                    <span class="contact-name">Anton Adler</span>
-                </div>
-            </div>
-        </div> -->
+        <div class="assignedTo-container">
+          <span class="assignedTo-span">Assigned To:</span>
+          <div class="contact-container">
+              <!-- <div class="initials-container" style="background-color: ${color};">${getInitials(contact.firstName, contact.lastName)}</div> -->
+              <div class="contact">
+                  <div class="initials-container">AA</div>
+                  <span class="contact-name">Anton Adler</span>
+              </div>
+          </div>
+      </div>
 
         <div class="subtasks-container">
             <span class="subtasks-span">Subtasks</span>
