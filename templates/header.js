@@ -42,6 +42,7 @@ window.onclick = function (event) {
             }
         }
     }
+    
 }
 
 // Example usage

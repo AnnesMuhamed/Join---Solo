@@ -2,7 +2,7 @@ body {
     padding: 0;
     margin: auto;
     font-family: 'Inter', sans-serif;
-    
+    overflow-x: hidden;
     max-width: 1440px;
     max-height: 1024px;
 }
@@ -28,7 +28,6 @@ body {
 }
 
 .main-logo {
-    
     width: 100.03px;
     height: 121.97px;
 }
@@ -196,3 +195,87 @@ transform: scale(1.1);
     text-decoration: none;
     color: #A8A8A8;
 }
+
+/* alert button */
+
+/* Styling für den benutzerdefinierten Alert-Container */
+.custom-alert {
+    display: none; /* Versteckt den Alert-Container standardmäßig */
+    position: fixed; /* Fixiert den Container im sichtbaren Bereich */
+    bottom: 0; /* Startet unten */
+    left: 50%; /* Zentriert horizontal */
+    transform: translateX(-50%); /* Korrigiert die horizontale Zentrierung */
+    z-index: 1000; /* Stellt sicher, dass der Alert über anderen Elementen liegt */
+    width: 312px; /* Breite des Containers */
+    height: 74px; /* Höhe des Containers */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #2A3647; /* Hintergrundfarbe */
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1); /* Schatten */
+    border-radius: 25px;
+}
+
+/* Styling für den Inhalt des benutzerdefinierten Alerts */
+.custom-alert-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 262px; /* Breite des Inhalts */
+    height: 24px; /* Höhe des Inhalts */
+    opacity: 0; /* Standardmäßig unsichtbar */
+    animation: fade-in 0.5s forwards; /* Einblende-Animation */
+    animation-delay: 800ms; /* Verzögerung der Einblende-Animation */
+}
+
+/* Textstyling */
+.custom-alert-content span {
+    font-family: Inter; /* Schriftart */
+    font-size: 20px; /* Schriftgröße */
+    font-weight: 400; /* Schriftstärke */
+    line-height: 24px; /* Zeilenhöhe */
+    text-align: left; /* Textausrichtung */
+    color: white;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    height: 100%;
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Animation für das Hochrutschen des Alerts */
+@keyframes slide-up {
+    from {
+        bottom: -100px; /* Startposition außerhalb des Bildschirms */
+    }
+    to {
+        bottom: 50%; /* Endposition in der Mitte des Bildschirms */
+        transform: translate(-50%, -50%); /* Vertikale und horizontale Zentrierung */
+    }
+}
+
+/* Einblende-Animation */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
