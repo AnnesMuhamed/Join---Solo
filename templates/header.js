@@ -5,28 +5,28 @@ async function loadData(path = "") {
     return await response.json();
 }
 
-function getInitials(firstName, lastName) {
-    return `${firstName.charAt(0).toUpperCase()}${lastName.charAt(0).toUpperCase()}`;
-}
-
-async function displayUserInitials(userID) {
-    try {
-        let user = await loadData(`users/${userID}`);
-        if (user) {
-            let initials = getInitials(user.firstName, user.lastName);
-            document.querySelector('.header-right .user').innerText = initials;
-            if (user.role !== "guest") {
-                document.getElementById('logout-link').style.display = 'block';
-            } else {
-                document.getElementById('logout-link').style.display = 'none';
-            }
-        } else {
-            console.error("Benutzer nicht gefunden");
-        }
-    } catch (error) {
-        console.error("Fehler beim Laden der Benutzerdaten:", error);
+function loadUserData() {
+    let user = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (!user) {
+        user = JSON.parse(sessionStorage.getItem('loggedInUser'));
     }
-}
+  
+    if (user) {
+        const userName = `${user.firstName} ${user.lastName}`;
+        document.querySelector('.greet .sofia').textContent = userName;
+        displayUserInitials(user.firstName, user.lastName);
+    }
+  }
+  
+  function getInitials(firstName, lastName) {
+    return `${firstName.charAt(0).toUpperCase()}${lastName.charAt(0).toUpperCase()}`;
+  }
+  
+  function displayUserInitials(firstName, lastName) {
+    const initials = getInitials(firstName, lastName);
+    const userDiv = document.getElementById('user');
+    userDiv.textContent = initials;
+  }
 
 function toggleDropdown() {
     document.getElementById("user-dropdown").classList.toggle("show");
@@ -44,22 +44,4 @@ window.onclick = function (event) {
     }
     
 }
-
-// Example usage
-displayUserInitials('userID'); // Replace 'userID' with the actual user ID to be used
-
-document.addEventListener('DOMContentLoaded', function () {
-    let currentButton = document.querySelector('.menu-button.current-toggle');
-
-    let menuButtons = document.querySelectorAll('.menu-button');
-    menuButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            if (currentButton !== button) {
-                currentButton.classList.remove('current-toggle');
-                button.classList.add('current-toggle');
-                currentButton = button;
-            }
-        });
-    });
-});
 

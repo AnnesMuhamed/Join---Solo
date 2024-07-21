@@ -20,26 +20,3 @@ async function includeHTML() {
   }
 }
 
-function loadUserData() {
-  let user = JSON.parse(localStorage.getItem('loggedInUser'));
-  if (!user) {
-      user = JSON.parse(sessionStorage.getItem('loggedInUser'));
-  }
-
-  if (user) {
-      const userName = `${user.firstName} ${user.lastName}`;
-      document.querySelector('.greet .sofia').textContent = userName;
-      displayUserInitials(user.firstName, user.lastName);
-  }
-}
-
-function getInitials(firstName, lastName) {
-  return `${firstName.charAt(0).toUpperCase()}${lastName.charAt(0).toUpperCase()}`;
-}
-
-function displayUserInitials(firstName, lastName) {
-  const initials = getInitials(firstName, lastName);
-  const userDiv = document.getElementById('user');
-  userDiv.textContent = initials;
-}
-
