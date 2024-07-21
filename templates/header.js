@@ -10,23 +10,23 @@ function loadUserData() {
     if (!user) {
         user = JSON.parse(sessionStorage.getItem('loggedInUser'));
     }
-  
+
     if (user) {
         const userName = `${user.firstName} ${user.lastName}`;
         document.querySelector('.greet .sofia').textContent = userName;
         displayUserInitials(user.firstName, user.lastName);
     }
-  }
-  
-  function getInitials(firstName, lastName) {
+}
+
+function getInitials(firstName, lastName) {
     return `${firstName.charAt(0).toUpperCase()}${lastName.charAt(0).toUpperCase()}`;
-  }
-  
-  function displayUserInitials(firstName, lastName) {
+}
+
+function displayUserInitials(firstName, lastName) {
     const initials = getInitials(firstName, lastName);
     const userDiv = document.getElementById('user');
     userDiv.textContent = initials;
-  }
+}
 
 function toggleDropdown() {
     document.getElementById("user-dropdown").classList.toggle("show");
@@ -42,6 +42,49 @@ window.onclick = function (event) {
             }
         }
     }
-    
+
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("Document loaded");
+    setTimeout(() => {
+        highlightCurrentPage();
+    }, 100);
+});
+
+function highlightCurrentPage() {
+    const currentPage = window.location.href;
+    console.log("Current Page:", currentPage);
+
+    const buttons = {
+        summary: document.getElementById('summary'),
+        addTask: document.getElementById('addTask'),
+        board: document.getElementById('board'),
+        contacts: document.getElementById('contacts'),
+        privacyPolicy: document.getElementById('privacyPolicy'),
+        legalNotice: document.getElementById('legalNotice')
+    };
+
+    console.log("Buttons:", buttons);
+
+    if (buttons.summary && currentPage.endsWith('summary-guest.html')) {
+        buttons.summary.classList.add('active');
+        console.log("Summary button highlighted");
+    } else if (buttons.addTask && currentPage.endsWith('add-task.html')) {
+        buttons.addTask.classList.add('active');
+        console.log("Add Task button highlighted");
+    } else if (buttons.board && currentPage.endsWith('board.html')) {
+        buttons.board.classList.add('active');
+        console.log("Board button highlighted");
+    } else if (buttons.contacts && currentPage.endsWith('contact.html')) {
+        buttons.contacts.classList.add('active');
+        console.log("Contacts button highlighted");
+    } else if (buttons.privacyPolicy && currentPage.endsWith('privacy-policy.html')) {
+        buttons.privacyPolicy.classList.add('active');
+        console.log("Privacy Policy button highlighted");
+    } else if (buttons.legalNotice && currentPage.endsWith('legal-notice.html')) {
+        buttons.legalNotice.classList.add('active');
+        console.log("Legal Notice button highlighted");
+    }
 }
 
