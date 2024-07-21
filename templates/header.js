@@ -46,7 +46,6 @@ window.onclick = function (event) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("Document loaded");
     setTimeout(() => {
         highlightCurrentPage();
     }, 100);
@@ -54,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function highlightCurrentPage() {
     const currentPage = window.location.href;
-    console.log("Current Page:", currentPage);
 
     const buttons = {
         summary: document.getElementById('summary'),
@@ -65,26 +63,19 @@ function highlightCurrentPage() {
         legalNotice: document.getElementById('legalNotice')
     };
 
-    console.log("Buttons:", buttons);
-
-    if (buttons.summary && currentPage.endsWith('summary-guest.html')) {
+    if ((buttons.summary && currentPage.endsWith('summary-guest.html')) || currentPage.endsWith('summary-user.html')) {
         buttons.summary.classList.add('active');
-        console.log("Summary button highlighted");
     } else if (buttons.addTask && currentPage.endsWith('add-task.html')) {
         buttons.addTask.classList.add('active');
-        console.log("Add Task button highlighted");
     } else if (buttons.board && currentPage.endsWith('board.html')) {
         buttons.board.classList.add('active');
-        console.log("Board button highlighted");
     } else if (buttons.contacts && currentPage.endsWith('contact.html')) {
         buttons.contacts.classList.add('active');
-        console.log("Contacts button highlighted");
     } else if (buttons.privacyPolicy && currentPage.endsWith('privacy-policy.html')) {
         buttons.privacyPolicy.classList.add('active');
-        console.log("Privacy Policy button highlighted");
     } else if (buttons.legalNotice && currentPage.endsWith('legal-notice.html')) {
         buttons.legalNotice.classList.add('active');
-        console.log("Legal Notice button highlighted");
     }
 }
+
 
