@@ -633,8 +633,6 @@ body.modal-open {
 
 .todo-card {
     display: flex;
-    width: 252px;
-    height: 215px;
     gap: 10px;
     padding: 16px;
     border-radius: 24px;
