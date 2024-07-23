@@ -49,6 +49,15 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
         highlightCurrentPage();
     }, 100);
+
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            setTimeout(() => {
+                highlightCurrentPage();
+            }, 100);
+        });
+    });
 });
 
 function highlightCurrentPage() {
@@ -62,6 +71,10 @@ function highlightCurrentPage() {
         privacyPolicy: document.getElementById('privacyPolicy'),
         legalNotice: document.getElementById('legalNotice')
     };
+
+    Object.values(buttons).forEach(button => {
+        if (button) button.classList.remove('active');
+    });
 
     if ((buttons.summary && currentPage.endsWith('summary-guest.html')) || currentPage.endsWith('summary-user.html')) {
         buttons.summary.classList.add('active');
@@ -77,5 +90,4 @@ function highlightCurrentPage() {
         buttons.legalNotice.classList.add('active');
     }
 }
-
 
