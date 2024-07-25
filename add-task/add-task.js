@@ -521,6 +521,7 @@ function createTaskJson() {
 		'priority': priority,
 		'category': getCategory(),
 		'subtasks': subtasks,
+		'status': 'open',
 	};
 	return task;
 }
