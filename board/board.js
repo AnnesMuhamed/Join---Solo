@@ -133,7 +133,7 @@ function closeTechnicalTask() {
 }
 
 function initialize() {
-  includeHTML();
+  includeHTML().then(loadUserData);
   updateHTML();
 }
 

@@ -42,7 +42,7 @@ function loginPage() {
             </label>
             <div class="button-container">
                 <button type="submit" class="login-button" disabled>Log in</button>
-                <a href="./summary/summary-guest.html">
+                <a href="./summary/summary.html">
                     <button type="button" class="guest-button">Guest Log in</button>
                 </a>
             </div>
@@ -102,7 +102,7 @@ function loginPage() {
             } else {
                 sessionStorage.setItem('loggedInUser', JSON.stringify(userFound));
             }
-            window.location.href = './summary/summary-user.html'; // Passe den Pfad an, falls erforderlich
+            window.location.href = './summary/summary.html'; // Passe den Pfad an, falls erforderlich
         } else {
             alert('Falscher Benutzername oder Passwort');
         }

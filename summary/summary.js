@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', init);
 
 function init() {
   includeHTML().then(loadUserData);
+  greetUser();
 }
 
 'use strict';
@@ -20,3 +21,18 @@ async function includeHTML() {
   }
 }
 
+function greetUser() {
+    let user = JSON.parse(localStorage.getItem('loggedInUser'));
+    if (!user) {
+        user = JSON.parse(sessionStorage.getItem('loggedInUser'));
+    }
+
+    if (user) {
+        const userName = `${user.firstName} ${user.lastName}`;
+		let greetUserField = document.querySelector('.gm');
+		let greetedUserField = document.querySelector('.sofia');
+		greetedUserField.classList.remove('d-none');
+        greetUserField.textContent = 'Good morning,';
+        greetedUserField.textContent = userName;
+    }
+}

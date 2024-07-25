@@ -12,8 +12,9 @@ function loadUserData() {
     }
 
     if (user) {
-        const userName = `${user.firstName} ${user.lastName}`;
-        document.querySelector('.greet .sofia').textContent = userName;
+		let logOutButton = document.getElementById('logout-link');
+		logOutButton.classList.remove('d-none');
+		logOutButton.classList.add('show');
         displayUserInitials(user.firstName, user.lastName);
     }
 }
@@ -76,7 +77,7 @@ function highlightCurrentPage() {
         if (button) button.classList.remove('active');
     });
 
-    if ((buttons.summary && currentPage.endsWith('summary-guest.html')) || currentPage.endsWith('summary-user.html')) {
+    if (currentPage.endsWith('summary.html')) {
         buttons.summary.classList.add('active');
     } else if (buttons.addTask && currentPage.endsWith('add-task.html')) {
         buttons.addTask.classList.add('active');

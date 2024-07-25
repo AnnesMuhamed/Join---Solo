@@ -79,11 +79,7 @@ body {
 }
 
 .card-one:hover .edit-image {
-    filter: brightness(0) saturate(1000%) invert(59%) sepia(45%) saturate(3434%) hue-rotate(161deg) brightness(95%) contrast(89%);
-}
-
-.edit-image:hover {
-    filter: brightness(0) saturate(1000%) invert(59%) sepia(45%) saturate(3434%) hue-rotate(161deg) brightness(95%) contrast(89%);
+    filter: invert(29%) sepia(56%) saturate(403%) hue-rotate(168deg) brightness(96%) contrast(95%);
 }
 
 .card-one:hover .todo-container span,
@@ -212,6 +208,7 @@ body {
 .second-card-section {
     display: flex;
     box-sizing: border-box;
+    align-items: center;
     width: 560px;
     height: 168px;
     padding: 28px;
@@ -369,18 +366,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 385px;
+    width: 485px;
     height: 136px;
     margin-top: 313px;
-    gap: 3px;
-}
-
-
-.greet {
-    display: flex;
-    flex-direction: column;
-    width: 385px;
-    height: 136px;
     gap: 3px;
 }
 
@@ -391,4 +379,18 @@ body {
     font-weight: 500;
     line-height: 56.4px;
     text-align: left;
+}
+
+.sofia {
+    width: 485px;
+    height: 77px;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 76.8px;
+    text-align: left;
+    color: #29ABE2;
+}
+
+.d-none {
+	display: none;
 }
