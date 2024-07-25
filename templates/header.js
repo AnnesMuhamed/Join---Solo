@@ -92,3 +92,8 @@ function highlightCurrentPage() {
     }
 }
 
+
+function logoutUser() {
+	localStorage.clear();
+	sessionStorage.clear();
+}
