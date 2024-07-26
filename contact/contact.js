@@ -44,7 +44,6 @@ const colors = [
 ];
 
 async function onloadFunction() {
-    await includeHTML().then(loadUserData);
     await renderContacts();
 }
 

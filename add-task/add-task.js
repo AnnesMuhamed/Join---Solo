@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function initFunc() {
 	await loadContacts();
-	await includeHTML().then(loadUserData);
 	renderCheckboxes();
 }
 

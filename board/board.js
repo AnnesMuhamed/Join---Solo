@@ -43,7 +43,7 @@ function updateHTML() {
           document.getElementById(category).innerHTML += generateTodoHTML(element);
       }
   });
-  includeHTML();
+//  includeHTML();
 }
 
 function startDragging(id) { // durch verschiebung werden die ids gespeichert.
@@ -133,7 +133,6 @@ function closeTechnicalTask() {
 }
 
 function initialize() {
-  includeHTML().then(loadUserData);
   updateHTML();
 }
 

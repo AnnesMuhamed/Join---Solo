@@ -1,5 +1,23 @@
 const BASE_URL = "https://join-232-default-rtdb.europe-west1.firebasedatabase.app/";
 
+document.addEventListener('DOMContentLoaded', () => {
+	includeHTML()
+		.then(loadUserData)
+		.then(highlightCurrentPage);
+	setTimeout(() => {
+		highlightCurrentPage();
+	}, 100);
+
+	const buttons = document.querySelectorAll('button');
+	buttons.forEach(button => {
+		button.addEventListener('click', () => {
+			setTimeout(() => {
+				highlightCurrentPage();
+			}, 100);
+		});
+	});
+});
+
 async function loadData(path = "") {
     let response = await fetch(BASE_URL + path + ".json");
     return await response.json();
@@ -46,38 +64,29 @@ window.onclick = function (event) {
 
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        highlightCurrentPage();
-    }, 100);
-
-    const buttons = document.querySelectorAll('button');
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            setTimeout(() => {
-                highlightCurrentPage();
-            }, 100);
-        });
-    });
-});
+function assignButtons() {
+	return {
+		summary: document.getElementById('summary'),
+		addTask: document.getElementById('addTask'),
+		board: document.getElementById('board'),
+		contacts: document.getElementById('contacts'),
+		privacyPolicy: document.getElementById('privacyPolicy'),
+		legalNotice: document.getElementById('legalNotice')
+	}
+}
 
 function highlightCurrentPage() {
-    const currentPage = window.location.href;
+    const currentPage = window.location.pathname;
 
-    const buttons = {
-        summary: document.getElementById('summary'),
-        addTask: document.getElementById('addTask'),
-        board: document.getElementById('board'),
-        contacts: document.getElementById('contacts'),
-        privacyPolicy: document.getElementById('privacyPolicy'),
-        legalNotice: document.getElementById('legalNotice')
-    };
+    let buttons = assignButtons();
 
     Object.values(buttons).forEach(button => {
-        if (button) button.classList.remove('active');
+        if (button) {
+			button.classList.remove('active');
+		}
     });
 
-    if (currentPage.endsWith('summary.html')) {
+    if ((buttons.summary && currentPage.endsWith('summary.html'))) {
         buttons.summary.classList.add('active');
     } else if (buttons.addTask && currentPage.endsWith('add-task.html')) {
         buttons.addTask.classList.add('active');

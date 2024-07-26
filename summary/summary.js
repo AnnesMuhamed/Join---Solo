@@ -1,8 +1,9 @@
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', () => {
+	init();
+});
 
 
 function init() {
-  includeHTML().then(loadUserData);
   greetUser();
 }
 
