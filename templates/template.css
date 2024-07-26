@@ -189,6 +189,10 @@ body {
   background-color: #29ABE2;
 }
 
+.d-none {
+	display: none;
+}
+
 .show {
   display: block;
 }

@@ -74,7 +74,7 @@ function init() {
                 <img src="../img/person.png" alt="Name Icon" class="input-icon">
             </label>
             <label class="input-container">
-                <input type="email" id="email" placeholder="Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" required>
+                <input type="email" id="email" placeholder="Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$" required>
                 <img src="../img/mail.png" alt="Email Icon" class="input-icon">
             </label>
             <label class="input-container">
