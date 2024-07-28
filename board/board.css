@@ -322,7 +322,7 @@ body.modal-open {
 
 .user-story-card.show {
     left: 50%;
-    top: 33%;
+    top: 512px;
     transform: translateX(-50%) translateY(-50%);
     display: flex;
     z-index: 1;
@@ -330,7 +330,7 @@ body.modal-open {
 
 .technical-task.show {
     left: 50%;
-    top: 33%;
+    top: 512px;
     transform: translateX(-50%) translateY(-50%);
     display: flex;
     z-index: 1;
