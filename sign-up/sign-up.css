@@ -20,11 +20,9 @@ body {
 .logo-container {
     display: flex;
     align-items: flex-start;
-    position: relative;
-    width: 100%;
+    width: 1360px;
     height: 121.97px;
-    top: 19px;
-    left: 77px;
+    margin-left: 77px;
 }
 
 .main-logo {
@@ -202,7 +200,7 @@ transform: scale(1.1);
 .custom-alert {
     display: none; /* Versteckt den Alert-Container standardmäßig */
     position: fixed; /* Fixiert den Container im sichtbaren Bereich */
-    bottom: 0; /* Startet unten */
+    bottom: -100px; /* Startet unten */
     left: 50%; /* Zentriert horizontal */
     transform: translateX(-50%); /* Korrigiert die horizontale Zentrierung */
     z-index: 1000; /* Stellt sicher, dass der Alert über anderen Elementen liegt */
@@ -230,7 +228,6 @@ transform: scale(1.1);
 
 /* Textstyling */
 .custom-alert-content span {
-    font-family: Inter; /* Schriftart */
     font-size: 20px; /* Schriftgröße */
     font-weight: 400; /* Schriftstärke */
     line-height: 24px; /* Zeilenhöhe */
