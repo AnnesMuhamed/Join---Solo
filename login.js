@@ -1,19 +1,3 @@
-async function loadData(path = "") {
-    let response = await fetch(BASE_URL + path + ".json");
-    return await response.json();
-}
-
-async function postData(path = "", data = {}) {
-    let response = await fetch(BASE_URL + path + ".json", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    return await response.json();
-}
-
 function loginPage() {
     let logInPage = document.getElementById('sectionLogin');
 

@@ -590,25 +590,3 @@ function clearForm() {
 	clearCheckboxes();
 	clearDivs();
 }
-
-
-async function loadData(path='') {
-	let response = await fetch(`${BASE_URL}${path}.json`);
-	let responseToJson = await response.json();
-	return responseToJson;
-}
-
-
-async function postData(path="", data={}) {
-	let response = await fetch(BASE_URL + path + ".json",{
-		method: "POST",
-		header: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify(data)
-	});
-	let responseToJson = await response.json();
-	return responseToJson;
-}
-
-

@@ -13,11 +13,6 @@ async function includeHTML() {
   }
 }
 
-async function loadData(path = "") {
-    let response = await fetch(BASE_URL + path + ".json");
-    return await response.json();
-}
-
 let todos = [{
   'id': 0,
   'title': 'Technical Task',
