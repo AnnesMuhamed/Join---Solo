@@ -82,3 +82,37 @@ body {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
+.assigned-contacts-container {
+	display: flex;
+	overflow-y: hidden;
+	overflow-x: auto;
+}
+
+.initials-span {
+	width: 42px;
+	height: 42px;
+	border-radius: 45px;
+	background: #FF7A00;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+	border: 2px solid #FFFFFF;
+	color: white;
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 14.4px;
+	text-align: center;
+	flex-shrink: 0;
+}
+
+.prio-container {
+	display: flex;
+	align-items: center;
+}
+
+.contacts-prio {
+	display: flex;
+	justify-content: space-between;
+}

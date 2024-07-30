@@ -24,14 +24,29 @@ async function sessionStoreTasks() {
 }
 
 
-function getContact(keyedJsonObject) {
+function getRandomColor() {
+	let letters = '0123456789ABCDEF';
+	let color = '#';
+	for(let i = 0; i < 6; i++) {
+		color += letters[Math.floor(Math.random() * 16)];
+	}
+	return color
+}
+
+
+function getContactInitials(firstName, lastName) {
+	return `${firstName.charAt(0)}${lastName.charAt(0)}`;
+}
+
+
+function getContact(assignedContactsIds) {
 	let contacts = JSON.parse(sessionStorage.getItem('contacts'));
-	let assignedContacts = keyedJsonObject.split(',');
+	let assignedContacts = assignedContactsIds.split(',');
 	for(let n = 0; n < assignedContacts.length; n++) {
 		let currentContact = contacts[`${assignedContacts[n]}`];
-		assignedContacts[n] = `${currentContact['firstName']} ${currentContact['lastName']}`;
+		assignedContacts[n] = `${getContactInitials(currentContact['firstName'], currentContact['lastName'])}`;
 	}
-	return assignedContacts.join(', ')
+	return assignedContacts;
 }
 
 
@@ -101,8 +116,58 @@ function createDescription(key, task) {
 	let descriptionTag = document.createElement('span');
 	descriptionTag.id = `${key}-description`;
 	descriptionTag.className = 'cards-description';
-	descriptionTag.textContent = `${task['description']}`
+	descriptionTag.textContent = `${task['description']}`;
 	underDiv.appendChild(descriptionTag);
+}
+
+
+function createContactsAndPrioContainer(key) {
+	let underDiv = document.getElementById(`${key}-under-container`);
+	let assignmentPrioContainer = document.createElement('div');
+	assignmentPrioContainer.id = `${key}-contacts-prio`;
+	assignmentPrioContainer.className = 'contacts-prio';
+	underDiv.appendChild(assignmentPrioContainer);
+}
+
+
+function createAssignedContactsContainer(key) {
+	let assignmentPrioContainer = document.getElementById(`${key}-contacts-prio`);
+	let assignedContactsContainer = document.createElement('div');
+	assignedContactsContainer.id = `${key}-assigned-contacts`;
+	assignedContactsContainer.className = 'assigned-contacts-container';
+	assignmentPrioContainer.appendChild(assignedContactsContainer);
+}
+
+
+function createAssignedContacts(key, task) {
+	let assignedContactsContainer = document.getElementById(`${key}-assigned-contacts`);
+	let assignedContacts = getContact(task['assignment']);
+	assignedContacts.forEach(initial => {
+		let assignedContactsSpan = document.createElement('span');
+		assignedContactsSpan.id = `${key}-${initial}`;
+		assignedContactsSpan.className = 'initials-span';
+		assignedContactsSpan.style.backgroundColor = getRandomColor();
+		assignedContactsSpan.textContent = `${initial}`;
+		assignedContactsContainer.appendChild(assignedContactsSpan);
+	});
+}
+
+
+function createPrioContainer(key) {
+	let assignmentPrioContainer = document.getElementById(`${key}-contacts-prio`);
+	let prioContainer = document.createElement('div');
+	prioContainer.id = `${key}-prio-container`;
+	prioContainer.className = `prio-container`;
+	assignmentPrioContainer.appendChild(prioContainer);
+}
+
+
+function createPrio(key, task) {
+	let prioContainer = document.getElementById(`${key}-prio-container`);
+	let prioTag = document.createElement('span');
+	prioTag.id = `${key}-prio`;
+	prioTag.textContent = `${task['priority']}`;
+	prioContainer.appendChild(prioTag);
 }
 
 
@@ -113,6 +178,11 @@ function createCard(key, taskCardsContainer, tasks) {
 	createTagSpan(key, tasks);
 	createTitle(key, tasks);
 	createDescription(key, tasks);
+	createContactsAndPrioContainer(key);
+	createAssignedContactsContainer(key);
+	createAssignedContacts(key, tasks);
+	createPrioContainer(key);
+	createPrio(key, tasks);
 }
 
 
@@ -124,37 +194,3 @@ function renderCards() {
 		createCard(key, taskCardsContainer, tasks[`${key}`]);
 	});
 }
-
-
-//function iterateOverJsonKeys(parentKey, jsonObject) {
-//	let orderedList = document.getElementById(`${parentKey}`);
-//	Object.keys(jsonObject).forEach(key => {
-//		let listItem = document.createElement('li');
-//		listItem.id = `${parentKey}-${key}`;
-//		if(key == 'assignment') {
-//			let assignedContacts = getContact(jsonObject[key]);
-//			listItem.textContent = `${key}: ${assignedContacts}`;
-//			orderedList.appendChild(listItem);
-//		} else if(key == 'date') {
-//			let dateString = formatDate(jsonObject[key]);
-//			listItem.textContent = `${key}: ${dateString}`;
-//			orderedList.appendChild(listItem);
-//		} else {
-//			listItem.textContent = `${key}: ${jsonObject[key]}`;
-//			orderedList.appendChild(listItem);
-//		}
-//	});
-//}
-//
-//
-//function renderTasks() {
-//	let tasks = JSON.parse(sessionStorage.getItem('tasks'));
-//	let taskCardsContainer = document.getElementById('task-cards-container');
-//	taskCardsContainer.innerHTML = '';
-//	Object.keys(tasks).forEach(key => {
-//		let orderedList = document.createElement('ol');
-//		orderedList.id = `${key}`;
-//		taskCardsContainer.appendChild(orderedList);
-//		iterateOverJsonKeys(key, tasks[key]);
-//	});
-//}
