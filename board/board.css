@@ -92,7 +92,7 @@ body.modal-open {
     width: 1080px;
     height: 688px;
     gap: 26px;
-	overflow: auto;
+    overflow: auto;
 }
 
 .headline-and-input {
@@ -148,7 +148,7 @@ body.modal-open {
 .add-button-img-column {
     filter: grayscale(100%);
     transition: all 0.1s ease;
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .add-button-img-column:hover {
@@ -201,6 +201,7 @@ body.modal-open {
     width: 252px;
     height: 696px;
     gap: 10px;
+    padding-top: 10px;
 }
 
 .drag-area-highlight {
@@ -276,7 +277,7 @@ body.modal-open {
     color: #FFFFFF;
 }
 
-.prioImg-technical { 
+.prioImg-technical {
     width: 17px;
     height: 12px;
 }
@@ -412,7 +413,8 @@ body.modal-open {
     gap: 25px;
 }
 
-.due-date-storycard, .due-date-technicalTask {
+.due-date-storycard,
+.due-date-technicalTask {
     width: 92px;
     height: 24px;
     font-size: 20px;
@@ -469,7 +471,7 @@ body.modal-open {
 }
 
 .prioImg {
-    
+
     width: 17px;
     height: 6.33px;
 }
@@ -564,7 +566,7 @@ body.modal-open {
     height: 32px;
     padding: 6px 16px 6px 16px;
     gap: 16px;
-    
+
 
 }
 
@@ -575,7 +577,8 @@ body.modal-open {
     gap: 16px;
 }
 
-.recipe-span, .layout-span {
+.recipe-span,
+.layout-span {
     font-size: 16px;
     font-weight: 400;
     line-height: 19.2px;
@@ -636,7 +639,7 @@ body.modal-open {
     padding: 16px;
     border-radius: 24px;
     background: rgba(255, 255, 255, 1);
-    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
 
@@ -682,47 +685,52 @@ body.modal-open {
 
 
 .cards-title {
-	font-size: 16px;
+    font-size: 16px;
 }
 
 .cards-description {
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 2;
-	overflow: hidden;
-	text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .assigned-contacts-container {
-	display: flex;
-	overflow-y: hidden;
-	overflow-x: auto;
+    display: flex;
+    overflow-y: hidden;
+    overflow-x: auto;
 }
 
 .initials-span {
-	width: 42px;
-	height: 42px;
-	border-radius: 45px;
-	background: #FF7A00;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-weight: bold;
-	border: 2px solid #FFFFFF;
-	color: white;
-	font-size: 12px;
-	font-weight: 400;
-	line-height: 14.4px;
-	text-align: center;
-	flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 45px;
+    background: #FF7A00;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 2px solid #FFFFFF;
+    color: white;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14.4px;
+    text-align: center;
+    flex-shrink: 0;
 }
 
 .prio-container {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 }
 
 .contacts-prio {
-	display: flex;
-	justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+}
+
+.tilted {
+    transform: rotate(+5deg);
+    transition: transform 0.2s ease;
 }

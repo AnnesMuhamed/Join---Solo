@@ -1,12 +1,9 @@
 'use strict';
 
-
 const PATH_TO_CONTACTS = 'contacts';
 const PATH_TO_TASKS = 'tasks';
 
-
 let currentDraggedElement;
-
 
 async function init() {
 	await sessionStoreContacts();
@@ -14,83 +11,80 @@ async function init() {
 	renderCards();
 }
 
-
 async function includeHTML() {
-  let includeElements = document.querySelectorAll("[w3-include-html]");
-  for (let i = 0; i < includeElements.length; i++) {
-    const element = includeElements[i];
-    let file = element.getAttribute("w3-include-html"); // "includes/header.html"
-    let resp = await fetch(file);
-    if (resp.ok) {
-      element.innerHTML = await resp.text();
-    } else {
-      element.innerHTML = "Page not found";
-    }
-  }
+	let includeElements = document.querySelectorAll("[w3-include-html]");
+	for (let i = 0; i < includeElements.length; i++) {
+		const element = includeElements[i];
+		let file = element.getAttribute("w3-include-html"); // "includes/header.html"
+		let resp = await fetch(file);
+		if (resp.ok) {
+			element.innerHTML = await resp.text();
+		} else {
+			element.innerHTML = "Page not found";
+		}
+	}
 }
-
 
 async function sessionStoreContacts() {
 	let contactsJson = await loadData(PATH_TO_CONTACTS);
 	sessionStorage.setItem('contacts', JSON.stringify(contactsJson));
 }
 
-
 async function sessionStoreTasks() {
 	let tasksJson = await loadData(PATH_TO_TASKS);
 	sessionStorage.setItem('tasks', JSON.stringify(tasksJson));
 }
 
-
 function getRandomColor() {
 	let letters = '0123456789ABCDEF';
 	let color = '#';
-	for(let i = 0; i < 6; i++) {
+	for (let i = 0; i < 6; i++) {
 		color += letters[Math.floor(Math.random() * 16)];
 	}
-	return color
+	return color;
 }
-
 
 function getAssignedContactInitials(firstName, lastName) {
 	return `${firstName.charAt(0)}${lastName.charAt(0)}`;
 }
 
-
 function getContact(assignedContactsIds) {
 	let contacts = JSON.parse(sessionStorage.getItem('contacts'));
 	let assignedContacts = assignedContactsIds.split(',');
-	for(let n = 0; n < assignedContacts.length; n++) {
+	for (let n = 0; n < assignedContacts.length; n++) {
 		let currentContact = contacts[`${assignedContacts[n]}`];
 		assignedContacts[n] = `${getAssignedContactInitials(currentContact['firstName'], currentContact['lastName'])}`;
 	}
 	return assignedContacts;
 }
 
-
 function formatDate(dateString) {
 	let dateStr = `${dateString}`;
 	let date = new Date(dateStr);
-	let options = {year: 'numeric', month:'2-digit', day:'2-digit'};
+	let options = { year: 'numeric', month: '2-digit', day: '2-digit' };
 	return date.toLocaleDateString('de-DE', options);
 }
 
-
 function startDragging(event) {
-  currentDraggedElement = event.target.id;
+	currentDraggedElement = event.target.id;
+	event.target.classList.add('tilted'); // Add the tilt effect
 }
 
+function endDragging(event) {
+	if (currentDraggedElement) {
+		document.getElementById(currentDraggedElement).classList.remove('tilted'); // Remove the tilt effect
+	}
+}
 
 function allowDrop(event) {
 	event.preventDefault();
 }
 
-
 function moveTo(event, state) {
 	event.preventDefault();
 	let tasks = JSON.parse(sessionStorage.getItem('tasks'));
 	let element = tasks[`${currentDraggedElement}`];
-	if(element) {
+	if (element) {
 		element.state = state;
 		sessionStorage.setItem('tasks', JSON.stringify(tasks));
 		updateData(PATH_TO_TASKS, tasks);
@@ -98,17 +92,15 @@ function moveTo(event, state) {
 	renderCards();
 }
 
-
 function createCardContainer(key, taskCardsContainer) {
 	let cardDiv = document.createElement('div');
 	cardDiv.id = `${key}`;
 	cardDiv.className = 'todo-card';
 	cardDiv.draggable = 'true';
 	cardDiv.ondragstart = startDragging;
-//	cardDiv.onclick = openTask(`${key}`);
+	cardDiv.ondragend = endDragging; // Handle the end of dragging to remove the tilt effect
 	taskCardsContainer.appendChild(cardDiv);
 }
-
 
 function createUnderContainer(key) {
 	let cardDiv = document.getElementById(`${key}`);
@@ -118,39 +110,35 @@ function createUnderContainer(key) {
 	cardDiv.appendChild(underDiv);
 }
 
-
 function createCategoryTag(key, task) {
 	let underDiv = document.getElementById(`${key}-under-container`);
 	let tagContainer = document.createElement('div');
 	tagContainer.id = `${key}-tag-container`;
-	if(task['category'] === 'Technical Task') {
+	if (task['category'] === 'Technical Task') {
 		tagContainer.className = 'technical-cards-headline-container';
-	} else if(task['category'] === 'User Story') {
+	} else if (task['category'] === 'User Story') {
 		tagContainer.className = 'user-cards-headline-container';
 	}
 	underDiv.appendChild(tagContainer);
 }
-
 
 function createTagSpan(key, task) {
 	let tagContainer = document.getElementById(`${key}-tag-container`);
 	let tagSpan = document.createElement('span');
 	tagSpan.id = `${key}-span`;
 	tagSpan.className = 'cards-headline';
-	tagSpan.textContent = `${task['category']}`
+	tagSpan.textContent = `${task['category']}`;
 	tagContainer.appendChild(tagSpan);
 }
-
 
 function createTitle(key, task) {
 	let underDiv = document.getElementById(`${key}-under-container`);
 	let titleTag = document.createElement('h1');
 	titleTag.id = `${key}-title`;
 	titleTag.className = 'cards-title';
-	titleTag.textContent = `${task['title']}`
+	titleTag.textContent = `${task['title']}`;
 	underDiv.appendChild(titleTag);
 }
-
 
 function createDescription(key, task) {
 	let underDiv = document.getElementById(`${key}-under-container`);
@@ -161,7 +149,6 @@ function createDescription(key, task) {
 	underDiv.appendChild(descriptionTag);
 }
 
-
 function createContactsAndPrioContainer(key) {
 	let underDiv = document.getElementById(`${key}-under-container`);
 	let assignmentPrioContainer = document.createElement('div');
@@ -169,7 +156,6 @@ function createContactsAndPrioContainer(key) {
 	assignmentPrioContainer.className = 'contacts-prio';
 	underDiv.appendChild(assignmentPrioContainer);
 }
-
 
 function createAssignedContactsContainer(key) {
 	let assignmentPrioContainer = document.getElementById(`${key}-contacts-prio`);
@@ -179,10 +165,9 @@ function createAssignedContactsContainer(key) {
 	assignmentPrioContainer.appendChild(assignedContactsContainer);
 }
 
-
 function createAssignedContacts(key, task) {
 	let assignedContactsContainer = document.getElementById(`${key}-assigned-contacts`);
-	if(task['assignment'] !== '') {
+	if (task['assignment'] !== '') {
 		let assignedContacts = getContact(task['assignment']);
 		assignedContacts.forEach(initial => {
 			let assignedContactsSpan = document.createElement('span');
@@ -195,7 +180,6 @@ function createAssignedContacts(key, task) {
 	}
 }
 
-
 function createPrioContainer(key) {
 	let assignmentPrioContainer = document.getElementById(`${key}-contacts-prio`);
 	let prioContainer = document.createElement('div');
@@ -204,7 +188,6 @@ function createPrioContainer(key) {
 	assignmentPrioContainer.appendChild(prioContainer);
 }
 
-
 function createPrio(key, task) {
 	let prioContainer = document.getElementById(`${key}-prio-container`);
 	let prioTag = document.createElement('span');
@@ -212,7 +195,6 @@ function createPrio(key, task) {
 	prioTag.textContent = `${task['priority']}`;
 	prioContainer.appendChild(prioTag);
 }
-
 
 function createCard(key, taskCardsContainer, tasks) {
 	createCardContainer(key, taskCardsContainer);
@@ -228,7 +210,6 @@ function createCard(key, taskCardsContainer, tasks) {
 	createPrio(key, tasks);
 }
 
-
 function renderCards() {
 	let tasks = JSON.parse(sessionStorage.getItem('tasks'));
 	let allTaskCardsContainer = document.querySelectorAll('.drag-area');
@@ -240,16 +221,14 @@ function renderCards() {
 	});
 }
 
-
 function openAddTaskForm() {
-  openForm('newTask');
+	openForm('newTask');
 }
 
-
 function openForm(formId) {
-  document.getElementById(formId).classList.add('show');
-  document.getElementById('overlay').style.display = 'block';
-  document.body.classList.add('modal-open');
+	document.getElementById(formId).classList.add('show');
+	document.getElementById('overlay').style.display = 'block';
+	document.body.classList.add('modal-open');
 }
 
 
