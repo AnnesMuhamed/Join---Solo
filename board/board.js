@@ -240,19 +240,21 @@ function renderCards() {
 	});
 }
 
-//
+
+function openAddTaskForm() {
+  openForm('newTask');
+}
+
+
+function openForm(formId) {
+  document.getElementById(formId).classList.add('show');
+  document.getElementById('overlay').style.display = 'block';
+  document.body.classList.add('modal-open');
+}
+
+
 //function openUserStory(id) {
 //  alert('User Story ID: ' + id);
-//}
-//
-//function openAddTaskForm() {
-//  openForm('newTask');
-//}
-//
-//function openForm(formId) {
-//  document.getElementById(formId).classList.add('show');
-//  document.getElementById('overlay').style.display = 'block';
-//  document.body.classList.add('modal-open');
 //}
 //
 //function closeAddTaskForm() {

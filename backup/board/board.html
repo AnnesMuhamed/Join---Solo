@@ -1,65 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/templates/template.css" />
-    <link rel="stylesheet" href="board.css">
-    <link rel="icon" type="image/x-icon" href="/img/favicon.png">
-    <script src="board.js"></script>
+    <link rel="stylesheet" href="../fonts/fonts.css" />
+    <link rel="stylesheet" href="../templates/template.css" />
+    <link rel="stylesheet" href="../add-task/add-task.css" />
+    <link rel="stylesheet" href="board.css" />
+    <link rel="icon" type="image/x-icon" href="../img/favicon.png" />
+    <script src="../add-task/add-task.js"></script>
+    <script src="../templates/header.js"></script>
+    <script src="../firebase.js"></script>
+    <script src="board.js" defer></script>
     <title>Board</title>
-</head>
+  </head>
 
-<body onload="includeHTML()">
+  <body onload="init()">
     <header class="header" w3-include-html="../templates/header.html"></header>
     <aside class="sidebar" w3-include-html="../templates/sidebar.html"></aside>
 
-    <section class="board-main-container">
-        <div class="headline-add-task-container">
-            <div class="headline-and-input">
-                <span class="headline-board">Board</span>
-                <div class="input-and-add-button">
-                    <div class="input-container">
-                        <input type="text" placeholder="Find Task" class="search-input">
-                        <div class="placeholder"></div>
-                        <img src="/img/board/search.icon.png" alt="Search" class="search-icon">
-                    </div>
-                    <button class="add-button">Add task +</button>
-                </div>
+    <div id="overlay" class="overlay"></div>
+    <div id="newTask" class="new-task">
+      <button onclick="closeAddTaskForm()" class="close-btn">
+        <img class="close-button-icon" src="/img/close.png" alt="" />
+      </button>
+      <h1 class="add-task-headline">Add Task</h1>
+      <form id="add-task-form" class="add-task-form">
+        <div class="definition">
+          <div class="d-flex-col">
+            <label for="title" class="required">
+              Title
+              <span style="color: red">*</span>
+            </label>
+            <input
+              class="title definition-entry-field"
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Enter a title"
+              required
+            />
+          </div>
+          <div class="d-flex-col">
+            <label for="description">Description</label>
+            <textarea
+              class="description definition-entry-field"
+              type="text"
+              id="description"
+              name="description"
+              placeholder="Enter a Description"
+            >
+            </textarea>
+          </div>
+          <div class="d-flex-col assignment-container">
+            <label for="assignment">Assigned to</label>
+            <div class="select-box">
+              <input
+                id="search"
+                class="assignment-selector definition-entry-field"
+                type="text"
+                name="assignment"
+                placeholder="Select contacts to assign"
+              />
             </div>
-            <div class="column-headers">
-                <span class="column-title">To do <img src="/img/board/plus-button.png" alt="add icon"
-                        class="add-button-img-column"></span>
-                <span class="column-title">In Progress <img src="/img/board/plus-button.png" alt="add icon"
-                        class="add-button-img-column"></span>
-                <span class="column-title">Await feedback <img src="/img/board/plus-button.png" alt="add icon"
-                        class="add-button-img-column"></span>
-                <span class="column-title">Done</span>
+            <div id="checkboxes"></div>
+            <div id="assigned-contacts"></div>
+          </div>
+        </div>
+        <svg height="424px" width="2" class="seperator">
+          <line
+            x1="1"
+            y1="0"
+            x2="1"
+            y2="424"
+            style="stroke: #d1d1d1; stroke-width: 1"
+          />
+        </svg>
+        <div class="properties">
+          <div class="d-flex-col">
+            <label for="date" class="required">
+              Due date
+              <span style="color: red">*</span>
+            </label>
+            <input
+              class="properties-entry-field due-date"
+              type="date"
+              id="date"
+              name="date"
+              required
+            />
+          </div>
+          <div class="d-flex-col">
+            <label for="radio-button-group">Prio</label>
+            <div id="radio-button-group" class="radio-button-group">
+              <input
+                type="radio"
+                id="prio-high"
+                name="prios"
+                value="3"
+                class="radio-button"
+              />
+              <label for="prio-high" class="radio-label">
+                <span> Urgent </span>
+                <img src="../img/add-task/prio-high.png" />
+              </label>
+              <input
+                type="radio"
+                id="prio-med"
+                name="prios"
+                value="2"
+                class="radio-button"
+              />
+              <label for="prio-med" class="radio-label">
+                <span> Medium </span>
+                <img src="../img/add-task/prio-med.png" />
+              </label>
+              <input
+                type="radio"
+                id="prio-low"
+                name="prios"
+                value="1"
+                class="radio-button"
+              />
+              <label for="prio-low" class="radio-label">
+                <span> Low </span>
+                <img src="../img/add-task/prio-low.png" />
+              </label>
             </div>
+          </div>
+          <div class="d-flex-col">
+            <label for="category" class="required">
+              Category
+              <span style="color: red">*</span>
+            </label>
+            <select
+              class="category properties-entry-field"
+              type="text"
+              id="category"
+              name="category"
+              required
+            >
+              <option disabled selected hidden>Select Task category</option>
+              <option>Technical Task</option>
+              <option>User Story</option>
+            </select>
+          </div>
+          <div class="d-flex-col">
+            <label for="subtasks">Subtasks</label>
+            <div class="subtask-container">
+              <input
+                class="subtasks properties-entry-field"
+                type="text"
+                id="subtasks"
+                name="subtasks"
+                placeholder="Add new subtask"
+              />
+              <div id="subtask-buttons-container" class="add-subtask-button">
+                <button
+                  id="add-subtask-button"
+                  class="in-line-btn"
+                  type="button"
+                >
+                  <img src="../img/add-task/add.png" />
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="card-container">
-            <div class="column-todo board-column"></div>
-            <div class="column-in-progress board-column"></div>
-            <div class="column-await-feedback board-column"></div>
-            <div class="column-done board-column"></div>
+      </form>
+      <div id="subtask-list-container" class="subtask-list-container">
+        <ul id="subtask-list" class="subtask-list"></ul>
+      </div>
+      <div id="buttons" class="buttons">
+        <span id="requirement" class="requirement">
+          <span style="color: red">*</span>
+          This field is required
+        </span>
+        <div class="btn-container">
+          <button id="clear-btn" class="add-task-btn clear-btn">Clear</button>
+          <button
+            id="create-btn"
+            class="add-task-btn create-task-btn"
+            form="add-task-form"
+            type="submit"
+          >
+            Create Task
+          </button>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <div class="user-story-card">
+    <section class="board-main-container">
+      <div class="headline-add-task-container">
+        <div class="headline-and-input">
+          <span class="headline-board">Board</span>
+          <div class="input-and-add-button">
+            <div class="input-container">
+              <input type="text" placeholder="Find Task" class="search-input" />
+              <div class="placeholder"></div>
+              <img
+                src="../img/board/search.icon.png"
+                alt="Search"
+                class="search-icon"
+              />
+            </div>
+            <button onclick="openAddTaskForm()" class="add-button">
+              Add task +
+            </button>
+          </div>
+        </div>
+        <div class="column-headers">
+          <span class="column-title"
+            >To do
+            <img onclick="openAddTaskForm()"
+              src="../img/board/plus-button.png"
+              alt="add icon"
+              class="add-button-img-column"
+          /></span>
+          <span class="column-title"
+            >In Progress
+            <img onclick="openAddTaskForm()"
+              src="../img/board/plus-button.png"
+              alt="add icon"
+              class="add-button-img-column"
+          /></span>
+          <span class="column-title"
+            >Await feedback
+            <img onclick="openAddTaskForm()"
+              src="../img/board/plus-button.png"
+              alt="add icon"
+              class="add-button-img-column"
+          /></span>
+          <span class="column-title">Done</span>
+        </div>
+      </div>
+      <div class="card-container">
+        <div class="drag-area" id="open" ondrop="moveTo(event, 'open')" ondragover="allowDrop(event);"></div>
+        <div class="drag-area" id="in-progress" ondrop="moveTo(event, 'in-progress')" ondragover="allowDrop(event);"></div>
+        <div class="drag-area" id="closed" ondrop="moveTo(event, 'closed')" ondragover="allowDrop(event);"></div>
+        <div class="drag-area" id="done" ondrop="moveTo(event, 'done')" ondragover="allowDrop(event);"></div>
+      </div>
+    <div id="userStoryCard" class="user-story-card">
 
         <div class="closeButton-container">
             <div class="userstory-span-container">
-                <span class="userstory-span">User Story</span>
+                <span id="userStoryTitle" class="userstory-span">User Story</span>
             </div>
-            <button class="close-userstory-btn"><img class="closeImg" src="/img/close.png" alt=""></button>
+            <button onclick="closeUserStory()" class="close-userstory-btn"><img class="closeImg" src="../img/close.png" alt=""></button>
         </div>
 
         <h1 class="userstory-headline">Kochwelt Page & Recipe Recommender</h1>
         <h5 class="userstory-underline">Build start page with recipe recommendation.</h5>
 
         <div class="date-container">
-            <span class="due-date">Due date:</span>
+            <span class="due-date-storycard">Due date:</span>
             <span class="date">10/05/2023</span>
         </div>
 
@@ -67,7 +261,7 @@
             <span class="priority-span">Priority:</span>
             <div class="medium-container">
                 <span class="medium-span">Medium</span>
-                <img class="prioImg" src="/img/Prio media.png" alt="">
+                <img class="prioImg" src="../img/Prio media.png" alt="">
             </div>
         </div>
 
@@ -86,11 +280,11 @@
             <span class="subtasks-span">Subtasks</span>
             <div class="checkbox">
                 <label class="option1" for="option">
-                    <input type="checkbox" name="option" id="option"> 
+                    <input type="checkbox" name="option" id="option">
                     <span class="recipe-span">Implement Recipe Recommendation</span>
                 </label>
                 <label class="option2" for="option">
-                    <input type="checkbox" name="option" id="option"> 
+                    <input type="checkbox" name="option" id="option">
                     <span class="layout-span">Start Page Layout</span>
                 </label>
             </div>
@@ -102,7 +296,7 @@
                 <span class="delete">Delete</span>
             </button>
 
-            <img class="gray-stroke" src="/img/high-stroke-gray.png" alt="">
+            <img class="gray-stroke" src="../img/high-stroke-gray.png" alt="">
 
             <button class="popup-buttons" onclick="openEditContact()">
                 <img class="edit-icon" src="../img/edit-black.png" alt="">
@@ -110,20 +304,20 @@
             </button>
         </div>
     </div>
-    <div class="technical-task">
+    <div id="technicalTask" class="technical-task">
 
         <div class="closeButton-container">
             <div class="technicalTask-span-container">
                 <span class="technical-span">Technical Task</span>
             </div>
-            <button class="close-userstory-btn"><img class="closeImg" src="/img/close.png" alt=""></button>
+            <button onclick="closeTechnicalTask()"  class="close-userstory-btn"><img class="closeImg" src="../img/close.png" alt=""></button>
         </div>
 
         <h1 class="userstory-headline">CSS Architecture Planning</h1>
         <h5 class="userstory-underline">Define CSS naming conventions and structure.</h5>
 
         <div class="date-container">
-            <span class="due-date">Due date:</span>
+            <span class="due-date-technicalTask">Due date:</span>
             <span class="date">10/05/2023</span>
         </div>
 
@@ -131,30 +325,30 @@
             <span class="priority-span">Priority:</span>
             <div class="urgent-container">
                 <span class="urgent-span">Urgent</span>
-                <img class="prioImg-technical" src="/img/prio-high.png" alt="">
+                <img class="prioImg-technical" src="../img/prio-high.png" alt="">
             </div>
         </div>
 
         <div class="assignedTo-container">
-            <span class="assignedTo-span">Assigned To:</span>
-            <div class="contact-container">
-                <!-- <div class="initials-container" style="background-color: ${color};">${getInitials(contact.firstName, contact.lastName)}</div> -->
-                <div class="contact">
-                    <div class="initials-container">AA</div>
-                    <span class="contact-name">Anton Adler</span>
-                </div>
-            </div>
-        </div>
+          <span class="assignedTo-span">Assigned To:</span>
+          <div class="contact-container">
+              <!-- <div class="initials-container" style="background-color: ${color};">${getInitials(contact.firstName, contact.lastName)}</div> -->
+              <div class="contact">
+                  <div class="initials-container">AA</div>
+                  <span class="contact-name">Anton Adler</span>
+              </div>
+          </div>
+      </div>
 
         <div class="subtasks-container">
             <span class="subtasks-span">Subtasks</span>
             <div class="checkbox">
                 <label class="option1" for="option">
-                    <input type="checkbox" name="option" id="option"> 
+                    <input type="checkbox" name="option" id="option">
                     <span class="recipe-span">Establish CSS Methodology</span>
                 </label>
                 <label class="option2" for="option">
-                    <input type="checkbox" name="option" id="option"> 
+                    <input type="checkbox" name="option" id="option">
                     <span class="layout-span">Setup Base Styles</span>
                 </label>
             </div>
@@ -166,7 +360,7 @@
                 <span class="delete">Delete</span>
             </button>
 
-            <img class="gray-stroke" src="/img/high-stroke-gray.png" alt="">
+            <img class="gray-stroke" src="../img/high-stroke-gray.png" alt="">
 
             <button class="popup-buttons" onclick="openEditContact()">
                 <img class="edit-icon" src="../img/edit-black.png" alt="">
@@ -174,6 +368,7 @@
             </button>
         </div>
     </div>
-    <script src="../templates/header.js"></script>
+    </section>
 </body>
 </html>
+

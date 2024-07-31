@@ -37,7 +37,7 @@ function getRandomColor() {
 }
 
 
-function getContactInitials(firstName, lastName) {
+function getAssignedContactInitials(firstName, lastName) {
 	return `${firstName.charAt(0)}${lastName.charAt(0)}`;
 }
 
@@ -47,7 +47,7 @@ function getContact(assignedContactsIds) {
 	let assignedContacts = assignedContactsIds.split(',');
 	for(let n = 0; n < assignedContacts.length; n++) {
 		let currentContact = contacts[`${assignedContacts[n]}`];
-		assignedContacts[n] = `${getContactInitials(currentContact['firstName'], currentContact['lastName'])}`;
+		assignedContacts[n] = `${getAssignedContactInitials(currentContact['firstName'], currentContact['lastName'])}`;
 	}
 	return assignedContacts;
 }
@@ -167,15 +167,17 @@ function createAssignedContactsContainer(key) {
 
 function createAssignedContacts(key, task) {
 	let assignedContactsContainer = document.getElementById(`${key}-assigned-contacts`);
-	let assignedContacts = getContact(task['assignment']);
-	assignedContacts.forEach(initial => {
-		let assignedContactsSpan = document.createElement('span');
-		assignedContactsSpan.id = `${key}-${initial}`;
-		assignedContactsSpan.className = 'initials-span';
-		assignedContactsSpan.style.backgroundColor = getRandomColor();
-		assignedContactsSpan.textContent = `${initial}`;
-		assignedContactsContainer.appendChild(assignedContactsSpan);
-	});
+	if(task['assignment'] !== '') {
+		let assignedContacts = getContact(task['assignment']);
+		assignedContacts.forEach(initial => {
+			let assignedContactsSpan = document.createElement('span');
+			assignedContactsSpan.id = `${key}-${initial}`;
+			assignedContactsSpan.className = 'initials-span';
+			assignedContactsSpan.style.backgroundColor = getRandomColor();
+			assignedContactsSpan.textContent = `${initial}`;
+			assignedContactsContainer.appendChild(assignedContactsSpan);
+		});
+	}
 }
 
 
