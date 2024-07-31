@@ -1,13 +1,16 @@
 'use strict';
 
 
+let currentDraggedElement;
+
+
 const PATH_TO_CONTACTS = 'contacts';
 const PATH_TO_TASKS = 'tasks';
 
 
-function init() {
-	sessionStoreContacts();
-	sessionStoreTasks();
+async function init() {
+	await sessionStoreContacts();
+	await sessionStoreTasks();
 	renderCards();
 }
 
@@ -58,12 +61,29 @@ function formatDate(dateString) {
 }
 
 
+function startDragging(id) {
+  currentDraggedElement = id;
+}
+
+
+function allowDrop(ev) {
+	ev.preventDefault();
+}
+
+
+function moveTo(category) {
+  let element = todos.find(todo => todo.id === currentDraggedElement);
+  element.category = category;
+  updateHTML();
+}
+
+
 function createCardContainer(key, taskCardsContainer) {
 	let cardDiv = document.createElement('div');
 	cardDiv.id = `${key}`;
 	cardDiv.className = 'todo-card';
 	cardDiv.draggable = 'true';
-//	cardDiv.ondragstart = startDragging(`${key}`);
+	cardDiv.ondragstart = startDragging(`${key}`);
 //	cardDiv.onclick = openTask(`${key}`);
 	taskCardsContainer.appendChild(cardDiv);
 }
