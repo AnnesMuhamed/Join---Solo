@@ -61,20 +61,26 @@ function formatDate(dateString) {
 }
 
 
-function startDragging(id) {
-  currentDraggedElement = id;
+function startDragging(event) {
+  currentDraggedElement = event.target.id;
 }
 
 
-function allowDrop(ev) {
-	ev.preventDefault();
+function allowDrop(event) {
+	event.preventDefault();
 }
 
 
-function moveTo(category) {
-  let element = todos.find(todo => todo.id === currentDraggedElement);
-  element.category = category;
-  updateHTML();
+function moveTo(event, state) {
+	event.preventDefault();
+	let tasks = JSON.parse(sessionStorage.getItem('tasks'));
+	let element = tasks[`${currentDraggedElement}`];
+	if(element) {
+		element.state = state;
+		sessionStorage.setItem('tasks', JSON.stringify(tasks));
+		updateData(PATH_TO_TASKS, tasks);
+	}
+	renderCards();
 }
 
 
@@ -83,7 +89,7 @@ function createCardContainer(key, taskCardsContainer) {
 	cardDiv.id = `${key}`;
 	cardDiv.className = 'todo-card';
 	cardDiv.draggable = 'true';
-	cardDiv.ondragstart = startDragging(`${key}`);
+	cardDiv.ondragstart = startDragging;
 //	cardDiv.onclick = openTask(`${key}`);
 	taskCardsContainer.appendChild(cardDiv);
 }
@@ -208,9 +214,11 @@ function createCard(key, taskCardsContainer, tasks) {
 
 function renderCards() {
 	let tasks = JSON.parse(sessionStorage.getItem('tasks'));
-	let taskCardsContainer = document.getElementById('open');
-	taskCardsContainer.innerHTML = '';
+	let allTaskCardsContainer = document.querySelectorAll('.drag-area');
+	allTaskCardsContainer.forEach(column => column.innerHTML = '');
 	Object.keys(tasks).forEach(key => {
-		createCard(key, taskCardsContainer, tasks[`${key}`]);
+		let task = tasks[`${key}`];
+		let taskCardsContainer = document.getElementById(`${task['state']}`);
+		createCard(key, taskCardsContainer, task);
 	});
 }

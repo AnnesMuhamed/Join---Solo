@@ -520,7 +520,7 @@ function createTaskJson() {
 		'priority': priority,
 		'category': getCategory(),
 		'subtasks': subtasks,
-		'status': 'open',
+		'state': 'open',
 	};
 	return task;
 }
