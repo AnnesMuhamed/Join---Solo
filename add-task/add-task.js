@@ -390,9 +390,9 @@ function showHideSubtaskLiButtonsContainer(event) {
 
 function addSubtask(subtask) {
 	if(subtasks.length > 0) {
-		subtasks += `,${subtask}`;
+		subtasks += `,${subtask}: "open"`;
 	} else {
-		subtasks += subtask;
+		subtasks += `${subtask}: "open"`;
 	}
 }
 

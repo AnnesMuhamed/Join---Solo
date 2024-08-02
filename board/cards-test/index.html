@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+				name="viewport"
+				content="width=device-width, initial-scale=1, shrink-to-fit=no"
+				/>
+		<link rel="icon" type="image/x-icon" href="./img/..." />
+		<link rel="stylesheet" href="fonts/fonts.css" />
+		<link rel="stylesheet" href="style.css" />
+		<script src="firebase.js"></script>
+		<script src="script.js"></script>
+		<title>Cards Test</title>
+	</head>
+
+	<body onload="init()">
+		<div class="card-container">
+			<div class="drag-area" id="open" ondrop="moveTo(event, 'open')" ondragover="allowDrop(event);"></div>
+			<div class="drag-area" id="closed" ondrop="moveTo(event, 'closed')" ondragover="allowDrop(event);"></div>
+			<div class="drag-area" id="in-progress" ondrop="moveTo(event, 'in-progress')" ondragover="allowDrop(event);"></div>
+			<div class="drag-area" id="done" ondrop="moveTo(event, 'done')" ondragover="allowDrop(event);"></div>
+		</div>
+		<!--		<section id="task-cards-container"></section>-->
+	</body>
+</html>
+
