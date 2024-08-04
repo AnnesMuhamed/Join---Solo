@@ -8,7 +8,7 @@ let contacts = null;
 
 
 let priority = null;
-let subtasks = '';
+let subtasks = [];
 let assignedContacts = '';
 
 
@@ -389,31 +389,38 @@ function showHideSubtaskLiButtonsContainer(event) {
 
 
 function addSubtask(subtask) {
-	if(subtasks.length > 0) {
-		subtasks += `,${subtask}: "open"`;
-	} else {
-		subtasks += `${subtask}: "open"`;
-	}
+    subtasks.push({[subtask]: 'open'});
 }
 
 
-function subtasksStringReplacement(id, replacement) {
-	let subtasksList = subtasks.split(',');
-	let idx = subtasksList.indexOf(id);
-	subtasksList[idx] = replacement;
-	subtasks = subtasksList.join(',')
+function findValueByKey(array, key) {
+    for(let obj of array) {
+        if(obj.hasOwnProperty(key)) {
+            return obj[key];
+        }
+    }
+    return null;
 }
 
 
 function editSubtasks() {
 	let listedSubtasks = document.querySelectorAll('li.subtask-list-element');
 	if(!listedSubtasks) {
-		subtasks = '';
+		subtasks = [];
 	} else {
-		subtasks = Array.from(listedSubtasks).map(element => {
-			let span = element.querySelector('span');
-			return span.textContent;
-		}).join(',');
+        let subtasksArray = Array.from(listedSubtasks).map(element => {
+            return element.querySelector('span').textContent;
+        });
+        let existingKeys = subtasks.map(obj => Object.keys(obj)[0]);
+        let keyToRemove = existingKeys.find(key => !subtasksArray.includes(key));
+        let keyToAdd = subtasksArray.find(key => !existingKeys.includes(key));
+        if(keyToAdd && keyToRemove) {
+            let value = findValueByKey(subtasks, keyToRemove);
+            subtasks.push({[keyToAdd]: value});
+            subtasks = subtasks.filter(obj => !obj.hasOwnProperty(keyToRemove));
+        } else if(!keyToAdd && keyToRemove) {
+            subtasks = subtasks.filter(obj => !obj.hasOwnProperty(keyToRemove));
+        }
 	}
 	removeEmptyListElements();
 }
@@ -519,7 +526,7 @@ function createTaskJson() {
 		'date': getDate(),
 		'priority': priority,
 		'category': getCategory(),
-		'subtasks': subtasks,
+		'subtasks': JSON.stringify(subtasks),
 		'state': 'open',
 	};
 	return task;
@@ -578,7 +585,7 @@ function clearDivs() {
 	divs.forEach(div => {
 		div.innerHTML = '';
 	});
-	subtasks = '';
+	subtasks = [];
 }
 
 
