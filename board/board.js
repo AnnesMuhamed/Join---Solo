@@ -231,6 +231,16 @@ function openForm(formId) {
 	document.body.classList.add('modal-open');
 }
 
+function closeAddTaskForm() {
+	closeForm('newTask');
+}
+
+function closeForm(formId) {
+ document.getElementById(formId).classList.remove('show');
+ document.getElementById('overlay').style.display = 'none';
+ document.body.classList.remove('modal-open');
+}
+
 
 //function openUserStory(id) {
 //  alert('User Story ID: ' + id);
