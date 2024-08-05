@@ -151,6 +151,7 @@ function createSubtaskContainer(key) {
 	let underDiv = document.getElementById(`${key}-under-container`);
 	let subtaskContainer = document.createElement('div');
 	subtaskContainer.id = `${key}-subtask`;
+    subtaskContainer.className = 'subtask-container';
 	underDiv.appendChild(subtaskContainer);
 }
 
@@ -178,6 +179,39 @@ function createSubtaskCounter(key, task) {
         subtasksCounter.textContent = `${counter.closed}/${counter.total}`;
     }
     subtaskContainer.appendChild(subtasksCounter);
+}
+
+
+function createProgressContainer(key, task) {
+	let subtaskContainer = document.getElementById(`${key}-subtask`);
+	let progressContainer = document.createElement('div');
+    progressContainer.id = `${key}-progress`;
+    if(task.subtasks.length != 0) {
+        progressContainer.className = 'progress-container';
+    }
+    subtaskContainer.appendChild(progressContainer);
+}
+
+function subtasksProgress(id, task) {
+    if(task.subtasks.length != 0) {
+        let progressBar = document.getElementById(id);
+        let subtasksList = JSON.parse(task.subtasks);
+        let subtasksClosed = subtasksList.filter((obj) => {
+            let key = Object.keys(obj)[0];
+            return obj[key] !== 'open';
+        });
+        let width = subtasksClosed.length / subtasksList.length * 100;
+        progressBar.style.width = `${width}%`;
+    }
+}
+
+function createProgressBar(key, task) {
+	let progressContainer = document.getElementById(`${key}-progress`);
+	let progressBar = document.createElement('div');
+    progressBar.id = `${key}-progress-bar`;
+    progressBar.className = 'progress-bar';
+    progressContainer.appendChild(progressBar);
+    subtasksProgress(progressBar.id, task);
 }
 
 
@@ -241,6 +275,8 @@ function createCard(key, taskCardsContainer, tasks) {
 	createTitle(key, tasks);
 	createDescription(key, tasks);
 	createSubtaskContainer(key);
+    createProgressContainer(key, tasks);
+    createProgressBar(key, tasks);
     createSubtaskCounter(key, tasks);
 	createContactsAndPrioContainer(key);
 	createAssignedContactsContainer(key);

@@ -1,118 +1,139 @@
 body {
   margin: 0;
   height: 100vh;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .card-container {
-    display: flex;
-    justify-content: space-between;
-    width: 1080px;
-    height: 688px;
-    gap: 26px;
-	overflow: auto;
+  display: flex;
+  justify-content: space-between;
+  width: 1080px;
+  height: 688px;
+  gap: 26px;
+  overflow: auto;
 }
 
 .drag-area {
-    display: flex;
-    flex-direction: column;
-    width: 252px;
-    height: 696px;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 252px;
+  height: 696px;
+  gap: 10px;
 }
 
 .todo-card {
-    display: flex;
-    gap: 10px;
-    padding: 16px;
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
-    cursor: pointer;
+  display: flex;
+  gap: 10px;
+  padding: 16px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 10px 3px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 }
 
 .under-container {
-    width: 220px;
-    height: 183px;
-    gap: 20px;
+  width: 220px;
+  height: 183px;
+  gap: 20px;
 }
 
 .user-cards-headline-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 113px;
-    height: 27px;
-    padding: 4px 16px 4px 16px;
-    gap: 10px;
-    border-radius: 8px;
-    background: rgba(0, 56, 255, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 113px;
+  height: 27px;
+  padding: 4px 16px 4px 16px;
+  gap: 10px;
+  border-radius: 8px;
+  background: rgba(0, 56, 255, 1);
 }
 
 .technical-cards-headline-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 144px;
-    height: 27px;
-    padding: 4px 16px 4px 16px;
-    gap: 10px;
-    border-radius: 8px;
-    background: rgba(31, 215, 193, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 144px;
+  height: 27px;
+  padding: 4px 16px 4px 16px;
+  gap: 10px;
+  border-radius: 8px;
+  background: rgba(31, 215, 193, 1);
 }
 
 .cards-headline {
-    width: 112px;
-    height: 19px;
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 19.2px;
-    text-align: center;
-    color: rgba(255, 255, 255, 1);
+  width: 112px;
+  height: 19px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  text-align: center;
+  color: rgba(255, 255, 255, 1);
 }
 
 .cards-title {
-	font-size: 16px;
+  font-size: 16px;
 }
 
 .cards-description {
-	display: -webkit-box;
-	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 2;
-	overflow: hidden;
-	text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .assigned-contacts-container {
-	display: flex;
-	overflow-y: hidden;
-	overflow-x: auto;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: auto;
 }
 
 .initials-span {
-	width: 42px;
-	height: 42px;
-	border-radius: 45px;
-	background: #FF7A00;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-weight: bold;
-	border: 2px solid #FFFFFF;
-	color: white;
-	font-size: 12px;
-	font-weight: 400;
-	line-height: 14.4px;
-	text-align: center;
-	flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 45px;
+  background: #ff7a00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: 2px solid #ffffff;
+  color: white;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.4px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.subtask-container {
+    display: flex;
+}
+
+.progress-container {
+    width: 80%;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background-color: #76c7c0;
+    border-radius: 15px 0 0 15px;
+    transition: width 0.2s ease-in-out;
 }
 
 .prio-container {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .contacts-prio {
-	display: flex;
-	justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
