@@ -58,6 +58,7 @@ function setupEventListeners() {
   document.body.addEventListener("submit", createTask);
 }
 
+
 function handleBodyClicks(event) {
   showCheckboxes(event);
   collapseCheckboxes(event);
@@ -178,12 +179,12 @@ function renderCheckboxes() {
       continue;
     }
     checkboxes.innerHTML += `
-			<label for="${id}">
-				<span class="initials-span">${initials}</span>
-				<span>${contacts[id]["firstName"]} ${contacts[id]["lastName"]}</span>
-				<input type="checkbox" id="${id}">
-			</label>
-		`;
+            <label for="${id}">
+                <span class="initials-span">${initials}</span>
+                <span>${contacts[id]["firstName"]} ${contacts[id]["lastName"]}</span>
+                <input type="checkbox" id="${id}">
+            </label>
+        `;
     checkboxState(id, initials);
   }
 }

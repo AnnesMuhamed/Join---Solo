@@ -147,23 +147,37 @@ function createDescription(key, task) {
 }
 
 
-function createSubtaskContainer(key, task) {
+function createSubtaskContainer(key) {
 	let underDiv = document.getElementById(`${key}-under-container`);
 	let subtaskContainer = document.createElement('div');
 	subtaskContainer.id = `${key}-subtask`;
-	let inputString = task['subtasks'];
-	inputString = inputString.replace(/([^,]+):/g, '"$1":');
-	inputString = `{${inputString}}`;
-	let subtasks = JSON.parse(inputString);
-	if(Object.keys(subtasks).length !== 0) {
-		for(let key in subtasks) {
-			console.log(Object.keys(subtasks).length);
-			let subtaskSpan = document.createElement('span');
-			subtaskSpan.textContent += `${key}: ${subtasks[key]}\n`;
-			subtaskContainer.appendChild(subtaskSpan);
-		}
-	}
 	underDiv.appendChild(subtaskContainer);
+}
+
+
+function reducerFunction(subtasksList) {
+    let acc = {closed: 0, total: 0};
+    for(let subtask of subtasksList) {
+        let key = Object.keys(subtask)[0];
+        if(subtask[`${key}`] !== 'open') {
+            acc.closed += 1;
+        }
+        acc.total += 1;
+    }
+    return acc;
+}
+
+
+function createSubtaskCounter(key, task) {
+	let subtaskContainer = document.getElementById(`${key}-subtask`);
+	let subtasksCounter = document.createElement('span');
+    subtasksCounter.id = `${key}-subtask-counter`;
+    if(task.subtasks.length != 0) {
+        let subtasksList = JSON.parse(task.subtasks);
+        let counter = reducerFunction(subtasksList);
+        subtasksCounter.textContent = `${counter.closed}/${counter.total}`;
+    }
+    subtaskContainer.appendChild(subtasksCounter);
 }
 
 
@@ -226,7 +240,8 @@ function createCard(key, taskCardsContainer, tasks) {
 	createTagSpan(key, tasks);
 	createTitle(key, tasks);
 	createDescription(key, tasks);
-	createSubtaskContainer(key, tasks);
+	createSubtaskContainer(key);
+    createSubtaskCounter(key, tasks);
 	createContactsAndPrioContainer(key);
 	createAssignedContactsContainer(key);
 	createAssignedContacts(key, tasks);
