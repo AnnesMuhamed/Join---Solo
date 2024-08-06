@@ -559,6 +559,7 @@ async function createTask(event) {
   try {
     let json = await postData(pathTasks, task);
     event.target.submit();
+      window.open('../board/board.html');
   } catch (error) {
     console.error("Error while sending data:", error);
   }
