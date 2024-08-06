@@ -257,7 +257,8 @@ function createPrio(key, task) {
 	let prioContainer = document.getElementById(`${key}-prio-container`);
 	let prioTag = document.createElement('span');
 	prioTag.id = `${key}-prio`;
-	prioTag.textContent = `${task['priority']}`;
+    if(task.priority != null)
+        prioTag.textContent = `${task['priority']}`;
 	prioContainer.appendChild(prioTag);
 }
 
