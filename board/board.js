@@ -149,6 +149,71 @@ function createDescription(key, task) {
 	underDiv.appendChild(descriptionTag);
 }
 
+function createSubtaskContainer(key) {
+	let underDiv = document.getElementById(`${key}-under-container`);
+	let subtaskContainer = document.createElement('div');
+	subtaskContainer.id = `${key}-subtask`;
+    subtaskContainer.className = 'card-subtask-container';
+	underDiv.appendChild(subtaskContainer);
+}
+
+
+function reducerFunction(subtasksList) {
+    let acc = {closed: 0, total: 0};
+    for(let subtask of subtasksList) {
+        let key = Object.keys(subtask)[0];
+        if(subtask[`${key}`] !== 'open') {
+            acc.closed += 1;
+        }
+        acc.total += 1;
+    }
+    return acc;
+}
+
+
+function createSubtaskCounter(key, task) {
+	let subtaskContainer = document.getElementById(`${key}-subtask`);
+	let subtasksCounter = document.createElement('span');
+    subtasksCounter.id = `${key}-subtask-counter`;
+    if(task.subtasks.length != 0) {
+        let subtasksList = JSON.parse(task.subtasks);
+        let counter = reducerFunction(subtasksList);
+        subtasksCounter.textContent = `${counter.closed}/${counter.total}`;
+    }
+    subtaskContainer.appendChild(subtasksCounter);
+}
+
+
+function createProgressContainer(key, task) {
+	let subtaskContainer = document.getElementById(`${key}-subtask`);
+	let progressContainer = document.createElement('div');
+    progressContainer.id = `${key}-progress`;
+    if(task.subtasks.length != 0) {
+        progressContainer.className = 'progress-container';
+    }
+    subtaskContainer.appendChild(progressContainer);
+}
+
+function subtasksProgress(id, task) {
+    if(task.subtasks.length != 0) {
+        let progressBar = document.getElementById(id);
+        let subtasksList = JSON.parse(task.subtasks);
+        let subtasksState = reducerFunction(subtasksList);
+        let width = subtasksState.closed / subtasksState.total * 100;
+        progressBar.style.width = `${width}%`;
+    }
+}
+
+function createProgressBar(key, task) {
+	let progressContainer = document.getElementById(`${key}-progress`);
+	let progressBar = document.createElement('div');
+    progressBar.id = `${key}-progress-bar`;
+    progressBar.className = 'progress-bar';
+    progressContainer.appendChild(progressBar);
+    subtasksProgress(progressBar.id, task);
+}
+
+
 function createContactsAndPrioContainer(key) {
 	let underDiv = document.getElementById(`${key}-under-container`);
 	let assignmentPrioContainer = document.createElement('div');
@@ -203,6 +268,10 @@ function createCard(key, taskCardsContainer, tasks) {
 	createTagSpan(key, tasks);
 	createTitle(key, tasks);
 	createDescription(key, tasks);
+	createSubtaskContainer(key);
+    createProgressContainer(key, tasks);
+    createProgressBar(key, tasks);
+    createSubtaskCounter(key, tasks);
 	createContactsAndPrioContainer(key);
 	createAssignedContactsContainer(key);
 	createAssignedContacts(key, tasks);

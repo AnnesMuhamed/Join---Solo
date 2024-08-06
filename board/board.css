@@ -720,6 +720,26 @@ body.modal-open {
     flex-shrink: 0;
 }
 
+.card-subtask-container {
+    display: flex;
+}
+
+.progress-container {
+    width: 80%;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background-color: #76c7c0;
+    border-radius: 15px 0 0 15px;
+    transition: width 0.2s ease-in-out;
+}
 .prio-container {
     display: flex;
     align-items: center;

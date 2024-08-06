@@ -151,7 +151,7 @@ function createSubtaskContainer(key) {
 	let underDiv = document.getElementById(`${key}-under-container`);
 	let subtaskContainer = document.createElement('div');
 	subtaskContainer.id = `${key}-subtask`;
-    subtaskContainer.className = 'subtask-container';
+    subtaskContainer.className = 'card-subtask-container';
 	underDiv.appendChild(subtaskContainer);
 }
 
@@ -196,11 +196,8 @@ function subtasksProgress(id, task) {
     if(task.subtasks.length != 0) {
         let progressBar = document.getElementById(id);
         let subtasksList = JSON.parse(task.subtasks);
-        let subtasksClosed = subtasksList.filter((obj) => {
-            let key = Object.keys(obj)[0];
-            return obj[key] !== 'open';
-        });
-        let width = subtasksClosed.length / subtasksList.length * 100;
+        let subtasksState = reducerFunction(subtasksList);
+        let width = subtasksState.closed / subtasksState.total * 100;
         progressBar.style.width = `${width}%`;
     }
 }

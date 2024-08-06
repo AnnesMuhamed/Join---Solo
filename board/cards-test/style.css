@@ -107,7 +107,7 @@ body {
   flex-shrink: 0;
 }
 
-.subtask-container {
+.card-subtask-container {
     display: flex;
 }
 
