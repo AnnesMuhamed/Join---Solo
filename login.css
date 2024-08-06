@@ -5,6 +5,7 @@ html {
   font-family: 'Inter', sans-serif;
   max-width: 1440px;
   max-height: 1024px;
+  overflow: hidden;
 }
 
 #sectionLogin {
