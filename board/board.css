@@ -644,9 +644,10 @@ body.modal-open {
 }
 
 .under-container {
+    display: flex;
     width: 220px;
-    height: 183px;
     gap: 20px;
+    flex-direction: column;
 }
 
 .technical-cards-headline-container {
@@ -686,7 +687,10 @@ body.modal-open {
 
 .cards-title {
     font-size: 16px;
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
+
 
 .cards-description {
     display: -webkit-box;
@@ -694,17 +698,23 @@ body.modal-open {
     -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    text-align: left;
+    color: #A8A8A8;
 }
 
 .assigned-contacts-container {
     display: flex;
     overflow-y: hidden;
     overflow-x: auto;
+    height: 34px;
 }
 
 .initials-span {
-    width: 42px;
-    height: 42px;
+    width: 32px;
+    height: 32px;
     border-radius: 45px;
     background: #FF7A00;
     display: flex;
@@ -722,15 +732,16 @@ body.modal-open {
 
 .card-subtask-container {
     display: flex;
+    align-items: center;
+    height: 16px;
 }
 
 .progress-container {
     width: 80%;
-    height: 20px;
+    height: 8px;
     background-color: #e0e0e0;
     border-radius: 15px;
     overflow: hidden;
-    margin-bottom: 20px;
 }
 
 .progress-bar {

@@ -248,13 +248,23 @@ function createPrioContainer(key) {
 }
 
 function createPrio(key, task) {
-	let prioContainer = document.getElementById(`${key}-prio-container`);
-	let prioTag = document.createElement('span');
-	prioTag.id = `${key}-prio`;
-    if(task.priority != null)
-        prioTag.textContent = `${task['priority']}`;
-	prioContainer.appendChild(prioTag);
+    let prioContainer = document.getElementById(`${key}-prio-container`);
+    prioContainer.innerHTML = '';
+    let prioImage = document.createElement('img');
+    prioImage.id = `${key}-prio`;
+
+    if (task.priority != null) {
+        const images = {
+            1: '/img/prio-low.png',
+            2: '/img/Prio media.png',
+            3: '/img/prio-high.png'
+        };
+        prioImage.src = images[task.priority];
+        prioImage.alt = `Priority ${task.priority}`;
+    }
+    prioContainer.appendChild(prioImage);
 }
+
 
 function createCard(key, taskCardsContainer, tasks) {
 	createCardContainer(key, taskCardsContainer);
