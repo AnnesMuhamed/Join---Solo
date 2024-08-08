@@ -1,14 +1,20 @@
 body {
     font-family: 'Inter', sans-serif;
-    overflow-y: hidden;
+    overflow-y: auto;
+}
+
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+    display: none !important;
+    /* Chrome, Safari, Opera */
 }
 
 /* Summary */
 
 .content {
     display: flex;
-    padding-top: 100px;
-    padding-left: 96px;
+    justify-content: center;
+    padding-top: 96px;
 }
 
 .summary-headline {
@@ -27,7 +33,6 @@ body {
 .first-headline {
     font-weight: 700;
     font-size: 61px;
-    line-height: 73.2;
 }
 
 .second-headline {
@@ -392,5 +397,5 @@ body {
 }
 
 .d-none {
-	display: none;
+    display: none;
 }
