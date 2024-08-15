@@ -1,0 +1,383 @@
+@media screen and (max-width: 780px) {
+    /* Summary */
+
+    body {
+        width: 428px;
+        height: 948px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header {
+        height: 80px;
+        font-size: 47px;
+        font-weight: 700;
+        line-height: 56.2px;
+        text-align: center;
+        padding: 0;
+    }
+
+    .header-right {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 428px;
+        height: 80px;
+        gap: 16px;
+        padding: 20px 16px 20px 16px;
+        justify-content: space-between;
+    }
+
+    .headline {
+        display: none;
+    }
+
+    .sidebar-nav {
+        display: none;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .sidebar-logo {
+        display: none;
+    }
+
+    .sidebar {
+        background-color: #2a3647;
+        z-index: 1;
+        position: absolute;
+        top: 868px;
+        width: 428px;
+        height: 80px;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        height: 80px;
+        width: 428px;
+        padding: 0;
+    } 
+
+    .menu {
+        display: flex;
+        width: 428px;
+        height: 80px;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+
+    .menu-button-design {
+        display: flex;
+        align-items: center;
+        width: 80px;
+        height: 76px;
+        padding: 8px 1px 8px 1px;
+        gap: 8px;
+        flex-direction: column;
+    }
+
+    .menu-button-design:hover {
+        cursor: pointer;
+        background-color: #091931;
+        border-radius: 16px;
+    }
+
+    .font-size {
+        font-size: 14px;
+    }
+
+    .greet {
+        display: none;
+    }
+
+    .content {
+        display: flex;
+        height: 800px;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .headline-cards-container  {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .summary-headline {
+        display: flex;
+        position: absolute;
+        top: 128px;
+        left: 70px;
+        width: 232px;
+        height: 104px;
+        gap: 16px;
+        align-content: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .first-headline {
+        font-weight: 700;
+        font-size: 47px;
+    }
+
+    .stroke-image {
+        position: absolute;
+        top: 95px;
+        left: 62px;
+        height: 57px;
+        width: 3px;
+        border: 3px;
+        transform: rotate(-90deg);
+    }
+
+    .second-headline {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 32.4px;
+    }
+
+    .summary-cards {
+        display: flex;
+        flex-direction: column;
+        width: 428px;
+        position: relative;
+        top: 172px;
+    }
+
+    .first-card-section {
+        display: flex;
+        width: 428px;
+        height: 110px;
+        gap: 32px;
+        padding-bottom: 28px;
+        padding-top: 28px;
+        justify-content: center;
+    }
+    
+    .card-one, .card-two {
+        display: flex;
+        box-sizing: border-box;
+        width: 186px;
+        height: 110px;
+        padding: 38px 19px 38px 19px;
+        gap: 10px;
+        border-radius: 30px;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 4px 0px #0000001A;
+        animation-timing-function: ease-out;
+        animation-duration: 80ms;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        align-items: center;
+    }
+
+    .edit-circle {
+        width: 40px;
+        display: flex;
+        height: 40px;
+        border: 7px solid #FFFFFF;
+        background: #2A3647;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+    }
+
+    .edit-image {
+        display: flex;
+        position: relative;
+        width: 3.77px;
+        height: 19.62px;
+        top: 10.63px;
+        left: 18.84px;
+        transition: all 0.3s ease;
+        transform: rotate(-31.25deg);
+    }
+
+    .todo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .todo-number, .done-number {
+        width: 40px;
+        height: 73px;
+        font-size: 47px;
+        font-weight: 600;
+        line-height: 76.8px;
+        text-align: center;
+        transition: color 0.3s ease;
+    }
+
+    .todo-span, .done-span {
+        font-size: 14px;
+    }
+
+    .hook-circle {
+        width: 40px;
+        display: flex;
+        height: 40px;
+        border: 7px solid #FFFFFF;
+        background: #2A3647;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+    }
+
+    .hook-image {
+        display: flex;
+        position: relative;
+        width: 17.77px;
+        height: 19.62px;
+        top: 10.63px;
+        left: 10.84px;
+        transition: all 0.3s ease;
+    }
+
+    .second-card-section {
+        margin-right: auto;
+        margin-left: auto;
+        display: flex;
+        justify-content: center;
+        box-sizing: border-box;
+        align-items: center;
+        width: 396px;
+        height: 110px;
+        padding: 28px 0px 28px 0px;
+        gap: 20px;
+        border-radius: 20px;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 4px 0px #0000001A;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .card-three {
+        display: flex;
+        align-items: center;
+        width: 108px;
+        height: 73px;
+        gap: 18px;
+    }
+
+    .urgent-img-container {
+        width: 40px;
+        height: 40px;
+    }
+
+    .urgent-img {
+        width: 40px;
+        height: 40px;
+    }
+
+    .urgent-stroke {
+        height: 68px;
+    }
+
+    .urgent-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50px;
+        height: 73px;
+        justify-content: center;
+    }
+
+    .one-urgent {
+        width: 50px;
+        height: 56px;
+        font-family: Inter;
+        font-size: 47px;
+        font-weight: 600;
+        line-height: 56.4px;
+        text-align: center;
+        transition: color 0.3s ease;
+    }
+
+    .urgent {
+        transition: color 0.3s ease;
+        width: 46px;
+        height: 17px;
+        font-size: 14px;
+        line-height: 16.8px;
+    }
+
+    .date-container {
+        display: flex;
+        flex-direction: column;
+        width: 135px;
+        height: 44px;
+        gap: 8px;
+        justify-content: flex-end;
+    }
+
+    .date {
+        width: 135px;
+        height: 19px;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 19.2px;
+        text-align: left;
+        transition: color 0.3s ease;
+    }
+
+    .upcoming-span {
+        width: 130px;
+        height: 17px;
+        font-size: 14px;
+        line-height: 16.8px;
+    }
+
+    .third-card-section {
+        display: flex;
+        margin-right: auto;
+        margin-left: auto;
+        box-sizing: border-box;
+        width: 376px;
+        height: 116px;
+        gap: 13px;
+        padding-top: 28px;
+    }
+
+    .card-four, .card-five, .card-six {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        width: 116px;
+        height: 116px;
+        top: 1px;
+        padding: 6px 0px 6px 0px;
+        gap: 13px;
+        border-radius: 20px;
+        background: #FFFFFF;
+        box-shadow: 0px 0px 4px 0px #0000001A;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .number {
+        width: 30px;
+        height: 56px;
+        font-family: Inter;
+        font-size: 47px;
+        font-weight: 600;
+        line-height: 56.04px;
+        text-align: center;
+        transition: color 0.3s ease;
+    }
+
+    .card-underline {
+        width: 54px;
+        height: 34px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 16.08px;
+        text-align: center;
+        transition: color 0.3s ease;
+    }
+}

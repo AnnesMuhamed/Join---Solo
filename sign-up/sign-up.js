@@ -43,15 +43,19 @@ function init() {
     </div>
 
     <div class="container">
+        
         <div class="header-container">
-        <a href="../index.html">    
-        <img src="../img/arrow-left-line.png" alt="Zurück" class="back-arrow">
-        </a>
+            <a href="../index.html">    
+                <img src="../img/arrow-left-line.png" alt="Zurück" class="back-arrow">
+            </a>
             <div class="header">
                 Sign Up
             </div>
+            <div class="divider">
+                <img class="blue-line" src="./img/Vector 5.png" alt="">
+            </div>
         </div>
-        <div class="divider"></div>
+        
         <form id="sign-up-form" class="form">
             <label class="input-container">
                 <input type="text" id="first-name" placeholder="First Name Last Name" minlength="2" required>
@@ -66,15 +70,16 @@ function init() {
                 <img src="../img/lock.png" alt="Password Icon" class="input-icon">
             </label>
             <label class="input-container">
-                <input type="password" id="confirm-password" placeholder="Confirm Password" minlength="4" required>
+                <input type="password" id="confirm-password" class="signup-password" placeholder="Confirm Password" minlength="4" required>
                 <img src="../img/lock.png" alt="Password Icon" class="input-icon">
             </label>
-            <div class="checkbox-container">
+            
+        </form>
+        <div class="checkbox-container">
                 <input type="checkbox" id="accept-policy" class="checkbox-hover-design" required>
                 <label for="accept-policy">I accept the <a href="../privacy-policy/privacy-policy.html" class="privacy-policy checkbox-hover-design">Privacy policy</a></label>
             </div>
             <button type="submit" class="sign-up-button">Sign Up</button>
-        </form>
     </div>
     <div class="link-container">
         <a class="policy-notice" href="#">Privacy Policy</a>

@@ -18,19 +18,19 @@ function loginPage() {
                 <img src="./img/mail.png" alt="Email Icon" class="input-icon">
             </label>
             <label class="input-container">
-                <input type="password" id="password" minlength="4" placeholder="Password" required>
+                <input type="password" id="password" minlength="4" placeholder="Password" class="login-password" required>
                 <img src="./img/lock.png" alt="Password Icon" class="input-icon">
             </label>
             <label class="option" for="option">
                 <input type="checkbox" name="option" id="option"> Remember me
             </label>
+        </form>
             <div class="button-container">
                 <button type="submit" class="login-button" disabled>Log in</button>
                 <a href="./summary/summary.html">
                     <button type="button" class="guest-button">Guest Log in</button>
                 </a>
             </div>
-        </form>
     </div>
     <div class="signup-container hidden">
         <span class="not-a-user">Not a Join user?</span>
