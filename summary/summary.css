@@ -30,6 +30,10 @@ html::-webkit-scrollbar {
     border: 3px;
 }
 
+.blue-stroke-image {
+    display: none;
+}
+
 .first-headline {
     font-weight: 700;
     font-size: 61px;

@@ -19,16 +19,14 @@
 
     .summary-headline {
         display: flex;
-        position: absolute;
-        top: 128px;
-        left: 70px;
+        margin-top: 128px;
+        margin-left: 16px;
         width: 232px;
         height: 104px;
         gap: 16px;
         align-content: center;
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: flex-end;
     }
 
     .first-headline {
@@ -37,13 +35,13 @@
     }
 
     .stroke-image {
-        position: absolute;
-        top: 95px;
-        left: 62px;
-        height: 57px;
-        width: 3px;
+        display: none;
+    }
+
+    .blue-stroke-image {
+        display: block;
+        height: 4px;
         border: 3px;
-        transform: rotate(-90deg);
     }
 
     .second-headline {
@@ -56,8 +54,6 @@
         display: flex;
         flex-direction: column;
         width: 428px;
-        position: relative;
-        top: 172px;
     }
 
     .first-card-section {

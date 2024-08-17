@@ -1,0 +1,89 @@
+@media screen and (max-width: 780px) {
+    body {
+        width: 428px;
+        height: 948px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .content {
+        height: 868px;
+        overflow: auto;
+    }
+
+    .add-task-headline {
+        margin-block-start: 0;
+        margin-block-end: 0;
+        margin-left: 16px;
+        margin-top: 80px;
+        font-size: 47px;
+        font-weight: 700;
+        line-height: 56.4px;
+        text-align: left;
+    }
+
+    .seperator {
+        display: none;
+    }
+
+    .add-task-form {
+        display: flex;
+        flex-direction: column;
+        align-items: normal;
+        justify-content: flex-end;
+        width: 396px;
+        top: 224px;
+        left: 16px;
+        gap: 16px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 32px;
+    }
+    
+    .definition {
+        width: 396px;
+    }
+
+    #checkboxes {
+        display: none;
+        border: 1px solid #dadada;
+        border-radius: 10px;
+        position: absolute;
+        top: 619px;
+        background-color: white;
+        z-index: 1;
+        height: 216px;
+        width: 396px;
+        max-width: 440px;
+        overflow-y: auto;
+    }
+
+    .properties {
+        width: 396px;
+    }
+
+    .subtask-list-container {
+        display: flex;
+        height: 148px;
+        width: 396px;
+        overflow: auto;
+        margin: 0;
+    }
+
+    .subtask-list {
+        padding: 6px;
+        padding-left: 0;
+    }
+
+    .buttons {
+        margin-left: 0px;
+        display: flex;
+        justify-content: space-between;
+        width: 396px;
+        align-items: center;
+    }
+
+    .clear-btn {
+        display: none;
+    }
+}
