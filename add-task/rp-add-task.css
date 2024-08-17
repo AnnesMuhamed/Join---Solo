@@ -1,4 +1,5 @@
 @media screen and (max-width: 780px) {
+
     body {
         width: 428px;
         height: 948px;
@@ -9,6 +10,10 @@
     .content {
         height: 868px;
         overflow: auto;
+        overflow-y: scroll;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+
     }
 
     .add-task-headline {
@@ -39,7 +44,7 @@
         margin-right: auto;
         margin-top: 32px;
     }
-    
+
     .definition {
         width: 396px;
     }
@@ -68,6 +73,8 @@
         width: 396px;
         overflow: auto;
         margin: 0;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .subtask-list {
@@ -81,6 +88,9 @@
         justify-content: space-between;
         width: 396px;
         align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 100px;
     }
 
     .clear-btn {
