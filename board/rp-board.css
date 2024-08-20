@@ -34,24 +34,24 @@
         align-items: center;
         justify-content: space-between;
     }
-}
 
-.card-container {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    height: 688px;
-    gap: 26px;
-    overflow: auto;
-    width: auto;
-    padding-bottom: 96px;
-}
+    .card-container {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        height: 688px;
+        gap: 26px;
+        overflow: auto;
+        width: auto;
+        padding-bottom: 96px;
+    }
 
-.drag-area {
-    height: auto;
-    flex-direction: row;
-}
+    .drag-area {
+        height: auto;
+        flex-direction: row;
+    }
 
-.add-button {
-    display: none;
+    .add-button {
+        display: none;
+    }
 }
