@@ -13,13 +13,20 @@
 
     .input-and-add-button {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: normal;
         gap: 8px;
-        padding: 0;
+        padding: 8px 0px 8px 0px;
+        width: 396px;
+    }
+
+    .search-input {
+        width: 396px;
     }
 
     .headline-add-task-container {
-        width: 0;
+        width: 396px;
+        margin-top: 50px;
+        padding: 0;
     }
 
     .add-button-rp {
@@ -48,10 +55,27 @@
 
     .drag-area {
         height: auto;
-        flex-direction: row;
     }
 
     .add-button {
         display: none;
+    }
+
+    .done-container, .awaitFeedback-container,
+    .inProgress-container, .card-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .column-title {
+        width: 396px;
+    }
+
+    .headline-board {
+        width: 136px;
+        height: 56px;
+        font-size: 47px;
+        font-weight: 700;
+        line-height: 56.4px;
     }
 }
