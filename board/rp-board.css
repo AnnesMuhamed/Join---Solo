@@ -18,7 +18,7 @@
         padding: 0;
     }
 
-    .headline-add-task-container{
+    .headline-add-task-container {
         width: 0;
     }
 
@@ -30,6 +30,7 @@
         gap: 26px;
         overflow: auto;
         width: auto;
+        padding-bottom: 96px;
     }
 
     .drag-area {
