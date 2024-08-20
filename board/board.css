@@ -3,6 +3,16 @@ body {
     overflow-x: hidden;
 }
 
+* {
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+*::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+}
+
 body.modal-open {
     overflow: hidden;
 }
@@ -88,8 +98,8 @@ body.modal-open {
 
 .card-container {
     display: flex;
-    justify-content: space-between;
-    width: 1080px;
+    justify-content: center;
+    width: 1098px;
     height: 688px;
     gap: 26px;
     overflow: auto;
@@ -186,7 +196,7 @@ body.modal-open {
 }
 
 .column-title {
-    width: 244px;
+    width: 252px;
     height: 24px;
     font-size: 20px;
     font-weight: 700;
@@ -751,6 +761,7 @@ body.modal-open {
     border-radius: 15px 0 0 15px;
     transition: width 0.2s ease-in-out;
 }
+
 .prio-container {
     display: flex;
     align-items: center;
