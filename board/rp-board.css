@@ -22,23 +22,36 @@
         width: 0;
     }
 
-    .card-container {
+    .add-button-rp {
+        display: block;
         display: flex;
-        justify-content: flex-start;
-        flex-direction: column;
-        height: 688px;
-        gap: 26px;
-        overflow: auto;
-        width: auto;
-        padding-bottom: 96px;
+        align-items: center;
+        justify-content: center;
     }
 
-    .drag-area {
-        height: auto;
-        flex-direction: row;
+    .headline-rp-add-button {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
+}
 
-    .add-button {
-        display: none;
-    }
+.card-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    height: 688px;
+    gap: 26px;
+    overflow: auto;
+    width: auto;
+    padding-bottom: 96px;
+}
+
+.drag-area {
+    height: auto;
+    flex-direction: row;
+}
+
+.add-button {
+    display: none;
 }

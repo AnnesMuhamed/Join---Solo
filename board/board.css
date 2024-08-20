@@ -776,3 +776,14 @@ body.modal-open {
     transform: rotate(+5deg);
     transition: transform 0.2s ease;
 }
+
+.add-button-rp{
+    display: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #2A3647;
+    background-color: #2A3647;
+    color: white;
+    transition: all 0.1s ease;
+}
