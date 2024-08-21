@@ -55,6 +55,7 @@
 
     .drag-area {
         height: auto;
+        flex-direction: row;
     }
 
     .add-button {
