@@ -1,0 +1,21 @@
+@media screen and (max-width: 780px) {
+
+    body {
+        width: 428px;
+        height: 948px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #contactSection {
+        width: 428px;
+        height: 766px;
+    }
+
+    .contacts {
+        background: #F6F7F8;
+        display: flex;
+        height: 766px;
+    }
+
+}

@@ -3,6 +3,7 @@
     .board-main-container {
         overflow: auto;
         width: 396px;
+        height: 766px;
         padding: 0px 16px 0px 16px;
     }
 
