@@ -37,6 +37,12 @@
         justify-content: center;
     }
 
+    .add-button-rp:hover {
+        cursor: pointer;
+        background-color: #29ABE2;
+        border-color: #29ABE2;
+    }
+
     .headline-rp-add-button {
         display: flex;
         align-items: center;
@@ -63,8 +69,10 @@
         display: none;
     }
 
-    .done-container, .awaitFeedback-container,
-    .inProgress-container, .card-container {
+    .done-container,
+    .awaitFeedback-container,
+    .inProgress-container,
+    .card-container {
         display: flex;
         flex-direction: column;
     }
