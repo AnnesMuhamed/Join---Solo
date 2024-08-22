@@ -106,6 +106,7 @@ function initialize() {
         overlay.style.opacity = 1;
         logoContainer.classList.add('move-to-corner');
         loginPage.style.display = 'flex';
+        loginPage.classList.remove('hidden');
         signupContainer.classList.remove('hidden');
         linkContainer.classList.remove('hidden');
 
