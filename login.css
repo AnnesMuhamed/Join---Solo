@@ -88,6 +88,10 @@ html {
   transition: all 100ms ease-in-out;
 }
 
+.white-logo {
+  display: none;
+}
+
 .hidden {
   display: none !important;
 }

@@ -19,6 +19,8 @@
     #overlay {
         width: 428px !important;
         width: 0;
+        background-color: #2A3647;
+        height: 926px;
     }
 
     .logo-container {
@@ -35,7 +37,7 @@
     .main-logo {
         width: 64px;
         height: 78.03px;
-        
+
     }
 
     .container {
@@ -129,7 +131,17 @@
 
     }
 
+    .dark-logo {
+        display: none;
+    }
+
+    .white-logo {
+        display: block;
+    }
+
     #logo-container {
+        display: flex;
+        align-items: center;
         width: 64px;
         top: 37px;
         left: 38px;
@@ -168,7 +180,8 @@
         justify-content: space-between;
     }
 
-    #username, .login-password {
+    #username,
+    .login-password {
         width: 364px;
         height: 48px;
         padding: 12px 21px 12px 21px;
@@ -197,8 +210,9 @@
         flex-direction: column;
         align-items: center;
     }
-    
-    .login-button, .guest-button {
+
+    .login-button,
+    .guest-button {
         width: 180px;
         height: 51px;
         padding: 4px 0px 4px 0px;
@@ -209,26 +223,18 @@
         text-align: center;
     }
 
-    
+
+
+
 
 }
 
-@media screen and (max-width: 640px) {
-    
-}
+@media screen and (max-width: 640px) {}
 
-@media screen and (max-width: 475px) {
-    
-}
+@media screen and (max-width: 475px) {}
 
-@media screen and (max-width: 400px) {
-    
-}
+@media screen and (max-width: 400px) {}
 
-@media screen and (max-width: 375px) {
-    
-}
+@media screen and (max-width: 375px) {}
 
-@media screen and (max-width: 350px) {
-    
-}
+@media screen and (max-width: 350px) {}

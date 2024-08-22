@@ -4,7 +4,8 @@ function loginPage() {
     logInPage.innerHTML = `
     <div id="overlay">
         <div id="logo-container">
-            <img src="./img/loginLogo.png" alt="Logo" id="main-logo">
+            <img class="dark-logo" src="./img/loginLogo.png" alt="Logo" id="main-logo-dark">
+            <img class="white-logo" src="./img/template/login-logo-rp.png" alt="Logo" id="main-logo-white">
         </div>
     </div>
     <div id="login-page" class="hidden">
@@ -47,7 +48,7 @@ function loginPage() {
     const passwordInput = document.getElementById('password');
     const loginButton = document.querySelector('.login-button');
 
-    
+
     function validateInputs() {
         if (usernameInput.value.trim() !== "" && passwordInput.value.trim() !== "") {
             loginButton.disabled = false;
@@ -66,11 +67,11 @@ function loginPage() {
         const password = passwordInput.value;
         const rememberMe = document.getElementById('option').checked;
 
-        
+
         const users = await loadData('user');
         let userFound = null;
 
-        
+
         for (const userId in users) {
             const user = users[userId];
             if (user.username === email && user.password === password) {
@@ -80,7 +81,7 @@ function loginPage() {
         }
 
         if (userFound) {
-        
+
             if (rememberMe) {
                 localStorage.setItem('loggedInUser', JSON.stringify(userFound));
             } else {
@@ -102,13 +103,24 @@ function initialize() {
         const loginPage = document.getElementById('login-page');
         const signupContainer = document.querySelector('.signup-container');
         const linkContainer = document.querySelector('.link-container');
+        let whiteLogo = document.getElementById('main-logo-white')
+        let darkLogo = document.getElementById('main-logo-dark')
 
         overlay.style.opacity = 1;
         logoContainer.classList.add('move-to-corner');
+        logoContainer.style.alignItems = 'flex-start';
         loginPage.style.display = 'flex';
         loginPage.classList.remove('hidden');
         signupContainer.classList.remove('hidden');
         linkContainer.classList.remove('hidden');
+        overlay.style.backgroundColor = 'white';
+        whiteLogo.style.display = 'none';
+        darkLogo.style.display ='block';
+        darkLogo.style.width ='64px';
+        darkLogo.style.height ='78.03px';
+        
+
+
 
         setTimeout(() => {
             overlay.style.width = '1440px';
