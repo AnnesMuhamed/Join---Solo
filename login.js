@@ -113,12 +113,12 @@ function initialize() {
         loginPage.classList.remove('hidden');
         signupContainer.classList.remove('hidden');
         linkContainer.classList.remove('hidden');
-        overlay.style.backgroundColor = 'white';
+        overlay.style.backgroundColor = '#F6F7F8';
         whiteLogo.style.display = 'none';
-        darkLogo.style.display ='block';
-        darkLogo.style.width ='64px';
-        darkLogo.style.height ='78.03px';
-        
+        darkLogo.style.display = 'block';
+        darkLogo.style.width = '64px';
+        darkLogo.style.height = '78.03px';
+
 
 
 
