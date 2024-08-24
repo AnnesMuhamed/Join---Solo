@@ -183,7 +183,34 @@ function contactPopUp(id, firstName, lastName, email, phone, color) {
     setEditFormValues(id, firstName, lastName, email, phone);
     popUpSection.classList.add('show');
     movePopupToPosition(popUpSection);
+
+
+    if (window.innerWidth <= 780) {
+        document.getElementById('contactSection').style.display = 'none';
+    }
+
+    const popUpElement = document.querySelector('.pop-up');
+    if (popUpElement) {
+        popUpElement.classList.add('show');
+    } else {
+        console.error("Popup-Element '.pop-up' nicht gefunden.");
+    }
 }
+
+function closeContactPopUp() {
+    document.getElementById('contactSection').style.display = 'block';
+    const popUpElement = document.querySelector('.pop-up');
+    if (popUpElement) {
+        popUpElement.classList.remove('show');
+    }
+}
+
+
+function closeContactPopUp() {
+    document.getElementById('contactSection').style.display = 'block';
+    document.getElementById('popup-section').parentNode.querySelector('.pop-up').classList.remove('show');
+}
+
 
 function setEditFormValues(id, firstName, lastName, email, phone) {
     document.getElementById('editContactId').value = id;

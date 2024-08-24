@@ -18,4 +18,408 @@
         height: 766px;
     }
 
+    #editContact, #addContact {
+        width: 396px;
+        height: 760px;
+        position: absolute;
+        top: 513px;
+        left: 160%;
+        transform: translate(-50%, -50%);
+        border-radius: 30px;
+        background: #FFFFFF;
+        display: flex;
+        overflow: hidden;
+        transition: all 0.5s ease-in-out;
+        box-shadow: 0px 0px 4px 0px #0000001A;
+        flex-direction: column;
+    }
+
+    #editContact.show {
+        left: 382px;
+        z-index: 1;
+    }
+
+    #contactLeft {
+        width: 396px;
+        height: 351px;
+        padding: 0px;
+        background: #2A3647;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    #joinLogoContainer {
+        display: none;
+    }
+
+    #addContactTextContainer {
+        width: 371px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-left: 24px;
+    }
+
+    #addContactHeader {
+        font-size: 47px;
+        font-weight: 700;
+        color: #FFFFFF;
+        line-height: 56.4px;
+    }
+
+    #addContactSubheader {
+        font-size: 20px;
+    }
+
+    #closeButtonContainer {
+        position: absolute;
+        top: 24px;
+        right: 18px;
+        width: 32px;
+        height: 32px;
+        border-radius: 56px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: none;
+    }
+
+    #closeButton {
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: none;
+        font-size: 22px;
+        cursor: pointer;
+        color: white;
+    }
+
+    .person-container {
+        position: fixed;
+        width: 120px;
+        height: 120px;
+        top: 292px;
+        left: 138px;
+        border-radius: 70px;
+        background: cadetblue;
+        border: 3px solid #FFFFFF;
+        box-shadow: 0px 0px 4px 0px #0000001A;
+    }
+
+    #inputFields {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        width: 364px;
+        height: 171px;
+        top: 444px;
+        left: 15.5px;
+        gap: 12px;
+    }
+
+    .inputField {
+        display: flex;
+        flex-direction: column;
+        width: 364px;
+        gap: 8px;
+    }
+
+    .inputField input {
+        width: 322px;
+        height: 18px;
+        padding: 13px 21px 13px 21px;
+        border-radius: 10px;
+        border: 1px solid #D1D1D1;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 24px;
+        color: #000000;
+        opacity: 0.5;
+        cursor: pointer;
+    }
+
+    .inputField-icon-name {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 22px;
+        left: 326px;
+    }
+
+    .inputField-icon-email {
+        position: absolute;
+        width: 20px;
+        height: 16px;
+        top: 89px;
+        left: 326px;
+    }
+
+    .inputField-icon-tel {
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        top: 153.5px;
+        left: 326px;
+    }
+
+    .inputField {
+        display: flex;
+        flex-direction: column;
+        width: 364px;
+        gap: 8px;
+    }
+
+    #editButtons {
+        position: absolute;
+        width: 201px;
+        height: 57px;
+        display: flex;
+        gap: 20px;
+        top: 667px;
+        left: 97.5px;
+    }
+
+    #buttons {
+        position: absolute;
+        display: flex;
+        width: 202px;
+        height: 51px;
+        gap: 20px;
+        top: 667px;
+        left: 97.5px;
+    }
+
+    .createButton {
+        width: 202px;
+        height: 51px;
+        padding: 18px 10px 18px 10px;
+    }
+
+    .cancelButton {
+        display: none;
+    }
+
+    .editCancelButton {
+        display: flex;
+        width: 82px;
+        height: 51px;
+        padding: 18px 10px 18px 10px;
+        gap: 4px;
+        border-radius: 10px;
+        border: 1px solid #2A3647;
+        background: #FFFFFF;
+        cursor: pointer;
+        transition: all 0.1s ease;
+        align-items: center;
+    }
+
+    .cancel {
+        width: 66px;
+        height: 24px;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 24px;
+        text-align: left;
+    }
+
+    .x-png {
+        display: none;
+    }
+
+    .saveButton {
+        width: 99px;
+        height: 51px;
+        padding: 16px;
+        gap: 4px;
+        border-radius: 10px;
+        border: none;
+        background: #2A3647;
+        color: #FFFFFF;
+        font-family: Inter;
+        font-size: 21px;
+        font-weight: 700;
+        line-height: 25.2px;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.1s ease;
+    }
+
+    #contactSection button {
+        display: flex;
+        position: fixed;
+        gap: 10px;
+        top: 758px;
+        left: 356px;
+        width: 56px;
+        height: 56px;
+        border-radius: 46px;
+        padding: 12px;
+        border: 1px;
+    }
+
+    .button-text {
+        display: none;
+    }
+
+    /* POPUP */
+
+     .pop-up {
+        display: none;
+        position: fixed;
+        top: 80px;
+        left: 132px;
+        width: 428px;
+        height: 766px;
+        background: #F6F7F8;
+        box-shadow: none;
+    }
+
+    .pop-up.show {
+        display: block;
+    }
+
+    #popup-section {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .contacts-headline {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: center;
+        width: 216px;
+        height: 104px;
+        position: absolute;
+        top: 48px;
+        left: 16px;
+        margin-top: 0px;
+        margin-left: 0px;
+        display: flex;
+        gap: 16px;
+    }
+
+    .back-button {
+        display: block;
+        position: absolute;
+        top: 48px;
+        left: 380px;
+        cursor: pointer;
+        border: none;
+        background: none;
+    }
+
+    #popup-section {
+        margin-left: 0;
+        position: absolute;
+        width: 330px;
+        top: 200px;
+        left: 16px;
+    }
+
+    .popup-container {
+        display: flex;
+        height: 361px;
+        flex-direction: column;
+        gap: 21px;
+    }
+
+    .popup-contact-info {
+        display: flex;
+        width: 330px;
+        height: 24px;
+        gap: 59px;
+        margin-top: 0;
+    }
+
+    .first-container {
+        display: flex;
+        align-items: center;
+        width: 326px;
+        height: 80px;
+        gap: 20px;
+    }
+
+    .popup-initiale-container {
+        width: 80px;
+        height: 80px;
+        gap: 10px;
+        border-radius: 70px;
+        border: 3px solid #FFFFFF;
+        box-shadow: 0px 0px 4px 0px #0000001A;
+    }
+
+    .initiale-circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 70px;
+        background: #FF7A00;
+    }
+
+    .popup-initiale {
+        display: flex;
+        position: absolute;
+        top: 30.48px;
+        left: 15.33px;
+        width: 53.33px;
+        height: 19.5px;
+        font-size: 27px;
+        font-weight: 400;
+        line-height: 32.4px;
+        text-align: center;
+        color: #FFFFFF;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .button-name-container {
+        display: flex;
+        width: 287px;
+        height: 88px;
+        gap: 8px;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .popup-name {
+        width: 226px;
+        height: 43px;
+        font-size: 36px;
+        font-weight: 700;
+        line-height: 43.2px;
+        text-align: unset;
+    }
+
+    .first-headline {
+        font-weight: 700;
+        font-size: 47px;
+    }
+
+    .second-headline {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 32.4px;
+    }
+
+    .stroke-image {
+        display: none;
+    }
+
+    .rpContact-blueStroke {
+        display: block;
+        width: 90px;
+        border: 3px;
+    }
+
+    .popup-buttons {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    
 }
