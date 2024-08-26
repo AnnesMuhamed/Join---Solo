@@ -99,6 +99,7 @@ function createCardContainer(key, taskCardsContainer) {
 	cardDiv.draggable = 'true';
 	cardDiv.ondragstart = startDragging;
 	cardDiv.ondragend = endDragging; // Handle the end of dragging to remove the tilt effect
+    cardDiv.onclick = () => openPopup(key);
 	taskCardsContainer.appendChild(cardDiv);
 }
 
