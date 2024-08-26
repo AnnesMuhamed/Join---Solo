@@ -48,6 +48,11 @@
         flex-direction: column;
     }
 
+    #addContact.show {
+        left: 214px;
+        z-index: 1;
+    }
+
     #editContact.show {
         left: 214px;
         z-index: 1;
