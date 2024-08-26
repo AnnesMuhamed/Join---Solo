@@ -1,7 +1,7 @@
 @media screen and (max-width: 780px) {
 
-    .main-container {
-        padding-top: 48px;
+    .pl {
+
         padding-left: 16px;
         padding-right: 16px;
     }
@@ -10,7 +10,11 @@
         overflow: auto;
     }
 
-    .headline-main {
+    .headline-p{
         font-size: 47px;
+    }
+
+    .headline-img-container{
+        padding-right: 16px;
     }
 }
