@@ -474,18 +474,23 @@
 
     .option {
         display: flex;
-        position: fixed;
+        justify-content: center;
+        align-items: center;
         width: 56px;
         height: 56px;
+        gap: 10px;
+        position: fixed;
         top: 758px;
         left: 465px;
-        padding: 12px;
-        gap: 10px;
         border-radius: 56px;
-        border: 1px;
         background: #2A3647;
         animation-timing-function: ease-out;
         animation-duration: 300ms;
         cursor: pointer;
+    }
+
+    .option-point-img {
+        width: 32px;
+        height: 32px;
     }
 }
