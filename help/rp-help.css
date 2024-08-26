@@ -1,0 +1,12 @@
+@media screen and (max-width: 780px) {
+
+    .main-container {
+        padding-top: 48px;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .rp-ul-overflow{
+        overflow: auto;
+    }
+}

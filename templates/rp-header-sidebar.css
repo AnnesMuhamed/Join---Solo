@@ -1,7 +1,7 @@
 @media screen and (max-width: 780px) {
     body {
         width: 428px;
-        height: 948px;
+        height: 926px;
         display: flex;
         flex-direction: column;
     }
