@@ -2,9 +2,13 @@
 
     body {
         width: 428px;
-        height: 948px;
+        height: 926px;
         display: flex;
         flex-direction: column;
+    }
+
+    .overlay {
+        height: 926px !important;
     }
 
     * {
@@ -33,7 +37,7 @@
         height: 760px;
         position: absolute;
         top: 513px;
-        left: 160%;
+        left: 176%;
         transform: translate(-50%, -50%);
         border-radius: 30px;
         background: #FFFFFF;
@@ -45,7 +49,7 @@
     }
 
     #editContact.show {
-        left: 382px;
+        left: 214px;
         z-index: 1;
     }
 
@@ -279,7 +283,7 @@
 
     /* POPUP */
 
-     .pop-up {
+    .pop-up {
         display: none;
         position: fixed;
         top: 80px;
@@ -350,9 +354,9 @@
     .first-container {
         display: flex;
         align-items: center;
-        width: 326px;
+        width: 396px;
         height: 80px;
-        gap: 20px;
+        gap: 8px;
     }
 
     .popup-initiale-container {
@@ -389,7 +393,7 @@
 
     .button-name-container {
         display: flex;
-        width: 287px;
+        width: 314px;
         height: 88px;
         gap: 8px;
         flex-direction: column;
@@ -397,10 +401,9 @@
     }
 
     .popup-name {
-        width: 226px;
+        width: 290px;
         height: 43px;
-        font-size: 36px;
-        font-weight: 700;
+        font-size: 32px;
         line-height: 43.2px;
         text-align: unset;
     }
@@ -426,10 +429,58 @@
         border: 3px;
     }
 
-    .popup-buttons {
-        justify-content: space-between;
-        width: 100%;
+    .popup-button-container {
+        display: none;
+        position: absolute;
+        width: 116px;
+        height: 100px;
+        top: 400px;
+        flex-direction: column;
+        box-shadow: 0px 4px 4px 0px #00000040;
+        border-radius: 20px 20px 0px 20px;
+        background: white;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
     }
 
-    
+    .popup-button-container.show {
+        display: flex;
+        position: absolute;
+        width: 116px;
+        height: 100px;
+        top: 400px;
+        left: 177px;
+        flex-direction: column;
+        box-shadow: 0px 4px 4px 0px #00000040;
+        border-radius: 20px 20px 0px 20px;
+        background: white;
+        padding: 10px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .popup-buttons {
+        justify-content: space-between;
+        width: 96px;
+        height: 40px;
+        padding: 8px;
+    }
+
+    .option {
+        display: flex;
+        position: fixed;
+        width: 56px;
+        height: 56px;
+        top: 758px;
+        left: 465px;
+        padding: 12px;
+        gap: 10px;
+        border-radius: 56px;
+        border: 1px;
+        background: #2A3647;
+        animation-timing-function: ease-out;
+        animation-duration: 300ms;
+        cursor: pointer;
+    }
 }

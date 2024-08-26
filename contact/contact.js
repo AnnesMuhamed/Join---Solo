@@ -153,7 +153,7 @@ function contactPopUp(id, firstName, lastName, email, phone, color) {
                 </div>
                 <div class="button-name-container">
                     <span class="popup-name">${firstName} ${lastName}</span>
-                    <div class="popup-button-container">
+                    <div class="popup-button-container" id="popup-button">
                         <button class="popup-buttons" onclick="openEditContact('${id}', '${firstName}', '${lastName}', '${email}', '${phone}')">
                             <img class="edit-icon" src="../img/edit-black.png" alt="">
                             <span class="edit">Edit</span>
@@ -271,6 +271,10 @@ async function deleteContact(id) {
 
 function closeContactPopUp() {
     document.getElementById('popup-section').classList.remove('show');
+}
+
+function togglePopupOption() {
+    document.getElementById("popup-button").classList.toggle("show");
 }
 
 document.addEventListener('DOMContentLoaded', onloadFunction);
