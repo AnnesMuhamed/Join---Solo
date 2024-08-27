@@ -1,6 +1,10 @@
 @media screen and (max-width: 780px) {
     /* Summary */
 
+    body {
+        margin: 0;
+    }
+
     .greet {
         display: none;
     }

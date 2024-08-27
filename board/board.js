@@ -9,6 +9,8 @@ async function init() {
 	await sessionStoreContacts();
 	await sessionStoreTasks();
 	renderCards();
+
+	document.getElementById('findCards').addEventListener('input', searchCards);
 }
 
 async function includeHTML() {
@@ -298,6 +300,29 @@ function renderCards() {
 	});
 }
 
+function searchCards() {
+    let searchQuery = document.getElementById('findCards').value.toLowerCase();
+
+    if (searchQuery.length < 3) {
+        renderCards();
+        return;
+    }
+
+    let tasks = JSON.parse(sessionStorage.getItem('tasks'));
+    let allTaskCardsContainer = document.querySelectorAll('.drag-area');
+    allTaskCardsContainer.forEach(column => column.innerHTML = '');
+
+    Object.keys(tasks).forEach(key => {
+        let task = tasks[key];
+        let taskTitle = task['title'].toLowerCase();
+
+        if (taskTitle.includes(searchQuery)) {
+            let taskCardsContainer = document.getElementById(task['state']);
+            createCard(key, taskCardsContainer, task);
+        }
+    });
+}
+
 function openAddTaskForm() {
 	openForm('newTask');
 }
@@ -317,42 +342,3 @@ function closeForm(formId) {
  document.getElementById('overlay').style.display = 'none';
  document.body.classList.remove('modal-open');
 }
-
-
-//function openUserStory(id) {
-//  alert('User Story ID: ' + id);
-//}
-//
-//function closeAddTaskForm() {
-//  closeForm('newTask');
-//}
-//
-//function closeForm(formId) {
-//  document.getElementById(formId).classList.remove('show');
-//  document.getElementById('overlay').style.display = 'none';
-//  document.body.classList.remove('modal-open');
-//}
-//
-//function openUserStory() {
-//  document.getElementById('userStoryCard').classList.add('show');
-//  document.getElementById('overlay').style.display = 'block';
-//  document.body.classList.add('modal-open');
-//}
-//
-//function closeUserStory() {
-//  document.getElementById('userStoryCard').classList.remove('show');
-//  document.getElementById('overlay').style.display = 'none';
-//  document.body.classList.remove('modal-open');
-//}
-//
-//function openTechnicalTask() {
-//  document.getElementById('technicalTask').classList.add('show');
-//  document.getElementById('overlay').style.display = 'block';
-//  document.body.classList.add('modal-open');
-//}
-//
-//function closeTechnicalTask() {
-//  document.getElementById('technicalTask').classList.remove('show');
-//  document.getElementById('overlay').style.display = 'none';
-//  document.body.classList.remove('modal-open');
-//}

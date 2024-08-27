@@ -24,13 +24,18 @@
   padding: 48px 40px;
   border-radius: 30px;
   box-shadow: 0px 0px 4px 0px #00000029;
-  background: #ffffff;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 }
 
 .popup-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 525px;
+  height: 36px;
 }
 
 .tag-container {
@@ -39,12 +44,18 @@
   align-items: center;
   padding: 4px 24px;
   border-radius: 8px;
+  width: 208px;
+  height: 36px;
+  gap: 10px;
 }
 
 .tag {
   font-size: 23px;
   font-weight: 400;
-  color: #ffffff;
+  color: #FFFFFF;
+  line-height: 27.6px;
+  width: 160px;
+  height: 28px;
 }
 
 .close-button {
@@ -80,6 +91,131 @@
   font-weight: 400;
   line-height: 24px;
   margin: 0;
+}
+
+.popup-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.label {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.value {
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 22.8px;
+}
+
+.info-item-date {
+  display: flex;
+  gap: 25px;
+}
+
+.info-item-prio {
+  display: flex;
+  gap: 25px;
+}
+
+.priority-container {
+  display: flex;
+  width: 128px;
+  height: 32px;
+  padding: 4px 18px;
+  gap: 10px;
+}
+
+.info-item-assigned {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 445px;
+  height: 148px;
+}
+
+.aaginee-container {
+  width: 445px;
+  height: 56px;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.assignee-initials {
+  display: flex;
+  gap: 10px;
+  width: 42px;
+  height: 42px;
+  border-radius: 45px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.assignee-name {
+  width: 167px;
+  height: 24px;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+.popup-subtasks {
+  display: flex;
+  flex-direction: column;
+  width: 445px;
+  height: 100px;
+  gap: 8px;
+}
+
+.subtasks-label {
+  width: 445px;
+  height: 24px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+
+.subtasks-list {
+  display: flex;
+  flex-direction: column;
+  width: 445px;
+  height: 68px;
+  gap: 4px;
+}
+
+.subtask-item {
+  display: flex;
+  width: 282px;
+  height: 32px;
+  padding: 6px 16px 6px 16px;
+  gap: 16px;
+}
+
+.subtask-checkbox {
+  cursor: pointer;
+}
+
+.popup-actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 500px;
+  height: 24px;
+  gap: 8px;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  border: 0;
+  background: 0;
+  gap: 8px;
+  cursor: pointer;
 }
 
 /* The rest of the CSS remains the same as before */
