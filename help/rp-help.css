@@ -1,5 +1,9 @@
 @media screen and (max-width: 780px) {
 
+    body {
+        margin: 0;
+    }
+
     .main-container {
         padding-top: 48px;
         padding-left: 16px;

@@ -1,6 +1,7 @@
 @media screen and (max-width: 780px) {
 
     body {
+        margin: 0;
         width: 428px;
         height: 948px;
         display: flex;

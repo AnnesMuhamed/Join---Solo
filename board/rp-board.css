@@ -1,5 +1,9 @@
 @media screen and (max-width: 780px) {
 
+    body {
+        margin: 0;
+    }
+
     .board-main-container {
         overflow: auto;
         width: 396px;
