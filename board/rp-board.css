@@ -92,4 +92,146 @@
         font-weight: 700;
         line-height: 56.4px;
     }
+
+    /* Big Cards */
+
+    .popup {
+        width: 348px;
+        padding: 32px 24px;
+        border-radius: 30px;
+        box-shadow: 0px 0px 4px 0px #00000029;
+        background: #FFFFFF;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .popup-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 348px;
+        height: 32px;
+    }
+
+    .tag-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 4px 16px;
+        border-radius: 8px;
+        width: 113px;
+        height: 27px;
+        gap: 10px;
+    }
+
+    .tag {
+        font-size: 16px;
+        font-weight: 400;
+        color: #FFFFFF;
+        line-height: 19.2px;
+        width: 81px;
+    }
+
+    .popup-title {
+        font-size: 36px;
+        font-weight: 700;
+        line-height: 43.2px;
+        margin: 0;
+    }
+
+    .popup-subtitle {
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19.2px;
+        margin: 0;
+    }
+
+    .label {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19.2px;
+    }
+
+    .value {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19.2px;
+    }
+
+    .priority-container {
+        display: flex;
+        width: 124px;
+        height: 27px;
+        padding: 4px 18px;
+        gap: 10px;
+    }
+
+    .priority-label {
+        font-size: 16px;
+        line-height: 12.2px;
+    }
+
+    .info-item-assigned {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 348px;
+        height: 148px;
+    }
+
+    .label {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19.2px;
+    }
+
+    .assignee-container {
+        width: 348px;
+        height: 43px;
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+    }
+
+    .assignee-name {
+        width: 167px;
+        height: 24px;
+        font-size: 16px;
+        line-height: 19.2px;
+        font-weight: 400;
+    }
+
+    .popup-subtasks {
+        display: flex;
+        flex-direction: column;
+        width: 348px;
+        height: 95px;
+        gap: 8px;
+    }
+
+    .subtasks-label {
+        width: 348px;
+        height: 19px;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 19.2px;
+        text-align: left;
+    }
+
+    .subtasks-list {
+        display: flex;
+        flex-direction: column;
+        width: 348px;
+        height: 68px;
+        gap: 4px;
+    }
+
+    .popup-actions {
+        display: flex;
+        justify-content: flex-end;
+        width: 348px;
+        height: 24px;
+        gap: 8px;
+    }
 }
