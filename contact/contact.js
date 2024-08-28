@@ -197,14 +197,6 @@ function contactPopUp(id, firstName, lastName, email, phone, color) {
     }
 }
 
-function closeContactPopUp() {
-    document.getElementById('contactSection').style.display = 'block';
-    const popUpElement = document.querySelector('.pop-up');
-    if (popUpElement) {
-        popUpElement.classList.remove('show');
-    }
-}
-
 
 function closeContactPopUp() {
     document.getElementById('contactSection').style.display = 'block';

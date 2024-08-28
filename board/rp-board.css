@@ -95,6 +95,11 @@
 
     /* Big Cards */
 
+    .popup-container {
+        position: fixed;
+        top: -135px;
+        left: -21px;
+    }
     .popup {
         width: 348px;
         padding: 32px 24px;
