@@ -37,3 +37,13 @@ function greetUser() {
         greetedUserField.textContent = userName;
     }
 }
+
+window.onload = function() {
+  document.getElementById('sectionGreet').style.display = 'flex';
+  document.getElementById('content').style.display = 'none';
+
+  setTimeout(function() {
+      document.getElementById('sectionGreet').style.display = 'none';
+      document.getElementById('content').style.display = 'block';
+  }, 3000);
+}
