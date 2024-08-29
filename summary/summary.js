@@ -39,11 +39,16 @@ function greetUser() {
 }
 
 window.onload = function() {
-  document.getElementById('sectionGreet').style.display = 'flex';
-  document.getElementById('content').style.display = 'none';
+  if (window.innerWidth <= 780) {
+      document.getElementById('sectionGreet').style.display = 'flex';
+      document.getElementById('content').style.display = 'none';
 
-  setTimeout(function() {
+      setTimeout(function() {
+          document.getElementById('sectionGreet').style.display = 'none';
+          document.getElementById('content').style.display = 'block';
+      }, 3000);
+  } else {
       document.getElementById('sectionGreet').style.display = 'none';
-      document.getElementById('content').style.display = 'block';
-  }, 3000);
+      document.getElementById('content').style.display = 'flex';
+  }
 }
