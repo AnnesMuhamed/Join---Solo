@@ -1,6 +1,6 @@
 let isEditing = false;
 
-function openPopup(key) {
+function getHtmlElements() {
   const popupContainer = document.querySelector(".popup-container");
   const popup = document.getElementById("popup");
   const tagContainer = document.getElementById("tag-container");
@@ -14,32 +14,98 @@ function openPopup(key) {
   const assigneeInitials = document.getElementById("assignee-initials");
   const assigneeName = document.getElementById("assignee-name");
   const subtasksList = document.getElementById("subtasks-list");
+  return [
+    popupContainer,
+    popup,
+    tagContainer,
+    tag,
+    popupTitle,
+    popupSubtitle,
+    dueDateElement,
+    priorityContainer,
+    priorityLabel,
+    priorityIcon,
+    assigneeInitials,
+    assigneeName,
+    subtasksList,
+  ];
+}
 
-  const tasks = JSON.parse(sessionStorage.getItem("tasks"));
-  const task = tasks[key];
+function getTask(key) {
+  let tasks = JSON.parse(sessionStorage.getItem("tasks"));
+  let task = tasks[key];
+  return task;
+}
 
-  // Determine the task type and update the styles accordingly
+function determineTaskType(task, tagContainer, tag) {
   if (task.category === "Technical Task") {
+    tagContainer.classList.remove("user-cards-headline-container");
     tagContainer.classList.add("technical-cards-headline-container");
     tag.textContent = "Technical Task";
   } else {
+    tagContainer.classList.remove("technical-cards-headline-container");
     tagContainer.classList.add("user-cards-headline-container");
     tag.textContent = "User Story";
   }
+}
 
+function determinePopoupTitle(task, popupTitle) {
   popupTitle.textContent = task.title;
+}
+
+function determinePopoupSubtitle(task, popupSubtitle) {
   popupSubtitle.textContent = task.description;
-  dueDateElement.textContent = formatDate(task.dueDate);
+}
 
-  priorityLabel.textContent = getPriorityLabel(task.priority);
-  priorityIcon.src = getPriorityIcon(task.priority);
+function determineDate(task, dueDateElement) {
+  dueDateElement.textContent = formatDate(task.date);
+}
 
+function determineTaskPriority(task, priorityLabel, priorityIcon) {
+  if (task.priority) {
+    priorityLabel.textContent = getPriorityLabel(task.priority);
+    priorityIcon.classList.remove("d-none");
+    priorityIcon.src = getPriorityIcon(task.priority);
+  } else {
+    priorityLabel.textContent = "";
+    priorityIcon.classList.add("d-none");
+  }
+}
+
+function determineAssignedContacts(task, assigneeInitials, assigneeName) {
   if (task.assignment) {
     const assignedContacts = getContact(task.assignment);
     assigneeInitials.textContent = assignedContacts[0];
     assigneeInitials.style.backgroundColor = getRandomColor();
     assigneeName.textContent = "Anton Adler"; // Assuming the contact name is always 'Anton Adler'
   }
+}
+
+function openPopup(key) {
+  let [
+    popupContainer,
+    popup,
+    tagContainer,
+    tag,
+    popupTitle,
+    popupSubtitle,
+    dueDateElement,
+    priorityContainer,
+    priorityLabel,
+    priorityIcon,
+    assigneeInitials,
+    assigneeName,
+    subtasksList,
+  ] = getHtmlElements();
+
+  task = getTask(key);
+
+  determineTaskType(task, tagContainer, tag);
+  determinePopoupTitle(task, popupTitle);
+  determinePopoupSubtitle(task, popupSubtitle);
+  determineDate(task, dueDateElement);
+  determineTaskPriority(task, priorityLabel, priorityIcon);
+  determineAssignedContacts(task, assigneeInitials, assigneeName);
 
   subtasksList.innerHTML = "";
   const subtasks = JSON.parse(task.subtasks);
@@ -71,14 +137,14 @@ function closePopup() {
 
 function getPriorityLabel(priority) {
   switch (priority) {
-    case 1:
+    case "1":
       return "Low";
-    case 2:
+    case "2":
       return "Medium";
-    case 3:
+    case "3":
       return "High";
     default:
-      return "Unknown";
+      return "";
   }
 }
 function editTask() {
@@ -117,7 +183,7 @@ function makeFieldsEditable(task) {
   // Make due date editable
   const dateInput = document.createElement("input");
   dateInput.type = "date";
-  dateInput.value = task.dueDate;
+  dateInput.value = task.date;
   dateInput.classList.add("editable");
   dueDateElement.innerHTML = "";
   dueDateElement.appendChild(dateInput);
@@ -172,7 +238,7 @@ function saveChanges(taskKey) {
 
   task.title = document.getElementById("popup-title").textContent;
   task.description = document.getElementById("popup-subtitle").textContent;
-  task.dueDate = document.querySelector("#due-date input").value;
+  task.date = document.querySelector("#due-date input").value;
   task.priority = document.querySelector("#priority-container select").value;
 
   const subtasks = [];
@@ -189,11 +255,11 @@ function saveChanges(taskKey) {
 
 function getPriorityIcon(priority) {
   switch (priority) {
-    case 1:
+    case "1":
       return "../img/prio-low.png";
-    case 2:
+    case "2":
       return "../img/Prio media.png";
-    case 3:
+    case "3":
       return "../img/prio-high.png";
     default:
       return "";
