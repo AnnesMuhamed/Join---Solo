@@ -62,6 +62,7 @@ function determineDate(task, dueDateElement) {
 function determineTaskPriority(task, priorityLabel, priorityIcon) {
   if (task.priority) {
     priorityLabel.textContent = getPriorityLabel(task.priority);
+    priorityLabel.classList.add("d-none");
     priorityIcon.classList.remove("d-none");
     priorityIcon.src = getPriorityIcon(task.priority);
   } else {
@@ -70,7 +71,11 @@ function determineTaskPriority(task, priorityLabel, priorityIcon) {
   }
 }
 
-function createAssignedContactsFields(assigneeContainer, assignedContacts, contacts) {
+function createAssignedContactsFields(
+  assigneeContainer,
+  assignedContacts,
+  contacts
+) {
   for (let contactId of assignedContacts) {
     let currentContact = contacts[`${contactId}`];
     assigneeContainer.innerHTML += `
@@ -101,6 +106,24 @@ function determineAssignedContacts(task, assigneeContainer) {
   }
 }
 
+function determineSubtasks(task, subtasksList) {
+  subtasksList.innerHTML = "";
+  let subtasks = JSON.parse(task.subtasks);
+  subtasks.forEach((subtask, index) => {
+    let subtaskItem = document.createElement("div");
+    subtaskItem.className = "subtask-item";
+    let checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.className = "subtask-checkbox";
+    let subtaskLabel = document.createElement("span");
+    subtaskLabel.className = "subtask-label";
+    subtaskLabel.textContent = Object.keys(subtask)[0];
+    subtaskItem.appendChild(checkbox);
+    subtaskItem.appendChild(subtaskLabel);
+    subtasksList.appendChild(subtaskItem);
+  });
+}
+
 function openPopup(key) {
   let [
     popupContainer,
@@ -125,22 +148,8 @@ function openPopup(key) {
   determineDate(task, dueDateElement);
   determineTaskPriority(task, priorityLabel, priorityIcon);
   determineAssignedContacts(task, assigneeContainer);
+  determineSubtasks(task, subtasksList);
 
-  subtasksList.innerHTML = "";
-  const subtasks = JSON.parse(task.subtasks);
-  subtasks.forEach((subtask, index) => {
-    const subtaskItem = document.createElement("div");
-    subtaskItem.className = "subtask-item";
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.className = "subtask-checkbox";
-    const subtaskLabel = document.createElement("span");
-    subtaskLabel.className = "subtask-label";
-    subtaskLabel.textContent = Object.keys(subtask)[0];
-    subtaskItem.appendChild(checkbox);
-    subtaskItem.appendChild(subtaskLabel);
-    subtasksList.appendChild(subtaskItem);
-  });
   // Store the task key as a data attribute on the popup
   popup.dataset.taskKey = key;
 
@@ -148,7 +157,7 @@ function openPopup(key) {
 }
 
 function closePopup() {
-  const popupContainer = document.querySelector(".popup-container");
+  let popupContainer = document.querySelector(".popup-container");
   popupContainer.classList.remove("show");
   isEditing = false;
   resetEditButton();
@@ -166,11 +175,25 @@ function getPriorityLabel(priority) {
       return "";
   }
 }
+
+function getPriorityIcon(priority) {
+  switch (priority) {
+    case "1":
+      return "../img/prio-low.png";
+    case "2":
+      return "../img/Prio media.png";
+    case "3":
+      return "../img/prio-high.png";
+    default:
+      return "";
+  }
+}
+
 function editTask() {
-  const popup = document.getElementById("popup");
-  const taskKey = popup.dataset.taskKey;
-  const tasks = JSON.parse(sessionStorage.getItem("tasks"));
-  const task = tasks[taskKey];
+  let popup = document.getElementById("popup");
+  let taskKey = popup.dataset.taskKey;
+  let tasks = JSON.parse(sessionStorage.getItem("tasks"));
+  let task = tasks[taskKey];
 
   if (!isEditing) {
     // Switch to edit mode
@@ -186,10 +209,10 @@ function editTask() {
 }
 
 function makeFieldsEditable(task) {
-  const popupTitle = document.getElementById("popup-title");
-  const popupSubtitle = document.getElementById("popup-subtitle");
-  const dueDateElement = document.getElementById("due-date");
-  const priorityContainer = document.getElementById("priority-container");
+  let popupTitle = document.getElementById("popup-title");
+  let popupSubtitle = document.getElementById("popup-subtitle");
+  let dueDateElement = document.getElementById("due-date");
+  let priorityContainer = document.getElementById("priority-container");
 
   // Make title editable
   popupTitle.contentEditable = true;
@@ -200,7 +223,7 @@ function makeFieldsEditable(task) {
   popupSubtitle.classList.add("editable");
 
   // Make due date editable
-  const dateInput = document.createElement("input");
+  let dateInput = document.createElement("input");
   dateInput.type = "date";
   dateInput.value = task.date;
   dateInput.classList.add("editable");
@@ -208,7 +231,7 @@ function makeFieldsEditable(task) {
   dueDateElement.appendChild(dateInput);
 
   // Make priority editable
-  const prioritySelect = document.createElement("select");
+  let prioritySelect = document.createElement("select");
   prioritySelect.innerHTML = `
     <option value="1">Low</option>
     <option value="2">Medium</option>
@@ -220,13 +243,13 @@ function makeFieldsEditable(task) {
   priorityContainer.appendChild(prioritySelect);
 
   // Make subtasks editable
-  const subtasksList = document.getElementById("subtasks-list");
-  const subtasks = JSON.parse(task.subtasks);
+  let subtasksList = document.getElementById("subtasks-list");
+  let subtasks = JSON.parse(task.subtasks);
   subtasksList.innerHTML = "";
   subtasks.forEach((subtask, index) => {
-    const subtaskItem = document.createElement("div");
+    let subtaskItem = document.createElement("div");
     subtaskItem.className = "subtask-item";
-    const subtaskInput = document.createElement("input");
+    let subtaskInput = document.createElement("input");
     subtaskInput.type = "text";
     subtaskInput.value = Object.keys(subtask)[0];
     subtaskInput.className = "subtask-input editable";
@@ -236,15 +259,17 @@ function makeFieldsEditable(task) {
 }
 
 function changeEditButtonToSave() {
-  const editButton = document.querySelector(".action-button:nth-child(3)");
-  // <img src="../img/save-icon.png" alt="Save" class="action-icon" />
+  let editButton = document.querySelector(".action-button:nth-child(3)");
+  editButton.style.color = '#FFFFFF';
+  editButton.style.backgroundColor = '#2A3647';
   editButton.innerHTML = `
-    <span class="action-label">Save</span>
+    <span class="action-label">Ok</span>
+    <img src="../img/hook.png" alt="Save" class="action-icon" />
   `;
 }
 
 function resetEditButton() {
-  const editButton = document.querySelector(".action-button:nth-child(3)");
+  let editButton = document.querySelector(".action-button:nth-child(3)");
   editButton.innerHTML = `
     <img src="../img/edit-black.png" alt="Edit" class="action-icon" />
     <span class="action-label">Edit</span>
@@ -252,15 +277,15 @@ function resetEditButton() {
 }
 
 function saveChanges(taskKey) {
-  const tasks = JSON.parse(sessionStorage.getItem("tasks"));
-  const task = tasks[taskKey];
+  let tasks = JSON.parse(sessionStorage.getItem("tasks"));
+  let task = tasks[taskKey];
 
   task.title = document.getElementById("popup-title").textContent;
   task.description = document.getElementById("popup-subtitle").textContent;
   task.date = document.querySelector("#due-date input").value;
   task.priority = document.querySelector("#priority-container select").value;
 
-  const subtasks = [];
+  let subtasks = [];
   document.querySelectorAll(".subtask-input").forEach((input) => {
     subtasks.push({ [input.value]: "open" });
   });
@@ -272,21 +297,9 @@ function saveChanges(taskKey) {
   openPopup(taskKey); // Refresh the popup with new data
 }
 
-function getPriorityIcon(priority) {
-  switch (priority) {
-    case "1":
-      return "../img/prio-low.png";
-    case "2":
-      return "../img/Prio media.png";
-    case "3":
-      return "../img/prio-high.png";
-    default:
-      return "";
-  }
-}
 function deleteTask() {
-  const popup = document.getElementById("popup");
-  const taskKey = popup.dataset.taskKey;
+  let popup = document.getElementById("popup");
+  let taskKey = popup.dataset.taskKey;
 
   // Show a confirmation dialog
   if (confirm("Are you sure you want to delete this task?")) {
