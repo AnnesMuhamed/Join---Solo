@@ -328,7 +328,6 @@ function moveTo(event, state) {
     renderCards();
 }
 
-
 function searchCards() {
     let searchQuery = document.getElementById('findCards').value.toLowerCase();
 

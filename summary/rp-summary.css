@@ -100,12 +100,12 @@
     .edit-image {
         display: flex;
         position: relative;
-        width: 3.77px;
+        width: 11.77px;
         height: 19.62px;
-        top: 10.63px;
-        left: 18.84px;
+        top: 9.63px;
+        left: 14.84px;
         transition: all 0.3s ease;
-        transform: rotate(-31.25deg);
+        transform: rotate(10.75deg);
     }
 
     .todo-container {
