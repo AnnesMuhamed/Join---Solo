@@ -1,19 +1,18 @@
 let isEditing = false;
 
 function getHtmlElements() {
-  const popupContainer = document.querySelector(".popup-container");
-  const popup = document.getElementById("popup");
-  const tagContainer = document.getElementById("tag-container");
-  const tag = document.getElementById("tag");
-  const popupTitle = document.getElementById("popup-title");
-  const popupSubtitle = document.getElementById("popup-subtitle");
-  const dueDateElement = document.getElementById("due-date");
-  const priorityContainer = document.getElementById("priority-container");
-  const priorityLabel = document.getElementById("priority-label");
-  const priorityIcon = document.getElementById("priority-icon");
-  const assigneeInitials = document.getElementById("assignee-initials");
-  const assigneeName = document.getElementById("assignee-name");
-  const subtasksList = document.getElementById("subtasks-list");
+  let popupContainer = document.querySelector(".popup-container");
+  let popup = document.getElementById("popup");
+  let tagContainer = document.getElementById("tag-container");
+  let tag = document.getElementById("tag");
+  let popupTitle = document.getElementById("popup-title");
+  let popupSubtitle = document.getElementById("popup-subtitle");
+  let dueDateElement = document.getElementById("due-date");
+  let priorityContainer = document.getElementById("priority-container");
+  let priorityLabel = document.getElementById("priority-label");
+  let priorityIcon = document.getElementById("priority-icon");
+  let assigneeContainer = document.getElementById("assignee-container");
+  let subtasksList = document.getElementById("subtasks-list");
   return [
     popupContainer,
     popup,
@@ -25,8 +24,7 @@ function getHtmlElements() {
     priorityContainer,
     priorityLabel,
     priorityIcon,
-    assigneeInitials,
-    assigneeName,
+    assigneeContainer,
     subtasksList,
   ];
 }
@@ -72,12 +70,34 @@ function determineTaskPriority(task, priorityLabel, priorityIcon) {
   }
 }
 
-function determineAssignedContacts(task, assigneeInitials, assigneeName) {
-  if (task.assignment) {
-    const assignedContacts = getContact(task.assignment);
-    assigneeInitials.textContent = assignedContacts[0];
+function createAssignedContactsFields(assigneeContainer, assignedContacts, contacts) {
+  for (let contactId of assignedContacts) {
+    let currentContact = contacts[`${contactId}`];
+    assigneeContainer.innerHTML += `
+            <div class="assignee-initials" id="${contactId}-assignee-initials">${getAssignedContactInitials(
+      currentContact["firstName"],
+      currentContact["lastName"]
+    )}</div>
+            <span class="assignee-name" id="${contactId}-assignee-name">${
+      currentContact.firstName
+    } ${currentContact.lastName}</span>
+      `;
+    let assigneeInitials = document.getElementById(
+      `${contactId}-assignee-initials`
+    );
     assigneeInitials.style.backgroundColor = getRandomColor();
-    assigneeName.textContent = "Anton Adler"; // Assuming the contact name is always 'Anton Adler'
+  }
+}
+
+function determineAssignedContacts(task, assigneeContainer) {
+  if (task.assignment) {
+    let contacts = JSON.parse(sessionStorage.getItem("contacts"));
+    let assignedContactsIds = task.assignment;
+    let assignedContacts = assignedContactsIds.split(",");
+    assigneeContainer.innerHTML = "";
+    createAssignedContactsFields(assigneeContainer, assignedContacts, contacts);
+  } else {
+    assigneeContainer.innerHTML = "";
   }
 }
 
@@ -93,8 +113,7 @@ function openPopup(key) {
     priorityContainer,
     priorityLabel,
     priorityIcon,
-    assigneeInitials,
-    assigneeName,
+    assigneeContainer,
     subtasksList,
   ] = getHtmlElements();
 
@@ -105,7 +124,7 @@ function openPopup(key) {
   determinePopoupSubtitle(task, popupSubtitle);
   determineDate(task, dueDateElement);
   determineTaskPriority(task, priorityLabel, priorityIcon);
-  determineAssignedContacts(task, assigneeInitials, assigneeName);
+  determineAssignedContacts(task, assigneeContainer);
 
   subtasksList.innerHTML = "";
   const subtasks = JSON.parse(task.subtasks);
