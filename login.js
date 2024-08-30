@@ -25,13 +25,14 @@ function loginPage() {
             <label class="option" for="option">
                 <input type="checkbox" name="option" id="option"> Remember me
             </label>
-        </form>
+        
             <div class="button-container">
                 <button type="submit" class="login-button" disabled>Log in</button>
                 <a href="./summary/summary.html">
                     <button type="button" class="guest-button">Guest Log in</button>
                 </a>
             </div>
+        </form>
     </div>
     <div class="signup-container hidden">
         <span class="not-a-user">Not a Join user?</span>
@@ -87,7 +88,7 @@ function loginPage() {
             } else {
                 sessionStorage.setItem('loggedInUser', JSON.stringify(userFound));
             }
-            window.location.href = './summary/summary.html'; // Passe den Pfad an, falls erforderlich
+            window.location.href = '../summary/summary.html';
         } else {
             alert('Falscher Benutzername oder Passwort');
         }
