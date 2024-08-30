@@ -290,15 +290,44 @@ function createCard(key, taskCardsContainer, tasks) {
 }
 
 function renderCards() {
-	let tasks = JSON.parse(sessionStorage.getItem('tasks'));
-	let allTaskCardsContainer = document.querySelectorAll('.drag-area');
-	allTaskCardsContainer.forEach(column => column.innerHTML = '');
-	Object.keys(tasks).forEach(key => {
-		let task = tasks[`${key}`];
-		let taskCardsContainer = document.getElementById(`${task['state']}`);
-		createCard(key, taskCardsContainer, task);
-	});
+    let tasks = JSON.parse(sessionStorage.getItem('tasks'));
+    let allTaskCardsContainer = document.querySelectorAll('.drag-area');
+
+    allTaskCardsContainer.forEach(column => {
+        column.innerHTML = '';
+
+        let noTasksDiv = document.createElement('div');
+        noTasksDiv.classList.add('no-tasks-message');
+        noTasksDiv.innerHTML = '<span>No tasks to do</span>';
+        column.appendChild(noTasksDiv);
+
+        let tasksInColumn = Object.keys(tasks).filter(key => tasks[key]['state'] === column.id);
+
+        if (tasksInColumn.length === 0) {
+            noTasksDiv.style.display = 'flex';
+        } else {
+            noTasksDiv.style.display = 'none';
+        }
+
+        tasksInColumn.forEach(key => {
+            let task = tasks[key];
+            createCard(key, column, task);
+        });
+    });
 }
+
+function moveTo(event, state) {
+    event.preventDefault();
+    let tasks = JSON.parse(sessionStorage.getItem('tasks'));
+    let element = tasks[`${currentDraggedElement}`];
+    if (element) {
+        element.state = state;
+        sessionStorage.setItem('tasks', JSON.stringify(tasks));
+        updateData(PATH_TO_TASKS, tasks);
+    }
+    renderCards();
+}
+
 
 function searchCards() {
     let searchQuery = document.getElementById('findCards').value.toLowerCase();
