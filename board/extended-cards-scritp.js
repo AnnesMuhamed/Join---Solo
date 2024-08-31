@@ -79,13 +79,13 @@ function createAssignedContactsFields(
   for (let contactId of assignedContacts) {
     let currentContact = contacts[`${contactId}`];
     assigneeContainer.innerHTML += `
-            <div class="assignee-initials" id="${contactId}-assignee-initials">${getAssignedContactInitials(
+           <div class="assignee-underContainer">  <div class="assignee-initials" id="${contactId}-assignee-initials">${getAssignedContactInitials(
       currentContact["firstName"],
       currentContact["lastName"]
     )}</div>
             <span class="assignee-name" id="${contactId}-assignee-name">${
       currentContact.firstName
-    } ${currentContact.lastName}</span>
+    } ${currentContact.lastName}</span> </div>
       `;
     let assigneeInitials = document.getElementById(
       `${contactId}-assignee-initials`
