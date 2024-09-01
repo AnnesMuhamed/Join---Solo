@@ -1,0 +1,45 @@
+.radio-button-group {
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.radio-button {
+  display: none;
+}
+
+.radio-label {
+  display: flex;
+  padding: 16px 10px 16px 10px;
+  width: 116px;
+  height: 24px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 10px;
+  box-shadow: 0 0 4px 0 #0000004a;
+}
+
+.radio-label span {
+  font-size: 20px;
+}
+
+.radio-label:hover {
+  background-color: black;
+}
+
+#prio-high:checked + .radio-label {
+  background-color: #ff3d00;
+}
+
+#prio-med:checked + .radio-label {
+  background-color: #ffa800;
+}
+
+#prio-low:checked + .radio-label {
+  background-color: #7ae229;
+}
+
+.radio-button:not(checked) + .radio-label {
+  background-color: white;
+}
