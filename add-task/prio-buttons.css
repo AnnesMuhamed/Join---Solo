@@ -28,15 +28,18 @@
   background-color: black;
 }
 
-#prio-high:checked + .radio-label {
+#prio-high:checked + .radio-label,
+#prio-high-edit:checked + .radio-label {
   background-color: #ff3d00;
 }
 
-#prio-med:checked + .radio-label {
+#prio-med:checked + .radio-label,
+#prio-med-edit:checked + .radio-label {
   background-color: #ffa800;
 }
 
-#prio-low:checked + .radio-label {
+#prio-low:checked + .radio-label,
+#prio-low-edit:checked + .radio-label {
   background-color: #7ae229;
 }
 
