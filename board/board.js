@@ -51,13 +51,22 @@ function getAssignedContactInitials(firstName, lastName) {
 }
 
 function getContact(assignedContactsIds) {
-	let contacts = JSON.parse(sessionStorage.getItem('contacts'));
-	let assignedContacts = assignedContactsIds.split(',');
-	for (let n = 0; n < assignedContacts.length; n++) {
-		let currentContact = contacts[`${assignedContacts[n]}`];
-		assignedContacts[n] = `${getAssignedContactInitials(currentContact['firstName'], currentContact['lastName'])}`;
-	}
-	return assignedContacts;
+    let contacts = JSON.parse(sessionStorage.getItem('contacts'));
+    console.log(`Contacts: ${contacts}`);
+    let assignedContacts = assignedContactsIds.split(',');
+    console.log(`Assigned Contacts: ${assignedContacts}`);
+    for (let n = 0; n < assignedContacts.length; n++) {
+        let currentContact = contacts[`${assignedContacts[n]}`];
+        if(!currentContact) {
+            console.log(`Broken Assigned Contacts: ${assignedContacts}`);
+        } else {
+            console.log(`Current Contact: ${currentContact}`);
+            console.log(`First Name: ${currentContact['firstName']}`);
+            console.log(`Last Name: ${currentContact['lastName']}`);
+            assignedContacts[n] = `${getAssignedContactInitials(currentContact['firstName'], currentContact['lastName'])}`;
+        }
+    }
+    return assignedContacts;
 }
 
 function formatDate(dateString) {
