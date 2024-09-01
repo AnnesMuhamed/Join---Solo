@@ -1,3 +1,116 @@
+@media screen and (max-width: 1440px) {
+    #sectionLogin {
+        width: 1280px;
+    }
+
+    #overlay {
+        width: 1280px !important;
+        width: 0;
+        background-color: #2A3647;
+        height: 926px;
+    }
+
+    .signup-container {
+        width: 890px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    #sectionLogin {
+        width: 1024px;
+    }
+
+    #overlay {
+        width: 1024px !important;
+        width: 0;
+        background-color: #2A3647;
+        height: 926px;
+    }
+
+    .signup-container {
+        width: 890px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    #sectionLogin {
+        width: 920px;
+    }
+
+    #overlay {
+        width: 920px !important;
+        width: 0;
+        background-color: #2A3647;
+        height: 926px;
+    }
+
+    .signup-container {
+        width: 700px;
+    }
+
+    #login-page {
+        width: 452px;
+    }
+}
+
+@media screen and (max-width: 920px) {
+    #sectionLogin {
+        width: 780px;
+    }
+
+    #overlay {
+        width: 780px !important;
+        width: 0;
+        background-color: #2A3647;
+        height: 926px;
+    }
+
+    .signup-container {
+        width: 700px;
+    }
+
+    #login-page {
+        width: 396px;
+        height: 515px;
+    }
+
+    .login-headline {
+        font-weight: 700;
+        font-size: 47px;
+        line-height: 56.4px;
+        display: block;
+        margin-block-start: 0;
+        margin-block-end: 0;
+
+    }
+
+    .blue-line {
+        margin-left: 22px;
+        width: 88px;
+        height: 3px;
+        border: 3px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        height: 192px;
+        width: 364px;
+        justify-content: space-between;
+    }
+
+    #username,
+    .login-password {
+        width: 364px;
+        height: 48px;
+        padding: 12px 21px 12px 21px;
+        gap: 10px;
+        border-radius: 10px;
+        border: 1px 0px 0px 0px;
+    }
+}
+
 @media screen and (max-width: 780px) {
     /* Sign up */
 
@@ -89,11 +202,6 @@
         cursor: pointer;
     }
 
-    .form {
-        width: 364px;
-        height: 296px;
-    }
-
     .input-container {
         width: 364px;
         height: 48px;
@@ -127,10 +235,31 @@
     }
 
     #login-page {
+        display: flex;
+        gap: 32px;
+        justify-content: space-evenly;
         width: 396px;
         height: 515px;
-        justify-content: center;
 
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        height: 192px;
+        width: 364px;
+        align-items: center;
+        justify-content: center;
+        /* width: 364px;
+        height: 296px; */
+    }
+
+    .option {
+        display: flex;
+        padding: 0px 16px 0px 16px;
+        gap: 8px;
+        width: 323px;
     }
 
     .dark-logo {
@@ -173,15 +302,14 @@
         border: 3px;
     }
 
-    form {
+    /* form {
         display: flex;
         flex-direction: column;
         gap: 16px;
         height: 192px;
         width: 364px;
         justify-content: space-between;
-        align-items: center;
-    }
+    } */
 
     #username,
     .login-password {
@@ -226,19 +354,29 @@
         text-align: center;
     }
 
-
-
+    
+    
 
 
 
 }
 
-@media screen and (max-width: 640px) {}
+@media screen and (max-width: 640px) {
 
-@media screen and (max-width: 475px) {}
+}
 
-@media screen and (max-width: 400px) {}
+@media screen and (max-width: 475px) {
 
-@media screen and (max-width: 375px) {}
+}
 
-@media screen and (max-width: 350px) {}
+@media screen and (max-width: 400px) {
+
+}
+
+@media screen and (max-width: 375px) {
+
+}
+
+@media screen and (max-width: 350px) {
+
+}
