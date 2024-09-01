@@ -24,10 +24,6 @@
   font-size: 20px;
 }
 
-.radio-label:hover {
-  background-color: black;
-}
-
 #prio-high:checked + .radio-label,
 #prio-high-edit:checked + .radio-label {
   background-color: #ff3d00;
@@ -43,6 +39,6 @@
   background-color: #7ae229;
 }
 
-.radio-button:not(checked) + .radio-label {
+.radio-button:not(:checked) + .radio-label {
   background-color: white;
 }

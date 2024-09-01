@@ -1,7 +1,8 @@
 let isEditing = false;
 
 document.addEventListener("DOMContentLoaded", function () {
-  radioButtonsSelectState();
+  // radioButtonsSelectState();
+  // observePopup();
 });
 
 function getHtmlElements() {
@@ -223,34 +224,68 @@ function createEditableDateField(task) {
   dueDateElement.appendChild(dateInput);
 }
 
-function createPrioButtons(radioButtonGroup) {
-  let priorityObject = {'high': 3, 'med': 2, 'low': 1};
+function handleMutations(mutationsList) {
+  for (let mutation of mutationsList) {
+    if (mutation.type === "childList") {
+      // Überprüfe, ob neue Radiobuttons hinzugefügt wurden
+      const addedNodes = mutation.addedNodes;
+      addedNodes.forEach((node) => {
+        if (
+          node.nodeType === Node.ELEMENT_NODE &&
+          node.matches('input[type="radio"]')
+        ) {
+          // Füge Eventlistener zum neu hinzugefügten Radiobutton hinzu
+          radioButtonsSelectState();
+        }
+      });
+    }
+  }
+}
 
-  for(let key of Object.keys(priorityObject)) {
-    let buttonLabel = document.createElement('label');
-    let buttonSpan = document.createElement('span');
-    let buttonImage = document.createElement('img');
-    let buttonInput = document.createElement('input');
+function observePopup() {
+  let popup = document.getElementById("popup");
+
+  // Erstelle einen neuen MutationObserver und übergebe die Callback-Funktion
+  let observer = new MutationObserver(handleMutations);
+
+  // Definiere die Beobachtungsoptionen
+  let config = {
+    childList: true, // Beobachte das Hinzufügen/Entfernen von Knoten
+    subtree: true, // Beobachte auch Unterelemente
+  };
+
+  // Starte die Beobachtung
+  observer.observe(popup, config);
+}
+
+function createPrioButtons(radioButtonGroup) {
+  let priorityObject = { high: 3, med: 2, low: 1 };
+
+  for (let key of Object.keys(priorityObject)) {
+    let buttonLabel = document.createElement("label");
+    let buttonSpan = document.createElement("span");
+    let buttonImage = document.createElement("img");
+    let buttonInput = document.createElement("input");
 
     buttonLabel.htmlFor = `prio-${key}`;
-    buttonLabel.className = 'radio-label';
-    switch(key) {
-      case 'high':
-          buttonSpan.textContent = 'Urgent';
-          break;
-      case 'med':
-          buttonSpan.textContent = 'Medium';
-          break;
-      case 'low':
-          buttonSpan.textContent = 'Low';
-          break;
+    buttonLabel.className = "radio-label";
+    switch (key) {
+      case "high":
+        buttonSpan.textContent = "Urgent";
+        break;
+      case "med":
+        buttonSpan.textContent = "Medium";
+        break;
+      case "low":
+        buttonSpan.textContent = "Low";
+        break;
     }
     buttonImage.src = `../img/add-task/prio-${key}.png`;
-    buttonInput.type = 'radio';
-    buttonInput.id = `prio-${key}-edit`;
-    buttonInput.name = 'prios';
+    buttonInput.type = "radio";
+    buttonInput.id = `prio-${key}`;
+    buttonInput.name = "prios";
     buttonInput.value = `${priorityObject[key]}`;
-    buttonInput.className = 'radio-button';
+    buttonInput.className = "radio-button";
 
     buttonLabel.appendChild(buttonSpan);
     buttonLabel.appendChild(buttonImage);
@@ -260,27 +295,27 @@ function createPrioButtons(radioButtonGroup) {
 }
 
 function createPrioButtonsGroup(prioLabel) {
-  let radioButtonGroup = document.createElement('div');
-  radioButtonGroup.id = 'radio-button-group-edit';
-  radioButtonGroup.classList.add('radio-button-group');
+  let radioButtonGroup = document.createElement("div");
+  radioButtonGroup.id = "radio-button-group-edit";
+  radioButtonGroup.classList.add("radio-button-group");
   createPrioButtons(radioButtonGroup);
   prioLabel.appendChild(radioButtonGroup);
 }
 
 function createEditablePrioButtons(task) {
   priority = task.priority;
-  let prioLabel = document.getElementById('priority-label');
-  let prioIcon = document.getElementById('priority-icon');
-  prioLabel.classList.remove('d-none');
-  prioLabel.innerHTML = '';
-  prioIcon.classList.add('d-none');
+  let prioLabel = document.getElementById("priority-label");
+  let prioIcon = document.getElementById("priority-icon");
+  prioLabel.classList.remove("d-none");
+  prioLabel.innerHTML = "";
+  prioIcon.classList.add("d-none");
   createPrioButtonsGroup(prioLabel);
 }
 
 function makeFieldsEditable(task) {
   let popupTitle = document.getElementById("popup-title");
   let popupSubtitle = document.getElementById("popup-subtitle");
-  let infoItemPrio = document.getElementById('info-item-prio');
+  let infoItemPrio = document.getElementById("info-item-prio");
 
   // Make title editable
   popupTitle.contentEditable = true;
@@ -294,14 +329,14 @@ function makeFieldsEditable(task) {
   createEditableDateField(task);
 
   // Make priority editable
-  infoItemPrio.style.flexDirection = 'column';
+  infoItemPrio.style.flexDirection = "column";
   createEditablePrioButtons(task);
 }
 
 function makeFieldsReadOnly() {
   let popupTitle = document.getElementById("popup-title");
   let popupSubtitle = document.getElementById("popup-subtitle");
-  let infoItemPrio = document.getElementById('info-item-prio');
+  let infoItemPrio = document.getElementById("info-item-prio");
 
   popupTitle.contentEditable = false;
   popupTitle.classList.remove("editable");
@@ -309,7 +344,7 @@ function makeFieldsReadOnly() {
   popupSubtitle.contentEditable = false;
   popupSubtitle.classList.remove("editable");
 
-  infoItemPrio.style.flexDirection = '';
+  infoItemPrio.style.flexDirection = "";
 }
 
 function changeEditButtonToSave() {
