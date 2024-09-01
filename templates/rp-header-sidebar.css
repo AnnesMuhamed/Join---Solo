@@ -102,4 +102,8 @@
     .dropdown-content a:not(#logout-link) {
         padding: 8px 0px;
     }
+
+    .menu-button.active {
+        border-radius: 16px;
+      }
 }
