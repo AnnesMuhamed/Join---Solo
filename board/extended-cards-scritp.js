@@ -1,10 +1,5 @@
 let isEditing = false;
 
-document.addEventListener("DOMContentLoaded", function () {
-  // radioButtonsSelectState();
-  // observePopup();
-});
-
 function getHtmlElements() {
   let popupContainer = document.querySelector(".popup-container");
   let popup = document.getElementById("popup");
@@ -222,40 +217,6 @@ function createEditableDateField(task) {
   dateInput.classList.add("editable");
   dueDateElement.innerHTML = "";
   dueDateElement.appendChild(dateInput);
-}
-
-function handleMutations(mutationsList) {
-  for (let mutation of mutationsList) {
-    if (mutation.type === "childList") {
-      // Überprüfe, ob neue Radiobuttons hinzugefügt wurden
-      const addedNodes = mutation.addedNodes;
-      addedNodes.forEach((node) => {
-        if (
-          node.nodeType === Node.ELEMENT_NODE &&
-          node.matches('input[type="radio"]')
-        ) {
-          // Füge Eventlistener zum neu hinzugefügten Radiobutton hinzu
-          radioButtonsSelectState();
-        }
-      });
-    }
-  }
-}
-
-function observePopup() {
-  let popup = document.getElementById("popup");
-
-  // Erstelle einen neuen MutationObserver und übergebe die Callback-Funktion
-  let observer = new MutationObserver(handleMutations);
-
-  // Definiere die Beobachtungsoptionen
-  let config = {
-    childList: true, // Beobachte das Hinzufügen/Entfernen von Knoten
-    subtree: true, // Beobachte auch Unterelemente
-  };
-
-  // Starte die Beobachtung
-  observer.observe(popup, config);
 }
 
 function createPrioButtons(radioButtonGroup) {
