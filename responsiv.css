@@ -129,6 +129,7 @@
     #login-page {
         width: 396px;
         height: 515px;
+        justify-content: center;
 
     }
 
@@ -179,6 +180,7 @@
         height: 192px;
         width: 364px;
         justify-content: space-between;
+        align-items: center;
     }
 
     #username,
@@ -224,8 +226,8 @@
         text-align: center;
     }
 
-    
-    
+
+
 
 
 
