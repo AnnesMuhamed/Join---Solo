@@ -283,7 +283,7 @@ html::-webkit-scrollbar {
     flex-direction: column;
     width: 178px;
     height: 80px;
-    gap: 13px;
+    gap: 37px;
     justify-content: flex-end;
 }
 
