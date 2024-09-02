@@ -97,7 +97,7 @@ function startDragging(event) {
   event.target.classList.add("tilted"); // Add the tilt effect
 }
 
-function endDragging(event) {
+function endDragging() {
   if (currentDraggedElement) {
     document.getElementById(currentDraggedElement).classList.remove("tilted"); // Remove the tilt effect
   }
@@ -207,7 +207,7 @@ function createSubtaskCounter(key, task) {
   subtaskContainer.appendChild(subtasksCounter);
 }
 
-function createProgressContainer(key, task) {
+function createProgressContainer(key) {
   let subtaskContainer = document.getElementById(`${key}-subtask`);
   let progressContainer = document.createElement("div");
   progressContainer.id = `${key}-progress`;
@@ -300,7 +300,7 @@ function createCard(key, taskCardsContainer, task) {
   createDescription(key, task);
   createSubtaskContainer(key);
   if (JSON.parse(task.subtasks).length > 2) {
-    createProgressContainer(key, task);
+    createProgressContainer(key);
     createProgressBar(key, task);
     createSubtaskCounter(key, task);
   }
