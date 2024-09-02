@@ -276,7 +276,7 @@ function createEditablePrioButtons(task) {
 function makeFieldsEditable(task) {
   let popupTitle = document.getElementById("popup-title");
   let popupSubtitle = document.getElementById("popup-subtitle");
-  let infoItemPrio = document.getElementById("info-item-prio");
+  // let infoItemPrio = document.getElementById("info-item-prio");
 
   // Make title editable
   popupTitle.contentEditable = true;
@@ -290,14 +290,14 @@ function makeFieldsEditable(task) {
   createEditableDateField(task);
 
   // Make priority editable
-  infoItemPrio.style.flexDirection = "column";
+  // infoItemPrio.style.flexDirection = "column";
   createEditablePrioButtons(task);
 }
 
 function makeFieldsReadOnly() {
   let popupTitle = document.getElementById("popup-title");
   let popupSubtitle = document.getElementById("popup-subtitle");
-  let infoItemPrio = document.getElementById("info-item-prio");
+  // let infoItemPrio = document.getElementById("info-item-prio");
 
   popupTitle.contentEditable = false;
   popupTitle.classList.remove("editable");
@@ -305,13 +305,13 @@ function makeFieldsReadOnly() {
   popupSubtitle.contentEditable = false;
   popupSubtitle.classList.remove("editable");
 
-  infoItemPrio.style.flexDirection = "";
+  // infoItemPrio.style.flexDirection = "";
 }
 
 function changeEditButtonToSave() {
   let editButton = document.querySelector(".action-button:nth-child(3)");
-  editButton.style.color = "#FFFFFF";
-  editButton.style.backgroundColor = "#2A3647";
+  // editButton.style.color = "#FFFFFF";
+  // editButton.style.backgroundColor = "#2A3647";
   editButton.innerHTML = `
     <span class="action-label">Ok</span>
     <img src="../img/hook.png" alt="Save" class="action-icon" />
