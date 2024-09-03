@@ -348,7 +348,7 @@
 
     #logo-container {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: flex-start;
         width: 274px;
         height: 338.07px;

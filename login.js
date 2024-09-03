@@ -130,7 +130,7 @@ function initialize() {
             overlay.style.alignItems = 'flex-start';
             overlay.style.justifyContent = 'flex-start';
         }, 500);
-    }, 3000);
+    }, 300000000);
 }
 
 
