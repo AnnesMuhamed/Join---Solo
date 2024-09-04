@@ -1,3 +1,20 @@
+@media screen and (max-width: 1440px) {
+   
+}
+
+@media screen and (max-width: 1280px) {
+    
+
+}
+
+@media screen and (max-width: 1024px) {
+    
+}
+
+@media screen and (max-width: 920px) {
+
+}
+
 @media screen and (max-width: 780px) {
     /* Summary */
 
@@ -336,4 +353,24 @@
         text-align: left;
         color: #29ABE2;
     }
+}
+
+@media screen and (max-width: 640px) {
+
+}
+
+@media screen and (max-width: 475px) {
+
+}
+
+@media screen and (max-width: 400px) {
+
+}
+
+@media screen and (max-width: 375px) {
+
+}
+
+@media screen and (max-width: 350px) {
+
 }

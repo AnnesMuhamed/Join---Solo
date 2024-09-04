@@ -27,9 +27,13 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #F6F7F8;
-  transition: opacity 500ms ease-in-out;
+  background-color: #2A3647;
+  opacity: 1;
+  transition: background-color 0.5s ease, opacity 0.5s ease;
+}
 
+.overlay-active {
+  background-color: #F6F7F8 !important;
 }
 
 .signup-container {
@@ -42,6 +46,12 @@ html {
   top: 67px;
   gap: 35px;
   transition: opacity 500ms ease-in-out;
+}
+
+.signup-container.show,
+.link-container.show {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
 }
 
 .not-a-user {
@@ -89,6 +99,18 @@ html {
   transition: all 100ms ease-in-out;
 }
 
+#main-logo-white {
+  display: block;
+  
+}
+
+#main-logo-dark {
+  display: none;
+  width: 64px;
+  height: 78.03px;
+  transition: all 0.5s ease;
+}
+
 .white-logo {
   display: none;
 }
@@ -98,7 +120,7 @@ html {
 }
 
 .show {
-  display: flex;
+  display: flex !important;
 }
 
 .move-to-corner {
@@ -107,11 +129,15 @@ html {
   left: 77px;
   width: 100.03px;
   height: 121.97px;
+  transition: all 0.5s ease;
 }
 
 .move-to-corner #main-logo {
   width: 100.03px;
   height: 121.97px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  transition: all 0.5s ease;
 }
 
 #login-page {

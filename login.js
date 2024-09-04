@@ -2,7 +2,7 @@ function loginPage() {
     let logInPage = document.getElementById('sectionLogin');
 
     logInPage.innerHTML = `
-    <div id="overlay">
+    <div id="overlay" class="overlay">
         <div id="logo-container">
             <img class="dark-logo" src="./img/loginLogo.png" alt="Logo" id="main-logo-dark">
             <img class="white-logo" src="./img/template/login-logo-rp.png" alt="Logo" id="main-logo-white">
@@ -98,40 +98,27 @@ function loginPage() {
 function initialize() {
     loginPage();
 
+   
     setTimeout(() => {
         const overlay = document.getElementById('overlay');
         const logoContainer = document.getElementById('logo-container');
         const loginPage = document.getElementById('login-page');
         const signupContainer = document.querySelector('.signup-container');
         const linkContainer = document.querySelector('.link-container');
-        let whiteLogo = document.getElementById('main-logo-white')
-        let darkLogo = document.getElementById('main-logo-dark')
+        const whiteLogo = document.getElementById('main-logo-white');
+        const darkLogo = document.getElementById('main-logo-dark');
 
-        overlay.style.opacity = 1;
+        overlay.classList.add('overlay-active'); 
         logoContainer.classList.add('move-to-corner');
-        logoContainer.style.alignItems = 'flex-start';
-        loginPage.style.display = 'flex';
-        loginPage.classList.remove('hidden');
-        signupContainer.classList.remove('hidden');
-        linkContainer.classList.remove('hidden');
-        overlay.style.backgroundColor = '#F6F7F8';
+        loginPage.classList.add('show');
+        signupContainer.classList.add('show');
+        linkContainer.classList.add('show');
+
         whiteLogo.style.display = 'none';
         darkLogo.style.display = 'block';
-        darkLogo.style.width = '64px';
-        darkLogo.style.height = '78.03px';
-
-
-
-
-        setTimeout(() => {
-            overlay.style.width = '1440px';
-            overlay.style.height = '1024px';
-            overlay.style.display = 'hidden';
-            overlay.style.alignItems = 'flex-start';
-            overlay.style.justifyContent = 'flex-start';
-        }, 500);
     }, 3000);
 }
+
 
 
 document.addEventListener('DOMContentLoaded', initialize);
