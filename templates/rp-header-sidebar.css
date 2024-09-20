@@ -1,7 +1,360 @@
+@media screen and (max-width: 1440px) {
+    body {
+        margin: 0;
+        width: 100%;
+        height: 926px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header {
+        padding: 20px 40px 20px 348px;
+    }
+
+    .sidebar {
+        width: 200px;
+        position: absolute;
+    }
+
+    .sidebar-top {
+        width: 200px;
+    }
+
+    .menu {
+        width: 200px;
+    }
+
+    .menu-button-design,
+    .menu-button-lower-design {
+        width: 200px;
+        padding: 8px 44px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    body {
+        margin: 0;
+        width: 100%;
+        height: 926px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header {
+        padding: 20px 40px 20px 348px;
+    }
+
+    .sidebar {
+        width: 200px;
+        position: absolute;
+    }
+
+    .sidebar-top {
+        width: 200px;
+    }
+
+    .menu {
+        width: 200px;
+    }
+
+    .menu-button-design,
+    .menu-button-lower-design {
+        width: 200px;
+        padding: 8px 44px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    body {
+        margin: 0;
+        width: 100%;
+        height: 926px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header {
+        padding: 20px 40px 20px 250px;
+    }
+
+    .sidebar {
+        width: 160px;
+        position: absolute;
+    }
+
+    .sidebar-top {
+        width: 160px;
+    }
+
+    .menu {
+        width: 160px;
+    }
+
+    .menu-button-design,
+    .menu-button-lower-design {
+        width: 160px;
+        padding: 8px 30px;
+    }
+
+    .font-size {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 920px) {
+    body {
+        width: 100%;
+    }
+
+    .header {
+        height: 80px;
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+        padding: 0;
+        justify-content: space-around;
+    }
+
+    .header-join-logo {
+        width: 32px;
+        height: 39.02px;
+        gap: 10px;
+        display: block !important;
+    }
+
+    .help-button {
+        display: none;
+    }
+
+    .header-right {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 642px;
+        height: 80px;
+        gap: 16px;
+        padding: 20px 16px 20px 16px;
+        justify-content: space-between;
+    }
+
+    .headline {
+        display: none;
+    }
+
+    .sidebar-nav {
+        display: none;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .sidebar-logo {
+        display: none;
+    }
+
+    .sidebar {
+        background-color: #2a3647;
+        z-index: 1;
+        position: absolute;
+        top: 902px;
+        width: 100%;
+        height: 80px;
+    }
+
+    .sidebar-top {
+        width: 100%;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        height: 80px;
+        width: 100%;
+        padding: 0;
+    }
+
+    .menu {
+        display: flex;
+        width: 780px;
+        height: 80px;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: row;
+    }
+
+    .menu-button-design {
+        display: flex;
+        align-items: center;
+        width: 80px;
+        height: 76px;
+        padding: 8px 1px 8px 1px;
+        gap: 8px;
+        flex-direction: column;
+    }
+
+    .menu-button-design:hover {
+        cursor: pointer;
+        background-color: #091931;
+        border-radius: 16px;
+    }
+
+    .font-size {
+        font-size: 14px;
+    }
+
+    .dropdown-content a:not(#logout-link) {
+        padding: 8px 0px;
+    }
+
+    .menu-button.active {
+        border-radius: 16px;
+      }
+}
+
 @media screen and (max-width: 780px) {
     body {
         margin: 0;
-        width: 428px;
+        width: 100%;
+        height: 926px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header {
+        height: 80px;
+        font-size: 20px;
+        font-weight: 700;
+        text-align: center;
+        padding: 0;
+    }
+
+    .header-join-logo {
+        width: 32px;
+        height: 39.02px;
+        gap: 10px;
+        display: block !important;
+    }
+
+    .help-button {
+        display: none;
+    }
+
+    .header-right {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 642px;
+        height: 80px;
+        gap: 16px;
+        padding: 20px 16px 20px 16px;
+        justify-content: space-between;
+    }
+
+    .headline {
+        display: none;
+    }
+
+    .sidebar-nav {
+        display: none;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .sidebar-logo {
+        display: none;
+    }
+
+    .sidebar {
+        background-color: #2a3647;
+        z-index: 1;
+        position: absolute;
+        width: 100%;
+        height: 80px;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        height: 80px;
+        width: 100%;
+        padding: 0;
+    }
+
+    .menu {
+        display: flex;
+        width: 642px;
+        height: 80px;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: row;
+    }
+
+    .menu-button-design {
+        display: flex;
+        align-items: center;
+        width: 80px;
+        height: 76px;
+        padding: 8px 1px 8px 1px;
+        gap: 8px;
+        flex-direction: column;
+    }
+
+    .menu-button-design:hover {
+        cursor: pointer;
+        background-color: #091931;
+        border-radius: 16px;
+    }
+
+    .font-size {
+        font-size: 14px;
+    }
+
+    .dropdown-content a:not(#logout-link) {
+        padding: 8px 0px;
+    }
+
+    .menu-button.active {
+        border-radius: 16px;
+      }
+}
+
+@media screen and (max-width: 640px) {
+    body {
+        width: 100%;
+    }
+
+    .sidebar {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;;
+    }
+
+    .sidebar-nav {
+        width: 100%;
+    }
+
+    .menu {
+        width: 100%;
+    }
+
+    .greet {
+        gap: 8px;
+    }
+
+    .gm {
+        display: flex;
+        justify-content: flex-end;
+        font-size: 26px;
+    }
+}
+
+@media screen and (max-width: 475px) {
+    body {
+        margin: 0;
+        width: 100%;
         height: 926px;
         display: flex;
         flex-direction: column;
@@ -58,7 +411,7 @@
         z-index: 1;
         position: absolute;
         top: 846px;
-        width: 428px;
+        width: 100%;
         height: 80px;
     }
 
@@ -106,4 +459,20 @@
     .menu-button.active {
         border-radius: 16px;
       }
+}
+
+@media screen and (max-width: 400px) {
+    .menu {
+        justify-content: flex-start;
+        gap: 22px;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .menu {
+        justify-content: flex-start;
+        gap: 10px;
+    }
+
+
 }

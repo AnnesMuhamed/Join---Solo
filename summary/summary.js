@@ -43,7 +43,7 @@ function greetUser() {
 }
 
 window.onload = function () {
-  if (window.innerWidth <= 780) {
+  if (window.innerWidth <= 475) {
     document.getElementById("sectionGreet").style.display = "flex";
     document.getElementById("content").style.display = "none";
 

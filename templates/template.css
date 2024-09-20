@@ -2,9 +2,8 @@ body {
   font-family: "Inter", sans-serif;
   height: 100vh;
   display: grid;
-  max-width: 1440px;
   max-height: 1024px;
-  margin: 0 auto;
+  margin: 0;
   grid-template-rows: 96px auto;
   grid-template-columns: 232px 1fr;
   grid-template-areas:

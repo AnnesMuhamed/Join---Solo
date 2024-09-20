@@ -313,6 +313,7 @@ body.modal-open {
     overflow-y: hidden;
     overflow-x: auto;
     height: 34px;
+    padding: 10px;
 }
 
 .initials-span {
@@ -331,6 +332,7 @@ body.modal-open {
     line-height: 14.4px;
     text-align: center;
     flex-shrink: 0;
+    margin-left: -10px;
 }
 
 .card-subtask-container {

@@ -1,25 +1,202 @@
 @media screen and (max-width: 1440px) {
-   
+    .content {
+        width: 100%;
+        height: 928px;
+        position: absolute;
+    }
+
+    .headline-cards-container {
+        height: 635px;
+        position: relative;
+        top: 126px;
+    }
 }
 
 @media screen and (max-width: 1280px) {
-    
+    .content {
+        display: flex;
+        justify-content: center;
+        padding-top: 0px;
+        position: absolute;
+        top: 97px;
+        left: 200px;
+        width: 100%;
+        height: 928px;
+    }
 
+    .headline-cards-container {
+        position: absolute;
+        top: 100px;
+        left: 50px;
+    }
+
+    .first-headline {
+        font-size: 36px;
+    }
+
+    .second-headline {
+        font-size: 21px;
+    }
+
+    .summary-headline {
+        width: 428px;
+    }
+
+    .first-card-section {
+        width: 392px;
+        height: 130px;
+    }
+
+    .summary-cards {
+        width: 392px;
+    }
+
+    .card-one, .card-two {
+        width: 180px;
+        height: 130px;
+        padding: 16px;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .edit-circle, .hook-circle {
+        width: 59px;
+        height: 59px;
+    }
+
+    .todo-number,
+    .done-number,
+    .one-urgent {
+        font-size: 49px;
+    }
+
+    .second-card-section {
+        width: 392px;
+        gap: 20px;
+    }
+
+    .date-container {
+        gap: 8px;
+        justify-content: center;
+    }
+
+    .date {
+        font-size: 16px;
+    }
+
+    .third-card-section {
+        width: 392px;
+        gap: 13px;
+    }
+
+    .card-four,
+    .card-five, 
+    .card-six {
+        padding: 17px;
+    }
+
+    .number {
+        font-size: 49px;
+        line-height: 50.8px;
+        width: 57px;
+    }
+
+    .card-underline {
+        font-size: 14px;
+    }
+
+    .greet {
+        width: 260px;
+        margin-top: 0;
+        position: absolute;
+        top: 412px;
+        left: 500px;
+    }
+
+    .gm {
+        font-size: 29px;
+        width: 260px;
+    }
+
+    .sofia {
+        font-size: 37px;
+        width: 260px;
+    }
 }
 
 @media screen and (max-width: 1024px) {
-    
+    .content {
+        width: 100%;
+        left: 160px;
+    } 
 }
 
 @media screen and (max-width: 920px) {
+    .content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        left: 160px;
+        position: static;
+    } 
 
+    .headline-cards-container {
+        display: flex;
+        flex-direction: column;
+        position: static;
+        justify-content: center;
+        height: 766px;
+    }
+
+    .greet {
+        position: absolute;
+        width: 100%;
+        flex-direction: row;
+        left: 0px;
+        top: 811px;
+    }
+
+    .gm {
+        width: 219px;
+    }
+
+    .sofia {
+        line-height: 58.8px;
+    }
 }
 
 @media screen and (max-width: 780px) {
-    /* Summary */
+    .content {
+        position: static;
+        width: 100%;
+    }
 
+    .greet {
+        flex-direction: row;
+
+    }
+
+    .sofia {
+        line-height: 58.8px;
+    }
+
+    .gm {
+        width: 214px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .content {
+        position: static;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 475px) {
     body {
-        margin: 0;
+        margin: 0 auto;
+        width: 100%;
     }
 
     .greet {
@@ -28,19 +205,15 @@
 
     .content {
         display: flex;
-        height: 800px;
+        height: 926pxpx;
         justify-content: center;
         padding: 0;
-    }
-
-    .headline-cards-container  {
-        display: flex;
-        flex-direction: column;
+        width: 100%;
+        position: static;
     }
 
     .summary-headline {
         display: flex;
-        margin-top: 128px;
         margin-left: 16px;
         width: 232px;
         height: 104px;
@@ -257,7 +430,7 @@
         width: 130px;
         height: 17px;
         font-size: 14px;
-        line-height: 16.8px;
+        line-height: 45.8px;
     }
 
     .third-card-section {
@@ -309,8 +482,6 @@
         transition: color 0.3s ease;
     }
 
-    /* GREET */
-
     .section-greet {
         display: flex;
         height: 767px;
@@ -355,22 +526,32 @@
     }
 }
 
-@media screen and (max-width: 640px) {
-
-}
-
-@media screen and (max-width: 475px) {
-
-}
-
 @media screen and (max-width: 400px) {
+    .headline-cards-container {
+        align-items: center;
+    }
 
-}
+    .summary-headline, .third-card-section {
+        justify-content: center;
+    }
 
-@media screen and (max-width: 375px) {
+    .summary-cards {
+        align-items: center;
+    }
 
-}
+    .card-one, .card-two {
+        width: 148px;
+    }
 
-@media screen and (max-width: 350px) {
+    .second-card-section {
+        width: 329px;
+    }
 
+    .card-four, .card-five, .card-six {
+        width: 99px;
+    }
+
+    .number {
+        width: 53px;
+    }
 }

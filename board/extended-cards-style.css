@@ -28,6 +28,8 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  height: 700px;
+  overflow-x: scroll;
 }
 
 .popup-header {
@@ -120,13 +122,15 @@
 
 .info-item-prio {
   display: flex;
-  gap: 25px;
+  align-items: center;
+}
+
+.radio-label  {
+  width: 88px !important;
 }
 
 .priority-container {
   display: flex;
-  width: 128px;
-  /* height: 32px; */
   padding: 4px 18px;
   gap: 10px;
 }
@@ -136,12 +140,11 @@
   flex-direction: column;
   gap: 12px;
   width: 445px;
-  height: 148px;
 }
 
 .assignee-container {
   width: 445px;
-  height: 56px;
+  /* height: 56px; */
   display: flex;
   align-items: baseline;
   flex-direction: column;
@@ -173,11 +176,19 @@
   font-weight: 400;
 }
 
+#edit-assigned-contacts {
+  display: flex;
+  overflow-x: auto;
+  height: 171px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0px 10px 0px;
+}
+
 .popup-subtasks {
   display: flex;
   flex-direction: column;
   width: 445px;
-  height: 100px;
   gap: 8px;
 }
 
@@ -194,7 +205,6 @@
   display: flex;
   flex-direction: column;
   width: 445px;
-  height: 68px;
   gap: 4px;
 }
 

@@ -6,17 +6,19 @@
     <link rel="stylesheet" href="../fonts/fonts.css" />
     <link rel="stylesheet" href="../templates/template.css" />
     <link rel="stylesheet" href="../add-task/add-task.css" />
-		<link rel="stylesheet" href="../add-task/contact-selector.css" />
-		<link rel="stylesheet" href="../add-task/prio-buttons.css" />
-		<link rel="stylesheet" href="../add-task/subtask-editor.css" />
+    <link rel="stylesheet" href="../add-task/contact-selector.css" />
+    <link rel="stylesheet" href="../add-task/prio-buttons.css" />
+    <link rel="stylesheet" href="../add-task/subtask-editor.css" />
     <link rel="stylesheet" href="board.css" />
     <link rel="stylesheet" href="extended-cards-style.css" />
     <link rel="icon" type="image/x-icon" href="../img/favicon.png" />
     <link rel="stylesheet" href="../templates/rp-header-sidebar.css" />
     <link rel="stylesheet" href="rp-board.css" />
-		<script src="../add-task/contact-selector.js"></script>
-		<script src="../add-task/prio-buttons.js"></script>
-		<script src="../add-task/subtask-editor.js"></script>
+    <link rel="stylesheet" href="rp-extendedcard.css">
+    <link rel="stylesheet" href="rp-new-task.css">
+    <script src="../add-task/contact-selector.js"></script>
+    <script src="../add-task/prio-buttons.js"></script>
+    <script src="../add-task/subtask-editor.js"></script>
     <script src="../add-task/add-task.js"></script>
     <script src="../templates/header.js"></script>
     <script src="../firebase.js"></script>
@@ -38,118 +40,44 @@
       <form id="add-task-form" class="add-task-form">
         <div class="definition">
           <div class="d-flex-col">
-            <label for="title" class="required">
-              Title
-              <span style="color: red">*</span>
-            </label>
-            <input
-              class="title definition-entry-field"
-              type="text"
-              id="title"
-              name="title"
-              placeholder="Enter a title"
-              required
-            />
+            <label for="title" class="required">Title <span style="color: red">*</span></label>
+            <input class="title definition-entry-field" type="text" id="title" name="title" placeholder="Enter a title" required />
           </div>
           <div class="d-flex-col">
             <label for="description">Description</label>
-            <textarea
-              class="description definition-entry-field"
-              type="text"
-              id="description"
-              name="description"
-              placeholder="Enter a Description"
-            >
-            </textarea>
+            <textarea class="description definition-entry-field" id="description" name="description" placeholder="Enter a Description"></textarea>
           </div>
           <div class="d-flex-col assignment-container">
             <label for="assignment">Assigned to</label>
             <div class="select-box">
-              <input
-                id="search"
-                class="assignment-selector definition-entry-field"
-                type="text"
-                name="assignment"
-                placeholder="Select contacts to assign"
-              />
+              <input id="search" class="assignment-selector definition-entry-field" type="text" name="assignment" placeholder="Select contacts to assign" />
             </div>
             <div id="checkboxes"></div>
             <div id="assigned-contacts"></div>
           </div>
         </div>
         <svg height="424px" width="2" class="seperator">
-          <line
-            x1="1"
-            y1="0"
-            x2="1"
-            y2="424"
-            style="stroke: #d1d1d1; stroke-width: 1"
-          />
+          <line x1="1" y1="0" x2="1" y2="424" style="stroke: #d1d1d1; stroke-width: 1" />
         </svg>
         <div class="properties">
           <div class="d-flex-col">
-            <label for="date" class="required">
-              Due date
-              <span style="color: red">*</span>
-            </label>
-            <input
-              class="properties-entry-field due-date"
-              type="date"
-              id="date"
-              name="date"
-              required
-            />
+            <label for="date" class="required">Due date <span style="color: red">*</span></label>
+            <input class="properties-entry-field due-date" type="date" id="date" name="date" required />
           </div>
           <div class="d-flex-col">
             <label for="radio-button-group">Prio</label>
             <div id="radio-button-group" class="radio-button-group">
-              <input
-                type="radio"
-                id="prio-high"
-                name="prios"
-                value="3"
-                class="radio-button"
-              />
-              <label for="prio-high" class="radio-label">
-                <span> Urgent </span>
-                <img src="../img/add-task/prio-high.png" />
-              </label>
-              <input
-                type="radio"
-                id="prio-med"
-                name="prios"
-                value="2"
-                class="radio-button"
-              />
-              <label for="prio-med" class="radio-label">
-                <span> Medium </span>
-                <img src="../img/add-task/prio-med.png" />
-              </label>
-              <input
-                type="radio"
-                id="prio-low"
-                name="prios"
-                value="1"
-                class="radio-button"
-              />
-              <label for="prio-low" class="radio-label">
-                <span> Low </span>
-                <img src="../img/add-task/prio-low.png" />
-              </label>
+              <input type="radio" id="prio-high" name="prios" value="3" class="radio-button" />
+              <label for="prio-high" class="radio-label"><span>Urgent</span><img class="rp-prio-img" src="../img/add-task/prio-high.png" /></label>
+              <input type="radio" id="prio-med" name="prios" value="2" class="radio-button" />
+              <label for="prio-med" class="radio-label"><span>Medium</span><img class="rp-prio-img" src="../img/add-task/prio-med.png" /></label>
+              <input type="radio" id="prio-low" name="prios" value="1" class="radio-button" />
+              <label for="prio-low" class="radio-label"><span>Low</span><img class="rp-prio-img" src="../img/add-task/prio-low.png" /></label>
             </div>
           </div>
           <div class="d-flex-col">
-            <label for="category" class="required">
-              Category
-              <span style="color: red">*</span>
-            </label>
-            <select
-              class="category properties-entry-field"
-              type="text"
-              id="category"
-              name="category"
-              required
-            >
+            <label for="category" class="required">Category <span style="color: red">*</span></label>
+            <select class="category properties-entry-field" id="category" name="category" required>
               <option disabled selected hidden>Select Task category</option>
               <option>Technical Task</option>
               <option>User Story</option>
@@ -158,21 +86,9 @@
           <div class="d-flex-col">
             <label for="subtasks">Subtasks</label>
             <div class="subtask-container">
-              <input
-                class="subtasks properties-entry-field"
-                type="text"
-                id="subtasks"
-                name="subtasks"
-                placeholder="Add new subtask"
-              />
+              <input class="subtasks properties-entry-field" type="text" id="subtasks" name="subtasks" placeholder="Add new subtask" />
               <div id="subtask-buttons-container" class="add-subtask-button">
-                <button
-                  id="add-subtask-button"
-                  class="in-line-btn"
-                  type="button"
-                >
-                  <img src="../img/add-task/add.png" />
-                </button>
+                <button id="add-subtask-button" class="in-line-btn" type="button"><img src="../img/add-task/add.png" /></button>
               </div>
             </div>
           </div>
@@ -182,20 +98,10 @@
         <ul id="subtask-list" class="subtask-list"></ul>
       </div>
       <div id="buttons" class="buttons">
-        <span id="requirement" class="requirement">
-          <span style="color: red">*</span>
-          This field is required
-        </span>
+        <span id="requirement" class="requirement"><span style="color: red">*</span>This field is required</span>
         <div class="btn-container">
           <button id="clear-btn" class="add-task-btn clear-btn">Clear</button>
-          <button
-            id="create-btn"
-            class="add-task-btn create-task-btn"
-            form="add-task-form"
-            type="submit"
-          >
-            Create Task
-          </button>
+          <button id="create-btn" class="add-task-btn create-task-btn" form="add-task-form" type="submit">Create Task</button>
         </div>
       </div>
     </div>
@@ -203,142 +109,61 @@
       <div class="headline-add-task-container">
         <div class="headline-and-input">
           <div onclick="window.location.href = '../add-task/add-task.html';" class="headline-rp-add-button">
-            <span class="headline-board">Board</span
-            ><button class="add-button-rp">
-              <img src="../img/board/add-button-rp.png" alt="" />
-            </button>
+            <span class="headline-board">Board</span><button class="add-button-rp"><img src="../img/board/add-button-rp.png" alt="" /></button>
           </div>
-
           <div class="input-and-add-button">
             <div class="input-container">
               <input id="findCards" type="text" placeholder="Find Task" class="search-input" />
               <div class="placeholder"></div>
-              <img
-                src="../img/board/search.icon.png"
-                alt="Search"
-                class="search-icon"
-              />
+              <img src="../img/board/search.icon.png" alt="Search" class="search-icon" />
             </div>
-            <button onclick="openAddTaskForm()" class="add-button">
-              Add task +
-            </button>
+            <button onclick="openAddTaskForm()" class="add-button">Add task +</button>
           </div>
         </div>
       </div>
       <div class="card-container">
         <div>
-          <span class="column-title"
-            >To do
-            <img
-              onclick="openAddTaskForm()"
-              src="../img/board/plus-button.png"
-              alt="add icon"
-              class="add-button-img-column"
-          /></span>
-          <div
-            class="drag-area"
-            id="open"
-            ondrop="moveTo(event, 'open')"
-            ondragover="allowDrop(event);"
-          ></div>
+          <span class="column-title">To do<img onclick="openAddTaskForm()" src="../img/board/plus-button.png" alt="add icon" class="add-button-img-column" /></span>
+          <div class="drag-area" id="open" ondrop="moveTo(event, 'open')" ondragover="allowDrop(event);"></div>
         </div>
         <div>
-          <span class="column-title"
-            >In Progress
-            <img
-              onclick="openAddTaskForm()"
-              src="../img/board/plus-button.png"
-              alt="add icon"
-              class="add-button-img-column"
-          /></span>
-          <div
-            class="drag-area"
-            id="in-progress"
-            ondrop="moveTo(event, 'in-progress')"
-            ondragover="allowDrop(event);"
-          ></div>
+          <span class="column-title">In Progress<img onclick="openAddTaskForm()" src="../img/board/plus-button.png" alt="add icon" class="add-button-img-column" /></span>
+          <div class="drag-area" id="in-progress" ondrop="moveTo(event, 'in-progress')" ondragover="allowDrop(event);"></div>
         </div>
         <div>
-          <span class="column-title"
-            >Await feedback
-            <img
-              onclick="openAddTaskForm()"
-              src="../img/board/plus-button.png"
-              alt="add icon"
-              class="add-button-img-column"
-          /></span>
-          <div
-            class="drag-area"
-            id="closed"
-            ondrop="moveTo(event, 'closed')"
-            ondragover="allowDrop(event);"
-          ></div>
+          <span class="column-title">Await feedback<img onclick="openAddTaskForm()" src="../img/board/plus-button.png" alt="add icon" class="add-button-img-column" /></span>
+          <div class="drag-area" id="closed" ondrop="moveTo(event, 'closed')" ondragover="allowDrop(event);"></div>
         </div>
         <div>
           <span class="column-title">Done</span>
-          <div
-            class="drag-area"
-            id="done"
-            ondrop="moveTo(event, 'done')"
-            ondragover="allowDrop(event);"
-          ></div>
+          <div class="drag-area" id="done" ondrop="moveTo(event, 'done')" ondragover="allowDrop(event);"></div>
         </div>
       </div>
       <!-- Pop-Up-Cards start -->
       <div class="popup-container">
         <div class="popup" id="popup">
           <div class="popup-header">
-            <div class="tag-container" id="tag-container">
-              <span class="tag" id="tag"></span>
-            </div>
-            <button class="close-button" onclick="closePopup()">
-              <img src="../img/close.png" alt="Close" class="close-icon" />
-            </button>
+            <div class="tag-container" id="tag-container"><span class="tag" id="tag"></span></div>
+            <button class="close-button" onclick="closePopup()"><img src="../img/close.png" alt="Close" class="close-icon" /></button>
           </div>
           <h1 class="popup-title" id="popup-title"></h1>
           <h5 class="popup-subtitle" id="popup-subtitle"></h5>
           <div class="popup-info">
-            <div class="info-item-date">
-              <span class="label">Due date:</span>
-              <span class="value" id="due-date"></span>
-            </div>
-            <div id="info-item-prio" class="info-item-prio">
-              <span class="label">Priority:</span>
-              <div class="priority-container" id="priority-container">
-                <span class="priority-label" id="priority-label"></span>
-                <img
-                  src=""
-                  alt="Priority icon"
-                  class="priority-icon"
-                  id="priority-icon"
-                />
-              </div>
-            </div>
+            <div class="info-item-date"><span class="label">Due date:</span><span class="value" id="due-date"></span></div>
+            <div id="priority-container"><span id="priority-label"></span><img id="priority-icon" /></div>
             <div class="info-item-assigned">
               <span class="label">Assigned To:</span>
-              <div class="assignee-container" id="assignee-container">
-              </div>
+              <div id="assignee-container"></div> <!-- This was added to ensure the contacts display -->
             </div>
           </div>
           <div class="popup-subtasks">
             <span class="subtasks-label">Subtasks</span>
-            <div class="subtasks-list" id="subtasks-list">
-            </div>
+            <div class="subtasks-list" id="subtasks-list"></div>
           </div>
           <div class="popup-actions">
-            <button class="action-button" onclick="deleteTask()">
-              <img src="../img/delete.png" alt="Delete" class="action-icon" />
-              <span class="action-label">Delete</span>
-            </button>
-            <img
-              src="../img/high-stroke-gray.png"
-              alt="Separator"
-              class="action-separator"
-            />
-            <button class="action-button" onclick="editTask()">
-              <img src="../img/edit-black.png" alt="Edit" class="action-icon" />
-              <span class="action-label">Edit</span>
-            </button>
+            <button class="action-button" onclick="deleteTask()"><img src="../img/delete.png" alt="Delete" class="action-icon" /><span class="action-label">Delete</span></button>
+            <img src="../img/high-stroke-gray.png" alt="Separator" class="action-separator" />
+            <button class="action-button" onclick="editTask()"><img src="../img/edit-black.png" alt="Edit" class="action-icon" /><span class="action-label">Edit</span></button>
           </div>
         </div>
       </div>
@@ -346,4 +171,3 @@
     </section>
   </body>
 </html>
-

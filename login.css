@@ -85,7 +85,7 @@ html {
 
 #logo-container {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: flex-start;
   flex-direction: column;
   width: 274px;

@@ -1,4 +1,4 @@
-let isEditing = false;
+let isEditing = false; // Status zur Bearbeitung
 
 function getHtmlElements() {
   let popupContainer = document.querySelector(".popup-container");
@@ -31,8 +31,7 @@ function getHtmlElements() {
 
 function getTask(key) {
   let tasks = JSON.parse(sessionStorage.getItem("tasks"));
-  let task = tasks[key];
-  return task;
+  return tasks[key];
 }
 
 function determineTaskType(task, tagContainer, tag) {
@@ -47,11 +46,11 @@ function determineTaskType(task, tagContainer, tag) {
   }
 }
 
-function determinePopoupTitle(task, popupTitle) {
+function determinePopupTitle(task, popupTitle) {
   popupTitle.textContent = task.title;
 }
 
-function determinePopoupSubtitle(task, popupSubtitle) {
+function determinePopupSubtitle(task, popupSubtitle) {
   popupSubtitle.textContent = task.description;
 }
 
@@ -71,57 +70,94 @@ function determineTaskPriority(task, priorityLabel, priorityIcon) {
   }
 }
 
-function createAssignedContactsFields(
-  assigneeContainer,
-  assignedContacts,
-  contacts
-) {
-  for (let contactId of assignedContacts) {
-    let currentContact = contacts[`${contactId}`];
-    assigneeContainer.innerHTML += `
-           <div class="assignee-underContainer">  <div class="assignee-initials" id="${contactId}-assignee-initials">${getAssignedContactInitials(
-      currentContact["firstName"],
-      currentContact["lastName"]
-    )}</div>
-            <span class="assignee-name" id="${contactId}-assignee-name">${
-      currentContact.firstName
-    } ${currentContact.lastName}</span> </div>
-      `;
-    let assigneeInitials = document.getElementById(
-      `${contactId}-assignee-initials`
-    );
-    assigneeInitials.style.backgroundColor = getRandomColor();
+function determineAssignedContacts(task, assigneeContainer) {
+  if (assigneeContainer) {
+    assigneeContainer.innerHTML = ""; // Leeren des Containers
+
+    if (task.assignment) {
+      let contacts = JSON.parse(sessionStorage.getItem("contacts"));
+      let assignedContactsIds = task.assignment.split(",");
+      createAssignedContactsFields(assigneeContainer, assignedContactsIds, contacts);
+    } else {
+      assigneeContainer.innerHTML = "<span>No contacts assigned</span>";
+    }
   }
 }
 
-function determineAssignedContacts(task, assigneeContainer) {
-  if (task.assignment) {
-    let contacts = JSON.parse(sessionStorage.getItem("contacts"));
-    let assignedContactsIds = task.assignment;
-    let assignedContacts = assignedContactsIds.split(",");
-    assigneeContainer.innerHTML = "";
-    createAssignedContactsFields(assigneeContainer, assignedContacts, contacts);
-  } else {
-    assigneeContainer.innerHTML = "";
-  }
+function createAssignedContactsFields(assigneeContainer, assignedContacts, contacts) {
+  assignedContacts.forEach((contactId) => {
+    let currentContact = contacts[contactId];
+    if (currentContact) {
+      let contactInitials = getAssignedContactInitials(currentContact.firstName, currentContact.lastName);
+      assigneeContainer.innerHTML += `
+        <div class="assignee-underContainer">
+          <div class="assignee-initials" style="background-color:${getRandomColor()}">
+            ${contactInitials}
+          </div>
+          <span class="assignee-name">${currentContact.firstName} ${currentContact.lastName}</span>
+        </div>`;
+    }
+  });
 }
 
 function determineSubtasks(task, subtasksList) {
   subtasksList.innerHTML = "";
   let subtasks = JSON.parse(task.subtasks);
   subtasks.forEach((subtask, index) => {
+    let key = Object.keys(subtask)[0];
+    let isChecked = subtask[key] === "done" ? "checked" : "";
     let subtaskItem = document.createElement("div");
     subtaskItem.className = "subtask-item";
-    let checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.className = "subtask-checkbox";
-    let subtaskLabel = document.createElement("span");
-    subtaskLabel.className = "subtask-label";
-    subtaskLabel.textContent = Object.keys(subtask)[0];
-    subtaskItem.appendChild(checkbox);
-    subtaskItem.appendChild(subtaskLabel);
+    subtaskItem.innerHTML = `
+      <input type="checkbox" class="subtask-checkbox" id="subtask-${index}" ${isChecked}>
+      <span class="subtask-label">${key}</span>
+    `;
+    
+    // Event-Listener für Checkboxen
+    subtaskItem.querySelector(`#subtask-${index}`).addEventListener("change", () => {
+      updateSubtaskProgress(task);
+    });
+
     subtasksList.appendChild(subtaskItem);
   });
+}
+
+function updateSubtaskProgress(task) {
+  let subtasks = [];
+  document.querySelectorAll("#subtasks-list .subtask-item").forEach((item, index) => {
+    let text = item.querySelector(".subtask-label").textContent;
+    let isChecked = item.querySelector(`#subtask-${index}`).checked;
+    let status = isChecked ? "done" : "open";
+    subtasks.push({ [text]: status });
+  });
+
+  task.subtasks = JSON.stringify(subtasks);
+  sessionStorage.setItem("tasks", JSON.stringify(task));
+  
+  updateProgressOnBoard(task);
+}
+
+function updateProgressOnBoard(task) {
+  let taskKey = task.id;
+  let progressBar = document.getElementById(`${taskKey}-progress-bar`);
+
+  let subtasks = JSON.parse(task.subtasks);
+  let totalSubtasks = subtasks.length;
+  let completedSubtasks = subtasks.filter(subtask => {
+    let key = Object.keys(subtask)[0];
+    return subtask[key] === "done";
+  }).length;
+
+  let progressPercent = (completedSubtasks / totalSubtasks) * 100;
+
+  if (progressBar) {
+    progressBar.style.width = `${progressPercent}%`;
+  }
+
+  let subtasksCounter = document.getElementById(`${taskKey}-subtask-counter`);
+  if (subtasksCounter) {
+    subtasksCounter.textContent = `${completedSubtasks}/${totalSubtasks}`;
+  }
 }
 
 function openPopup(key) {
@@ -140,21 +176,43 @@ function openPopup(key) {
     subtasksList,
   ] = getHtmlElements();
 
-  task = getTask(key);
+  let task = getTask(key);
 
   determineTaskType(task, tagContainer, tag);
-  determinePopoupTitle(task, popupTitle);
-  determinePopoupSubtitle(task, popupSubtitle);
+  determinePopupTitle(task, popupTitle);
+  determinePopupSubtitle(task, popupSubtitle);
   determineDate(task, dueDateElement);
   determineTaskPriority(task, priorityLabel, priorityIcon);
   determineAssignedContacts(task, assigneeContainer);
   determineSubtasks(task, subtasksList);
 
-  // Store the task key as a data attribute on the popup
   popup.dataset.taskKey = key;
-
   popupContainer.classList.add("show");
 }
+
+function makeFieldsReadOnly() {
+  let popupTitle = document.getElementById("popup-title");
+  let popupSubtitle = document.getElementById("popup-subtitle");
+  let dueDateElement = document.getElementById("due-date");
+
+  // Mache den Titel nicht mehr bearbeitbar
+  popupTitle.contentEditable = false;
+  popupTitle.classList.remove("editable");
+
+  // Mache die Beschreibung nicht mehr bearbeitbar
+  popupSubtitle.contentEditable = false;
+  popupSubtitle.classList.remove("editable");
+
+  // Überprüfe, ob das Datum bearbeitbar gemacht wurde, und setze es wieder zurück
+  let dateInput = dueDateElement.querySelector("input");
+  if (dateInput) {
+    let dateSpan = document.createElement("span");
+    dateSpan.textContent = dateInput.value;
+    dueDateElement.innerHTML = "";
+    dueDateElement.appendChild(dateSpan);
+  }
+}
+
 
 function closePopup() {
   let popupContainer = document.querySelector(".popup-container");
@@ -197,16 +255,42 @@ function editTask() {
   let task = tasks[taskKey];
 
   if (!isEditing) {
-    // Switch to edit mode
     isEditing = true;
     makeFieldsEditable(task);
-    changeEditButtonToSave();
+    changeEditButtonToSave(); // Ändere den Button zu "Ok"
   } else {
-    // Save changes
-    saveChanges(taskKey);
+    saveChanges(taskKey); // Speichere die Änderungen
     isEditing = false;
-    resetEditButton();
+    resetEditButton(); // Setze den Button wieder auf "Edit" zurück
   }
+}
+
+
+function resetEditButton() {
+  let editButton = document.querySelector(".action-button:nth-child(3)"); // Wähle den Bearbeitungs-Button
+  if (editButton) {
+    editButton.innerHTML = `
+      <img src="../img/edit-black.png" alt="Edit" class="action-icon" />
+      <span class="action-label">Edit</span>
+    `;
+  } else {
+    console.error("Edit button not found.");
+  }
+}
+
+
+function makeFieldsEditable(task) {
+  let popupTitle = document.getElementById("popup-title");
+  popupTitle.contentEditable = true;
+  popupTitle.classList.add("editable");
+
+  let popupSubtitle = document.getElementById("popup-subtitle");
+  popupSubtitle.contentEditable = true;
+  popupSubtitle.classList.add("editable");
+
+  createEditableDateField(task);
+  createEditablePrioButtons(task);
+  makeContactsEditable(task);
 }
 
 function createEditableDateField(task) {
@@ -222,7 +306,7 @@ function createEditableDateField(task) {
 function createPrioButtons(radioButtonGroup) {
   let priorityObject = { high: 3, med: 2, low: 1 };
 
-  for (let key of Object.keys(priorityObject)) {
+  Object.keys(priorityObject).forEach((key) => {
     let buttonLabel = document.createElement("label");
     let buttonSpan = document.createElement("span");
     let buttonImage = document.createElement("img");
@@ -230,17 +314,7 @@ function createPrioButtons(radioButtonGroup) {
 
     buttonLabel.htmlFor = `prio-${key}`;
     buttonLabel.className = "radio-label";
-    switch (key) {
-      case "high":
-        buttonSpan.textContent = "Urgent";
-        break;
-      case "med":
-        buttonSpan.textContent = "Medium";
-        break;
-      case "low":
-        buttonSpan.textContent = "Low";
-        break;
-    }
+    buttonSpan.textContent = key === "high" ? "Urgent" : key === "med" ? "Medium" : "Low";
     buttonImage.src = `../img/add-task/prio-${key}.png`;
     buttonInput.type = "radio";
     buttonInput.id = `prio-${key}`;
@@ -252,15 +326,7 @@ function createPrioButtons(radioButtonGroup) {
     buttonLabel.appendChild(buttonImage);
     radioButtonGroup.appendChild(buttonLabel);
     radioButtonGroup.appendChild(buttonInput);
-  }
-}
-
-function createPrioButtonsGroup(prioLabel) {
-  let radioButtonGroup = document.createElement("div");
-  radioButtonGroup.id = "radio-button-group-edit";
-  radioButtonGroup.classList.add("radio-button-group");
-  createPrioButtons(radioButtonGroup);
-  prioLabel.appendChild(radioButtonGroup);
+  });
 }
 
 function createEditablePrioButtons(task) {
@@ -270,60 +336,87 @@ function createEditablePrioButtons(task) {
   prioLabel.classList.remove("d-none");
   prioLabel.innerHTML = "";
   prioIcon.classList.add("d-none");
-  createPrioButtonsGroup(prioLabel);
-}
 
-function makeFieldsEditable(task) {
-  let popupTitle = document.getElementById("popup-title");
-  let popupSubtitle = document.getElementById("popup-subtitle");
-  // let infoItemPrio = document.getElementById("info-item-prio");
-
-  // Make title editable
-  popupTitle.contentEditable = true;
-  popupTitle.classList.add("editable");
-
-  // Make description editable
-  popupSubtitle.contentEditable = true;
-  popupSubtitle.classList.add("editable");
-
-  // Make due date editable
-  createEditableDateField(task);
-
-  // Make priority editable
-  // infoItemPrio.style.flexDirection = "column";
-  createEditablePrioButtons(task);
-}
-
-function makeFieldsReadOnly() {
-  let popupTitle = document.getElementById("popup-title");
-  let popupSubtitle = document.getElementById("popup-subtitle");
-  // let infoItemPrio = document.getElementById("info-item-prio");
-
-  popupTitle.contentEditable = false;
-  popupTitle.classList.remove("editable");
-
-  popupSubtitle.contentEditable = false;
-  popupSubtitle.classList.remove("editable");
-
-  // infoItemPrio.style.flexDirection = "";
+  let radioButtonGroup = document.createElement("div");
+  radioButtonGroup.id = "radio-button-group-edit";
+  radioButtonGroup.classList.add("radio-button-group");
+  createPrioButtons(radioButtonGroup);
+  prioLabel.appendChild(radioButtonGroup);
 }
 
 function changeEditButtonToSave() {
-  let editButton = document.querySelector(".action-button:nth-child(3)");
-  // editButton.style.color = "#FFFFFF";
-  // editButton.style.backgroundColor = "#2A3647";
-  editButton.innerHTML = `
-    <span class="action-label">Ok</span>
-    <img src="../img/hook.png" alt="Save" class="action-icon" />
-  `;
+  let editButton = document.querySelector(".action-button:nth-child(3)"); // Wähle den Bearbeitungs-Button
+  if (editButton) {
+    editButton.innerHTML = `
+      <span class="action-label">Ok</span>
+      <img src="../img/hook.png" alt="Save" class="action-icon" />
+    `;
+  } else {
+    console.error("Edit button not found.");
+  }
 }
 
-function resetEditButton() {
-  let editButton = document.querySelector(".action-button:nth-child(3)");
-  editButton.innerHTML = `
-    <img src="../img/edit-black.png" alt="Edit" class="action-icon" />
-    <span class="action-label">Edit</span>
-  `;
+
+function makeContactsEditable(task) {
+  let assigneeContainer = document.getElementById("assignee-container");
+  assigneeContainer.innerHTML = `
+    <div class="select-box">
+      <input id="edit-search" class="assignment-selector definition-entry-field" type="text" name="assignment" placeholder="Select contacts to assign">
+    </div>
+    <div id="edit-checkboxes"></div>
+    <div id="edit-assigned-contacts"></div>`;
+
+  let assignedContactsContainer = document.getElementById("edit-assigned-contacts");
+  let contacts = JSON.parse(sessionStorage.getItem("contacts"));
+  let assignedContactsIds = task.assignment.split(",");
+
+  createAssignedContactsFields(assignedContactsContainer, assignedContactsIds, contacts);
+  renderCheckboxesForEditMode(assignedContactsIds);
+}
+
+function renderCheckboxesForEditMode(assignedContactsIds) {
+  let contacts = JSON.parse(sessionStorage.getItem("contacts"));
+  let checkboxesContainer = document.getElementById("edit-checkboxes");
+  checkboxesContainer.innerHTML = "";
+
+  Object.keys(contacts).forEach(contactId => {
+    let contact = contacts[contactId];
+    let isChecked = assignedContactsIds.includes(contactId) ? "checked" : "";
+
+    checkboxesContainer.innerHTML += `
+      <label>
+        <input type="checkbox" id="${contactId}" ${isChecked} />
+        ${contact.firstName} ${contact.lastName}
+      </label>`;
+  });
+
+  document.querySelectorAll("#edit-checkboxes input").forEach(input => {
+    input.addEventListener("change", function () {
+      updateAssignedContacts(input);
+    });
+  });
+}
+
+function updateAssignedContacts(input) {
+  let assignments = document.getElementById("edit-assigned-contacts");
+  let contactId = input.id;
+  let contacts = JSON.parse(sessionStorage.getItem("contacts"));
+  let contact = contacts[contactId];
+
+  if (input.checked) {
+    assignments.innerHTML += `
+      <div class="assignee-underContainer" id="assigned-${contactId}">
+        <div class="assignee-initials" style="background-color:${getRandomColor()}">
+          ${getAssignedContactInitials(contact.firstName, contact.lastName)}
+        </div>
+        <span class="assignee-name">${contact.firstName} ${contact.lastName}</span>
+      </div>`;
+  } else {
+    let assignedElement = document.getElementById(`assigned-${contactId}`);
+    if (assignedElement) {
+      assignedElement.remove();
+    }
+  }
 }
 
 function saveChanges(taskKey) {
@@ -332,38 +425,69 @@ function saveChanges(taskKey) {
 
   task.title = document.getElementById("popup-title").textContent;
   task.description = document.getElementById("popup-subtitle").textContent;
-  task.date = document.querySelector("#due-date input").value;
+
+  let dueDateInput = document.querySelector("#due-date input");
+  if (dueDateInput) {
+    task.date = dueDateInput.value;
+  }
+
   task.priority = priority;
+
+  let selectedContacts = [];
+  document.querySelectorAll("#edit-checkboxes input:checked").forEach((input) => {
+    selectedContacts.push(input.id);
+  });
+  task.assignment = selectedContacts.join(",");
 
   sessionStorage.setItem("tasks", JSON.stringify(tasks));
   updateData(PATH_TO_TASKS, tasks);
   renderCards();
   makeFieldsReadOnly();
-  openPopup(taskKey); // Refresh the popup with new data
+  openPopup(taskKey);
 }
 
 function deleteTask() {
   let popup = document.getElementById("popup");
   let taskKey = popup.dataset.taskKey;
 
-  // Show a confirmation dialog
   if (confirm("Are you sure you want to delete this task?")) {
-    // Retrieve tasks from sessionStorage
     let tasks = JSON.parse(sessionStorage.getItem("tasks"));
-
-    // Delete the task
     delete tasks[taskKey];
-
-    // Update sessionStorage
     sessionStorage.setItem("tasks", JSON.stringify(tasks));
-
-    // Update the backend
     updateData(PATH_TO_TASKS, tasks);
-
-    // Close the popup
     closePopup();
-
-    // Re-render the board
     renderCards();
   }
 }
+
+
+function loadPopupScripts(templateUrl) {
+  fetch(templateUrl)
+    .then(response => response.text())
+    .then(data => {
+      const popupContainer = document.querySelector(".popup-container");
+      const scriptContainer = document.createElement('div');
+      scriptContainer.innerHTML = data;
+      popupContainer.appendChild(scriptContainer);
+    })
+    .catch(error => console.error('Error loading template:', error));
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Lädt die Skripte ins Popup, wenn das Popup geladen wird
+  loadPopupScripts('../templates/popup-scripts-template.html');
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+

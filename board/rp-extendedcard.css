@@ -1,0 +1,38 @@
+@media screen and (max-width: 920px) {
+    .popup-container {
+        height: 927px;
+    }
+}
+
+@media screen and (max-width: 780px) {
+    .popup-container {
+        width: 780px;
+    }
+
+    .info-item-prio {
+        display: flex;
+        gap: 0px !important;
+        align-items: center;
+    }
+
+    .priority-container {
+        display: flex;
+        width: 124px;
+        height: 60px;
+        align-items: center;
+    }
+
+    .radio-label {
+        padding: 12px 6px 12px 6px;
+        width: 64px;
+        height: 18px;    
+    }
+
+    .radio-label span {
+        font-size: 12px;
+    }
+
+    /* .rp-prio-img {
+        width: 13px;
+    } */
+}

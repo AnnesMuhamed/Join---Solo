@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function initFunc() {
   await loadContacts();
-  renderCheckboxes();
+  renderCheckboxes(); // Stelle sicher, dass die Funktion hier verfügbar ist
 }
 
 function setupEventListeners() {
@@ -153,7 +153,6 @@ function clearCheckboxes() {
   checkboxes.forEach((checkbox) => {
     checkbox.checked = false;
   });
-  assignedContacts = "";
 }
 
 function clearDivs() {
@@ -172,3 +171,21 @@ function clearForm() {
   clearCheckboxes();
   clearDivs();
 }
+
+// Funktion hinzugefügt: renderCheckboxes
+function renderCheckboxes() {
+  let contacts = JSON.parse(sessionStorage.getItem("contacts"));
+  let checkboxes = document.getElementById("checkboxes");
+  checkboxes.innerHTML = "";
+
+  for (let id in contacts) {
+    let contact = contacts[id];
+    let checkbox = `
+      <label>
+        <input type="checkbox" id="${id}" />
+        ${contact.firstName} ${contact.lastName}
+      </label>`;
+    checkboxes.innerHTML += checkbox;
+  }
+}
+

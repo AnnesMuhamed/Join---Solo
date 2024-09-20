@@ -62,10 +62,12 @@ async function renderContacts() {
     }
 
     contactSection.innerHTML = `
-        <button id="addContactButton" onclick="openContactForm()" class="add-contact-button">
-            <span class="button-text">Add a new contact</span>
-            <img src="../img/person_add.png" alt="Add Icon" class="button-icon">
-        </button>
+        <div class="addButton-container">
+            <button id="addContactButton" onclick="openContactForm()" class="add-contact-button">
+                <span class="button-text">Add a new contact</span>
+                <img src="../img/person_add.png" alt="Add Icon" class="button-icon">
+            </button>
+        </div>
         <div class="contact-list-container">
             ${alphabetSections.join('')}
         </div>
@@ -153,15 +155,17 @@ function contactPopUp(id, firstName, lastName, email, phone, color) {
                 </div>
                 <div class="button-name-container">
                     <span class="popup-name">${firstName} ${lastName}</span>
-                    <div class="popup-button-container" id="popup-button">
-                        <button class="popup-buttons" onclick="openEditContact('${id}', '${firstName}', '${lastName}', '${email}', '${phone}')">
-                            <img class="edit-icon" src="../img/edit-black.png" alt="">
-                            <span class="edit">Edit</span>
-                        </button>
-                        <button class="popup-buttons" onclick="deleteContact('${id}')">
-                            <img class="delete-icon" src="../img/delete.png" alt="">
-                            <span class="delete">Delete</span>
-                        </button>
+                    <div class="overlay-popup-container">
+                        <div class="popup-button-container" id="popup-button">
+                            <button class="popup-buttons" onclick="openEditContact('${id}', '${firstName}', '${lastName}', '${email}', '${phone}')">
+                                <img class="edit-icon" src="../img/edit-black.png" alt="">
+                                <span class="edit">Edit</span>
+                            </button>
+                            <button class="popup-buttons" onclick="deleteContact('${id}')">
+                                <img class="delete-icon" src="../img/delete.png" alt="">
+                                <span class="delete">Delete</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -185,7 +189,7 @@ function contactPopUp(id, firstName, lastName, email, phone, color) {
     movePopupToPosition(popUpSection);
 
 
-    if (window.innerWidth <= 780) {
+    if (window.innerWidth <= 640) {
         document.getElementById('contactSection').style.display = 'none';
     }
 

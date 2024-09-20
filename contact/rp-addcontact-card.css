@@ -1,0 +1,398 @@
+@media screen and (max-width: 1440px) {
+    #editContact, #addContact {
+        width: 1112px;
+        height: 570px;
+    }
+
+    #contactLeft {
+        width: 320px;
+        padding: 56px;
+    }
+
+    #addContactHeader {
+        font-size: 54px;
+    }
+
+    #addContactSubheader {
+        font-size: 24px;
+    }
+
+    .person-container {
+        left: 482px;
+        top: 220px;
+    }
+
+    #inputFields {
+        top: 148px;
+        left: 659px;
+        gap: 22px;
+    }
+
+    .inputField-icon-tel {
+        top: 198.5px;
+    }
+
+    .inputField-icon-email {
+        top: 114px;
+    }
+
+    #editButtons, #buttons {
+        left: 659px;
+    }
+}
+
+@media screen and (max-width: 1280px) {
+    #editContact.show, #addContact.show {
+        left: 50%;
+    }
+
+    #editContact, #addContact {
+        width: 874px;
+        height: 552px;
+    }
+
+    #contactLeft {
+        width: 230px;
+        padding: 46px;
+    }
+
+    #addContactTextContainer {
+        width: 255px;
+    }
+
+    #addContactSubheader {
+        font-size: 18px;
+    }
+
+    #addContactHeader {
+        font-size: 39px;
+    }
+
+    .person-container {
+        left: 350px;
+        top: 202px;
+    }
+
+    #inputFields {
+        top: 148px;
+        left: 506px;
+        gap: 18px;
+    }
+
+    .inputField, #inputFields {
+        width: 334px;
+    }
+
+    .inputField input {
+        width: 305px;
+        height: 24px;
+    }
+
+    .inputField-icon-name, .inputField-icon-name {
+        width: 16px;
+        height: 16px;
+        left: 300px;
+    }
+
+    .inputField-icon-email {
+        top: 105px;
+        left: 300px;
+    }
+
+    .inputField-icon-tel {
+        top: 180.5px;
+        left: 300px;
+    }
+
+    #editButtons {
+        left: 506px;
+    }
+
+    #buttons {
+        left: 506px;
+        justify-content: center;
+        width: 316px;
+    }
+
+    .create-contact {
+        font-size: 16px;
+        font-weight: 500;
+    }
+}
+
+@media screen and (max-width: 1040px) {
+    #editContact {
+        width: 874px;
+        height: 552px;
+    }
+
+    #contactLeft {
+        width: 230px;
+        padding: 46px;
+    }
+
+    #addContactHeader {
+        font-size: 40px;
+    }
+
+    .addcontact-logo {
+        width: 45.6px;
+        height: 56.48px;
+    }
+
+    .person-container {
+        left: 344px;
+        top: 202px;
+    }
+
+    #inputFields {
+        width: 325px;
+        height: 215px;
+    }
+
+    .inputField input {
+        width: 296px;
+        height: 24px;
+    }
+}
+
+@media screen and (max-width: 920px) {
+    .overlay {
+        height: 1008px;
+    }
+
+    #editContact, #addContact {
+        width: 396px;
+        height: 760px;
+        top: 500px;
+        left: 176%;
+        box-shadow: 0px 0px 4px 0px #0000001A;
+        flex-direction: column;
+    }
+
+    #addContact.show {
+        left: 50%;
+        z-index: 1;
+    }
+
+    #editContact.show {
+        left: 50%;
+        z-index: 1;
+    }
+
+    #contactLeft {
+        width: 396px;
+        height: 351px;
+        padding: 0px;
+    }
+
+    #joinLogoContainer {
+        display: none;
+    }
+
+    #addContactTextContainer {
+        margin-left: 24px;
+    }
+
+    #addContactHeader {
+        font-size: 47px;
+        font-weight: 700;
+        color: #FFFFFF;
+        line-height: 56.4px;
+    }
+
+    #addContactSubheader {
+        font-size: 20px;
+    }
+
+    #closeButtonContainer {
+        top: 24px;
+        right: 18px;
+        background: none;
+    }
+
+    #closeButton {
+        width: 32px;
+        height: 32px;
+        font-size: 22px;
+        color: white;
+    }
+
+    .person-container {
+        top: 292px;
+        left: 138px;
+    }
+
+    #inputFields {
+        width: 364px;
+        height: 171px;
+        top: 444px;
+        left: 15.5px;
+        gap: 12px;
+    }
+
+    .inputField {
+        display: flex;
+        flex-direction: column;
+        width: 364px;
+        gap: 8px;
+    }
+
+    .inputField input {
+        width: 322px;
+        height: 18px;
+        padding: 13px 21px 13px 21px;
+    }
+
+    .inputField-icon-name {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 22px;
+        left: 326px;
+    }
+
+    .inputField-icon-email {
+        position: absolute;
+        width: 20px;
+        height: 16px;
+        top: 89px;
+        left: 326px;
+    }
+
+    .inputField-icon-tel {
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        top: 153.5px;
+        left: 326px;
+    }
+
+    .inputField {
+        display: flex;
+        flex-direction: column;
+        width: 364px;
+        gap: 8px;
+    }
+
+    #editButtons {
+        width: 201px;
+        gap: 20px;
+        top: 667px;
+        left: 97.5px;
+    }
+
+    #buttons {
+        width: 202px;
+        height: 51px;
+        gap: 20px;
+        top: 667px;
+        left: 97.5px;
+    }
+
+    .createButton {
+        width: 202px;
+        height: 51px;
+        padding: 18px 10px 18px 10px;
+    }
+
+    .cancelButton {
+        display: none;
+    }
+
+    .editCancelButton {
+        display: flex;
+        width: 82px;
+        height: 51px;
+        padding: 18px 10px 18px 10px;
+        align-items: center;
+    }
+
+    .x-png {
+        display: none;
+    }
+
+    .saveButton {
+        width: 99px;
+        height: 51px;
+        padding: 16px;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    #contactSection {
+        width: 428px;
+        height: 848px;
+    }
+
+    .contacts {
+        background: #F6F7F8;
+        display: flex;
+        height: 848px;
+        padding-left: 0;
+    }
+
+    .addButton-container {
+        position: fixed;
+        top: 840px;
+        height: 56px;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 32px;
+    }
+
+    #contactSection button {
+        display: flex;
+        position: fixed;
+        gap: 10px;
+        top: 840px;
+        width: 56px;
+        height: 56px;
+        border-radius: 46px;
+        padding: 12px;
+        border: 1px;
+    }
+
+    .button-text {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #editContact, #addContact, #contactLeft {
+        width: 330px;
+    }
+
+    #addContactTextContainer {
+        width: 300px;
+    }
+
+    #addContactHeader {
+        font-size: 43px;
+    }
+
+    .person-container {
+        left: 101px;
+    }
+
+    #inputFields, .inputField {
+        width: 299px;
+    }
+
+    .inputField input {
+        width: 254px;
+    }
+
+    .inputField-icon-name, .inputField-icon-email, .inputField-icon-tel {
+        left: 265px;
+    }
+
+    #editButtons {
+        left: 62.5px;
+    }
+
+    #buttons {
+        left: 63.5px;
+    }
+}

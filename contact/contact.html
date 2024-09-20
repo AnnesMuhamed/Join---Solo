@@ -10,6 +10,7 @@
     <script src="../templates/header.js"></script>
     <link rel="stylesheet" href="../templates/rp-header-sidebar.css">
     <link rel="stylesheet" href="rp-contact.css">
+    <link rel="stylesheet" href="rp-addcontact-card.css">
     <script src="../firebase.js"></script>
     <script src="contact.js"></script>
     <title>Contact</title>
@@ -35,13 +36,17 @@
             <img class="rpContact-blueStroke" src="../img/rp-bluestroke.png" alt="">
           </div>
           <button class="back-button">
-            <a href="../contact/contact.html"><img src="../img/arrow-left-line.png" alt=""></a>
+            <a class="left-arrow" href="../contact/contact.html"><img src="../img/arrow-left-line.png" alt=""></a>
           </button>
           
           <div id="popup-section"></div>
-          <div id="popup-option" class="option" onclick="togglePopupOption()">
-            <img class="option-point-img" src="../img/optionpoint.png" alt="">
+
+          <div class="popup-option-container">
+            <div id="popup-option" class="option" onclick="togglePopupOption()">
+              <img class="option-point-img" src="../img/optionpoint.png" alt="">
+            </div>
           </div>
+
         </div>
     </div>
     

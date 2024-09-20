@@ -1,0 +1,39 @@
+@media screen and (max-width: 1280px) {
+    .new-task {
+        width: 864px;
+    }
+
+    .close-btn {
+        left: 800px;
+    }
+
+    .add-task-form {
+        margin-left: 50px;
+    }
+
+    .due-date {
+        width: 250px;
+    }
+
+    .radio-button-group {
+        justify-content: flex-start;
+    }
+
+    .category, .subtask-container {
+        width: 350px;
+    }
+
+    .subtask-list {
+        padding-left: 400px;
+    }
+
+    .subtask-list-element {
+        width: 350px;
+    }
+
+    .buttons {
+        justify-content: space-between;
+        width: 500px;
+        align-items: center;
+    }
+}
