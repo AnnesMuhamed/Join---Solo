@@ -1,0 +1,119 @@
+
+.popup {
+    width: 425px;
+    padding: 48px 40px;
+    border-radius: 30px;
+    box-shadow: 0px 0px 4px 0px #00000029;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    height: 700px;
+    overflow-x: scroll;
+    box-sizing: border-box;
+  }
+
+#edit-task-form1 {
+    display: flex;
+    flex-direction: column;
+    max-height: 700px;
+    width: 100%;
+    word-break: break-word;
+    padding: 0 12px;
+    gap: 16px;
+}
+
+#title1, #due-date1, #search1, #subtasks1 {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    padding: 12px 0px 16px 12px;
+    border-radius: 10px;
+    border: 1px solid #d1d1d1;
+}
+
+#due-date1 {
+    padding: 12px 12px 16px 12px !important;
+}
+
+#radio-button-group-edit1 {
+    word-break: normal;
+}
+
+#prio-high1 {
+    width: 120px;
+}
+
+#description1 {
+    height: 120px;
+    padding: 18px 0px 16px 18px;
+    width: 100%;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+#subtask-buttons-container1 {
+    position: relative;
+    right: 40px;
+    border-radius: 0;
+    display: flex;
+    background-color: none !important;
+    border: 0;
+    height: 0;
+    padding: 0;
+}
+
+.popup-cencel-button {
+    display: flex;
+    align-items: center;
+    border: 0;
+    background: 0;
+    gap: 8px;
+    margin-left: 350px;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+  }
+
+  .popup-cencel-button:hover {
+    background-color: rgb(238 231 231);
+    border-radius: 56px;
+  }
+
+  .popup-actions {
+    display: flex;
+    height: 56px;
+    gap: 8px;
+  }
+
+  .popup-save-button {
+    width: 90px;
+    height: 56px;
+    gap: 4px;
+    background: rgba(42, 54, 71, 1);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    padding: 16px 0;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-left: 232px;
+  }
+
+  .popup-save-button:hover {
+    background: rgba(41, 171, 226, 1);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transform: scale(1.05);
+  }
+
+  .action-icon {
+    width: 12px;
+    height: 12px;
+  }

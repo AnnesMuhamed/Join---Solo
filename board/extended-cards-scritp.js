@@ -692,7 +692,7 @@ function loadSubtasks(task, subtasksList) {
   });
 }
 
-function editTask(taskId) {
+function editTask(taskId, idSuffix='1') {
   const popupContainer = document.querySelector('.popup-container');
   const popupContent = document.getElementById('popup');
 
@@ -700,59 +700,56 @@ function editTask(taskId) {
     .then(response => response.text())
     .then(html => {
       popupContent.innerHTML = /*html*/`
-        <form id="edit-task-form" class="edit-task-form">
+      <button class="popup-cencel-button" onclick="closePopup()">
+            <img src="../img/close.png" alt="Close" class="action-icon">
+          </button>
+        <form id="edit-task-form${idSuffix}" class="edit-task-form">
           <div class="d-flex-col">
             <label for="title">Title</label>
-            <input type="text" id="title" class="definition-entry-field" placeholder="Enter a title" required>
+            <input type="text" id="title${idSuffix}" class="definition-entry-field" placeholder="Enter a title" required>
           </div>
           <div class="d-flex-col">
             <label for="description">Description</label>
-            <textarea id="description" class="definition-entry-field" placeholder="Enter a description"></textarea>
+            <textarea id="description${idSuffix}" class="definition-entry-field" placeholder="Enter a description"></textarea>
           </div>
           <div class="d-flex-col">
             <label for="due-date">Due date</label>
-            <input type="date" id="due-date" class="properties-entry-field" required>
+            <input type="date" id="due-date${idSuffix}" class="properties-entry-field" required>
           </div>
           <div class="d-flex-col">
             <label>Priority</label>
-            <div id="radio-button-group-edit" class="radio-button-group">
-              <input type="radio" id="prio-high" name="prios" value="3" class="radio-button">
+            <div id="radio-button-group-edit${idSuffix}" class="radio-button-group">
+              <input type="radio" id="prio-high${idSuffix}" name="prios" value="3" class="radio-button">
               <label for="prio-high" class="radio-label"><span>Urgent</span><img class="rp-prio-img" src="../img/add-task/prio-high.png"></label>
-              <input type="radio" id="prio-med" name="prios" value="2" class="radio-button">
+              <input type="radio" id="prio-med${idSuffix}" name="prios" value="2" class="radio-button">
               <label for="prio-med" class="radio-label"><span>Medium</span><img class="rp-prio-img" src="../img/add-task/prio-med.png"></label>
-              <input type="radio" id="prio-low" name="prios" value="1" class="radio-button">
+              <input type="radio" id="prio-low${idSuffix}" name="prios" value="1" class="radio-button">
               <label for="prio-low" class="radio-label"><span>Low</span><img class="rp-prio-img" src="../img/add-task/prio-low.png"></label>
             </div>
           </div>
           <div class="d-flex-col assignment-container">
             <label for="assignment">Select contacts to assign</label>
             <div class="select-box">
-              <input id="search" class="assignment-selector" type="text" placeholder="Select contacts to assign">
+              <input id="search${idSuffix}" class="assignment-selector" type="text" placeholder="Select contacts to assign">
             </div>
-            <div id="checkboxes"></div>
-            <div id="assigned-contacts"></div>
+            <div id="checkboxes${idSuffix}"></div>
+            <div id="assigned-contacts${idSuffix}"></div>
           </div>
           <div class="d-flex-col">
             <label for="subtasks">Subtasks</label>
             <div class="subtask-container">
-              <input type="text" id="subtasks" class="properties-entry-field" placeholder="Add new subtask">
-              <div id="subtask-buttons-container" class="add-subtask-button">
-                <button id="add-subtask-button" class="in-line-btn" type="button"><img src="../img/add-task/add.png"></button>
+              <input type="text" id="subtasks${idSuffix}" class="properties-entry-field" placeholder="Add new subtask">
+              <div id="subtask-buttons-container${idSuffix}" class="add-subtask-button">
+                <button id="add-subtask-button${idSuffix}" class="in-line-btn" type="button"><img src="../img/add-task/add.png"></button>
               </div>
             </div>
           </div>
-          <ul id="subtask-list" class="subtask-list"></ul>
+          <ul id="subtask-list${idSuffix}" class="subtask-list"></ul>
         </form>
-        <div class="popup-actions">
-          <button class="action-button" onclick="saveEditedTask('${taskId}')">
-            <img src="../img/save.png" alt="Save" class="action-icon">
-            <span class="action-label">Save</span>
+        <button class="popup-save-button" onclick="saveEditedTask('${taskId}')">
+          <span class="action-label">Ok</span>
+          <img src="../img/hook.png" alt="Save" class="action-icon"> 
           </button>
-          <button class="action-button" onclick="closePopup()">
-            <img src="../img/close.png" alt="Close" class="action-icon">
-            <span class="action-label">Cancel</span>
-          </button>
-        </div>
       `;
 
       populateTaskForm(taskId);
