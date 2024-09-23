@@ -395,6 +395,17 @@ function closeForm(formId) {
   document.body.classList.remove("modal-open");
 }
 
+function openForm(id) {
+  document.getElementById(id).classList.add('show');
+  document.getElementById("overlay").style.display = "block";
+  document.body.classList.add("modal-open");
+}
+
+function closeForm(id) {
+  document.getElementById(id).classList.remove('show');
+  document.getElementById("overlay").style.display = "none";
+  document.body.classList.remove("modal-open");
+}
 
 
 

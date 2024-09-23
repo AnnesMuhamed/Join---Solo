@@ -22,6 +22,7 @@
     <script src="../add-task/add-task.js"></script>
     <script src="../templates/header.js"></script>
     <script src="../firebase.js"></script>
+    <script src="task-template.js"></script>
     <script src="extended-cards-scritp.js"></script>
     <script src="board.js"></script>
     <title>Board</title>
@@ -163,7 +164,7 @@
           <div class="popup-actions">
             <button class="action-button" onclick="deleteTask()"><img src="../img/delete.png" alt="Delete" class="action-icon" /><span class="action-label">Delete</span></button>
             <img src="../img/high-stroke-gray.png" alt="Separator" class="action-separator" />
-            <button class="action-button" onclick="editTask()"><img src="../img/edit-black.png" alt="Edit" class="action-icon" /><span class="action-label">Edit</span></button>
+            <button onclick="editTask('${taskId}')"><img src="../img/edit-black.png" alt="Edit" class="action-icon" /><span class="action-label">Edit</span></button>
           </div>
         </div>
       </div>
