@@ -143,29 +143,6 @@
       <!-- Pop-Up-Cards start -->
       <div class="popup-container">
         <div class="popup" id="popup">
-          <div class="popup-header">
-            <div class="tag-container" id="tag-container"><span class="tag" id="tag"></span></div>
-            <button class="close-button" onclick="closePopup()"><img src="../img/close.png" alt="Close" class="close-icon" /></button>
-          </div>
-          <h1 class="popup-title" id="popup-title"></h1>
-          <h5 class="popup-subtitle" id="popup-subtitle"></h5>
-          <div class="popup-info">
-            <div class="info-item-date"><span class="label">Due date:</span><span class="value" id="due-date"></span></div>
-            <div id="priority-container"><span id="priority-label"></span><img id="priority-icon" /></div>
-            <div class="info-item-assigned">
-              <span class="label">Assigned To:</span>
-              <div id="assignee-container"></div> <!-- This was added to ensure the contacts display -->
-            </div>
-          </div>
-          <div class="popup-subtasks">
-            <span class="subtasks-label">Subtasks</span>
-            <div class="subtasks-list" id="subtasks-list"></div>
-          </div>
-          <div class="popup-actions">
-            <button class="action-button" onclick="deleteTask()"><img src="../img/delete.png" alt="Delete" class="action-icon" /><span class="action-label">Delete</span></button>
-            <img src="../img/high-stroke-gray.png" alt="Separator" class="action-separator" />
-            <button onclick="editTask('${taskId}')"><img src="../img/edit-black.png" alt="Edit" class="action-icon" /><span class="action-label">Edit</span></button>
-          </div>
         </div>
       </div>
       <!-- Pop-Up-Cards end -->
