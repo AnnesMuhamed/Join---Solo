@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
-    height: 700px;
+    max-height: 700px;
     box-sizing: border-box;
   }
 
@@ -22,8 +22,7 @@
     overflow-x: scroll;
 }
 
-#title1, #due-date1, #search1, #subtasks1 {
-    width: 100%;
+#title1, #due-date1, #search1 {
     font-size: 20px;
     font-weight: 400;
     line-height: 24px;
@@ -31,6 +30,17 @@
     padding: 12px 0px 16px 12px;
     border-radius: 10px;
     border: 1px solid #d1d1d1;
+}
+
+#subtasks1 {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  padding: 12px 0px 16px 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d1d1;
+  width: 100%;
 }
 
 #due-date1 {
@@ -48,7 +58,6 @@
 #description1 {
     height: 120px;
     padding: 18px 0px 16px 18px;
-    width: 100%;
     font-size: 20px;
     font-weight: 400;
     font-family: 'Inter';
@@ -91,6 +100,7 @@
     display: flex;
     justify-content: flex-end;
     gap: 8px;
+    height: 27px;
   }
 
   .popup-save-button {
@@ -146,4 +156,18 @@
   .priority-icon {
     width: 12px;
     height: 12px;
+  }
+
+  .inPopup {
+    width: 100%;
+  }
+
+  .custom-label {
+    display: flex;
+  }
+
+  .star {
+    color: red;
+    font-weight: bold;
+    margin-left: 5px;
   }

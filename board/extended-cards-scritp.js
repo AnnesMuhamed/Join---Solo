@@ -204,19 +204,23 @@ function editTask(taskId, idSuffix='1') {
             <img src="../img/close.png" alt="Close" class="action-icon-x">
           </button>
         <form id="edit-task-form${idSuffix}" class="edit-task-form">
-          <div class="d-flex-col">
-            <label for="title">Title</label>
+          <div class="d-flex-col inPopup">
+            <label class="custom-label" for="title">Title
+            <span class="star">*</span>
+            </label>
             <input type="text" id="title${idSuffix}" class="definition-entry-field" placeholder="Enter a title" required>
           </div>
-          <div class="d-flex-col">
+          <div class="d-flex-col inPopup">
             <label for="description">Description</label>
             <textarea id="description${idSuffix}" class="definition-entry-field" placeholder="Enter a description"></textarea>
           </div>
-          <div class="d-flex-col">
-            <label for="due-date">Due date</label>
+          <div class="d-flex-col inPopup">
+            <label class="custom-label" for="due-date">Due date
+            <span class="star">*</span>
+            </label>
             <input type="date" id="due-date${idSuffix}" class="properties-entry-field" required>
           </div>
-          <div class="d-flex-col">
+          <div class="d-flex-col inPopup">
             <label>Priority</label>
             <div id="radio-button-group-edit${idSuffix}" class="radio-button-group">
               <input type="radio" id="prio-high${idSuffix}" name="prios" value="3" class="radio-button">
@@ -227,7 +231,7 @@ function editTask(taskId, idSuffix='1') {
               <label for="prio-low" class="radio-label"><span>Low</span><img class="rp-prio-img" src="../img/add-task/prio-low.png"></label>
             </div>
           </div>
-          <div class="d-flex-col assignment-container">
+          <div class="d-flex-col assignment-container inPopup">
             <label for="assignment">Select contacts to assign</label>
             <div class="select-box">
               <input id="search${idSuffix}" class="assignment-selector" type="text" placeholder="Select contacts to assign">
@@ -235,7 +239,7 @@ function editTask(taskId, idSuffix='1') {
             <div id="checkboxes${idSuffix}"></div>
             <div id="assigned-contacts${idSuffix}"></div>
           </div>
-          <div class="d-flex-col">
+          <div class="d-flex-col inPopup">
             <label for="subtasks">Subtasks</label>
             <div class="subtask-container">
               <input type="text" id="subtasks${idSuffix}" class="properties-entry-field" placeholder="Add new subtask">
@@ -349,12 +353,17 @@ function renderInfoPopup(taskId){
           <h1 class="popup-title" id="popup-title"></h1>
           <h5 class="popup-subtitle" id="popup-subtitle"></h5>
             <div class="info-item-date"><span class="label">Due date:</span><span class="value" id="due-date"></span></div>
-            <div id="priority-container"><span class="label">Priority:</span><span id="priority-label"></span><img id="priority-icon" /></div>
+            <div id="priority-container">
+              <span class="label">Priority:</span>
+              <div class="priority-lable-container">
+                <span id="priority-label"></span>
+                <img id="priority-icon" /></div>
+              </div>
             <div class="info-item-assigned">
               <span class="label">Assigned To:</span>
               <div id="assignee-container"></div> <!-- This was added to ensure the contacts display -->
               <div class="popup-subtasks">
-            <span class="subtasks-label">Subtasks</span>
+            <span class="subtasks-label">Subtasks:</span>
             <div class="subtasks-list" id="subtasks-list"></div>
           </div>
             </div>
