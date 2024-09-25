@@ -9,7 +9,6 @@
     flex-direction: column;
     gap: 24px;
     height: 700px;
-    overflow-x: scroll;
     box-sizing: border-box;
   }
 
@@ -20,6 +19,7 @@
     word-break: break-word;
     padding: 0 12px;
     gap: 16px;
+    overflow-x: scroll;
 }
 
 #title1, #due-date1, #search1, #subtasks1 {
@@ -51,7 +51,12 @@
     width: 100%;
     font-size: 20px;
     font-weight: 400;
+    font-family: 'Inter';
     line-height: 24px;
+}
+
+.properties-entry-field {
+  font-family: 'Inter';
 }
 
 #subtask-buttons-container1 {
@@ -71,10 +76,10 @@
     border: 0;
     background: 0;
     gap: 8px;
-    margin-left: 350px;
+    margin-left: 323px;
     cursor: pointer;
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 40px;
   }
 
   .popup-cencel-button:hover {
@@ -85,13 +90,12 @@
   .popup-actions {
     display: flex;
     justify-content: flex-end;
-    height: 56px;
     gap: 8px;
   }
 
   .popup-save-button {
-    width: 90px;
-    height: 56px;
+    width: 77px;
+    height: 61px;
     gap: 4px;
     background: rgba(42, 54, 71, 1);
     color: white;
@@ -100,10 +104,12 @@
     justify-content: center;
     border: none;
     cursor: pointer;
-    padding: 16px 0;
+    padding: 18px 10px 18px 10px;
     border-radius: 10px;
-    font-size: 20px;
-    margin-left: 232px;
+    font-size: 21px;
+    font-weight: 700;
+    margin-left: 250px;
+    line-height: 25.2px;
   }
 
   .popup-save-button:hover {
@@ -112,7 +118,32 @@
     transform: scale(1.05);
   }
 
-  .action-icon {
+  #priority-container {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+  }
+
+  #assignee-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .subtask-popup {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    height: fit-content;
+    padding: 6px 16px;
+  }
+
+  .subtask-popup:hover {
+    background-color: rgb(238 231 231);
+    border-radius: 10px;
+  }
+
+  .priority-icon {
     width: 12px;
     height: 12px;
   }

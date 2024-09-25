@@ -147,13 +147,49 @@ function loadSubtasks(task, subtasksList) {
   let subtasks = JSON.parse(task.subtasks || "[]");
   subtasks.forEach((subtask, index) => {
     let key = Object.keys(subtask)[0];
-    let isChecked = subtask[key] === "done" ? "checked" : "";
+    let isChecked = subtask[key] === "done";
+    let checkboxImg = isChecked ? "../img/checked.png" : "../img/checkbox.png";
+    
     subtasksList.innerHTML += `
-      <div class="subtask-item">
-        <input type="checkbox" class="subtask-checkbox" id="subtask-${index}" ${isChecked} disabled>
-        <span class="subtask-label">${key}</span>
+      <div class="subtask-popup ${isChecked ? 'checked' : ''}" data-subtask-id="${index}">
+        <div class="subtask-checkbox" onclick="toggleSubtaskCheck(${task.id}, ${index});">
+          <img src="${checkboxImg}" alt="Checkbox" id="checkbox-img-${index}">
+        </div>
+        <span>${key}</span>
       </div>`;
   });
+}
+
+function toggleSubtaskCheck(taskId, subtaskIndex) {
+  // Hole die Aufgabenliste aus dem sessionStorage
+  let tasks = JSON.parse(sessionStorage.getItem('tasks'));
+  
+  // Hole die aktuelle Aufgabe
+  let task = tasks[taskId];
+
+  // Hole die Subtasks der Aufgabe und ändere den Status des ausgewählten Subtasks
+  let subtasks = JSON.parse(task.subtasks || "[]");
+  let subtaskKey = Object.keys(subtasks[subtaskIndex])[0];
+  
+  // Wechsel des Status: 'done' <-> 'not done'
+  subtasks[subtaskIndex][subtaskKey] = subtasks[subtaskIndex][subtaskKey] === "done" ? "not done" : "done";
+  
+  // Aktualisiere den Task in der Session
+  task.subtasks = JSON.stringify(subtasks);
+  tasks[taskId] = task;
+  sessionStorage.setItem('tasks', JSON.stringify(tasks));
+  
+  // Aktualisiere das Bild basierend auf dem neuen Status
+  let checkboxImg = subtasks[subtaskIndex][subtaskKey] === "done" ? "../img/checked.png" : "../img/checkbox.png";
+  document.getElementById(`checkbox-img-${subtaskIndex}`).src = checkboxImg;
+
+  // Optional: Wenn du möchtest, kannst du die Klasse 'checked' basierend auf dem neuen Status hinzufügen oder entfernen
+  let subtaskItem = document.querySelector(`[data-subtask-id="${subtaskIndex}"]`);
+  if (subtasks[subtaskIndex][subtaskKey] === "done") {
+    subtaskItem.classList.add('checked');
+  } else {
+    subtaskItem.classList.remove('checked');
+  }
 }
 
 function editTask(taskId, idSuffix='1') {
@@ -165,7 +201,7 @@ function editTask(taskId, idSuffix='1') {
     .then(html => {
       popupContent.innerHTML = /*html*/`
       <button class="popup-cencel-button" onclick="closePopup()">
-            <img src="../img/close.png" alt="Close" class="action-icon">
+            <img src="../img/close.png" alt="Close" class="action-icon-x">
           </button>
         <form id="edit-task-form${idSuffix}" class="edit-task-form">
           <div class="d-flex-col">
@@ -212,7 +248,7 @@ function editTask(taskId, idSuffix='1') {
         </form>
         <button class="popup-save-button" onclick="saveEditedTask('${taskId}')">
           <span class="action-label">Ok</span>
-          <img src="../img/hook.png" alt="Save" class="action-icon"> 
+          <img src="../img/hook.png" alt="Save" class="action-icon-hook"> 
           </button>
       `;
 
@@ -309,24 +345,25 @@ function renderInfoPopup(taskId){
             <div class="tag-container" id="tag-container"><span class="tag" id="tag"></span></div>
             <button class="close-button" onclick="closePopup()"><img src="../img/close.png" alt="Close" class="close-icon" /></button>
           </div>
+          <div class="popup-info">
           <h1 class="popup-title" id="popup-title"></h1>
           <h5 class="popup-subtitle" id="popup-subtitle"></h5>
-          <div class="popup-info">
             <div class="info-item-date"><span class="label">Due date:</span><span class="value" id="due-date"></span></div>
-            <div id="priority-container"><span id="priority-label"></span><img id="priority-icon" /></div>
+            <div id="priority-container"><span class="label">Priority:</span><span id="priority-label"></span><img id="priority-icon" /></div>
             <div class="info-item-assigned">
               <span class="label">Assigned To:</span>
               <div id="assignee-container"></div> <!-- This was added to ensure the contacts display -->
-            </div>
-          </div>
-          <div class="popup-subtasks">
+              <div class="popup-subtasks">
             <span class="subtasks-label">Subtasks</span>
             <div class="subtasks-list" id="subtasks-list"></div>
           </div>
+            </div>
+          </div>
+          
           <div class="popup-actions">
             <button class="action-button" onclick="deleteTask()"><img src="../img/delete.png" alt="Delete" class="action-icon" /><span class="action-label">Delete</span></button>
             <img src="../img/high-stroke-gray.png" alt="Separator" class="action-separator" />
-            <button onclick="editTask('${taskId}')"><img src="../img/edit-black.png" alt="Edit" class="action-icon" /><span class="action-label">Edit</span></button>
+            <button class="action-button" onclick="editTask('${taskId}')"><img src="../img/edit-black.png" alt="Edit" class="action-icon" /><span class="action-label">Edit</span></button>
           </div>`;
 }
 

@@ -95,9 +95,21 @@
           </div>
         </div>
       </form>
-      <div id="subtask-list-container" class="subtask-list-container">
-        <ul id="subtask-list" class="subtask-list"></ul>
+      <div class="subtasks" id="subtask-list">
+        <div class="subtask-popup checked" data-subtask-id="1">
+          <div class="subtask-checkbox" onclick="toggleSubtaskCheck(1, 0);">
+            <img src="../img/checked.png" alt="Checkbox" id="checkbox-img-1">
+          </div>
+          <span>Subtask 1</span> 
+        </div>
+        <div class="subtask-popup" data-subtask-id="2">
+          <div class="subtask-checkbox" onclick="toggleSubtaskCheck(1, 1);">
+            <img src="../img/checkbox.png" alt="Checkbox" id="checkbox-img-2">
+          </div>
+          <span>Subtask 2</span> 
+        </div>
       </div>
+      
       <div id="buttons" class="buttons">
         <span id="requirement" class="requirement"><span style="color: red">*</span>This field is required</span>
         <div class="btn-container">
