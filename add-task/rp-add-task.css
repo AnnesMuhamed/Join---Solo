@@ -81,10 +81,6 @@
         gap: 12px;
     }
 
-    #checkboxes {
-        width: 260px;
-    }
-
     .subtask-list-element:hover, .subtask-list-element:focus-within, .subtask-list-element {
         width: 378px;
     }
@@ -297,13 +293,9 @@
         display: none;
         border: 1px solid #dadada;
         border-radius: 10px;
-        position: absolute;
-        top: 619px;
         background-color: white;
         z-index: 1;
-        height: 216px;
-        width: 396px;
-        max-width: 440px;
+        width: 100%;
         overflow-y: auto;
     }
 

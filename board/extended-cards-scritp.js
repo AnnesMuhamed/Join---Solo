@@ -451,20 +451,3 @@ function getContactInitials(id) {
   }
   return "";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
