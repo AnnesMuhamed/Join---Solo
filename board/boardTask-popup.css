@@ -23,11 +23,11 @@
 }
 
 #title1, #due-date1, #search1 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 400;
-    line-height: 24px;
+    line-height: 19.2px;
     text-align: left;
-    padding: 12px 0px 16px 12px;
+    padding: 12px 0px 12px 12px;
     border-radius: 10px;
     border: 1px solid #d1d1d1;
 }
@@ -171,3 +171,99 @@
     font-weight: bold;
     margin-left: 5px;
   }
+
+  .dropdown-arrow {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    cursor: pointer;
+  }
+  
+  .checkboxes-container {
+    width: 100%;
+    padding: 10px;
+    position: relative;
+    bottom: 6px;
+    border: 1px solid #d1d1d1;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    background: white;
+    box-sizing: border-box;
+    max-height: 173px;
+    min-height: 173px;
+    overflow-y: auto;
+    overflow-x: scroll;
+    transition: max-height 0.3s ease-out;
+  }
+
+.popup-toggle-contacts {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  height: 56px;
+  border-radius: 10px;
+}
+
+.popup-toggle-contacts:hover {
+  background: rgba(238, 238, 238, 1);
+}
+
+.popup-contact-checkboxImg {
+  width: 20px;
+  height: 20px;
+  background-size: cover;
+  display: inline-block;
+  background-image: url('../img/checkbox.png');
+  background-size: cover;
+  cursor: pointer;
+  display: inline-block;
+}
+
+input[type="checkbox"]:checked + .popup-contact-checkboxImg {
+  background-image: url('../img/checked.png');
+}
+
+.dropdown-arrow {
+  width: 24px;
+  height: 24px;
+  background-image: url('../img/arrow_dropdown.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.dropdown-arrow.active {
+  background-image: url('../img/arrow_dropup.png');
+}
+
+.d-none {
+  display: none;
+}
+
+#assigned-contacts1 {
+  display: flex;
+  width: 100%;
+}
+
+.initials-popup-span {
+  width: 42px;
+  height: 42px;
+  border-radius: 45px;
+  background: #ff7a00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: 2px solid #ffffff;
+  color: white;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.4px;
+  text-align: center;
+  flex-shrink: 0;
+  margin-left: 0;
+}
+  

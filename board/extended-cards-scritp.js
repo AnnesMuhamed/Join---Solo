@@ -232,13 +232,16 @@ function editTask(taskId, idSuffix='1') {
             </div>
           </div>
           <div class="d-flex-col assignment-container inPopup">
-            <label for="assignment">Select contacts to assign</label>
-            <div class="select-box">
-              <input id="search${idSuffix}" class="assignment-selector" type="text" placeholder="Select contacts to assign">
+          <label for="assignment">Select contacts to assign</label>
+          <div class="select-box">
+            <input id="search1" class="assignment-selector" type="text" placeholder="Select contacts to assign">
+            <div id="dropdownArrow" class="dropdown-arrow" onclick="toggleCheckboxes()"></div>
+            <div id="checkboxesDiv" class="d-none">
+              <div id="checkboxes1" class="checkboxes-container"></div>
             </div>
-            <div id="checkboxes${idSuffix}"></div>
-            <div id="assigned-contacts${idSuffix}"></div>
           </div>
+        </div>
+        <div id="assigned-contacts1"></div>
           <div class="d-flex-col inPopup">
             <label for="subtasks">Subtasks</label>
             <div class="subtask-container">
@@ -255,7 +258,6 @@ function editTask(taskId, idSuffix='1') {
           <img src="../img/hook.png" alt="Save" class="action-icon-hook"> 
           </button>
       `;
-
       populateTaskForm(taskId,idSuffix);
       popupContainer.classList.add('show');
     })
@@ -323,6 +325,7 @@ function saveEditedTask(taskId) {
     sessionStorage.setItem('tasks', JSON.stringify(tasks));
     closePopup();
     renderCards();
+    renderCheckboxes();
   }
 }
 
@@ -375,6 +378,86 @@ function renderInfoPopup(taskId){
             <button class="action-button" onclick="editTask('${taskId}')"><img src="../img/edit-black.png" alt="Edit" class="action-icon" /><span class="action-label">Edit</span></button>
           </div>`;
 }
+
+let selectedContacts = [];
+
+function toggleCheckboxes() {
+  const checkboxesDiv = document.getElementById("checkboxesDiv");
+  const dropdownArrow = document.getElementById("dropdownArrow");
+
+  if (checkboxesDiv.classList.contains("d-none")) {
+    checkboxesDiv.classList.remove("d-none");
+    dropdownArrow.classList.add("active");  
+  } else {
+    checkboxesDiv.classList.add("d-none"); 
+    dropdownArrow.classList.remove("active");
+  }
+  renderCheckboxes();
+}
+
+function renderCheckboxes() {
+  let contacts = JSON.parse(sessionStorage.getItem("contacts")) || {};
+  let checkboxes = document.getElementById("checkboxes1");
+  checkboxes.innerHTML = "";  
+
+  for (let id in contacts) {
+    let contact = contacts[id];
+    let initials = getContactInitials(id); 
+    let isChecked = selectedContacts.includes(id);
+
+    let checkboxHTML = `
+      <label class="popup-toggle-contacts">
+        <span class="initials-span" id="initials-${id}" onclick="assignContactInitials('${id}', '${initials}');">${initials}</span>
+        ${contact.firstName} ${contact.lastName}
+        <input type="checkbox" id="checkbox-${id}" onchange="toggleContactCheck('${id}');" ${isChecked ? 'checked' : ''} style="display:none;">
+        <span class="popup-contact-checkboxImg ${isChecked ? 'checked' : ''}" id="checkbox-img-${id}" onclick="toggleContactCheck('${id}');"></span>
+      </label>`;
+
+    checkboxes.innerHTML += checkboxHTML;
+  }
+}
+
+function toggleContactCheck(contactId) {
+  const checkbox = document.getElementById(`checkbox-${contactId}`);
+  checkbox.checked = !checkbox.checked;  
+
+  if (checkbox.checked) {
+    selectedContacts.push(contactId); 
+  } else {
+    selectedContacts = selectedContacts.filter(id => id !== contactId);
+  }
+  updateAssignedContacts();
+}
+
+function updateAssignedContacts() {
+  const assignedDiv = document.getElementById("assigned-contacts1");
+  let contacts = JSON.parse(sessionStorage.getItem("contacts")) || {};
+  
+  assignedDiv.innerHTML = ""; 
+
+  selectedContacts.forEach(id => {
+    const contact = contacts[id];
+    if (contact) {
+      let initials = getContactInitials(id);
+      assignedDiv.innerHTML += `<span class="initials-popup-span" id="assigned-${id}">${initials}</span>`;
+    }
+  });
+}
+
+function getContactInitials(id) {
+  let contacts = JSON.parse(sessionStorage.getItem("contacts")) || {};
+  if (contacts[id]) {
+    return `${contacts[id].firstName.charAt(0)}${contacts[id].lastName.charAt(0)}`;
+  }
+  return "";
+}
+
+
+
+
+
+
+
 
 
 

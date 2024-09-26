@@ -182,8 +182,8 @@ function renderCheckboxes() {
     let contact = contacts[id];
     let checkbox = `
       <label>
+      ${contact.firstName} ${contact.lastName}
         <input type="checkbox" id="${id}" />
-        ${contact.firstName} ${contact.lastName}
       </label>`;
     checkboxes.innerHTML += checkbox;
   }
