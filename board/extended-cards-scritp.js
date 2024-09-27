@@ -379,7 +379,7 @@ function renderInfoPopup(taskId){
           </div>`;
 }
 
-let selectedContacts = [];
+let selectedContacts = new Set();  // Set zur Speicherung ausgewählter Kontakte
 
 function toggleCheckboxes() {
   const checkboxesDiv = document.getElementById("checkboxesDiv");
@@ -392,7 +392,8 @@ function toggleCheckboxes() {
     checkboxesDiv.classList.add("d-none"); 
     dropdownArrow.classList.remove("active");
   }
-  renderCheckboxes();
+  
+  renderCheckboxes();  // Beim Auf- und Zuklappen wird die Kontaktliste neu gerendert
 }
 
 function renderCheckboxes() {
@@ -403,16 +404,16 @@ function renderCheckboxes() {
   for (let id in contacts) {
     let contact = contacts[id];
     let initials = getContactInitials(id); 
-    let isChecked = selectedContacts.includes(id);
+    let isChecked = selectedContacts.has(id);  // Prüfen, ob Kontakt ausgewählt ist
 
     let checkboxHTML = /*html*/` 
-      <label class="popup-toggle-contacts" onclick="popupHighlightContact(this);">
+      <label class="popup-toggle-contacts ${isChecked ? 'highlighted' : ''}" onclick="popupHighlightContact(this, '${id}');">
         <div class="initials-names-toggle">
-          <span class="initials-span" id="initials-${id}" onclick="assignContactInitials('${id}', '${initials}');">${initials}</span>
+          <span class="initials-span" id="initials-${id}">${initials}</span>
           <span class="popup-toggle-contact-names">${contact.firstName} ${contact.lastName}</span>
         </div>
-        <input type="checkbox" id="checkbox-${id}" onchange="toggleContactCheck('${id}');" ${isChecked ? 'checked' : ''} style="display:none;">
-        <span class="popup-contact-checkboxImg ${isChecked ? 'checked' : ''}" id="checkbox-img-${id}" onclick="toggleContactCheck('${id}');"></span>
+        <input type="checkbox" id="checkbox-${id}" ${isChecked ? 'checked' : ''} style="display:none;">
+        <span class="popup-contact-checkboxImg ${isChecked ? 'checked' : ''}" id="checkbox-img-${id}"></span>
       </label>`;
 
     checkboxes.innerHTML += checkboxHTML;
@@ -431,9 +432,23 @@ function toggleContactCheck(contactId) {
   updateAssignedContacts();
 }
 
-function popupHighlightContact(element) {
-    document.querySelectorAll('.popup-toggle-contacts').forEach(item => item.classList.remove('highlighted'));
-    element.classList.add('highlighted');
+function popupHighlightContact(element, contactId) {
+  const checkbox = document.getElementById(`checkbox-${contactId}`);
+  const checkboxImg = document.getElementById(`checkbox-img-${contactId}`);
+
+  checkbox.checked = !checkbox.checked;
+
+  if (checkbox.checked) {
+    selectedContacts.add(contactId);  // Kontakt zum Set hinzufügen
+    element.classList.add('highlighted');  // Hervorhebung hinzufügen
+    checkboxImg.classList.add('checked');  // Checkbox-Icon weiß darstellen
+  } else {
+    selectedContacts.delete(contactId);  // Kontakt aus Set entfernen
+    element.classList.remove('highlighted');  // Hervorhebung entfernen
+    checkboxImg.classList.remove('checked');  // Checkbox-Icon zurücksetzen
+  }
+
+  updateAssignedContacts();
 }
 
 
@@ -441,21 +456,13 @@ function updateAssignedContacts() {
   const assignedDiv = document.getElementById("assigned-contacts1");
   let contacts = JSON.parse(sessionStorage.getItem("contacts")) || {};
 
-  // Leere den Container, um alte Initialen zu entfernen
   assignedDiv.innerHTML = ""; 
-
-  let renderedContacts = new Set();  // Set zum Vermeiden von Duplikaten
 
   selectedContacts.forEach(id => {
     const contact = contacts[id];
-    if (contact && !renderedContacts.has(id)) {
+    if (contact) {
       let initials = getContactInitials(id);
-      
-      // Füge die Initialen nur hinzu, wenn der Kontakt noch nicht hinzugefügt wurde
       assignedDiv.innerHTML += `<span class="initials-popup-span" id="assigned-${id}">${initials}</span>`;
-      
-      // Markiere diesen Kontakt als hinzugefügt
-      renderedContacts.add(id);
     }
   });
 }
