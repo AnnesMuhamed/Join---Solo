@@ -245,7 +245,14 @@ input[type="checkbox"]:checked + .popup-contact-checkboxImg {
 
 #assigned-contacts1 {
   display: flex;
-  width: 100%;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  min-height: 50px;
+  white-space: nowrap;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
 .initials-popup-span {
@@ -286,6 +293,6 @@ input[type="checkbox"]:checked + .popup-contact-checkboxImg {
 
 .popup-contact-checkboxImg.checked {
   background-color: white; /* Haken wird weiß */
-  border: 2px solid white;  /* Rand weiß darstellen */
+  border: 1px solid white;  /* Rand weiß darstellen */
 }
   

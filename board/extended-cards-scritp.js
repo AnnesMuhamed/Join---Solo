@@ -1,4 +1,6 @@
 let isEditing = false;
+let initialColors = {};
+let selectedContacts = new Set();
 
 function getHtmlElements() {
   let popupContainer = document.querySelector(".popup-container");
@@ -232,16 +234,16 @@ function editTask(taskId, idSuffix='1') {
             </div>
           </div>
           <div class="d-flex-col assignment-container inPopup">
-          <label for="assignment">Select contacts to assign</label>
-          <div class="select-box">
-            <input id="search1" class="assignment-selector" type="text" placeholder="Select contacts to assign">
-            <div id="dropdownArrow" class="dropdown-arrow" onclick="toggleCheckboxes()"></div>
-            <div id="checkboxesDiv" class="d-none">
-              <div id="checkboxes1" class="checkboxes-container"></div>
+            <label for="assignment">Select contacts to assign</label>
+            <div class="select-box">
+              <input id="search1" class="assignment-selector" type="text" placeholder="Select contacts to assign">
+              <div id="dropdownArrow" class="dropdown-arrow" onclick="toggleCheckboxes()"></div>
+              <div id="checkboxesDiv" class="d-none">
+                <div id="checkboxes1" class="checkboxes-container"></div>
+              </div>
             </div>
           </div>
-        </div>
-        <div id="assigned-contacts1"></div>
+          <div id="assigned-contacts1"></div>
           <div class="d-flex-col inPopup">
             <label for="subtasks">Subtasks</label>
             <div class="subtask-container">
@@ -258,7 +260,7 @@ function editTask(taskId, idSuffix='1') {
           <img src="../img/hook.png" alt="Save" class="action-icon-hook"> 
           </button>
       `;
-      populateTaskForm(taskId,idSuffix);
+      populateTaskForm(taskId, idSuffix);  // Überträgt Task-Inhalte ins Formular
       popupContainer.classList.add('show');
     })
     .catch(error => console.error('Error loading Add Task form:', error));
@@ -276,11 +278,11 @@ function populateTaskForm(taskId, idSuffix) {
     let priorityElement = document.querySelector(`input[name="prios"][value="${task.priority}"]`);
     if (priorityElement) priorityElement.checked = true;
 
+    // Kontakte übernehmen
     let assignees = task.assignment.split(',');
-    assignees.forEach(assigneeId => {
-      let assigneeCheckbox = document.querySelector(`input[name="assignees"][value="${assigneeId}"]`);
-      if (assigneeCheckbox) assigneeCheckbox.checked = true;
-    });
+    selectedContacts = new Set(assignees);  // Ausgewählte Kontakte setzen
+    
+    renderCheckboxesWithColors();  // Kontakte in der Liste mit Farben anzeigen
 
     let subtasks = JSON.parse(task.subtasks || "[]");
     let subtaskList = document.getElementById('subtask-list');
@@ -297,6 +299,8 @@ function populateTaskForm(taskId, idSuffix) {
     });
   }
 }
+
+
 
 function saveEditedTask(taskId) {
   let tasks = JSON.parse(sessionStorage.getItem('tasks'));
@@ -379,7 +383,7 @@ function renderInfoPopup(taskId){
           </div>`;
 }
 
-let selectedContacts = new Set();  // Set zur Speicherung ausgewählter Kontakte
+
 
 function toggleCheckboxes() {
   const checkboxesDiv = document.getElementById("checkboxesDiv");
@@ -393,23 +397,30 @@ function toggleCheckboxes() {
     dropdownArrow.classList.remove("active");
   }
   
-  renderCheckboxes();  // Beim Auf- und Zuklappen wird die Kontaktliste neu gerendert
+  renderCheckboxes();
 }
 
-function renderCheckboxes() {
+function renderCheckboxesWithColors() {
   let contacts = JSON.parse(sessionStorage.getItem("contacts")) || {};
   let checkboxes = document.getElementById("checkboxes1");
-  checkboxes.innerHTML = "";  
+  checkboxes.innerHTML = "";
 
   for (let id in contacts) {
     let contact = contacts[id];
     let initials = getContactInitials(id); 
     let isChecked = selectedContacts.has(id);  // Prüfen, ob Kontakt ausgewählt ist
 
+    // Prüfen, ob der Kontakt bereits eine Farbe hat, wenn nicht, zufällige Farbe generieren
+    if (!initialColors[id]) {
+      initialColors[id] = getRandomColor();
+    }
+
+    let randomColor = initialColors[id];  // Farbe für die Initialen
+
     let checkboxHTML = /*html*/` 
       <label class="popup-toggle-contacts ${isChecked ? 'highlighted' : ''}" onclick="popupHighlightContact(this, '${id}');">
         <div class="initials-names-toggle">
-          <span class="initials-span" id="initials-${id}">${initials}</span>
+          <span class="initials-span" id="initials-${id}" style="background-color:${randomColor};">${initials}</span>
           <span class="popup-toggle-contact-names">${contact.firstName} ${contact.lastName}</span>
         </div>
         <input type="checkbox" id="checkbox-${id}" ${isChecked ? 'checked' : ''} style="display:none;">
@@ -419,6 +430,7 @@ function renderCheckboxes() {
     checkboxes.innerHTML += checkboxHTML;
   }
 }
+
 
 function toggleContactCheck(contactId) {
   const checkbox = document.getElementById(`checkbox-${contactId}`);
@@ -440,11 +452,11 @@ function popupHighlightContact(element, contactId) {
 
   if (checkbox.checked) {
     selectedContacts.add(contactId);  // Kontakt zum Set hinzufügen
-    element.classList.add('highlighted');  // Hervorhebung hinzufügen
+    element.classList.add('highlighted');  // Hervorhebung (blau) hinzufügen
     checkboxImg.classList.add('checked');  // Checkbox-Icon weiß darstellen
   } else {
     selectedContacts.delete(contactId);  // Kontakt aus Set entfernen
-    element.classList.remove('highlighted');  // Hervorhebung entfernen
+    element.classList.remove('highlighted');  // Hervorhebung (blau) entfernen
     checkboxImg.classList.remove('checked');  // Checkbox-Icon zurücksetzen
   }
 
@@ -462,10 +474,14 @@ function updateAssignedContacts() {
     const contact = contacts[id];
     if (contact) {
       let initials = getContactInitials(id);
-      assignedDiv.innerHTML += `<span class="initials-popup-span" id="assigned-${id}">${initials}</span>`;
+      let assignedColor = initialColors[id];  // Farbe für die Initialen übernehmen
+
+      // Kontakt mit der gespeicherten Initialen-Farbe hinzufügen
+      assignedDiv.innerHTML += `<span class="initials-popup-span" id="assigned-${id}" style="background-color:${assignedColor};">${initials}</span>`;
     }
   });
 }
+
 
 
 function getContactInitials(id) {
@@ -475,3 +491,13 @@ function getContactInitials(id) {
   }
   return "";
 } 
+
+function getRandomColor() {
+  let letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
