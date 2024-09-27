@@ -163,29 +163,20 @@ function loadSubtasks(task, subtasksList) {
 }
 
 function toggleSubtaskCheck(taskId, subtaskIndex) {
-  // Hole die Aufgabenliste aus dem sessionStorage
   let tasks = JSON.parse(sessionStorage.getItem('tasks'));
-  
-  // Hole die aktuelle Aufgabe
   let task = tasks[taskId];
-
-  // Hole die Subtasks der Aufgabe und ändere den Status des ausgewählten Subtasks
   let subtasks = JSON.parse(task.subtasks || "[]");
   let subtaskKey = Object.keys(subtasks[subtaskIndex])[0];
   
-  // Wechsel des Status: 'done' <-> 'not done'
   subtasks[subtaskIndex][subtaskKey] = subtasks[subtaskIndex][subtaskKey] === "done" ? "not done" : "done";
   
-  // Aktualisiere den Task in der Session
   task.subtasks = JSON.stringify(subtasks);
   tasks[taskId] = task;
   sessionStorage.setItem('tasks', JSON.stringify(tasks));
   
-  // Aktualisiere das Bild basierend auf dem neuen Status
   let checkboxImg = subtasks[subtaskIndex][subtaskKey] === "done" ? "../img/checked.png" : "../img/checkbox.png";
   document.getElementById(`checkbox-img-${subtaskIndex}`).src = checkboxImg;
 
-  // Optional: Wenn du möchtest, kannst du die Klasse 'checked' basierend auf dem neuen Status hinzufügen oder entfernen
   let subtaskItem = document.querySelector(`[data-subtask-id="${subtaskIndex}"]`);
   if (subtasks[subtaskIndex][subtaskKey] === "done") {
     subtaskItem.classList.add('checked');
@@ -260,7 +251,7 @@ function editTask(taskId, idSuffix='1') {
           <img src="../img/hook.png" alt="Save" class="action-icon-hook"> 
           </button>
       `;
-      populateTaskForm(taskId, idSuffix);  // Überträgt Task-Inhalte ins Formular
+      populateTaskForm(taskId, idSuffix);
       popupContainer.classList.add('show');
     })
     .catch(error => console.error('Error loading Add Task form:', error));
@@ -278,11 +269,10 @@ function populateTaskForm(taskId, idSuffix) {
     let priorityElement = document.querySelector(`input[name="prios"][value="${task.priority}"]`);
     if (priorityElement) priorityElement.checked = true;
 
-    // Kontakte übernehmen
     let assignees = task.assignment.split(',');
-    selectedContacts = new Set(assignees);  // Ausgewählte Kontakte setzen
+    selectedContacts = new Set(assignees);
     
-    renderCheckboxesWithColors();  // Kontakte in der Liste mit Farben anzeigen
+    renderCheckboxesWithColors();
 
     let subtasks = JSON.parse(task.subtasks || "[]");
     let subtaskList = document.getElementById('subtask-list');
@@ -299,8 +289,6 @@ function populateTaskForm(taskId, idSuffix) {
     });
   }
 }
-
-
 
 function saveEditedTask(taskId) {
   let tasks = JSON.parse(sessionStorage.getItem('tasks'));
@@ -368,7 +356,7 @@ function renderInfoPopup(taskId){
               </div>
             <div class="info-item-assigned">
               <span class="label">Assigned To:</span>
-              <div id="assignee-container"></div> <!-- This was added to ensure the contacts display -->
+              <div id="assignee-container"></div> 
               <div class="popup-subtasks">
             <span class="subtasks-label">Subtasks:</span>
             <div class="subtasks-list" id="subtasks-list"></div>
@@ -382,8 +370,6 @@ function renderInfoPopup(taskId){
             <button class="action-button" onclick="editTask('${taskId}')"><img src="../img/edit-black.png" alt="Edit" class="action-icon" /><span class="action-label">Edit</span></button>
           </div>`;
 }
-
-
 
 function toggleCheckboxes() {
   const checkboxesDiv = document.getElementById("checkboxesDiv");
@@ -408,14 +394,13 @@ function renderCheckboxesWithColors() {
   for (let id in contacts) {
     let contact = contacts[id];
     let initials = getContactInitials(id); 
-    let isChecked = selectedContacts.has(id);  // Prüfen, ob Kontakt ausgewählt ist
+    let isChecked = selectedContacts.has(id);
 
-    // Prüfen, ob der Kontakt bereits eine Farbe hat, wenn nicht, zufällige Farbe generieren
     if (!initialColors[id]) {
       initialColors[id] = getRandomColor();
     }
 
-    let randomColor = initialColors[id];  // Farbe für die Initialen
+    let randomColor = initialColors[id];
 
     let checkboxHTML = /*html*/` 
       <label class="popup-toggle-contacts ${isChecked ? 'highlighted' : ''}" onclick="popupHighlightContact(this, '${id}');">
@@ -430,7 +415,6 @@ function renderCheckboxesWithColors() {
     checkboxes.innerHTML += checkboxHTML;
   }
 }
-
 
 function toggleContactCheck(contactId) {
   const checkbox = document.getElementById(`checkbox-${contactId}`);
@@ -451,18 +435,17 @@ function popupHighlightContact(element, contactId) {
   checkbox.checked = !checkbox.checked;
 
   if (checkbox.checked) {
-    selectedContacts.add(contactId);  // Kontakt zum Set hinzufügen
-    element.classList.add('highlighted');  // Hervorhebung (blau) hinzufügen
-    checkboxImg.classList.add('checked');  // Checkbox-Icon weiß darstellen
+    selectedContacts.add(contactId);
+    element.classList.add('highlighted'); 
+    checkboxImg.classList.add('checked');
   } else {
-    selectedContacts.delete(contactId);  // Kontakt aus Set entfernen
-    element.classList.remove('highlighted');  // Hervorhebung (blau) entfernen
-    checkboxImg.classList.remove('checked');  // Checkbox-Icon zurücksetzen
+    selectedContacts.delete(contactId);
+    element.classList.remove('highlighted'); 
+    checkboxImg.classList.remove('checked'); 
   }
 
   updateAssignedContacts();
 }
-
 
 function updateAssignedContacts() {
   const assignedDiv = document.getElementById("assigned-contacts1");
@@ -474,15 +457,12 @@ function updateAssignedContacts() {
     const contact = contacts[id];
     if (contact) {
       let initials = getContactInitials(id);
-      let assignedColor = initialColors[id];  // Farbe für die Initialen übernehmen
+      let assignedColor = initialColors[id];  
 
-      // Kontakt mit der gespeicherten Initialen-Farbe hinzufügen
       assignedDiv.innerHTML += `<span class="initials-popup-span" id="assigned-${id}" style="background-color:${assignedColor};">${initials}</span>`;
     }
   });
 }
-
-
 
 function getContactInitials(id) {
   let contacts = JSON.parse(sessionStorage.getItem("contacts")) || {};

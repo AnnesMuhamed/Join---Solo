@@ -292,7 +292,7 @@ input[type="checkbox"]:checked + .popup-contact-checkboxImg {
 }
 
 .popup-contact-checkboxImg.checked {
-  background-color: white; /* Haken wird weiß */
-  border: 1px solid white;  /* Rand weiß darstellen */
+  background-color: white;
+  border: 1px solid white;
 }
   
