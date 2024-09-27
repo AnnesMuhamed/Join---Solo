@@ -181,7 +181,6 @@
   
   .checkboxes-container {
     width: 100%;
-    padding: 10px;
     position: relative;
     bottom: 6px;
     border: 1px solid #d1d1d1;
@@ -205,6 +204,7 @@
   cursor: pointer;
   height: 56px;
   border-radius: 10px;
+  padding: 12px 16px;
 }
 
 .popup-toggle-contacts:hover {
@@ -265,5 +265,26 @@ input[type="checkbox"]:checked + .popup-contact-checkboxImg {
   text-align: center;
   flex-shrink: 0;
   margin-left: 0;
+}
+
+.initials-names-toggle {
+  display: flex;
+  align-items: center;
+  width: 192px;
+  gap: 16px
+}
+
+.popup-toggle-contacts.highlighted {
+  background-color: #2A3647;
+  color: white;
+}
+
+.highlighted {
+  background-color: #2A3647;
+  color: white;
+}
+
+.popup-contact-checkboxImg.checked {
+  background-color: white; /* Haken wird weiß */
 }
   

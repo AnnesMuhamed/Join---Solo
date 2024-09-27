@@ -405,10 +405,12 @@ function renderCheckboxes() {
     let initials = getContactInitials(id); 
     let isChecked = selectedContacts.includes(id);
 
-    let checkboxHTML = `
-      <label class="popup-toggle-contacts">
-        <span class="initials-span" id="initials-${id}" onclick="assignContactInitials('${id}', '${initials}');">${initials}</span>
-        ${contact.firstName} ${contact.lastName}
+    let checkboxHTML = /*html*/` 
+      <label class="popup-toggle-contacts" onclick="popupHighlightContact(this);">
+        <div class="initials-names-toggle">
+          <span class="initials-span" id="initials-${id}" onclick="assignContactInitials('${id}', '${initials}');">${initials}</span>
+          <span class="popup-toggle-contact-names">${contact.firstName} ${contact.lastName}</span>
+        </div>
         <input type="checkbox" id="checkbox-${id}" onchange="toggleContactCheck('${id}');" ${isChecked ? 'checked' : ''} style="display:none;">
         <span class="popup-contact-checkboxImg ${isChecked ? 'checked' : ''}" id="checkbox-img-${id}" onclick="toggleContactCheck('${id}');"></span>
       </label>`;
@@ -429,20 +431,35 @@ function toggleContactCheck(contactId) {
   updateAssignedContacts();
 }
 
+function popupHighlightContact(element) {
+    document.querySelectorAll('.popup-toggle-contacts').forEach(item => item.classList.remove('highlighted'));
+    element.classList.add('highlighted');
+}
+
+
 function updateAssignedContacts() {
   const assignedDiv = document.getElementById("assigned-contacts1");
   let contacts = JSON.parse(sessionStorage.getItem("contacts")) || {};
-  
+
+  // Leere den Container, um alte Initialen zu entfernen
   assignedDiv.innerHTML = ""; 
+
+  let renderedContacts = new Set();  // Set zum Vermeiden von Duplikaten
 
   selectedContacts.forEach(id => {
     const contact = contacts[id];
-    if (contact) {
+    if (contact && !renderedContacts.has(id)) {
       let initials = getContactInitials(id);
+      
+      // Füge die Initialen nur hinzu, wenn der Kontakt noch nicht hinzugefügt wurde
       assignedDiv.innerHTML += `<span class="initials-popup-span" id="assigned-${id}">${initials}</span>`;
+      
+      // Markiere diesen Kontakt als hinzugefügt
+      renderedContacts.add(id);
     }
   });
 }
+
 
 function getContactInitials(id) {
   let contacts = JSON.parse(sessionStorage.getItem("contacts")) || {};
@@ -450,4 +467,4 @@ function getContactInitials(id) {
     return `${contacts[id].firstName.charAt(0)}${contacts[id].lastName.charAt(0)}`;
   }
   return "";
-}
+} 
