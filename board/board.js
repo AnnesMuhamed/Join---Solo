@@ -94,7 +94,7 @@ function formatDate(dateString) {
 
 function startDragging(event) {
   currentDraggedElement = event.target.id;
-  event.target.classList.add("tilted"); // Add the tilt effect
+  event.target.classList.add("tilted");
 }
 
 function endDragging() {
@@ -125,7 +125,7 @@ function createCardContainer(key, taskCardsContainer) {
   cardDiv.className = "todo-card";
   cardDiv.draggable = "true";
   cardDiv.ondragstart = startDragging;
-  cardDiv.ondragend = endDragging; // Handle the end of dragging to remove the tilt effect
+  cardDiv.ondragend = endDragging;
   cardDiv.onclick = () => openPopup(key);
   taskCardsContainer.appendChild(cardDiv);
 }
@@ -255,7 +255,6 @@ function createAssignedContacts(key, task) {
     let assignedContacts = getContact(key, task["assignment"]);
     let contactCount = assignedContacts.length;
 
-    // Nur die ersten vier Kontakte anzeigen
     assignedContacts.slice(0, 4).forEach((initial) => {
       let assignedContactsSpan = document.createElement("span");
       assignedContactsSpan.id = `${key}-${initial}`;
@@ -265,7 +264,6 @@ function createAssignedContacts(key, task) {
       assignedContactsContainer.appendChild(assignedContactsSpan);
     });
 
-    // Wenn mehr als 4 Kontakte vorhanden sind, füge ein "+X" hinzu
     if (contactCount > 4) {
       let extraContactsSpan = document.createElement("span");
       extraContactsSpan.className = "extra-contacts-span";

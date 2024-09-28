@@ -1,9 +1,11 @@
 body {
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
+    
 }
 
 * {
+    box-sizing: border-box;
     scrollbar-width: none;
     /* Firefox */
 }
@@ -92,7 +94,6 @@ body.modal-open {
     flex-direction: column;
     justify-content: space-between;
     width: 1080px;
-    height: 136px;
     padding-top: 96px;
 }
 

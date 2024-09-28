@@ -26,10 +26,6 @@
         width: 0;
         padding-top: 74px;
     }
-
-    .todo-card, .under-container {
-        width: 190px !important;
-    }
 }
 
 @media screen and (max-width: 1280px) {

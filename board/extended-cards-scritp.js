@@ -341,6 +341,7 @@ function deleteTask() {
 
 function renderInfoPopup(taskId){
   return /*html*/`
+
   <div class="popup-header">
             <div class="tag-container" id="tag-container"><span class="tag" id="tag"></span></div>
             <button class="close-button" onclick="closePopup()"><img src="../img/close.png" alt="Close" class="close-icon" /></button>
