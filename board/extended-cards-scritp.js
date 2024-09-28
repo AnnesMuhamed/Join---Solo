@@ -1,6 +1,7 @@
 let isEditing = false;
 let initialColors = {};
 let selectedContacts = new Set();
+// let subtasks = []; 
 
 function getHtmlElements() {
   let popupContainer = document.querySelector(".popup-container");
@@ -227,7 +228,7 @@ function editTask(taskId, idSuffix='1') {
           <div class="d-flex-col assignment-container inPopup">
             <label for="assignment">Select contacts to assign</label>
             <div class="select-box">
-              <input id="search1" class="assignment-selector" type="text" placeholder="Select contacts to assign">
+              <input id="search1" class="assignment-selector" type="text" placeholder="Select contacts to assign" oninput="filterContacts()">
               <div id="dropdownArrow" class="dropdown-arrow" onclick="toggleCheckboxes()"></div>
               <div id="checkboxesDiv" class="d-none">
                 <div id="checkboxes1" class="checkboxes-container"></div>
@@ -240,7 +241,7 @@ function editTask(taskId, idSuffix='1') {
             <div class="subtask-container">
               <input type="text" id="subtasks${idSuffix}" class="properties-entry-field" placeholder="Add new subtask">
               <div id="subtask-buttons-container${idSuffix}" class="add-subtask-button">
-                <button id="add-subtask-button${idSuffix}" class="in-line-btn" type="button"><img src="../img/add-task/add.png"></button>
+                <button id="add-subtask-button${idSuffix}" onclick="confirmOrCancelSubtask('${idSuffix}')" class="in-line-btn" type="button"><img src="../img/add-task/add.png"></button>
               </div>
             </div>
           </div>

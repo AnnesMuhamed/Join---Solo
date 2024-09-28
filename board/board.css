@@ -310,8 +310,7 @@ body.modal-open {
 
 .assigned-contacts-container {
     display: flex;
-    overflow-y: hidden;
-    overflow-x: auto;
+    align-items: center;
     height: 34px;
     padding: 10px;
 }
@@ -333,6 +332,12 @@ body.modal-open {
     text-align: center;
     flex-shrink: 0;
     margin-left: -10px;
+}
+
+.extra-contacts-span {
+    font-size: 16px;
+    font-weight: 700;
+    margin-left: 5px;
 }
 
 .card-subtask-container {

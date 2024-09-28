@@ -249,12 +249,14 @@ function createAssignedContactsContainer(key) {
 }
 
 function createAssignedContacts(key, task) {
-  let assignedContactsContainer = document.getElementById(
-    `${key}-assigned-contacts`
-  );
+  let assignedContactsContainer = document.getElementById(`${key}-assigned-contacts`);
+  
   if (task["assignment"] !== "") {
     let assignedContacts = getContact(key, task["assignment"]);
-    assignedContacts.forEach((initial) => {
+    let contactCount = assignedContacts.length;
+
+    // Nur die ersten vier Kontakte anzeigen
+    assignedContacts.slice(0, 4).forEach((initial) => {
       let assignedContactsSpan = document.createElement("span");
       assignedContactsSpan.id = `${key}-${initial}`;
       assignedContactsSpan.className = "initials-span";
@@ -262,8 +264,17 @@ function createAssignedContacts(key, task) {
       assignedContactsSpan.textContent = `${initial}`;
       assignedContactsContainer.appendChild(assignedContactsSpan);
     });
+
+    // Wenn mehr als 4 Kontakte vorhanden sind, füge ein "+X" hinzu
+    if (contactCount > 4) {
+      let extraContactsSpan = document.createElement("span");
+      extraContactsSpan.className = "extra-contacts-span";
+      extraContactsSpan.textContent = `+${contactCount - 4}`;
+      assignedContactsContainer.appendChild(extraContactsSpan);
+    }
   }
 }
+
 
 function createPrioContainer(key) {
   let assignmentPrioContainer = document.getElementById(`${key}-contacts-prio`);
