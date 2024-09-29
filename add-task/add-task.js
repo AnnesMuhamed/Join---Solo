@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 async function initFunc() {
   await loadContacts();
-  renderCheckboxes(); // Stelle sicher, dass die Funktion hier verfügbar ist
+  renderCheckboxes();
 }
 
 function setupEventListeners() {
