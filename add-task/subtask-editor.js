@@ -49,23 +49,25 @@ function clearSubtaskInput() {
 	`;
 }
 
-function confirmOrCancelSubtask() {
-  let subtaskButtonContainer = document.getElementById(
-    "subtask-buttons-container"
-  );
-  let subtask = document.getElementById("subtasks");
+function confirmOrCancelSubtask(idSuffix) {
+  let subtaskButtonContainer = document.getElementById('subtask-buttons-container' + idSuffix);
+  let subtask = document.getElementById('subtasks' + idSuffix);
   if (subtask.value) {
-    subtaskButtonContainer.innerHTML = "";
+    subtaskButtonContainer.innerHTML = '';
     subtaskButtonContainer.innerHTML = `
-			${inlineSubtaskButton("clear")}
-			${verticalSeparator("1px", "24px", "#D1D1D1")}
-			${inlineSubtaskButton("check")}
-	`;
+      ${inlineSubtaskButton("clear")}
+      ${verticalSeparator("1px", "24px", "#D1D1D1")}
+      ${inlineSubtaskButton("check")}
+    `;
+  } else {
+    console.log("Subtask value is empty, not updating buttons");
   }
 }
 
-function renderSubtask() {
-  let unsortedList = document.getElementById("subtask-list");
+
+function renderSubtask(idSuffix) {
+  console.log("renderSubtask function called");
+  let unsortedList = document.getElementById("subtask-list" + idSuffix);
   let subtask = getSubtask();
   addSubtask(subtask);
   let newListElement = document.createElement("li");

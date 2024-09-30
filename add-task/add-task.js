@@ -12,46 +12,39 @@ async function initFunc() {
   renderCheckboxes();
 }
 
-function setupEventListeners() {
-  let searchInput = document.getElementById("search");
-  let subTaskButton = document.getElementById("add-subtask-button");
-  let subtasksList = document.getElementById("subtask-list");
-  let clearButton = document.getElementById("clear-btn");
+function setupEventListeners(idSuffix) {
+  let searchInput = document.getElementById("search" + idSuffix);
+  let subTaskButton = document.getElementById("add-subtask-button" + idSuffix);
+  let subtasksList = document.getElementById("subtask-list" + idSuffix);
+  let clearButton = document.getElementById("clear-btn" + idSuffix);
 
-  //Event delegation for body-click
   document.body.addEventListener("click", handleBodyClicks);
 
-  //Event listener for specific elements
-  subTaskButton.addEventListener("click", confirmOrCancelSubtask);
-  subtasksList.addEventListener("dblclick", subtasksHandleDoubleClick);
-  subtasksList.addEventListener("click", subtasksHandleEditClick);
-  subtasksList.addEventListener("click", subtasksHandleDeleteClick);
-  subtasksList.addEventListener(
-    "mouseenter",
-    showHideSubtaskLiButtonsContainer,
-    true
-  );
-  subtasksList.addEventListener(
-    "mouseleave",
-    showHideSubtaskLiButtonsContainer,
-    true
-  );
-  searchInput.addEventListener("keyup", renderCheckboxes);
-  clearButton.addEventListener("click", clearForm);
+  subTaskButton.addEventListener("click", () => confirmOrCancelSubtask(idSuffix)); 
+  subtasksList.addEventListener("dblclick", (event) => subtasksHandleDoubleClick(event, idSuffix)); 
+  subtasksList.addEventListener("click", (event) => subtasksHandleEditClick(event, idSuffix));  
+  subtasksList.addEventListener("click", (event) => subtasksHandleDeleteClick(event, idSuffix));  
+  subtasksList.addEventListener("mouseenter", (event) => showHideSubtaskLiButtonsContainer(event, idSuffix), true); 
+  subtasksList.addEventListener("mouseleave", (event) => showHideSubtaskLiButtonsContainer(event, idSuffix), true);
 
-  subtasksMutationObserver();
+  searchInput.addEventListener("keyup", () => renderCheckboxes(idSuffix)); 
+  clearButton.addEventListener("click", () => clearForm(idSuffix)); 
 
-  //Event listener for submit
-  document.body.addEventListener("submit", createTask);
+  subtasksMutationObserver(idSuffix);  
+
+  document.body.addEventListener("submit", (event) => createTask(event, idSuffix)); 
 }
 
-function attachEventListener(node) {
-  if (node.id === "check-subtask-button") {
-    node.addEventListener("click", renderSubtask);
-  } else if (node.id === "clear-subtask-button") {
-    node.addEventListener("click", clearSubtaskInput);
+
+function attachEventListener(node, idSuffix) {
+  if (node.id === "check-subtask-button" + idSuffix) {
+    console.log("Event listener added for check-subtask-button" + idSuffix);
+    node.addEventListener("click", () => renderSubtask(idSuffix));  
+  } else if (node.id === "clear-subtask-button" + idSuffix) {
+    console.log("Event listener added for clear-subtask-button" + idSuffix);
+    node.addEventListener("click", () => clearSubtaskInput(idSuffix));  
   } else {
-    node.addEventListener("click", confirmOrCancelSubtask);
+    node.addEventListener("click", () => confirmOrCancelSubtask(idSuffix));  
   }
 }
 
@@ -172,7 +165,6 @@ function clearForm() {
   clearDivs();
 }
 
-// Funktion hinzugefügt: renderCheckboxes
 function renderCheckboxes() {
   let contacts = JSON.parse(sessionStorage.getItem("contacts"));
   let checkboxes = document.getElementById("checkboxes");

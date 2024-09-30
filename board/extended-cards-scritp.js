@@ -1,7 +1,6 @@
 let isEditing = false;
 let initialColors = {};
 let selectedContacts = new Set();
-// let subtasks = []; 
 
 function getHtmlElements() {
   let popupContainer = document.querySelector(".popup-container");
@@ -148,19 +147,50 @@ function loadAssignees(task, assigneeContainer) {
 function loadSubtasks(task, subtasksList) {
   subtasksList.innerHTML = "";
   let subtasks = JSON.parse(task.subtasks || "[]");
+  
   subtasks.forEach((subtask, index) => {
-    let key = Object.keys(subtask)[0];
-    let isChecked = subtask[key] === "done";
-    let checkboxImg = isChecked ? "../img/checked.png" : "../img/checkbox.png";
-    
-    subtasksList.innerHTML += `
-      <div class="subtask-popup ${isChecked ? 'checked' : ''}" data-subtask-id="${index}">
-        <div class="subtask-checkbox" onclick="toggleSubtaskCheck(${task.id}, ${index});">
-          <img src="${checkboxImg}" alt="Checkbox" id="checkbox-img-${index}">
-        </div>
-        <span>${key}</span>
-      </div>`;
+      let key = Object.keys(subtask)[0];
+      let isChecked = subtask[key] === "done";
+      let checkboxImg = isChecked ? "../img/checked.png" : "../img/checkbox.png";
+      
+      subtasksList.innerHTML += `
+          <div class="subtask-popup ${isChecked ? 'checked' : ''}" data-subtask-id="${index}">
+              <div class="subtask-checkbox" onclick="toggleSubtaskCheck(${task.id}, ${index});">
+                  <img src="${checkboxImg}" alt="Checkbox" id="checkbox-img-${index}">
+              </div>
+              <span>${key}</span>
+              <button onclick="editSubtask(${task.id}, ${index})">Edit</button>
+              <button onclick="removeSubtask(${task.id}, ${index})">Delete</button>
+          </div>`;
   });
+}
+
+function removeSubtask(taskId, subtaskIndex) {
+  let tasks = JSON.parse(sessionStorage.getItem('tasks'));
+  let task = tasks[taskId];
+  let subtasks = JSON.parse(task.subtasks || "[]");
+
+  subtasks.splice(subtaskIndex, 1);
+  task.subtasks = JSON.stringify(subtasks);
+  sessionStorage.setItem('tasks', JSON.stringify(tasks));
+  loadSubtasks(task, document.getElementById('subtasks-list'));
+}
+
+
+function editSubtask(taskId, subtaskIndex) {
+  let tasks = JSON.parse(sessionStorage.getItem('tasks'));
+  let task = tasks[taskId];
+  let subtasks = JSON.parse(task.subtasks || "[]");
+  
+  let subtaskKey = Object.keys(subtasks[subtaskIndex])[0];
+  let newTaskText = prompt("Edit subtask", subtaskKey); 
+
+  if (newTaskText !== null && newTaskText.trim() !== "") {
+      subtasks[subtaskIndex] = { [newTaskText]: subtasks[subtaskIndex][subtaskKey] };
+      task.subtasks = JSON.stringify(subtasks);
+      sessionStorage.setItem('tasks', JSON.stringify(tasks));
+      loadSubtasks(task, document.getElementById('subtasks-list'));
+  }
 }
 
 function toggleSubtaskCheck(taskId, subtaskIndex) {
@@ -192,8 +222,8 @@ function editTask(taskId, idSuffix='1') {
 
   fetch('../templates/add-task-content.html')
     .then(response => response.text())
-    .then(html => {
-      popupContent.innerHTML = /*html*/`
+    .then(function () {
+        popupContent.innerHTML = /*html*/ `
       <button class="popup-cencel-button" onclick="closePopup()">
             <img src="../img/close.png" alt="Close" class="action-icon-x">
           </button>
@@ -237,14 +267,16 @@ function editTask(taskId, idSuffix='1') {
           </div>
           <div id="assigned-contacts1"></div>
           <div class="d-flex-col inPopup">
-            <label for="subtasks">Subtasks</label>
-            <div class="subtask-container">
-              <input type="text" id="subtasks${idSuffix}" class="properties-entry-field" placeholder="Add new subtask">
-              <div id="subtask-buttons-container${idSuffix}" class="add-subtask-button">
-                <button id="add-subtask-button${idSuffix}" onclick="confirmOrCancelSubtask('${idSuffix}')" class="in-line-btn" type="button"><img src="../img/add-task/add.png"></button>
-              </div>
-            </div>
-          </div>
+    <label for="subtasks">Subtasks</label>
+    <div class="subtask-container">
+        <input type="text" id="subtasks${idSuffix}" class="properties-entry-field" placeholder="Add new subtask">
+        <div id="subtask-buttons-container${idSuffix}" class="add-subtask-button">
+            <button id="add-subtask-button${idSuffix}" onclick="confirmOrCancelSubtask('${idSuffix}')" class="in-line-btn" type="button">
+                <img src="../img/add-task/add.png">
+            </button>
+        </div>
+    </div>
+</div>
           <ul id="subtask-list${idSuffix}" class="subtask-list"></ul>
         </form>
         <button class="popup-save-button" onclick="saveEditedTask('${taskId}')">
@@ -252,9 +284,10 @@ function editTask(taskId, idSuffix='1') {
           <img src="../img/hook.png" alt="Save" class="action-icon-hook"> 
           </button>
       `;
-      populateTaskForm(taskId, idSuffix);
-      popupContainer.classList.add('show');
-    })
+     
+        populateTaskForm(taskId, idSuffix);
+        popupContainer.classList.add('show');
+      })
     .catch(error => console.error('Error loading Add Task form:', error));
 }
 
