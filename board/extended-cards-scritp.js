@@ -159,38 +159,8 @@ function loadSubtasks(task, subtasksList) {
                   <img src="${checkboxImg}" alt="Checkbox" id="checkbox-img-${index}">
               </div>
               <span>${key}</span>
-              <button onclick="editSubtask(${task.id}, ${index})">Edit</button>
-              <button onclick="removeSubtask(${task.id}, ${index})">Delete</button>
           </div>`;
   });
-}
-
-function removeSubtask(taskId, subtaskIndex) {
-  let tasks = JSON.parse(sessionStorage.getItem('tasks'));
-  let task = tasks[taskId];
-  let subtasks = JSON.parse(task.subtasks || "[]");
-
-  subtasks.splice(subtaskIndex, 1);
-  task.subtasks = JSON.stringify(subtasks);
-  sessionStorage.setItem('tasks', JSON.stringify(tasks));
-  loadSubtasks(task, document.getElementById('subtasks-list'));
-}
-
-
-function editSubtask(taskId, subtaskIndex) {
-  let tasks = JSON.parse(sessionStorage.getItem('tasks'));
-  let task = tasks[taskId];
-  let subtasks = JSON.parse(task.subtasks || "[]");
-  
-  let subtaskKey = Object.keys(subtasks[subtaskIndex])[0];
-  let newTaskText = prompt("Edit subtask", subtaskKey); 
-
-  if (newTaskText !== null && newTaskText.trim() !== "") {
-      subtasks[subtaskIndex] = { [newTaskText]: subtasks[subtaskIndex][subtaskKey] };
-      task.subtasks = JSON.stringify(subtasks);
-      sessionStorage.setItem('tasks', JSON.stringify(tasks));
-      loadSubtasks(task, document.getElementById('subtasks-list'));
-  }
 }
 
 function toggleSubtaskCheck(taskId, subtaskIndex) {
