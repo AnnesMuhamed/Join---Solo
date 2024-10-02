@@ -47,7 +47,7 @@ async function renderContacts() {
                 </div>
             `);
         }
-        let color = colors[i % colors.length]; // Hintergrundfarbe in der Reihenfolge festlegen
+        let color = colors[i % colors.length];
         alphabetSections.push(`
             <div class="contact-item" data-id="${contact.id}" data-first-name="${contact.firstName}" data-last-name="${contact.lastName}" data-username="${contact.username}" data-phone="${contact.phone}" data-color="${color}" onclick="highlightContact(this); contactPopUp('${contact.id}', '${contact.firstName}', '${contact.lastName}', '${contact.username}', '${contact.phone}', '${color}')">
                 <div class="initials-container" style="background-color: ${color};">${getInitials(contact.firstName, contact.lastName)}</div>

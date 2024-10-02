@@ -49,9 +49,9 @@ function clearSubtaskInput() {
 	`;
 }
 
-function confirmOrCancelSubtask(idSuffix) {
-  let subtaskButtonContainer = document.getElementById('subtask-buttons-container' + idSuffix);
-  let subtask = document.getElementById('subtasks' + idSuffix);
+function confirmOrCancelSubtask() {
+  let subtaskButtonContainer = document.getElementById('subtask-buttons-container');
+  let subtask = document.getElementById('subtasks');
   if (subtask.value) {
     subtaskButtonContainer.innerHTML = '';
     subtaskButtonContainer.innerHTML = `
@@ -65,9 +65,9 @@ function confirmOrCancelSubtask(idSuffix) {
 }
 
 
-function renderSubtask(idSuffix) {
+function renderSubtask() {
   console.log("renderSubtask function called");
-  let unsortedList = document.getElementById("subtask-list" + idSuffix);
+  let unsortedList = document.getElementById("subtask-list");
   let subtask = getSubtask();
   addSubtask(subtask);
   let newListElement = document.createElement("li");

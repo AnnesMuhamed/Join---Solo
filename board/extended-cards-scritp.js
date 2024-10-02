@@ -261,6 +261,21 @@ function editTask(taskId, idSuffix='1') {
     .catch(error => console.error('Error loading Add Task form:', error));
 }
 
+function confirmOrCancelSubtask(idSuffix) {
+  let subtask = document.getElementById('subtasks' + idSuffix);
+  let subtaskList = document.getElementById('subtask-list' + idSuffix);
+
+  if (subtask && subtask.value.trim()) {
+    let li = document.createElement('li');
+    li.classList.add('subtask-item');
+    li.textContent = subtask.value;
+    subtaskList.appendChild(li);
+    subtask.value = '';
+  }
+}
+
+
+
 function populateTaskForm(taskId, idSuffix) {
   let tasks = JSON.parse(sessionStorage.getItem('tasks'));
   let task = tasks[taskId];
