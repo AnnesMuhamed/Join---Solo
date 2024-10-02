@@ -237,17 +237,17 @@ function editTask(taskId, idSuffix='1') {
           </div>
           <div id="assigned-contacts1"></div>
           <div class="d-flex-col inPopup">
-    <label for="subtasks">Subtasks</label>
-    <div class="subtask-container">
-        <input type="text" id="subtasks${idSuffix}" class="properties-entry-field" placeholder="Add new subtask">
-        <div id="subtask-buttons-container${idSuffix}" class="add-subtask-button">
-            <button id="add-subtask-button${idSuffix}" onclick="confirmOrCancelSubtask('${idSuffix}')" class="in-line-btn" type="button">
-                <img src="../img/add-task/add.png">
-            </button>
-        </div>
-    </div>
-</div>
-          <ul id="subtask-list${idSuffix}" class="subtask-list"></ul>
+            <label for="subtasks">Subtasks</label>
+          <div class="subtask-container">
+            <input type="text" id="subtasks${idSuffix}" class="properties-entry-field" placeholder="Add new subtask">
+              <div id="subtask-buttons-container${idSuffix}" class="add-subtask-button">
+                <button id="add-subtask-button${idSuffix}" onclick="confirmOrCancelSubtask('${idSuffix}')" class="in-line-btn" type="button">
+                    <img src="../img/add-task/add.png">
+                </button>
+              </div>
+            </div>
+          </div>
+          <ul id="subtask-list${idSuffix}" class="subtask-list1"></ul>
         </form>
         <button class="popup-save-button" onclick="saveEditedTask('${taskId}')">
           <span class="action-label">Ok</span>
@@ -261,20 +261,122 @@ function editTask(taskId, idSuffix='1') {
     .catch(error => console.error('Error loading Add Task form:', error));
 }
 
-function confirmOrCancelSubtask(idSuffix) {
-  let subtask = document.getElementById('subtasks' + idSuffix);
-  let subtaskList = document.getElementById('subtask-list' + idSuffix);
+function subtasksHandleDoubleClick(idSuffix) {
+  const spanElement = document.getElementById(`subtask-span-${idSuffix}`);
+  const li = document.getElementById(`subtask-li-${idSuffix}`);
+  const buttonsContainer = li.querySelector(".subtaskli-buttons-container");
+  
+  const input = createInputElement(spanElement.textContent);
+  replaceLiWithInput(li, input);
+  attachInputEventListeners(input, li, spanElement, buttonsContainer);
+}
 
-  if (subtask && subtask.value.trim()) {
-    let li = document.createElement('li');
-    li.classList.add('subtask-item');
-    li.textContent = subtask.value;
-    subtaskList.appendChild(li);
-    subtask.value = '';
+function subtasksHandleEditClick(event) {
+  const li = event.target.closest("li");
+  const span = li.querySelector("span");
+  const buttonsContainer = li.querySelector(".subtaskli-buttons-container");
+  const input = createInputElement(span.textContent);
+  buttonsContainer.style.display = "none";
+  li.replaceChild(input, span); 
+  buttonsContainer.innerHTML = `
+    <button class="sutbtask-hover-btn" onclick="confirmEdit('${li.id}', '${input.value}')">✔</button>
+    <button class="sutbtask-hover-btn" onclick="subtasksHandleDeleteClick(event)"><img src="../img/add-task/delete.png" alt="Delete Button"></button>
+  `;
+  buttonsContainer.style.display = "flex";
+  input.onkeypress = function (e) {
+    if (e.key === "Enter") {
+      confirmEdit(li.id, input.value);
+    }
+  };
+  input.onblur = function () {
+    confirmEdit(li.id, input.value);
+  };
+
+  input.focus();
+}
+
+function confirmEdit(liId, newValue) {
+  const li = document.getElementById(liId);
+  const span = document.createElement("span");
+  span.textContent = newValue.trim() !== "" ? newValue : "Untitled Subtask";
+  const buttonsContainer = li.querySelector(".subtaskli-buttons-container");
+
+  li.replaceChild(span, li.querySelector("input"));
+  buttonsContainer.style.display = "none";
+}
+
+function createInputElement(text) {
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = text;
+  input.classList.add("edit-input");
+  return input;
+}
+
+function subtasksHandleDeleteClick(event) {
+  const li = event.target.closest("li");
+  li.remove();
+}
+
+function confirmOrCancelSubtask(idSuffix) {
+  let subtaskInput = document.getElementById('subtasks' + idSuffix);
+  if (subtaskInput && subtaskInput.value.trim()) {
+    renderSubtask(subtaskInput.value, idSuffix);
+    subtaskInput.value = '';
   }
 }
 
+function renderSubtask(subtask, idSuffix) {
+  let unsortedList = document.getElementById("subtask-list" + idSuffix);
+  addSubtask(subtask);
+  let newListElement = document.createElement("li");
+  newListElement.id = subtask;
+  newListElement.classList.add("subtask-list-element");
+  newListElement.innerHTML += `
+    <span>${subtask}</span>
+    <div class="subtaskli-buttons-container hidden">
+      ${inSubtaskListButton("edit")}
+      ${verticalSeparator("1px", "24px", "#A8A8A8")}
+      ${inSubtaskListButton("delete")}
+    </div>
+  `;
 
+  newListElement.onmouseenter = function () {
+    let buttonsContainer = newListElement.querySelector(".subtaskli-buttons-container");
+    buttonsContainer.style.display = "flex";
+  };
+
+  newListElement.onmouseleave = function () {
+    let buttonsContainer = newListElement.querySelector(".subtaskli-buttons-container");
+    buttonsContainer.style.display = "none";
+  };
+
+  unsortedList.appendChild(newListElement);
+}
+
+function addSubtask(subtask) {
+  subtasks.push({ [subtask]: "open" });
+}
+
+function clearSubtaskInput() {
+  document.getElementById('subtasks').value = '';
+}
+
+function inSubtaskListButton(action) {
+  if (action === "edit") {
+    return `<button type="button" class="sutbtask-hover-btn" onclick="subtasksHandleEditClick(event)"><img src="../img/add-task/edit.png" alt="Edit Button"></button>`;
+  } else if (action === "delete") {
+    return `<button type="button" class="sutbtask-hover-btn" onclick="subtasksHandleDeleteClick(event)"><img src="../img/add-task/delete.png" alt="Delete Button"></button>`;
+  }
+}
+
+function verticalSeparator(width, height, color) {
+  return `
+    <svg width="${width}" height="${height}">
+      <line x1="0" y1="0" x2="0" y2="${height}" stroke="${color}" stroke-width="1"/>
+    </svg>
+  `;
+}
 
 function populateTaskForm(taskId, idSuffix) {
   let tasks = JSON.parse(sessionStorage.getItem('tasks'));
