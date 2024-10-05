@@ -213,6 +213,7 @@ body.modal-open {
     height: 696px;
     gap: 10px;
     padding-top: 10px;
+    border: 1px dashed black;
 }
 
 .drag-area-highlight {

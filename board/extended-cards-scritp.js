@@ -5,6 +5,7 @@ let selectedContacts = new Set();
 function getHtmlElements() {
   let popupContainer = document.querySelector(".popup-container");
   let popup = document.getElementById("popup");
+  let popupTag = document.getElementById('tag-container');
   let popupTitle = document.getElementById("popup-title");
   let popupSubtitle = document.getElementById("popup-subtitle");
   let dueDateElement = document.getElementById("due-date");
@@ -15,6 +16,7 @@ function getHtmlElements() {
   return [
     popupContainer,
     popup,
+    popupTag,
     popupTitle,
     popupSubtitle,
     dueDateElement,
@@ -48,6 +50,7 @@ function openPopup(key) {
   let [
     popupContainer,
     popup,
+    popupTag,
     popupTitle,
     popupSubtitle,
     dueDateElement,
@@ -61,6 +64,10 @@ function openPopup(key) {
   if (!task) {
     console.error(`Task with key ${key} not found`);
     return;
+  }
+
+  if (popupTag) {
+    popupTag.textContent = task.category
   }
 
   if (popupTitle) {
@@ -81,12 +88,22 @@ function openPopup(key) {
     console.error("dueDateElement not found");
   }
 
+  getPopupTagColor(task, popupTag);
   determineTaskPriority(task, priorityLabel, priorityIcon);
   loadAssignees(task, assigneeContainer);
   loadSubtasks(task, subtasksList);
 
   popup.dataset.taskKey = key;
   popupContainer.classList.add("show");
+}
+
+function getPopupTagColor(task, popupTag) {
+  popupTag.classList.remove("user-story", "technical-task");
+  if (task.category === "User Story") {
+    popupTag.classList.add("user-story");
+  } else if (task.category === "Technical Task") {
+    popupTag.classList.add("technical-task");
+  }
 }
 
 function formatDate(dateString) {
