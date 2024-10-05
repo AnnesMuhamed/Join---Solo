@@ -164,20 +164,24 @@ function loadAssignees(task, assigneeContainer) {
 function loadSubtasks(task, subtasksList) {
   subtasksList.innerHTML = "";
   let subtasks = JSON.parse(task.subtasks || "[]");
-  
-  subtasks.forEach((subtask, index) => {
+
+  if (subtasks.length === 0) {
+    subtasksList.innerHTML = "<span>You have no subtasks</span>";
+  } else {
+    subtasks.forEach((subtask, index) => {
       let key = Object.keys(subtask)[0];
       let isChecked = subtask[key] === "done";
       let checkboxImg = isChecked ? "../img/checked.png" : "../img/checkbox.png";
       
       subtasksList.innerHTML += `
-          <div class="subtask-popup ${isChecked ? 'checked' : ''}" data-subtask-id="${index}">
-              <div class="subtask-checkbox" onclick="toggleSubtaskCheck(${task.id}, ${index});">
-                  <img src="${checkboxImg}" alt="Checkbox" id="checkbox-img-${index}">
-              </div>
-              <span>${key}</span>
-          </div>`;
-  });
+        <div class="subtask-popup ${isChecked ? 'checked' : ''}" data-subtask-id="${index}">
+          <div class="subtask-checkbox" onclick="toggleSubtaskCheck(${task.id}, ${index});">
+            <img src="${checkboxImg}" alt="Checkbox" id="checkbox-img-${index}">
+          </div>
+          <span>${key}</span>
+        </div>`;
+    });
+  }
 }
 
 function toggleSubtaskCheck(taskId, subtaskIndex) {
