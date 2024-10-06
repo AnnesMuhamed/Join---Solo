@@ -1,6 +1,6 @@
 
 .popup {
-    width: 425px;
+    width: 525px;
     padding: 48px 40px;
     border-radius: 30px;
     box-shadow: 0px 0px 4px 0px #00000029;
@@ -33,14 +33,12 @@
 }
 
 #subtasks1 {
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 24px;
-  text-align: left;
-  padding: 12px 0px 16px 12px;
-  border-radius: 10px;
-  border: 1px solid #d1d1d1;
+  flex: 1;
+  height: 48px;
   width: 100%;
+  padding: 12px 16px 12px 16px;
+  border-right: none;
+  border-radius: 10px 0 0 10px;
 }
 
 #due-date1 {
@@ -68,14 +66,17 @@
   font-family: 'Inter';
 }
 
-#subtask-buttons-container1 {
-    position: relative;
-    right: 67px;
-    border-radius: 0;
+.popup-subtaskinput {
+    border-radius: 10px 0px 0px 10px;
     display: flex;
-    border: 0;
-    height: 24px;
-    padding: 0;
+    height: 48px;
+    border-right: none;
+    padding: 12px 16px 12px 16px;
+    width: 100%;
+}
+
+.popup-subtaskinput:focus {
+  border-right: none;
 }
 
 .popup-cencel-button {
@@ -84,7 +85,7 @@
     border: 0;
     background: 0;
     gap: 8px;
-    margin-left: 323px;
+    margin-left: 424px;
     cursor: pointer;
     width: 24px;
     height: 40px;
@@ -117,7 +118,7 @@
     border-radius: 10px;
     font-size: 21px;
     font-weight: 700;
-    margin-left: 250px;
+    margin-left: 356px;
     line-height: 25.2px;
   }
 
@@ -306,6 +307,7 @@ input[type="checkbox"]:checked + .popup-contact-checkboxImg {
 .sutbtask-hover-btn {
   border: none;
   cursor: pointer;
+  background-color: transparent;
 }
 
 .edit-input {

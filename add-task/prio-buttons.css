@@ -46,3 +46,59 @@
 .radio-button:not(:checked) + .radio-label {
   background-color: white;
 }
+
+.radio-button-group1 {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.radio-button1 {
+  display: none;
+}
+
+.radio-label1 {
+  display: flex;
+  padding: 16px 10px;
+  width: 136px;
+  height: 56px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  box-shadow: 0 0 4px 0 #0000004a;
+}
+
+.radio-label1:hover {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.radio-label1 span {
+  font-size: 20px;
+}
+
+#prio-high1:checked + .radio-label1,
+#prio-high-edit1:checked + .radio-label1 {
+  background-color: #ff3d00;
+}
+
+#prio-med1:checked + .radio-label1,
+#prio-med1-edit:checked + .radio-label1 {
+  background-color: #ffa800;
+}
+
+#prio-low1:checked + .radio-label1,
+#prio-low-edit1:checked + .radio-label1 {
+  background-color: #7ae229;
+}
+
+.radio-button1:not(:checked) + .radio-label1 {
+  background-color: white;
+}
+

@@ -120,10 +120,6 @@
   align-items: center;
 }
 
-.radio-label  {
-  width: 88px !important;
-}
-
 .priority-container {
   display: flex;
   padding: 4px 18px;

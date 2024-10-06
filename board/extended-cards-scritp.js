@@ -237,13 +237,13 @@ function editTask(taskId, idSuffix='1') {
           </div>
           <div class="d-flex-col inPopup">
             <label>Priority</label>
-            <div id="radio-button-group-edit${idSuffix}" class="radio-button-group">
-              <input type="radio" id="prio-high${idSuffix}" name="prios" value="3" class="radio-button">
-              <label for="prio-high" class="radio-label"><span>Urgent</span><img class="rp-prio-img" src="../img/add-task/prio-high.png"></label>
-              <input type="radio" id="prio-med${idSuffix}" name="prios" value="2" class="radio-button">
-              <label for="prio-med" class="radio-label"><span>Medium</span><img class="rp-prio-img" src="../img/add-task/prio-med.png"></label>
-              <input type="radio" id="prio-low${idSuffix}" name="prios" value="1" class="radio-button">
-              <label for="prio-low" class="radio-label"><span>Low</span><img class="rp-prio-img" src="../img/add-task/prio-low.png"></label>
+            <div id="radio-button-group-edit${idSuffix}" class="radio-button-group${idSuffix}">
+              <input type="radio" id="prio-high${idSuffix}" name="prios" value="3" class="radio-button${idSuffix}">
+              <label for="prio-high" class="radio-label${idSuffix}"><span>Urgent</span><img class="rp-prio-img" src="../img/add-task/prio-high.png"></label>
+              <input type="radio" id="prio-med${idSuffix}" name="prios" value="2" class="radio-button${idSuffix}">
+              <label for="prio-med" class="radio-label${idSuffix}"><span>Medium</span><img class="rp-prio-img" src="../img/add-task/prio-med.png"></label>
+              <input type="radio" id="prio-low${idSuffix}" name="prios" value="1" class="radio-button${idSuffix}">
+              <label for="prio-low" class="radio-label${idSuffix}"><span>Low</span><img class="rp-prio-img" src="../img/add-task/prio-low.png"></label>
             </div>
           </div>
           <div class="d-flex-col assignment-container inPopup">
@@ -259,14 +259,14 @@ function editTask(taskId, idSuffix='1') {
           <div id="assigned-contacts1"></div>
           <div class="d-flex-col inPopup">
             <label for="subtasks">Subtasks</label>
-          <div class="subtask-container">
-            <input type="text" id="subtasks${idSuffix}" class="properties-entry-field" placeholder="Add new subtask">
-              <div id="subtask-buttons-container${idSuffix}" class="add-subtask-button">
-                <button id="add-subtask-button${idSuffix}" onclick="confirmOrCancelSubtask('${idSuffix}')" class="in-line-btn" type="button">
-                    <img src="../img/add-task/add.png">
-                </button>
-              </div>
-            </div>
+            <div class="subtask-container">
+            <input class="properties-entry-field popup-subtaskinput" type="text" id="subtask-input${idSuffix}" placeholder="Add new subtask">
+          <div id="subtask-buttons-container${idSuffix}" class="add-subtask-button">
+          <button id="add-subtask-button${idSuffix}" class="in-line-btn" type="button" onclick="showSubtaskButtons('${idSuffix}')">
+            <img src="../img/add-task/add.png">
+          </button>
+          </div>
+        </div>
           </div>
           <ul id="subtask-list${idSuffix}" class="subtask-list1"></ul>
         </form>
@@ -280,6 +280,91 @@ function editTask(taskId, idSuffix='1') {
         popupContainer.classList.add('show');
       })
     .catch(error => console.error('Error loading Add Task form:', error));
+}
+
+function showSubtaskButtons(idSuffix) {
+  const subtaskInput = document.getElementById(`subtask-input${idSuffix}`);
+  const buttonsContainer = document.getElementById(`subtask-buttons-container${idSuffix}`);
+  if (subtaskInput.value.trim()) {
+    buttonsContainer.innerHTML = `
+      <button class="sutbtask-hover-btn" onclick="clearSubtaskInput('${idSuffix}')"><img src="../img/close.png" alt="Save" class=""></button>
+      <button class="sutbtask-hover-btn" onclick="confirmSubtask('${idSuffix}', event)"><img src="../img/success.png" alt="Save" class=""> </button>
+    `;
+  } else {
+    console.log("No subtask input provided.");
+  }
+}
+
+
+
+function confirmSubtask(idSuffix, event) {
+  event.preventDefault(); 
+
+  const subtaskInput = document.getElementById(`subtask-input${idSuffix}`);
+  const subtaskList = document.getElementById(`subtask-list${idSuffix}`);
+  if (subtaskInput.value.trim()) {
+    let newListItem = document.createElement('li');
+    newListItem.textContent = subtaskInput.value;
+    newListItem.classList.add('subtask-list-item');
+    newListItem.innerHTML += `
+      <button onclick="editSubtask(this, '${idSuffix}')"><img src="../img/edit-black.png" alt="Save" class=""></button>
+      <button onclick="deleteSubtask(this, '${idSuffix}')"><img src="../img/delete.png" alt="Save" class=""></button>
+    `;
+    subtaskList.appendChild(newListItem);
+    subtasks.push(subtaskInput.value);
+    subtaskInput.value = "";
+    resetSubtaskButtons(idSuffix);
+  } else {
+    console.log("No subtask input provided.");
+  }
+}
+
+
+
+function saveSubtask(button) {
+  const listItem = button.parentNode;
+  const input = listItem.querySelector("input");
+
+  if (input.value.trim()) {
+      listItem.innerHTML = input.value;
+      listItem.innerHTML += `
+          <button onclick="editSubtask(this)">Edit</button>
+          <button onclick="deleteSubtask(this)">Delete</button>
+      `;
+  } else {
+      console.log("No subtask input provided.");
+  }
+}
+
+function editSubtask(button) {
+  const listItem = button.parentNode;
+  const oldValue = listItem.firstChild.textContent;
+
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = oldValue;
+
+  listItem.innerHTML = "";
+  listItem.appendChild(input);
+
+  listItem.innerHTML += `
+      <button onclick="saveSubtask(this)">✔</button>
+      <button onclick="cancelEdit(this, '${oldValue}')">X</button>
+  `;
+}
+
+function cancelEdit(button, oldValue) {
+  const listItem = button.parentNode;
+  listItem.innerHTML = oldValue;
+  listItem.innerHTML += `
+      <button onclick="editSubtask(this)">Edit</button>
+      <button onclick="deleteSubtask(this)">Delete</button>
+  `;
+}
+
+function deleteSubtask(button) {
+  const listItem = button.parentNode;
+  listItem.remove();
 }
 
 function subtasksHandleDoubleClick(idSuffix) {
@@ -379,8 +464,19 @@ function addSubtask(subtask) {
   subtasks.push({ [subtask]: "open" });
 }
 
-function clearSubtaskInput() {
-  document.getElementById('subtasks').value = '';
+function resetSubtaskButtons(idSuffix) {
+  const buttonsContainer = document.getElementById(`subtask-buttons-container${idSuffix}`);
+  buttonsContainer.innerHTML = `
+    <button id="add-subtask-button${idSuffix}" class="in-line-btn" type="button" onclick="showSubtaskButtons('${idSuffix}')">
+      <img src="../img/add-task/add.png">
+    </button>
+  `;
+}
+
+function clearSubtaskInput(idSuffix) {
+  const subtaskInput = document.getElementById(`subtask-input${idSuffix}`);
+  subtaskInput.value = ""; 
+  resetSubtaskButtons(idSuffix); 
 }
 
 function inSubtaskListButton(action) {
