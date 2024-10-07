@@ -442,23 +442,34 @@ function renderCards() {
   }
 }
 
-
-function saveEditedTask(taskId) {
+async function saveEditedTask(taskId) {
   let tasks = JSON.parse(sessionStorage.getItem('tasks'));
   let task = tasks[taskId];
 
   if (task) {
-    task.title = document.getElementById('title1').value;
-    task.description = document.getElementById('description1').value;
-    task.date = document.getElementById('due-date1').value;
-    task.priority = document.querySelector('input[name="prios"]:checked').value;
+    let titleInput = document.getElementById('title1');
+    let descriptionInput = document.getElementById('description1');
+    let dateInput = document.getElementById('due-date1');
+    let priorityInput = document.querySelector('input[name="prios"]:checked');
+
+    if (titleInput) {
+      task.title = titleInput.value.trim() !== "" ? titleInput.value : task.title;
+    }
+    if (descriptionInput) {
+      task.description = descriptionInput.value.trim() !== "" ? descriptionInput.value : task.description;
+    }
+    if (dateInput) {
+      task.date = dateInput.value.trim() !== "" ? dateInput.value : task.date;
+    }
+    if (priorityInput) {
+      task.priority = priorityInput.value;
+    }
 
     let selectedAssignees = Array.from(selectedContacts);
-
     if (selectedAssignees.length > 0) {
       task.assignment = selectedAssignees.join(',');
     } else {
-      task.assignment = ""; 
+      task.assignment = "";
     }
 
     let subtasks = [];
@@ -471,16 +482,19 @@ function saveEditedTask(taskId) {
     tasks[taskId] = task;
     sessionStorage.setItem('tasks', JSON.stringify(tasks));
 
+    try {
+      await updateData(`tasks/${taskId}`, task);
+    } catch (error) {
+      console.error(`Fehler beim Aktualisieren der Task in Firebase: ${error}`);
+    }
+
     renderCards();
     closePopup();
+
+  } else {
+    console.error(`Task mit ID ${taskId} wurde nicht gefunden!`);
   }
 }
-
-
-
-
-
-
 
 function updateProgressBar(taskId) {
   let tasks = JSON.parse(sessionStorage.getItem('tasks'));
@@ -601,7 +615,6 @@ function renderCheckboxesWithColors() {
   }
 }
 
-
 function toggleContactCheck(contactId) {
   const checkbox = document.getElementById(`checkbox-${contactId}`);
   checkbox.checked = !checkbox.checked;  
@@ -653,12 +666,3 @@ function getContactInitials(id) {
   }
   return "";
 } 
-
-function getRandomColor() {
-  let letters = '0123456789ABCDEF';
-  let color = '#';
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
