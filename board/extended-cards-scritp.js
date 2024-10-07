@@ -279,7 +279,6 @@ function editTask(taskId, idSuffix='1') {
         populateTaskForm(taskId, idSuffix);
         popupContainer.classList.add('show');
       })
-    .catch(error => console.error('Error loading Add Task form:', error));
 }
 
 function showSubtaskButtons(idSuffix) {
@@ -295,11 +294,8 @@ function showSubtaskButtons(idSuffix) {
   }
 }
 
-
-
 function confirmSubtask(idSuffix, event) {
   event.preventDefault(); 
-
   const subtaskInput = document.getElementById(`subtask-input${idSuffix}`);
   const subtaskList = document.getElementById(`subtask-list${idSuffix}`);
   if (subtaskInput.value.trim()) {
@@ -307,161 +303,70 @@ function confirmSubtask(idSuffix, event) {
     newListItem.textContent = subtaskInput.value;
     newListItem.classList.add('subtask-list-item');
     newListItem.innerHTML += `
-      <button onclick="editSubtask(this, '${idSuffix}')"><img src="../img/edit-black.png" alt="Save" class=""></button>
-      <button onclick="deleteSubtask(this, '${idSuffix}')"><img src="../img/delete.png" alt="Save" class=""></button>
-    `;
+    <div class="subtask-li-btn-container">
+      <button class="sutbtask-hover-btn" onclick="editSubtask(this, '${idSuffix}')"><img src="../img/edit-black.png" alt=""></button>
+      ${verticalSeparator("1px", "24px", "#A8A8A8")}
+      <button class="sutbtask-hover-btn" onclick="deleteSubtask(this, '${idSuffix}')"><img src="../img/delete.png" alt=""></button>
+    </div>`;
     subtaskList.appendChild(newListItem);
-    subtasks.push(subtaskInput.value);
     subtaskInput.value = "";
     resetSubtaskButtons(idSuffix);
-  } else {
-    console.log("No subtask input provided.");
-  }
-}
-
-
-
-function saveSubtask(button) {
-  const listItem = button.parentNode;
-  const input = listItem.querySelector("input");
-
-  if (input.value.trim()) {
-      listItem.innerHTML = input.value;
-      listItem.innerHTML += `
-          <button onclick="editSubtask(this)">Edit</button>
-          <button onclick="deleteSubtask(this)">Delete</button>
-      `;
-  } else {
-      console.log("No subtask input provided.");
   }
 }
 
 function editSubtask(button) {
-  const listItem = button.parentNode;
+  const listItem = button.parentNode.parentNode;
+  listItem.classList.add('editing');
+  
   const oldValue = listItem.firstChild.textContent;
+
+  const inputContainer = document.createElement("div");
+  inputContainer.classList.add('input-container');
 
   const input = document.createElement("input");
   input.type = "text";
   input.value = oldValue;
-
-  listItem.innerHTML = "";
-  listItem.appendChild(input);
-
-  listItem.innerHTML += `
-      <button onclick="saveSubtask(this)">✔</button>
-      <button onclick="cancelEdit(this, '${oldValue}')">X</button>
-  `;
-}
-
-function cancelEdit(button, oldValue) {
-  const listItem = button.parentNode;
-  listItem.innerHTML = oldValue;
-  listItem.innerHTML += `
-      <button onclick="editSubtask(this)">Edit</button>
-      <button onclick="deleteSubtask(this)">Delete</button>
-  `;
-}
-
-function deleteSubtask(button) {
-  const listItem = button.parentNode;
-  listItem.remove();
-}
-
-function subtasksHandleDoubleClick(idSuffix) {
-  const spanElement = document.getElementById(`subtask-span-${idSuffix}`);
-  const li = document.getElementById(`subtask-li-${idSuffix}`);
-  const buttonsContainer = li.querySelector(".subtaskli-buttons-container");
-  
-  const input = createInputElement(spanElement.textContent);
-  replaceLiWithInput(li, input);
-  attachInputEventListeners(input, li, spanElement, buttonsContainer);
-}
-
-function subtasksHandleEditClick(event) {
-  const li = event.target.closest("li");
-  const span = li.querySelector("span");
-  const buttonsContainer = li.querySelector(".subtaskli-buttons-container");
-  const input = createInputElement(span.textContent);
-  buttonsContainer.style.display = "none";
-  li.replaceChild(input, span); 
-  buttonsContainer.innerHTML = `
-    <button class="sutbtask-hover-btn" onclick="confirmEdit('${li.id}', '${input.value}')">✔</button>
-    <button class="sutbtask-hover-btn" onclick="subtasksHandleDeleteClick(event)"><img src="../img/add-task/delete.png" alt="Delete Button"></button>
-  `;
-  buttonsContainer.style.display = "flex";
-  input.onkeypress = function (e) {
-    if (e.key === "Enter") {
-      confirmEdit(li.id, input.value);
-    }
-  };
-  input.onblur = function () {
-    confirmEdit(li.id, input.value);
-  };
-
-  input.focus();
-}
-
-function confirmEdit(liId, newValue) {
-  const li = document.getElementById(liId);
-  const span = document.createElement("span");
-  span.textContent = newValue.trim() !== "" ? newValue : "Untitled Subtask";
-  const buttonsContainer = li.querySelector(".subtaskli-buttons-container");
-
-  li.replaceChild(span, li.querySelector("input"));
-  buttonsContainer.style.display = "none";
-}
-
-function createInputElement(text) {
-  const input = document.createElement("input");
-  input.type = "text";
-  input.value = text;
   input.classList.add("edit-input");
-  return input;
+
+  const saveButton = document.createElement("button");
+  saveButton.innerHTML = `<img src="../img/success.png" alt="Save">`;
+  saveButton.classList.add("save-button");
+  saveButton.onclick = function () {
+    saveSubtask(listItem, input.value);
+  };
+
+  const deleteButton = document.createElement("button");
+  deleteButton.innerHTML = `
+    ${verticalSeparator("1px", "24px", "#A8A8A8")}
+    <img src="../img/delete.png" alt="Delete">`;
+  deleteButton.classList.add("delete-button");
+  deleteButton.onclick = function () {
+    deleteSubtask(listItem);
+  };
+
+  inputContainer.appendChild(input);
+  inputContainer.appendChild(saveButton);
+  inputContainer.appendChild(deleteButton);
+  listItem.innerHTML = "";
+  listItem.appendChild(inputContainer);
 }
 
-function subtasksHandleDeleteClick(event) {
-  const li = event.target.closest("li");
-  li.remove();
-}
-
-function confirmOrCancelSubtask(idSuffix) {
-  let subtaskInput = document.getElementById('subtasks' + idSuffix);
-  if (subtaskInput && subtaskInput.value.trim()) {
-    renderSubtask(subtaskInput.value, idSuffix);
-    subtaskInput.value = '';
+function saveSubtask(listItem, newValue) {
+  if (newValue.trim()) {
+    listItem.classList.remove('editing');
+    listItem.innerHTML = `
+      <span>${newValue}</span>
+      <div class="subtask-li-btn-container">
+        <button class="sutbtask-hover-btn" onclick="editSubtask(this)"><img src="../img/edit-black.png" alt="Edit"></button>
+        ${verticalSeparator("1px", "24px", "#A8A8A8")}
+        <button class="sutbtask-hover-btn" onclick="deleteSubtask(this)"><img src="../img/delete.png" alt="Delete"></button>
+      </div>`;
   }
 }
 
-function renderSubtask(subtask, idSuffix) {
-  let unsortedList = document.getElementById("subtask-list" + idSuffix);
-  addSubtask(subtask);
-  let newListElement = document.createElement("li");
-  newListElement.id = subtask;
-  newListElement.classList.add("subtask-list-element");
-  newListElement.innerHTML += `
-    <span>${subtask}</span>
-    <div class="subtaskli-buttons-container hidden">
-      ${inSubtaskListButton("edit")}
-      ${verticalSeparator("1px", "24px", "#A8A8A8")}
-      ${inSubtaskListButton("delete")}
-    </div>
-  `;
-
-  newListElement.onmouseenter = function () {
-    let buttonsContainer = newListElement.querySelector(".subtaskli-buttons-container");
-    buttonsContainer.style.display = "flex";
-  };
-
-  newListElement.onmouseleave = function () {
-    let buttonsContainer = newListElement.querySelector(".subtaskli-buttons-container");
-    buttonsContainer.style.display = "none";
-  };
-
-  unsortedList.appendChild(newListElement);
-}
-
-function addSubtask(subtask) {
-  subtasks.push({ [subtask]: "open" });
+function deleteSubtask(button) {
+  const listItem = button.parentNode.parentNode;
+  listItem.remove();
 }
 
 function resetSubtaskButtons(idSuffix) {
@@ -469,36 +374,18 @@ function resetSubtaskButtons(idSuffix) {
   buttonsContainer.innerHTML = `
     <button id="add-subtask-button${idSuffix}" class="in-line-btn" type="button" onclick="showSubtaskButtons('${idSuffix}')">
       <img src="../img/add-task/add.png">
-    </button>
-  `;
+    </button>`;
 }
 
 function clearSubtaskInput(idSuffix) {
   const subtaskInput = document.getElementById(`subtask-input${idSuffix}`);
-  subtaskInput.value = ""; 
-  resetSubtaskButtons(idSuffix); 
-}
-
-function inSubtaskListButton(action) {
-  if (action === "edit") {
-    return `<button type="button" class="sutbtask-hover-btn" onclick="subtasksHandleEditClick(event)"><img src="../img/add-task/edit.png" alt="Edit Button"></button>`;
-  } else if (action === "delete") {
-    return `<button type="button" class="sutbtask-hover-btn" onclick="subtasksHandleDeleteClick(event)"><img src="../img/add-task/delete.png" alt="Delete Button"></button>`;
-  }
-}
-
-function verticalSeparator(width, height, color) {
-  return `
-    <svg width="${width}" height="${height}">
-      <line x1="0" y1="0" x2="0" y2="${height}" stroke="${color}" stroke-width="1"/>
-    </svg>
-  `;
+  subtaskInput.value = "";
+  resetSubtaskButtons(idSuffix);
 }
 
 function populateTaskForm(taskId, idSuffix) {
   let tasks = JSON.parse(sessionStorage.getItem('tasks'));
   let task = tasks[taskId];
-
   if (task) {
     document.getElementById(`title${idSuffix}`).value = task.title || '';
     document.getElementById(`description${idSuffix}`).value = task.description || '';
@@ -506,12 +393,9 @@ function populateTaskForm(taskId, idSuffix) {
 
     let priorityElement = document.querySelector(`input[name="prios"][value="${task.priority}"]`);
     if (priorityElement) priorityElement.checked = true;
-
     let assignees = task.assignment.split(',');
     selectedContacts = new Set(assignees);
-    
     renderCheckboxesWithColors();
-
     let subtasks = JSON.parse(task.subtasks || "[]");
     let subtaskList = document.getElementById('subtask-list');
     subtaskList.innerHTML = '';
@@ -531,7 +415,6 @@ function populateTaskForm(taskId, idSuffix) {
 function saveEditedTask(taskId) {
   let tasks = JSON.parse(sessionStorage.getItem('tasks'));
   let task = tasks[taskId];
-
   if (task) {
     task.title = document.getElementById('title').value;
     task.description = document.getElementById('description').value;
@@ -543,7 +426,6 @@ function saveEditedTask(taskId) {
       selectedAssignees.push(checkbox.value);
     });
     task.assignment = selectedAssignees.join(',');
-
     let subtasks = [];
     document.querySelectorAll('#subtask-list .subtask-list-element').forEach(item => {
       let subtaskText = item.querySelector('span').textContent;
@@ -551,7 +433,6 @@ function saveEditedTask(taskId) {
       subtasks.push({ [subtaskText]: subtaskChecked });
     });
     task.subtasks = JSON.stringify(subtasks);
-
     sessionStorage.setItem('tasks', JSON.stringify(tasks));
     closePopup();
     renderCards();
@@ -578,8 +459,7 @@ function deleteTask() {
 
 function renderInfoPopup(taskId){
   return /*html*/`
-
-  <div class="popup-header">
+      <div class="popup-header">
             <div class="tag-container" id="tag-container"><span class="tag" id="tag"></span></div>
             <button class="close-button" onclick="closePopup()"><img src="../img/close.png" alt="Close" class="close-icon" /></button>
           </div>
@@ -602,12 +482,11 @@ function renderInfoPopup(taskId){
           </div>
             </div>
           </div>
-          
           <div class="popup-actions">
             <button class="action-button" onclick="deleteTask()"><img src="../img/delete.png" alt="Delete" class="action-icon" /><span class="action-label">Delete</span></button>
             <img src="../img/high-stroke-gray.png" alt="Separator" class="action-separator" />
             <button class="action-button" onclick="editTask('${taskId}')"><img src="../img/edit-black.png" alt="Edit" class="action-icon" /><span class="action-label">Edit</span></button>
-          </div>`;
+        </div>`;
 }
 
 function toggleCheckboxes() {
@@ -621,7 +500,6 @@ function toggleCheckboxes() {
     checkboxesDiv.classList.add("d-none"); 
     dropdownArrow.classList.remove("active");
   }
-  
   renderCheckboxes();
 }
 
@@ -638,9 +516,7 @@ function renderCheckboxesWithColors() {
     if (!initialColors[id]) {
       initialColors[id] = getRandomColor();
     }
-
     let randomColor = initialColors[id];
-
     let checkboxHTML = /*html*/` 
       <label class="popup-toggle-contacts ${isChecked ? 'highlighted' : ''}" onclick="popupHighlightContact(this, '${id}');">
         <div class="initials-names-toggle">
@@ -650,7 +526,6 @@ function renderCheckboxesWithColors() {
         <input type="checkbox" id="checkbox-${id}" ${isChecked ? 'checked' : ''} style="display:none;">
         <span class="popup-contact-checkboxImg ${isChecked ? 'checked' : ''}" id="checkbox-img-${id}"></span>
       </label>`;
-
     checkboxes.innerHTML += checkboxHTML;
   }
 }
@@ -658,7 +533,6 @@ function renderCheckboxesWithColors() {
 function toggleContactCheck(contactId) {
   const checkbox = document.getElementById(`checkbox-${contactId}`);
   checkbox.checked = !checkbox.checked;  
-
   if (checkbox.checked) {
     selectedContacts.push(contactId); 
   } else {
@@ -670,9 +544,7 @@ function toggleContactCheck(contactId) {
 function popupHighlightContact(element, contactId) {
   const checkbox = document.getElementById(`checkbox-${contactId}`);
   const checkboxImg = document.getElementById(`checkbox-img-${contactId}`);
-
   checkbox.checked = !checkbox.checked;
-
   if (checkbox.checked) {
     selectedContacts.add(contactId);
     element.classList.add('highlighted'); 
@@ -682,16 +554,13 @@ function popupHighlightContact(element, contactId) {
     element.classList.remove('highlighted'); 
     checkboxImg.classList.remove('checked'); 
   }
-
   updateAssignedContacts();
 }
 
 function updateAssignedContacts() {
   const assignedDiv = document.getElementById("assigned-contacts1");
   let contacts = JSON.parse(sessionStorage.getItem("contacts")) || {};
-
   assignedDiv.innerHTML = ""; 
-
   selectedContacts.forEach(id => {
     const contact = contacts[id];
     if (contact) {

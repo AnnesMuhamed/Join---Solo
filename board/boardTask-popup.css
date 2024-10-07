@@ -325,4 +325,80 @@ input[type="checkbox"]:checked + .popup-contact-checkboxImg {
   display: flex;
   position: relative;
 }
+
+.subtask-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  line-height: 19.2px;
+  font-weight: 400;
+}
+
+.subtask-list-item:hover {
+  background-color: #f2f0f5;
+  border-radius: 10px;
+}
+
+.subtask-list-item.editing:hover {
+  background-color: transparent;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%; 
+}
+
+.edit-input {
+  flex-grow: 1;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #000;
+  background-color: white;
+  border-radius: 10px;
+  padding-right: 60px;
+  padding: 10px;
+  width: 100%;
+  outline: none; 
+  box-sizing: border-box;
+}
+
+.edit-input:focus {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #000;
+}
+
+.save-button {
+  display: flex;
+  position: absolute;
+  left: 330px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.delete-button {
+  display: flex;
+  position: absolute;
+  left: 359px;
+  gap: 5px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.subtask-li-btn-container {
+  display: flex;
+
+}
+
   

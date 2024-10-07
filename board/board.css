@@ -79,6 +79,7 @@ body.modal-open {
 .board-main-container {
     background-color: #F6F7F8;
     padding: 0px 0px 0px 64px;
+    overflow: auto;
 }
 
 .headline-board {
@@ -210,10 +211,8 @@ body.modal-open {
     display: flex;
     flex-direction: column;
     width: 252px;
-    height: 696px;
     gap: 10px;
     padding-top: 10px;
-    border: 1px dashed black;
 }
 
 .drag-area-highlight {
