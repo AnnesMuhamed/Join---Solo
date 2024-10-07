@@ -207,7 +207,7 @@ function toggleSubtaskCheck(taskId, subtaskIndex) {
   }
 }
 
-function editTask(taskId, idSuffix='1') {
+function editTask(taskId, idSuffix = '1') {
   const popupContainer = document.querySelector('.popup-container');
   const popupContent = document.getElementById('popup');
 
@@ -275,10 +275,9 @@ function editTask(taskId, idSuffix='1') {
           <img src="../img/hook.png" alt="Save" class="action-icon-hook"> 
           </button>
       `;
-     
         populateTaskForm(taskId, idSuffix);
         popupContainer.classList.add('show');
-      })
+      });
 }
 
 function showSubtaskButtons(idSuffix) {
@@ -296,59 +295,61 @@ function showSubtaskButtons(idSuffix) {
 
 function confirmSubtask(idSuffix, event) {
   event.preventDefault(); 
+
   const subtaskInput = document.getElementById(`subtask-input${idSuffix}`);
   const subtaskList = document.getElementById(`subtask-list${idSuffix}`);
+
   if (subtaskInput.value.trim()) {
     let newListItem = document.createElement('li');
-    newListItem.textContent = subtaskInput.value;
-    newListItem.classList.add('subtask-list-item');
-    newListItem.innerHTML += `
-    <div class="subtask-li-btn-container">
-      <button class="sutbtask-hover-btn" onclick="editSubtask(this, '${idSuffix}')"><img src="../img/edit-black.png" alt=""></button>
-      ${verticalSeparator("1px", "24px", "#A8A8A8")}
-      <button class="sutbtask-hover-btn" onclick="deleteSubtask(this, '${idSuffix}')"><img src="../img/delete.png" alt=""></button>
-    </div>`;
-    subtaskList.appendChild(newListItem);
+    newListItem.classList.add('subtask-list-element');
+    newListItem.innerHTML = `
+      <span>${subtaskInput.value}</span>
+      <div class="subtask-li-btn-container">
+        <button class="sutbtask-hover-btn" onclick="editSubtask(this, '${idSuffix}')"><img src="../img/edit-black.png" alt="Edit"></button>
+        ${verticalSeparator("1px", "24px", "#A8A8A8")}
+        <button class="sutbtask-hover-btn" onclick="deleteSubtask(this, '${idSuffix}')"><img src="../img/delete.png" alt="Delete"></button>
+      </div>
+    `;
+    subtaskList.appendChild(newListItem); 
     subtaskInput.value = "";
     resetSubtaskButtons(idSuffix);
+  } else {
+    console.log("No subtask input provided.");
   }
 }
 
-function editSubtask(button) {
-  const listItem = button.parentNode.parentNode;
-  listItem.classList.add('editing');
+function editSubtask(button, idSuffix) {
+  const listItem = button.closest('li');
+  listItem.classList.add('editing'); 
   
-  const oldValue = listItem.firstChild.textContent;
-
+  const subtaskText = listItem.querySelector('span').textContent;
   const inputContainer = document.createElement("div");
-  inputContainer.classList.add('input-container');
 
+  inputContainer.classList.add('input-container');
   const input = document.createElement("input");
   input.type = "text";
-  input.value = oldValue;
+  input.value = subtaskText; 
   input.classList.add("edit-input");
-
   const saveButton = document.createElement("button");
   saveButton.innerHTML = `<img src="../img/success.png" alt="Save">`;
   saveButton.classList.add("save-button");
-  saveButton.onclick = function () {
+  saveButton.onclick = function (event) {
+    event.preventDefault();
     saveSubtask(listItem, input.value);
   };
 
   const deleteButton = document.createElement("button");
-  deleteButton.innerHTML = `
-    ${verticalSeparator("1px", "24px", "#A8A8A8")}
-    <img src="../img/delete.png" alt="Delete">`;
+  deleteButton.innerHTML = `<img src="../img/delete.png" alt="Delete">`;
   deleteButton.classList.add("delete-button");
   deleteButton.onclick = function () {
     deleteSubtask(listItem);
   };
-
   inputContainer.appendChild(input);
   inputContainer.appendChild(saveButton);
   inputContainer.appendChild(deleteButton);
   listItem.innerHTML = "";
   listItem.appendChild(inputContainer);
+  input.focus();
 }
 
 function saveSubtask(listItem, newValue) {
@@ -360,7 +361,8 @@ function saveSubtask(listItem, newValue) {
         <button class="sutbtask-hover-btn" onclick="editSubtask(this)"><img src="../img/edit-black.png" alt="Edit"></button>
         ${verticalSeparator("1px", "24px", "#A8A8A8")}
         <button class="sutbtask-hover-btn" onclick="deleteSubtask(this)"><img src="../img/delete.png" alt="Delete"></button>
-      </div>`;
+      </div>
+    `;
   }
 }
 
@@ -386,6 +388,7 @@ function clearSubtaskInput(idSuffix) {
 function populateTaskForm(taskId, idSuffix) {
   let tasks = JSON.parse(sessionStorage.getItem('tasks'));
   let task = tasks[taskId];
+
   if (task) {
     document.getElementById(`title${idSuffix}`).value = task.title || '';
     document.getElementById(`description${idSuffix}`).value = task.description || '';
@@ -393,50 +396,118 @@ function populateTaskForm(taskId, idSuffix) {
 
     let priorityElement = document.querySelector(`input[name="prios"][value="${task.priority}"]`);
     if (priorityElement) priorityElement.checked = true;
-    let assignees = task.assignment.split(',');
+
+    let assignees = task.assignment ? task.assignment.split(',') : [];
     selectedContacts = new Set(assignees);
+
     renderCheckboxesWithColors();
+    updateAssignedContacts();
+
     let subtasks = JSON.parse(task.subtasks || "[]");
-    let subtaskList = document.getElementById('subtask-list');
+    let subtaskList = document.getElementById('subtask-list1');
     subtaskList.innerHTML = '';
     subtasks.forEach((subtask, index) => {
       let key = Object.keys(subtask)[0];
-      let isChecked = subtask[key] === "done" ? "checked" : "";
       subtaskList.innerHTML += `
         <li class="subtask-list-element">
-          <input type="checkbox" id="subtask-${index}" ${isChecked}>
           <span>${key}</span>
+          <div class="subtask-li-btn-container">
+            <button class="sutbtask-hover-btn" onclick="editSubtask(this, '${idSuffix}')"><img src="../img/edit-black.png" alt="Edit"></button>
+            ${verticalSeparator("1px", "24px", "#A8A8A8")}
+            <button class="sutbtask-hover-btn" onclick="deleteSubtask(this, '${idSuffix}')"><img src="../img/delete.png" alt="Delete"></button>
+          </div>
         </li>
       `;
     });
   }
 }
 
+function renderCards() {
+  let tasks = JSON.parse(sessionStorage.getItem('tasks')); 
+  let boardContainer = document.getElementById('board-container');
+  boardContainer.innerHTML = '';
+
+  for (let taskId in tasks) {
+    let task = tasks[taskId];
+    let taskCard = document.createElement('div');
+    taskCard.classList.add('task-card');
+    taskCard.innerHTML = `
+      <h3>${task.title}</h3>
+      <p>${task.description}</p>
+      <p>Due date: ${task.date}</p>
+      <p>Priority: ${getPriorityLabel(task.priority)}</p>
+      <button onclick="openPopup('${taskId}')">Edit</button>
+    `;
+    boardContainer.appendChild(taskCard);
+  }
+}
+
+
 function saveEditedTask(taskId) {
   let tasks = JSON.parse(sessionStorage.getItem('tasks'));
   let task = tasks[taskId];
+
   if (task) {
-    task.title = document.getElementById('title').value;
-    task.description = document.getElementById('description').value;
-    task.date = document.getElementById('due-date').value;
+    task.title = document.getElementById('title1').value;
+    task.description = document.getElementById('description1').value;
+    task.date = document.getElementById('due-date1').value;
     task.priority = document.querySelector('input[name="prios"]:checked').value;
 
-    let selectedAssignees = [];
-    document.querySelectorAll('input[name="assignees"]:checked').forEach(checkbox => {
-      selectedAssignees.push(checkbox.value);
-    });
-    task.assignment = selectedAssignees.join(',');
+    let selectedAssignees = Array.from(selectedContacts);
+
+    if (selectedAssignees.length > 0) {
+      task.assignment = selectedAssignees.join(',');
+    } else {
+      task.assignment = ""; 
+    }
+
     let subtasks = [];
-    document.querySelectorAll('#subtask-list .subtask-list-element').forEach(item => {
+    document.querySelectorAll('#subtask-list1 .subtask-list-element').forEach(item => {
       let subtaskText = item.querySelector('span').textContent;
-      let subtaskChecked = item.querySelector('input').checked ? "done" : "open";
+      let subtaskChecked = "open"; 
       subtasks.push({ [subtaskText]: subtaskChecked });
     });
     task.subtasks = JSON.stringify(subtasks);
+    tasks[taskId] = task;
     sessionStorage.setItem('tasks', JSON.stringify(tasks));
-    closePopup();
+
     renderCards();
-    renderCheckboxes();
+    closePopup();
+  }
+}
+
+
+
+
+
+
+
+function updateProgressBar(taskId) {
+  let tasks = JSON.parse(sessionStorage.getItem('tasks'));
+  let task = tasks[taskId];
+
+  if (task && task.subtasks) {
+    let subtasks = JSON.parse(task.subtasks);
+    let totalSubtasks = subtasks.length;
+    let completedSubtasks = subtasks.filter(subtask => {
+      let key = Object.keys(subtask)[0];
+      return subtask[key] === "done"; //
+    }).length;
+
+    let progress = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
+    let progressBar = document.querySelector(`#progress-bar-${taskId}`);
+    let progressLabel = document.querySelector(`#progress-label-${taskId}`);
+
+    if (progressBar && progressLabel) {
+      progressBar.style.width = `${progress}%`;
+      progressLabel.textContent = `${completedSubtasks}/${totalSubtasks} Subtasks completed`;
+      
+      if (totalSubtasks === 0) {
+        progressBar.style.display = "none";
+      } else {
+        progressBar.style.display = "block";
+      }
+    }
   }
 }
 
@@ -530,6 +601,7 @@ function renderCheckboxesWithColors() {
   }
 }
 
+
 function toggleContactCheck(contactId) {
   const checkbox = document.getElementById(`checkbox-${contactId}`);
   checkbox.checked = !checkbox.checked;  
@@ -560,7 +632,9 @@ function popupHighlightContact(element, contactId) {
 function updateAssignedContacts() {
   const assignedDiv = document.getElementById("assigned-contacts1");
   let contacts = JSON.parse(sessionStorage.getItem("contacts")) || {};
-  assignedDiv.innerHTML = ""; 
+
+  assignedDiv.innerHTML = "";
+
   selectedContacts.forEach(id => {
     const contact = contacts[id];
     if (contact) {

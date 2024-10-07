@@ -340,7 +340,7 @@ input[type="checkbox"]:checked + .popup-contact-checkboxImg {
   border-radius: 10px;
 }
 
-.subtask-list-item.editing:hover {
+.edit-input.editing:hover {
   background-color: transparent;
 }
 
