@@ -67,31 +67,25 @@ function openPopup(key) {
   }
 
   if (popupTag) {
-    popupTag.textContent = task.category
+    popupTag.textContent = task.category;
   }
 
   if (popupTitle) {
     popupTitle.textContent = task.title || 'No title available';
-  } else {
-    console.error("popupTitle element not found");
   }
 
   if (popupSubtitle) {
     popupSubtitle.textContent = task.description || 'No description available';
-  } else {
-    console.error("popupSubtitle element not found");
   }
 
   if (dueDateElement) {
     dueDateElement.textContent = task.date ? formatDate(task.date) : 'No due date available';
-  } else {
-    console.error("dueDateElement not found");
   }
 
   getPopupTagColor(task, popupTag);
   determineTaskPriority(task, priorityLabel, priorityIcon);
   loadAssignees(task, assigneeContainer);
-  loadSubtasks(task, subtasksList);
+  loadSubtasks(task, subtasksList, key);
 
   popup.dataset.taskKey = key;
   popupContainer.classList.add("show");
@@ -161,10 +155,9 @@ function loadAssignees(task, assigneeContainer) {
   });
 }
 
-function loadSubtasks(task, subtasksList) {
+function loadSubtasks(task, subtasksList, taskId) {
   subtasksList.innerHTML = "";
   let subtasks = JSON.parse(task.subtasks || "[]");
-
   if (subtasks.length === 0) {
     subtasksList.innerHTML = "<span>You have no subtasks</span>";
   } else {
@@ -172,11 +165,10 @@ function loadSubtasks(task, subtasksList) {
       let key = Object.keys(subtask)[0];
       let isChecked = subtask[key] === "done";
       let checkboxImg = isChecked ? "../img/checked.png" : "../img/checkbox.png";
-      
       subtasksList.innerHTML += `
-        <div class="subtask-popup ${isChecked ? 'checked' : ''}" data-subtask-id="${index}">
-          <div class="subtask-checkbox" onclick="toggleSubtaskCheck(${task.id}, ${index});">
-            <img src="${checkboxImg}" alt="Checkbox" id="checkbox-img-${index}">
+        <div class="subtask-popup ${isChecked ? 'checked' : ''}" data-subtask-id="${taskId}-${index}">
+          <div class="subtask-checkbox" onclick="toggleSubtaskCheck('${taskId}', ${index});">
+            <img src="${checkboxImg}" alt="Checkbox" id="checkbox-img-${taskId}-${index}">
           </div>
           <span>${key}</span>
         </div>`;
@@ -187,23 +179,64 @@ function loadSubtasks(task, subtasksList) {
 function toggleSubtaskCheck(taskId, subtaskIndex) {
   let tasks = JSON.parse(sessionStorage.getItem('tasks'));
   let task = tasks[taskId];
+  if (!task) {
+    console.error(`Task with ID ${taskId} not found`);
+    return;
+  }
   let subtasks = JSON.parse(task.subtasks || "[]");
   let subtaskKey = Object.keys(subtasks[subtaskIndex])[0];
-  
-  subtasks[subtaskIndex][subtaskKey] = subtasks[subtaskIndex][subtaskKey] === "done" ? "not done" : "done";
-  
+  subtasks[subtaskIndex][subtaskKey] = subtasks[subtaskIndex][subtaskKey] === "done" ? "open" : "done";
   task.subtasks = JSON.stringify(subtasks);
   tasks[taskId] = task;
   sessionStorage.setItem('tasks', JSON.stringify(tasks));
-  
-  let checkboxImg = subtasks[subtaskIndex][subtaskKey] === "done" ? "../img/checked.png" : "../img/checkbox.png";
-  document.getElementById(`checkbox-img-${subtaskIndex}`).src = checkboxImg;
 
-  let subtaskItem = document.querySelector(`[data-subtask-id="${subtaskIndex}"]`);
-  if (subtasks[subtaskIndex][subtaskKey] === "done") {
-    subtaskItem.classList.add('checked');
+  updateData(`tasks/${taskId}`, task);
+  let checkboxImg = subtasks[subtaskIndex][subtaskKey] === "done" ? "../img/checked.png" : "../img/checkbox.png";
+  let checkboxElement = document.getElementById(`checkbox-img-${taskId}-${subtaskIndex}`);
+  if (checkboxElement) {
+    checkboxElement.src = checkboxImg;
+    let subtaskItem = document.querySelector(`[data-subtask-id="${taskId}-${subtaskIndex}"]`);
+    if (subtasks[subtaskIndex][subtaskKey] === "done") {
+      subtaskItem.classList.add('checked');
+    } else {
+      subtaskItem.classList.remove('checked');
+    }
+    updateProgressBar(taskId);
   } else {
-    subtaskItem.classList.remove('checked');
+    console.error(`Checkbox element with ID checkbox-img-${taskId}-${subtaskIndex} not found`);
+  }
+}
+
+function updateProgressBar(taskId) {
+  let tasks = JSON.parse(sessionStorage.getItem('tasks'));
+  let task = tasks[taskId];
+
+  if (task && task.subtasks) {
+    let subtasks = JSON.parse(task.subtasks);
+    let totalSubtasks = subtasks.length;
+    let completedSubtasks = subtasks.filter(subtask => {
+      let key = Object.keys(subtask)[0];
+      return subtask[key] === "done";
+    }).length;
+
+    let progress = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
+    let progressBar = document.querySelector(`#${taskId}-progress-bar`);
+    let progressLabel = document.querySelector(`#${taskId}-subtask-counter`);
+
+    if (progressBar && progressLabel) {
+      progressBar.style.width = `${progress}%`;
+
+      // Update the progress label text to include "Subtasks"
+      progressLabel.textContent = `${completedSubtasks}/${totalSubtasks} Subtasks`;
+
+      if (totalSubtasks === 0) {
+        progressBar.style.display = "none";
+      } else {
+        progressBar.style.display = "block";
+      }
+    } else {
+      console.error(`Progress bar or label not found for task ID: ${taskId}`);
+    }
   }
 }
 
@@ -493,35 +526,6 @@ async function saveEditedTask(taskId) {
 
   } else {
     console.error(`Task mit ID ${taskId} wurde nicht gefunden!`);
-  }
-}
-
-function updateProgressBar(taskId) {
-  let tasks = JSON.parse(sessionStorage.getItem('tasks'));
-  let task = tasks[taskId];
-
-  if (task && task.subtasks) {
-    let subtasks = JSON.parse(task.subtasks);
-    let totalSubtasks = subtasks.length;
-    let completedSubtasks = subtasks.filter(subtask => {
-      let key = Object.keys(subtask)[0];
-      return subtask[key] === "done"; //
-    }).length;
-
-    let progress = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
-    let progressBar = document.querySelector(`#progress-bar-${taskId}`);
-    let progressLabel = document.querySelector(`#progress-label-${taskId}`);
-
-    if (progressBar && progressLabel) {
-      progressBar.style.width = `${progress}%`;
-      progressLabel.textContent = `${completedSubtasks}/${totalSubtasks} Subtasks completed`;
-      
-      if (totalSubtasks === 0) {
-        progressBar.style.display = "none";
-      } else {
-        progressBar.style.display = "block";
-      }
-    }
   }
 }
 

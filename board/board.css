@@ -345,23 +345,29 @@ body.modal-open {
     display: flex;
     align-items: center;
     height: 16px;
+    gap: 8px;
 }
 
 .progress-container {
-    width: 80%;
+    width: 128px;
     height: 8px;
     background-color: #e0e0e0;
-    border-radius: 15px;
+    border-radius: 16px;
     overflow: hidden;
 }
 
 .progress-bar {
     height: 100%;
     width: 0;
-    background-color: #76c7c0;
-    border-radius: 15px 0 0 15px;
+    background: #4589FF;
+    border-radius: 16px 0 0 15px;
     transition: width 0.2s ease-in-out;
 }
+
+[id$="-subtask-counter"] {
+    font-size: 12px;
+  }
+  
 
 .prio-container {
     display: flex;

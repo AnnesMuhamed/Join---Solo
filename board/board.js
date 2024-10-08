@@ -203,9 +203,10 @@ function createSubtaskCounter(key, task) {
   subtasksCounter.id = `${key}-subtask-counter`;
   let subtasksList = JSON.parse(task.subtasks);
   let counter = reducerFunction(subtasksList);
-  subtasksCounter.textContent = `${counter.closed}/${counter.total}`;
+  subtasksCounter.textContent = `${counter.closed}/${counter.total} Subtasks`;
   subtaskContainer.appendChild(subtasksCounter);
 }
+
 
 function createProgressContainer(key) {
   let subtaskContainer = document.getElementById(`${key}-subtask`);
