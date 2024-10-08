@@ -183,16 +183,17 @@ function toggleSubtaskCheck(taskId, subtaskIndex) {
     console.error(`Task with ID ${taskId} not found`);
     return;
   }
+  
   let subtasks = JSON.parse(task.subtasks || "[]");
   let subtaskKey = Object.keys(subtasks[subtaskIndex])[0];
   subtasks[subtaskIndex][subtaskKey] = subtasks[subtaskIndex][subtaskKey] === "done" ? "open" : "done";
   task.subtasks = JSON.stringify(subtasks);
   tasks[taskId] = task;
   sessionStorage.setItem('tasks', JSON.stringify(tasks));
-
   updateData(`tasks/${taskId}`, task);
   let checkboxImg = subtasks[subtaskIndex][subtaskKey] === "done" ? "../img/checked.png" : "../img/checkbox.png";
   let checkboxElement = document.getElementById(`checkbox-img-${taskId}-${subtaskIndex}`);
+
   if (checkboxElement) {
     checkboxElement.src = checkboxImg;
     let subtaskItem = document.querySelector(`[data-subtask-id="${taskId}-${subtaskIndex}"]`);
@@ -202,9 +203,50 @@ function toggleSubtaskCheck(taskId, subtaskIndex) {
       subtaskItem.classList.remove('checked');
     }
     updateProgressBar(taskId);
+    renderCards();
   } else {
     console.error(`Checkbox element with ID checkbox-img-${taskId}-${subtaskIndex} not found`);
   }
+}
+
+function createOrUpdateProgressBar(taskId) {
+  let tasks = JSON.parse(sessionStorage.getItem('tasks'));
+  let task = tasks[taskId];
+
+  if (!task) {
+    console.error(`Task with ID ${taskId} not found for progress update`);
+    return;
+  }
+
+  let progressBarContainer = document.querySelector(`#${taskId}-progress`);
+  let progressBar = document.querySelector(`#${taskId}-progress-bar`);
+  let progressLabel = document.querySelector(`#${taskId}-subtask-counter`);
+
+  if (!progressBarContainer || !progressBar || !progressLabel) {
+    let subtaskContainer = document.querySelector(`#${taskId}-subtask`);
+
+    if (!progressBarContainer) {
+      progressBarContainer = document.createElement('div');
+      progressBarContainer.id = `${taskId}-progress`;
+      progressBarContainer.className = 'progress-container';
+      subtaskContainer.appendChild(progressBarContainer);
+    }
+
+    if (!progressBar) {
+      progressBar = document.createElement('div');
+      progressBar.id = `${taskId}-progress-bar`;
+      progressBar.className = 'progress-bar';
+      progressBarContainer.appendChild(progressBar);
+    }
+
+    if (!progressLabel) {
+      progressLabel = document.createElement('span');
+      progressLabel.id = `${taskId}-subtask-counter`;
+      progressLabel.className = 'subtask-counter';
+      progressBarContainer.appendChild(progressLabel);
+    }
+  }
+  updateProgressBar(taskId);
 }
 
 function updateProgressBar(taskId) {
@@ -225,8 +267,6 @@ function updateProgressBar(taskId) {
 
     if (progressBar && progressLabel) {
       progressBar.style.width = `${progress}%`;
-
-      // Update the progress label text to include "Subtasks"
       progressLabel.textContent = `${completedSubtasks}/${totalSubtasks} Subtasks`;
 
       if (totalSubtasks === 0) {
@@ -479,55 +519,51 @@ async function saveEditedTask(taskId) {
   let tasks = JSON.parse(sessionStorage.getItem('tasks'));
   let task = tasks[taskId];
 
-  if (task) {
-    let titleInput = document.getElementById('title1');
-    let descriptionInput = document.getElementById('description1');
-    let dateInput = document.getElementById('due-date1');
-    let priorityInput = document.querySelector('input[name="prios"]:checked');
-
-    if (titleInput) {
-      task.title = titleInput.value.trim() !== "" ? titleInput.value : task.title;
-    }
-    if (descriptionInput) {
-      task.description = descriptionInput.value.trim() !== "" ? descriptionInput.value : task.description;
-    }
-    if (dateInput) {
-      task.date = dateInput.value.trim() !== "" ? dateInput.value : task.date;
-    }
-    if (priorityInput) {
-      task.priority = priorityInput.value;
-    }
-
-    let selectedAssignees = Array.from(selectedContacts);
-    if (selectedAssignees.length > 0) {
-      task.assignment = selectedAssignees.join(',');
-    } else {
-      task.assignment = "";
-    }
-
-    let subtasks = [];
-    document.querySelectorAll('#subtask-list1 .subtask-list-element').forEach(item => {
-      let subtaskText = item.querySelector('span').textContent;
-      let subtaskChecked = "open"; 
-      subtasks.push({ [subtaskText]: subtaskChecked });
-    });
-    task.subtasks = JSON.stringify(subtasks);
-    tasks[taskId] = task;
-    sessionStorage.setItem('tasks', JSON.stringify(tasks));
-
-    try {
-      await updateData(`tasks/${taskId}`, task);
-    } catch (error) {
-      console.error(`Fehler beim Aktualisieren der Task in Firebase: ${error}`);
-    }
-
-    renderCards();
-    closePopup();
-
-  } else {
+  if (!task) {
     console.error(`Task mit ID ${taskId} wurde nicht gefunden!`);
+    return;
   }
+
+  let titleInput = document.getElementById('title1');
+  let descriptionInput = document.getElementById('description1');
+  let dateInput = document.getElementById('due-date1');
+  let priorityInput = document.querySelector('input[name="prios"]:checked');
+  if (titleInput) {
+    task.title = titleInput.value.trim() !== "" ? titleInput.value : task.title;
+  }
+  if (descriptionInput) {
+    task.description = descriptionInput.value.trim() !== "" ? descriptionInput.value : task.description;
+  }
+  if (dateInput) {
+    task.date = dateInput.value.trim() !== "" ? dateInput.value : task.date;
+  }
+  if (priorityInput) {
+    task.priority = priorityInput.value;
+  }
+
+  let selectedAssignees = Array.from(selectedContacts);
+  task.assignment = selectedAssignees.length > 0 ? selectedAssignees.join(',') : "";
+  let subtasks = [];
+  document.querySelectorAll('#subtask-list1 .subtask-list-element').forEach(item => {
+    let subtaskText = item.querySelector('span').textContent;
+    let subtaskChecked = "open";
+    subtasks.push({ [subtaskText]: subtaskChecked });
+  });
+  task.subtasks = JSON.stringify(subtasks);
+  tasks[taskId] = task;
+  sessionStorage.setItem('tasks', JSON.stringify(tasks));
+  
+  try {
+    await updateData(`tasks/${taskId}`, task);
+  } catch (error) {
+    console.error(`Fehler beim Aktualisieren der Task in Firebase: ${error}`);
+  }
+  renderCards();
+  closePopup();
+  createOrUpdateProgressBar(taskId);
 }
+
+
 
 function closePopup() {
   document.querySelector(".popup-container").classList.remove("show");

@@ -230,7 +230,19 @@ function createProgressBar(key, task) {
   progressBar.id = `${key}-progress-bar`;
   progressBar.className = "progress-bar";
   progressContainer.appendChild(progressBar);
-  subtasksProgress(progressBar.id, task);
+  let subtasks = JSON.parse(task.subtasks);
+  let totalSubtasks = subtasks.length;
+  let completedSubtasks = subtasks.filter(subtask => {
+    let subtaskKey = Object.keys(subtask)[0];
+    return subtask[subtaskKey] === "done";
+  }).length;
+  let progress = totalSubtasks > 0 ? (completedSubtasks / totalSubtasks) * 100 : 0;
+  progressBar.style.width = `${progress}%`;
+  let progressLabel = document.createElement("span");
+  progressLabel.id = `${key}-subtask-counter`;
+  progressLabel.className = "subtask-counter";
+  progressLabel.textContent = `${completedSubtasks}/${totalSubtasks} Subtasks`;
+  progressContainer.appendChild(progressLabel);
 }
 
 function createContactsAndPrioContainer(key) {
@@ -274,7 +286,6 @@ function createAssignedContacts(key, task) {
   }
 }
 
-
 function createPrioContainer(key) {
   let assignmentPrioContainer = document.getElementById(`${key}-contacts-prio`);
   let prioContainer = document.createElement("div");
@@ -309,7 +320,7 @@ function createCard(key, taskCardsContainer, task) {
   createTitle(key, task);
   createDescription(key, task);
   createSubtaskContainer(key);
-  if (JSON.parse(task.subtasks).length > 2) {
+  if (JSON.parse(task.subtasks).length > 0) {
     createProgressContainer(key);
     createProgressBar(key, task);
     createSubtaskCounter(key, task);
@@ -324,7 +335,6 @@ function createCard(key, taskCardsContainer, task) {
 function renderCards() {
   let tasks = JSON.parse(sessionStorage.getItem("tasks"));
   let allTaskCardsContainer = document.querySelectorAll(".drag-area");
-
   allTaskCardsContainer.forEach((column) => {
     column.innerHTML = "";
 
@@ -342,7 +352,6 @@ function renderCards() {
     } else {
       noTasksDiv.style.display = "none";
     }
-
     tasksInColumn.forEach((key) => {
       let task = tasks[key];
       createCard(key, column, task);
