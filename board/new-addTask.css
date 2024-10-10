@@ -1,0 +1,30 @@
+#new-task-assigned-contacts {
+    width: 100%;
+    position: relative;
+    bottom: 22px;
+    border: 1px solid #d1d1d1;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    background: white;
+    box-sizing: border-box;
+    max-height: 173px;
+    min-height: 173px;
+    overflow-y: auto;
+    overflow-x: scroll;
+    transition: max-height 0.3s ease-out;
+}
+
+.new-task-contact-label {
+    display: flex;
+    justify-content: space-between;
+    padding: 7px 16px;
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+  

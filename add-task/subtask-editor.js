@@ -1,21 +1,5 @@
 let subtasks = [];
 
-function subtasksMutationObserver() {
-  let targetNode = document.getElementById("subtask-buttons-container");
-  const config = { childList: true };
-  const callback = function (mutationsList) {
-    for (let mutation of mutationsList) {
-      if (mutation.type === "childList") {
-        mutation.addedNodes.forEach((node) => {
-          attachEventListener(node);
-        });
-      }
-    }
-  };
-  const observer = new MutationObserver(callback);
-  observer.observe(targetNode, config);
-}
-
 function getSubtask() {
   let subtask = document.getElementById("subtasks");
   return subtask.value;
@@ -52,37 +36,55 @@ function clearSubtaskInput() {
 function confirmOrCancelSubtask() {
   let subtaskButtonContainer = document.getElementById('subtask-buttons-container');
   let subtask = document.getElementById('subtasks');
-  if (subtask.value) {
-    subtaskButtonContainer.innerHTML = '';
+  if (subtask.value.trim() !== "") {
     subtaskButtonContainer.innerHTML = `
-      ${inlineSubtaskButton("clear")}
+      <button class="in-line-btn" type="button" onclick="clearSubtaskInput()">
+          <img src="../img/add-task/clear.png"/>
+      </button>
       ${verticalSeparator("1px", "24px", "#D1D1D1")}
-      ${inlineSubtaskButton("check")}
+      <button class="in-line-btn" type="button" onclick="renderSubtask()">
+          <img src="../img/add-task/check.png"/>
+      </button>
     `;
-  } else {
-    console.log("Subtask value is empty, not updating buttons");
   }
 }
 
-
 function renderSubtask() {
-  console.log("renderSubtask function called");
   let unsortedList = document.getElementById("subtask-list");
   let subtask = getSubtask();
-  addSubtask(subtask);
-  let newListElement = document.createElement("li");
-  newListElement.id = subtask;
-  newListElement.classList.add("subtask-list-element");
-  newListElement.innerHTML += `
-								<span>${subtask}</span>
-								<div class="subtaskli-buttons-container hidden">
-									${inSubtaskListButton("edit")}
-									${verticalSeparator("1px", "24px", "#A8A8A8")}
-									${inSubtaskListButton("delete")}
-								</div>
-							`;
-  unsortedList.appendChild(newListElement);
-  clearSubtaskInput();
+  if (subtask.trim() !== "") {
+    addSubtask(subtask);
+    let newListElement = document.createElement("li");
+    newListElement.classList.add("subtask-list-element");
+    newListElement.innerHTML += `
+      <span>${subtask}</span>
+      <div class="subtaskli-buttons-container">
+          <button class="in-line-btn" type="button" onclick="editSubtask(this)">
+              <img src="../img/add-task/edit.png"/>
+          </button>
+          ${verticalSeparator("1px", "24px", "#A8A8A8")}
+          <button class="in-line-btn" type="button" onclick="deleteSubtask(this)">
+              <img src="../img/add-task/delete.png"/>
+          </button>
+      </div>
+    `;
+    unsortedList.appendChild(newListElement);
+    clearSubtaskInput();
+  }
+}
+
+function deleteSubtask(button) {
+  const li = button.closest("li");
+  li.remove();
+  editSubtasks();
+}
+
+function editSubtask(button) {
+  const li = button.closest("li");
+  const span = li.querySelector("span");
+  const input = createInputElement(span.textContent);
+  replaceLiWithInput(li, input);
+  attachInputEventListeners(input, li, span, li.querySelector(".subtaskli-buttons-container"));
 }
 
 function showHideSubtaskLiButtonsContainer(event) {

@@ -7,14 +7,14 @@ let contacts = null;
 
 let assignedContacts = "";
 
-function handleBodyClicks(event) {
-  showCheckboxes(event);
-  collapseCheckboxes(event);
-  assignContacts(event);
-}
-
 async function loadContacts() {
-  contacts = await loadData(pathContacts);
+  contacts = await loadData(pathContacts); 
+  console.log("Kontakte geladen:", contacts);
+  if (contacts) {
+    renderCheckboxes(); 
+  } else {
+    console.error("Kontakte konnten nicht geladen werden.");
+  }
 }
 
 function getContactsIds() {
@@ -31,20 +31,30 @@ function getContactInitials(id) {
   ].charAt(0)}`;
 }
 
-function assignContacts(event) {
+function assignContacts(event) {  
+  if (!event.target || event.target.type !== "checkbox") {
+    console.error("assignContacts wurde mit einem ungültigen Element aufgerufen");
+    return;
+  }
+  
   let assignments = document.getElementById("assigned-contacts");
-  if (event.target.type === "checkbox") {
-    let checkboxId = event.target.id;
-    let initials = getContactInitials(checkboxId);
-    let initialsElement = document.getElementById(`${checkboxId}-${initials}`);
+  let checkboxId = event.target.id;
+  let initials = getContactInitials(checkboxId);
+  let initialsElement = document.getElementById(`${checkboxId}-${initials}`);
+
+  if (event.target.checked) {
+    if (!initialsElement) {
+      let newSpan = document.createElement("span");
+      newSpan.className = "initials-span";
+      newSpan.id = `${checkboxId}-${initials}`;
+      newSpan.textContent = initials;
+      assignments.appendChild(newSpan);
+      addContacts(checkboxId);
+    }
+  } else {
     if (initialsElement) {
       initialsElement.remove();
       removeContacts(checkboxId);
-    } else {
-      assignments.innerHTML += `
-				<span class="initials-span" id="${checkboxId}-${initials}">${initials}</span>
-		`;
-      addContacts(checkboxId);
     }
   }
 }
@@ -77,36 +87,24 @@ function renderCheckboxes() {
       continue;
     }
     checkboxes.innerHTML += `
-            <label for="${id}">
-                <span class="initials-span">${initials}</span>
-                <span>${contacts[id]["firstName"]} ${contacts[id]["lastName"]}</span>
-                <input type="checkbox" id="${id}">
-            </label>
-        `;
+      <label for="${id}">
+        <span class="initials-span">${initials}</span>
+        <span>${contacts[id]["firstName"]} ${contacts[id]["lastName"]}</span>
+        <input type="checkbox" id="${id}" onclick="assignContacts(event)">
+      </label>
+    `;
     checkboxState(id, initials);
   }
 }
 
-function showCheckboxes(event) {
+function toggleCheckboxes() {
   let checkboxes = document.getElementById("checkboxes");
-  if (event.target.closest(".select-box")) {
-    if (!expanded) {
+  if (!expanded) {
       checkboxes.style.display = "block";
       expanded = true;
-    } else {
+  } else {
       checkboxes.style.display = "none";
       expanded = false;
-    }
-  }
-}
-
-function collapseCheckboxes(event) {
-  let checkboxes = document.getElementById("checkboxes");
-  let search = document.getElementById("search");
-  if (!event.target.closest(".assignment-container")) {
-    search.value = "";
-    checkboxes.style.display = "none";
-    expanded = false;
   }
 }
 

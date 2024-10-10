@@ -3,49 +3,11 @@ let pathTasks = "tasks";
 
 function init() {
   initFunc();
-  setupEventListeners();
   radioButtonsSelectState();
 };
 
 async function initFunc() {
   await loadContacts();
-  renderCheckboxes();
-}
-
-function setupEventListeners() {
-  let searchInput = document.getElementById("search");
-  let subTaskButton = document.getElementById("add-subtask-button");
-  let subtasksList = document.getElementById("subtask-list");
-  let clearButton = document.getElementById("clear-btn");
-
-  document.body.addEventListener("click", handleBodyClicks);
-
-  subTaskButton.addEventListener("click", () => confirmOrCancelSubtask()); 
-  subtasksList.addEventListener("dblclick", (event) => subtasksHandleDoubleClick(event)); 
-  subtasksList.addEventListener("click", (event) => subtasksHandleEditClick(event));  
-  subtasksList.addEventListener("click", (event) => subtasksHandleDeleteClick(event));  
-  subtasksList.addEventListener("mouseenter", (event) => showHideSubtaskLiButtonsContainer(event), true); 
-  subtasksList.addEventListener("mouseleave", (event) => showHideSubtaskLiButtonsContainer(event), true);
-
-  searchInput.addEventListener("keyup", () => renderCheckboxes()); 
-  clearButton.addEventListener("click", () => clearForm()); 
-
-  subtasksMutationObserver();  
-
-  document.body.addEventListener("submit", (event) => createTask(event)); 
-}
-
-
-function attachEventListener(node) {
-  if (node.id === "check-subtask-button") {
-    console.log("Event listener added for check-subtask-button");
-    node.addEventListener("click", () => renderSubtask());  
-  } else if (node.id === "clear-subtask-button") {
-    console.log("Event listener added for clear-subtask-button");
-    node.addEventListener("click", () => clearSubtaskInput());  
-  } else {
-    node.addEventListener("click", () => confirmOrCancelSubtask());  
-  }
 }
 
 async function includeHTML() {
@@ -163,21 +125,5 @@ function clearForm() {
   clearRadioButtons();
   clearCheckboxes();
   clearDivs();
-}
-
-function renderCheckboxes() {
-  let contacts = JSON.parse(sessionStorage.getItem("contacts"));
-  let checkboxes = document.getElementById("checkboxes");
-  checkboxes.innerHTML = "";
-
-  for (let id in contacts) {
-    let contact = contacts[id];
-    let checkbox = `
-      <label>
-      ${contact.firstName} ${contact.lastName}
-        <input type="checkbox" id="${id}" />
-      </label>`;
-    checkboxes.innerHTML += checkbox;
-  }
 }
 

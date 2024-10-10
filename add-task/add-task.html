@@ -54,7 +54,7 @@
 					<div class="d-flex-col assignment-container">
 						<label for="assignment">Assigned to</label>
 						<div class="select-box">
-							<input id="search" class="assignment-selector definition-entry-field" type="text" name="assignment" placeholder="Select contacts to assign">
+							<input id="search" class="assignment-selector definition-entry-field" type="text" name="assignment" placeholder="Select contacts to assign" onclick="toggleCheckboxes()">
 							<div id="checkboxes">
 							</div>
 						</div>
@@ -119,7 +119,7 @@
 						<div class="subtask-container">
 							<input class="subtasks properties-entry-field" type="text" id="subtasks" name="subtasks" placeholder="Add new subtask">
 							<div id="subtask-buttons-container" class="add-subtask-button">
-								<button id="add-subtask-button" class="in-line-btn" type="button">
+								<button id="add-subtask-button" class="in-line-btn" type="button" onclick="confirmOrCancelSubtask()">
 									<img src="../img/add-task/add.png"/>
 								</button>
 							</div>
@@ -140,7 +140,7 @@
 					This field is required
 				</span>
 				<div class="btn-container">
-					<button id="clear-btn" class="add-task-btn clear-btn">Clear</button>
+					<button id="clear-btn" class="add-task-btn clear-btn" onclick="clearForm()">Clear</button>
 					<button id="create-btn" class="add-task-btn create-task-btn" form="add-task-form" type="submit">Create Task</button>
 				</div>
 			</div>

@@ -28,10 +28,10 @@
     <title>Board</title>
   </head>
 
-  <body onload="init()">
+  <body onload="initBoard()">
     <header class="header" w3-include-html="../templates/header.html"></header>
     <aside class="sidebar" w3-include-html="../templates/sidebar.html"></aside>
-
+   
     <div id="overlay" class="overlay"></div>
     <div id="newTask" class="new-task">
       <button onclick="closeAddTaskForm()" class="close-btn">
@@ -92,24 +92,13 @@
                 <button id="add-subtask-button" class="in-line-btn" type="button"><img src="../img/add-task/add.png" /></button>
               </div>
             </div>
+            <div id="subtask-list-container" class="subtask-list-container">
+              <ul id="subtask-list" class="subtask-list">
+              </ul>
+            </div>
           </div>
         </div>
       </form>
-      <div class="subtasks" id="subtask-list">
-        <div class="subtask-popup checked" data-subtask-id="1">
-          <div class="subtask-checkbox" onclick="toggleSubtaskCheck(1, 0);">
-            <img src="../img/checked.png" alt="Checkbox" id="checkbox-img-1">
-          </div>
-          <span>Subtask 1</span> 
-        </div>
-        <div class="subtask-popup" data-subtask-id="2">
-          <div class="subtask-checkbox" onclick="toggleSubtaskCheck(1, 1);">
-            <img src="../img/checkbox.png" alt="Checkbox" id="checkbox-img-2">
-          </div>
-          <span>Subtask 2</span> 
-        </div>
-      </div>
-      
       <div id="buttons" class="buttons">
         <span id="requirement" class="requirement"><span style="color: red">*</span>This field is required</span>
         <div class="btn-container">
