@@ -38,16 +38,16 @@
       <button onclick="closeBoardAddTaskForm()" class="close-btn">
         <img class="close-button-icon" src="../img/close.png" alt="Close Button" />
       </button>
-      <h1 class="add-task-headline">Add Task</h1>
-      <form id="board-add-task-form" class="add-task-form">
+      <h1 class="board-task-headline">Add Task</h1>
+      <form id="board-add-task-form" class="board-task-form">
         <!-- Definition Section -->
-        <div class="definition">
-          <div class="d-flex-col">
+        <div class="board-definition">
+          <div class="board-d-flex-col">
             <label for="board-title" class="required">
               Title <span style="color: red">*</span>
             </label>
             <input
-              class="title definition-entry-field"
+              class="board-title definition-entry-field"
               type="text"
               id="board-title"
               name="title"
@@ -55,7 +55,7 @@
               required
             />
           </div>
-          <div class="d-flex-col">
+          <div class="board-d-flex-col">
             <label for="board-description">Description</label>
             <textarea
               class="description definition-entry-field"
@@ -64,10 +64,10 @@
               placeholder="Enter a Description"
             ></textarea>
           </div>
-          <div class="d-flex-col assignment-container">
+          <div class="board-d-flex-col assignment-container">
             <label for="board-assignment">Assigned to</label>
             <div class="select-box">
-              <input id="board-search" class="assignment-selector definition-entry-field" type="text" name="assignment" placeholder="Select contacts to assign" onkeyup="boardFilterCheckboxes()" />
+              <input id="board-search" class="board-assigned-selector definition-entry-field" type="text" name="assignment" placeholder="Select contacts to assign" onkeyup="boardFilterCheckboxes()" />
               <div class="dropdown-arrow" onclick="boardToggleCheckboxes()"></div>
             </div>
             <div id="board-checkboxes" class="checkboxes-container d-none"></div>
@@ -84,20 +84,20 @@
           />
         </svg>
         <!-- Properties Section -->
-        <div class="properties">
-          <div class="d-flex-col">
+        <div class="board-properties">
+          <div class="board-d-flex-col">
             <label for="board-date" class="required">
               Due date <span style="color: red">*</span>
             </label>
             <input
-              class="properties-entry-field due-date"
+              class="properties-entry-field board-due-date"
               type="date"
               id="board-date"
               name="date"
               required
             />
           </div>
-          <div class="d-flex-col">
+          <div class="board-d-flex-col">
             <label for="radio-button-group">Prio</label>
             <div id="board-radio-button-group" class="radio-button-group">
               <input type="radio" id="board-prio-high" name="board-prios" value="3" class="radio-button" />
@@ -119,7 +119,7 @@
               </label>
             </div>
           </div>          
-          <div class="d-flex-col">
+          <div class="board-d-flex-col">
             <label for="board-category" class="required">
               Category <span style="color: red">*</span>
             </label>
@@ -134,7 +134,7 @@
               <option>User Story</option>
             </select>
           </div>
-          <div class="d-flex-col">
+          <div class="board-d-flex-col">
             <label for="board-subtasks">Subtasks</label>
             <!-- HTML für das Subtask-Feld und die Buttons -->
             <div class="subtask-container">
@@ -152,7 +152,7 @@
         </div>
       </form>
       <!-- Buttons -->
-      <div id="board-buttons" class="buttons">
+      <div id="board-buttons" class="board-buttons">
         <span id="board-requirement" class="requirement">
           <span style="color: red">*</span>This field is required
         </span>

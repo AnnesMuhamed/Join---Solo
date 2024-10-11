@@ -73,7 +73,7 @@ function renderBoardCheckboxes() {
       checkboxLabel.htmlFor = id;
   
       const spanInitials = document.createElement("span");
-      spanInitials.className = "initials-span";
+      spanInitials.className = "initials-span board-task";
       spanInitials.textContent = initials;
   
       const spanFullName = document.createElement("span");
@@ -126,7 +126,7 @@ function boardAssignContacts(event, id) {
       label.classList.add("checked");
   
       const newSpan = document.createElement("span");
-      newSpan.className = "initials-span";
+      newSpan.className = "initials-span board-task";
       newSpan.id = `assigned-${id}`;
       newSpan.textContent = initials;
       newSpan.style.backgroundColor = getRandomColor();
@@ -240,7 +240,7 @@ function assignBoardContacts(event) {
     if (event.target.checked) {
       if (!initialsElement) {
         let newSpan = document.createElement("span");
-        newSpan.className = "initials-span";
+        newSpan.className = "initials-span board-task";
         newSpan.id = `board-${checkboxId}-${initials}`;
         newSpan.textContent = initials;
         assignments.appendChild(newSpan);
@@ -387,7 +387,7 @@ function boardFilterCheckboxes() {
         checkboxLabel.htmlFor = id;
   
         const spanInitials = document.createElement("span");
-        spanInitials.className = "initials-span";
+        spanInitials.className = "initials-span board-task";
         spanInitials.textContent = initials;
   
         const spanFullName = document.createElement("span");

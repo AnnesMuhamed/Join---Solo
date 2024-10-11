@@ -62,8 +62,9 @@
     line-height: 24px;
 }
 
-.properties-entry-field {
+.properties-entry-field:focus {
   font-family: 'Inter';
+  border-right: none;
 }
 
 .popup-subtaskinput {
