@@ -2,7 +2,7 @@
 
 let boardPathTasks = "tasks";
 let boardSubtasks = [];
-let boardAssignedContacts = "";
+let boardAssignedContacts = [];
 let boardPriority = null;
 let boardExpanded = false; 
 
@@ -32,7 +32,7 @@ function boardCreateTaskJson() {
     let task = {
       title: document.getElementById("board-title").value.trim(),
       description: document.getElementById("board-description").value.trim() || "",
-      assignment: boardAssignedContacts,
+      assignment: boardAssignedContacts.join(","),
       date: document.getElementById("board-date").value,
       priority: boardPriority,
       category: document.getElementById("board-category").value,
@@ -44,7 +44,6 @@ function boardCreateTaskJson() {
 
 async function loadBoardContacts() {
     let contacts = JSON.parse(sessionStorage.getItem("contacts"));
-    console.log("Board Kontakte geladen:", contacts);
     if (contacts) {
       renderBoardCheckboxes();
     } else {
@@ -54,37 +53,43 @@ async function loadBoardContacts() {
 
 function renderBoardCheckboxes() {
     const contacts = JSON.parse(sessionStorage.getItem("contacts"));
-  
+
     if (!contacts) {
       console.error("Kontakte konnten nicht aus dem Session Storage geladen werden.");
       return;
     }
-  
+
     const checkboxes = document.getElementById("board-checkboxes");
     checkboxes.innerHTML = "";
-  
+
     for (let id in contacts) {
       const contact = contacts[id];
       const initials = `${contact.firstName.charAt(0)}${contact.lastName.charAt(0)}`;
       const fullName = `${contact.firstName} ${contact.lastName}`;
-  
+
       const checkboxLabel = document.createElement("label");
       checkboxLabel.className = "checkbox-label";
       checkboxLabel.htmlFor = id;
-  
+
       const spanInitials = document.createElement("span");
       spanInitials.className = "initials-span board-task";
       spanInitials.textContent = initials;
-  
+
       const spanFullName = document.createElement("span");
       spanFullName.className = "contact-name";
       spanFullName.textContent = fullName;
-  
+
       const checkbox = document.createElement("div");
       checkbox.className = "custom-checkbox";
       checkbox.id = `checkbox-${id}`;
+
+      if (boardAssignedContacts.includes(id)) {
+        checkbox.classList.add("checked");
+        checkboxLabel.classList.add("checked");
+      }
+
       checkbox.onclick = (event) => boardAssignContacts(event, id);
-  
+
       checkboxLabel.appendChild(spanInitials);
       checkboxLabel.appendChild(spanFullName);
       checkboxLabel.appendChild(checkbox);
@@ -99,11 +104,11 @@ function boardToggleCheckboxes() {
       console.error("Checkboxes-Element nicht gefunden.");
       return;
     }
-  
+
     if (boardExpanded) {
-      checkboxes.style.display = "none";
+      checkboxes.classList.add('d-none');
     } else {
-      checkboxes.style.display = "block";
+      checkboxes.classList.remove('d-none');
       renderBoardCheckboxes();
     }
     boardExpanded = !boardExpanded;
@@ -115,24 +120,30 @@ function boardAssignContacts(event, id) {
     const assignmentsContainer = document.getElementById("board-assigned-contacts");
     const contacts = JSON.parse(sessionStorage.getItem("contacts"));
     const initials = `${contacts[id].firstName.charAt(0)}${contacts[id].lastName.charAt(0)}`;
-  
+
+    if (!Array.isArray(boardAssignedContacts)) {
+        boardAssignedContacts = [];
+    }
+
     if (checkbox.classList.contains("checked")) {
-      checkbox.classList.remove("checked");
-      label.classList.remove("checked");
-      document.getElementById(`assigned-${id}`).remove();
-      removeBoardContacts(id);
+        checkbox.classList.remove("checked");
+        label.classList.remove("checked");
+        document.getElementById(`assigned-${id}`).remove();
+        removeBoardContacts(id);
     } else {
-      checkbox.classList.add("checked");
-      label.classList.add("checked");
-  
-      const newSpan = document.createElement("span");
-      newSpan.className = "initials-span board-task";
-      newSpan.id = `assigned-${id}`;
-      newSpan.textContent = initials;
-      newSpan.style.backgroundColor = getRandomColor();
-      assignmentsContainer.appendChild(newSpan);
-  
-      addBoardContacts(id);
+        checkbox.classList.add("checked");
+        label.classList.add("checked");
+
+        if (!boardAssignedContacts.includes(id)) {
+            boardAssignedContacts.push(id);
+
+            const newSpan = document.createElement("span");
+            newSpan.className = "initials-span board-task";
+            newSpan.id = `assigned-${id}`;
+            newSpan.textContent = initials;
+            newSpan.style.backgroundColor = getRandomColor();
+            assignmentsContainer.appendChild(newSpan);
+        }
     }
 }
 
@@ -144,13 +155,11 @@ function addBoardContacts(contactId) {
     }
 }
 
-function removeBoardContacts(contactId) {
-    let contactsArray = boardAssignedContacts.split(",");
-    const index = contactsArray.indexOf(contactId);
+function removeBoardContact(contactId) {
+    const index = boardAssignedContacts.indexOf(contactId);
     if (index !== -1) {
-      contactsArray.splice(index, 1);
+        boardAssignedContacts.splice(index, 1);
     }
-    boardAssignedContacts = contactsArray.join(",");
 }
 
 function boardConfirmOrCancelSubtask() {
@@ -254,11 +263,22 @@ function assignBoardContacts(event) {
     }
 }
 
+function removeBoardContacts(contactId) {
+    if (!Array.isArray(boardAssignedContacts)) {
+        boardAssignedContacts = [];
+    }
+
+    const index = boardAssignedContacts.indexOf(contactId);
+    if (index !== -1) {
+        boardAssignedContacts.splice(index, 1);
+    }
+}
+
 function boardClearForm() {
     document.getElementById("board-add-task-form").reset();
     boardPriority = null;
     boardSubtasks = [];
-    boardAssignedContacts = ""; 
+    boardAssignedContacts = [];
     document.getElementById("board-assigned-contacts").innerHTML = "";
     document.getElementById("board-subtask-list").innerHTML = "";
 }
