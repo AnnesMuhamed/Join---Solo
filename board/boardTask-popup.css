@@ -205,6 +205,7 @@
   height: 56px;
   border-radius: 10px;
   padding: 12px 16px;
+  margin-bottom: 2px;
 }
 
 .popup-toggle-contacts:hover {
@@ -223,7 +224,7 @@
 }
 
 input[type="checkbox"]:checked + .popup-contact-checkboxImg {
-  background-image: url('../img/checked.png');
+  background-image: url('../img/checked-white.png');
 }
 
 .dropdown-arrow {
@@ -289,11 +290,6 @@ input[type="checkbox"]:checked + .popup-contact-checkboxImg {
 .highlighted {
   background-color: #2A3647;
   color: white;
-}
-
-.popup-contact-checkboxImg.checked {
-  background-color: white;
-  border: 1px solid white;
 }
 
 .subtask-list1 {
