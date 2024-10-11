@@ -13,18 +13,34 @@ async function initBoardAddTask() {
   
 async function boardCreateTask(event) {
     event.preventDefault();
-    let task = boardCreateTaskJson();
-    let tasks = JSON.parse(sessionStorage.getItem(boardPathTasks)) || {};
-    const newTaskId = `task-${Date.now()}`;
-    tasks[newTaskId] = task;
-    sessionStorage.setItem(boardPathTasks, JSON.stringify(tasks));
-  
+    const title = document.getElementById("board-title").value.trim();
+    const description = document.getElementById("board-description").value.trim();
+    const date = document.getElementById("board-date").value;
+    const category = document.getElementById("board-category").value;
+    
+    if (!title || !date || !category) {
+        alert('Bitte füllen Sie alle erforderlichen Felder (Titel, Fälligkeitsdatum, Kategorie) aus.');
+        return;
+    }
+    const newTask = {
+        title: title,
+        description: description,
+        assignment: boardAssignedContacts.join(","),
+        date: date,
+        priority: boardPriority,
+        category: category,
+        subtasks: JSON.stringify(boardSubtasks),
+        state: "open"
+    };
+
     try {
-      await postData(boardPathTasks, tasks);
-      renderCards();
-      closeBoardAddTaskForm();
+        await postData('tasks', newTask);
+        alert("Aufgabe erfolgreich erstellt und in Firebase gespeichert.");
+        renderCards();
+        closeBoardAddTaskForm();
+        window.open("../board/board.html");
     } catch (error) {
-      console.error("Fehler beim Speichern der Aufgabe in Firebase:", error);
+        console.error("Fehler beim Speichern der Aufgabe in Firebase:", error);
     }
 }
 

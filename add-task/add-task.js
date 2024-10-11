@@ -60,21 +60,51 @@ function createTaskJson() {
     date: getDate(),
     priority: priority,
     category: getCategory(),
-    subtasks: JSON.stringify(subtasks),
-    state: "open",
+    subtasks: subtasks.length > 0 ? JSON.stringify(subtasks) : "[]",
+    state: "open"
   };
   return task;
 }
 
 async function createTask(event) {
   event.preventDefault();
-  let task = createTaskJson();
+  const title = getTitle();
+  const date = getDate();
+  const category = getCategory();
+  const description = getDescription();
+  if (!title || !date || !category) {
+    alert("Bitte füllen Sie alle erforderlichen Felder (Titel, Fälligkeitsdatum, Kategorie) aus.");
+    return;
+  }
+  let formattedSubtasks = [];
+  if (Array.isArray(subtasks) && subtasks.length > 0) {
+    formattedSubtasks = JSON.stringify(subtasks);
+  } else {
+    formattedSubtasks = "[]";
+  }
+  let formattedAssignedContacts = "";
+  if (Array.isArray(assignedContacts) && assignedContacts.length > 0) {
+    formattedAssignedContacts = assignedContacts.join(",");
+  } else {
+    formattedAssignedContacts = "";
+  }
+  const selectedPriority = priority || null;
+  const newTask = {
+    title: title,
+    description: description,
+    assignment: formattedAssignedContacts,
+    date: date,
+    priority: selectedPriority,
+    category: category,
+    subtasks: formattedSubtasks,
+    state: "open"
+  };
   try {
-    let json = await postData(pathTasks, task);
-    event.target.submit();
+    await postData(pathTasks, newTask);
+    alert("Aufgabe erfolgreich erstellt und in Firebase gespeichert.");
     window.open("../board/board.html");
   } catch (error) {
-    console.error("Error while sending data:", error);
+    console.error("Fehler beim Senden der Daten:", error);
   }
 }
 

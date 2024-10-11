@@ -90,7 +90,7 @@ function renderCheckboxes() {
       <label for="${id}">
         <span class="initials-span">${initials}</span>
         <span>${contacts[id]["firstName"]} ${contacts[id]["lastName"]}</span>
-        <input type="checkbox" id="${id}" onclick="assignContacts(event)">
+        <input type="checkbox" class="assigned-checkbox" id="${id}" onclick="assignContacts(event)">
       </label>
     `;
     checkboxState(id, initials);
