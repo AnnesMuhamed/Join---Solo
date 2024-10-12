@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 .radio-button-group {
   display: flex;
   gap: 16px;
@@ -11,8 +15,8 @@
 .radio-label {
   display: flex;
   padding: 16px 10px 16px 10px;
-  width: 116px;
-  height: 24px;
+  width: 136px;
+  height: 56px;
   cursor: pointer;
   align-items: center;
   justify-content: space-evenly;

@@ -19,10 +19,8 @@
   border: 1px solid #dadada;
   border-radius: 10px;
   background-color: white;
-  z-index: 1;
-  height: 22%;
+  height: 240px;
   width: 100%;
-  max-width: 440px;
   overflow-y: auto;
 }
 

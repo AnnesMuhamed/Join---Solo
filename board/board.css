@@ -470,18 +470,6 @@ body.modal-open {
 }
 
 /* Add task + POPUP */
-  
-.checkboxes-container {
-    display: none;
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #fff;
-    position: absolute;
-    z-index: 1000;
-    max-height: 200px;
-    overflow-y: auto;
-}
-  
 .checkbox-label {
     display: flex;
     align-items: center;

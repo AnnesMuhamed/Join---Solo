@@ -1,13 +1,6 @@
-document.addEventListener('DOMContentLoaded', function() {
-	onloadFunction()
-});
-
-
-let alphabetSections = [];
-const colors = [
-    '#FF7A00', '#9327FF', '#6E52FF', '#FC71FF', '#FFBB2B',
-    '#1FD7C1', '#462F8A', '#FF4646', '#00BEE8'
-];
+function initContact() {
+    onloadFunction()
+}
 
 async function onloadFunction() {
     await renderContacts();
@@ -28,14 +21,15 @@ async function renderContacts() {
     let currentLetter = '';
 
     let contactsArray = Object.entries(contacts).map(([id, contact]) => ({ id, ...contact }));
-    contactsArray = contactsArray.filter(contact => contact && contact.lastName);
-    contactsArray.sort((a, b) => a.lastName.localeCompare(b.lastName));
+    contactsArray = contactsArray.filter(contact => contact && contact.firstName);
+    contactsArray.sort((a, b) => a.firstName.localeCompare(b.firstName));
 
-    alphabetSections = [];
+    let alphabetSections = [];
 
     for (let i = 0; i < contactsArray.length; i++) {
         let contact = contactsArray[i];
-        let firstLetter = contact.lastName.charAt(0).toUpperCase();
+        let firstLetter = contact.firstName.charAt(0).toUpperCase();
+        
         if (firstLetter !== currentLetter) {
             if (currentLetter !== '') {
                 alphabetSections.push(`<div class="separator"></div>`);
@@ -47,7 +41,7 @@ async function renderContacts() {
                 </div>
             `);
         }
-        let color = colors[i % colors.length];
+        let color = contact.color;
         alphabetSections.push(`
             <div class="contact-item" data-id="${contact.id}" data-first-name="${contact.firstName}" data-last-name="${contact.lastName}" data-username="${contact.username}" data-phone="${contact.phone}" data-color="${color}" onclick="highlightContact(this); contactPopUp('${contact.id}', '${contact.firstName}', '${contact.lastName}', '${contact.username}', '${contact.phone}', '${color}')">
                 <div class="initials-container" style="background-color: ${color};">${getInitials(contact.firstName, contact.lastName)}</div>
@@ -272,6 +266,4 @@ function closeContactPopUp() {
 function togglePopupOption() {
     document.getElementById("popup-button").classList.toggle("show");
 }
-
-document.addEventListener('DOMContentLoaded', onloadFunction);
 

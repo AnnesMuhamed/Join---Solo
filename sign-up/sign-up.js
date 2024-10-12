@@ -1,4 +1,11 @@
-document.addEventListener('DOMContentLoaded', init);
+const predefinedColors = [
+    '#6E52FF', '#FF5EB3', '#FF7A00', '#1FD7C1', '#00BEE8', '#9327FF', '#FC71FF',
+    '#FFA35E', '#FF745E', '#C3FF2B', '#0038FF', '#FFC701', '#FFBB2B', '#FF4646', '#FFE62B'
+];
+
+function initSignUp() {
+    signUpInnerHTML();
+}
 
 function showCustomAlert(message) {
     document.getElementById('alert-message').textContent = message;
@@ -6,36 +13,19 @@ function showCustomAlert(message) {
     alertElement.style.display = 'flex';
     alertElement.style.animation = 'slide-up 0.5s forwards 800ms';
 
-    document.getElementById('userStoryCard').classList.add('show');
-    document.getElementById('overlay').style.display = 'block';
-    document.body.classList.add('modal-open');
-
     setTimeout(() => {
         alertElement.style.display = 'none';
     }, 2000);
 }
 
-function showCustomAlert(message) {
-    document.getElementById('alert-message').textContent = message;
-    const alertElement = document.getElementById('custom-alert');
-    alertElement.style.display = 'flex';
-    alertElement.style.animation = 'slide-up 0.5s forwards, fade-in 0.5s forwards 800ms';
-
-    setTimeout(() => {
-        alertElement.style.display = 'none';
-    }, 2000);
-}
-
-function init() {
+function signUpInnerHTML() {
     let signUp = document.getElementById('sectionSignUp');
-
     signUp.innerHTML = `
     <div class="logo-container">
         <img src="../img/loginLogo.png" alt="Logo" class="main-logo">
     </div>
 
     <div class="container">
-        
         <div class="header-container">
             <a href="../index.html">    
                 <img src="../img/arrow-left-line.png" alt="Zurück" class="back-arrow">
@@ -54,7 +44,7 @@ function init() {
                 <img src="../img/person.png" alt="Name Icon" class="input-icon">
             </label>
             <label class="input-container">
-                <input type="email" id="email" placeholder="Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$" required>
+                <input type="email" id="email" placeholder="Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" required>
                 <img src="../img/mail.png" alt="Email Icon" class="input-icon">
             </label>
             <label class="input-container">
@@ -65,130 +55,48 @@ function init() {
                 <input type="password" id="confirm-password" class="signup-password" placeholder="Confirm Password" minlength="4" required>
                 <img src="../img/lock.png" alt="Password Icon" class="input-icon">
             </label>
-            
         </form>
         <div class="checkbox-container">
                 <input type="checkbox" id="accept-policy" class="checkbox-hover-design" required>
                 <label for="accept-policy">I accept the <a href="../privacy-policy/privacy-policy.html" class="privacy-policy checkbox-hover-design">Privacy policy</a></label>
             </div>
-            <button type="submit" class="sign-up-button">Sign Up</button>
+            <button class="sign-up-button" onclick="handleSignUp()">Sign Up</button>
     </div>
     <div class="link-container">
         <a class="policy-notice" href="#">Privacy Policy</a>
         <a class="policy-notice" href="#">Legal notice</a>
     `;
-
-    const signUpForm = document.getElementById('sign-up-form');
-    signUpForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const name = document.getElementById('first-name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
-        const confirmPassword = document.getElementById('confirm-password').value.trim();
-
-        if (password !== confirmPassword) {
-            showCustomAlert("Passwort stimmt nicht überein");
-            return;
-        }
-
-        const [firstName, ...lastNameParts] = name.split(' ');
-        const lastName = lastNameParts.join(' ');
-
-        if (!lastName) {
-            showCustomAlert('Bitte geben Sie sowohl Vor- als auch Nachnamen ein');
-            return;
-        }
-
-        await createUser(firstName, lastName, email, password);
-        showCustomAlert("You Signed Up successfully");
-        setTimeout(() => {
-            window.location.href = '../index.html';
-        }, 2000);
-    });
 }
 
+async function handleSignUp() {
+    const name = document.getElementById('first-name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const confirmPassword = document.getElementById('confirm-password').value.trim();
 
+    if (password !== confirmPassword) {
+        showCustomAlert("Passwort stimmt nicht überein");
+        return;
+    }
 
-function init() {
-    let signUp = document.getElementById('sectionSignUp');
+    const [firstName, ...lastNameParts] = name.split(' ');
+    const lastName = lastNameParts.join(' ');
 
-    signUp.innerHTML = `
-    <div class="logo-container">
-        <img src="../img/loginLogo.png" alt="Logo" class="main-logo">
-    </div>
+    if (!lastName) {
+        showCustomAlert('Bitte geben Sie sowohl Vor- als auch Nachnamen ein');
+        return;
+    }
+    const randomColor = predefinedColors[Math.floor(Math.random() * predefinedColors.length)];
 
-    <div class="container">
-        <div class="header-container">
-        <a href="../index.html">    
-        <img src="../img/arrow-left-line.png" alt="Zurück" class="back-arrow">
-        </a>
-            <div class="header">
-                Sign Up
-            </div>
-        </div>
-        <div class="divider"></div>
-        <form id="sign-up-form" class="form">
-            <label class="input-container">
-                <input type="text" id="first-name" placeholder="First Name Last Name" minlength="2" required>
-                <img src="../img/person.png" alt="Name Icon" class="input-icon">
-            </label>
-            <label class="input-container">
-                <input type="email" id="email" placeholder="Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" required>
-                <img src="../img/mail.png" alt="Email Icon" class="input-icon">
-            </label>
-            <label class="input-container">
-                <input type="password" id="password" placeholder="Password" minlength="4" required>
-                <img src="../img/lock.png" alt="Password Icon" class="input-icon">
-            </label>
-            <label class="input-container">
-                <input type="password" id="confirm-password" placeholder="Confirm Password" minlength="4" required>
-                <img src="../img/lock.png" alt="Password Icon" class="input-icon">
-            </label>
-            <div class="checkbox-container">
-                <input type="checkbox" id="accept-policy" class="checkbox-hover-design" required>
-                <label for="accept-policy">I accept the <a href="../privacy-policy/privacy-policy.html" class="privacy-policy checkbox-hover-design">Privacy policy</a></label>
-            </div>
-            <button type="submit" class="sign-up-button">Sign Up</button>
-        </form>
-    </div>
-    <div class="link-container">
-        <a class="policy-notice" href="#">Privacy Policy</a>
-        <a class="policy-notice" href="#">Legal notice</a>
-    </div>
-    `;
-
-    const signUpForm = document.getElementById('sign-up-form');
-    signUpForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const name = document.getElementById('first-name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
-        const confirmPassword = document.getElementById('confirm-password').value.trim();
-
-        if (password !== confirmPassword) {
-            alert("Passwort stimmit nicht überein");
-            return;
-        }
-
-        const [firstName, ...lastNameParts] = name.split(' ');
-        const lastName = lastNameParts.join(' ');
-
-        if (!lastName) {
-            alert('Bitte geben Sie sowohl Vor- als auch Nachnamen ein');
-            return;
-        }
-
-        await createUser(firstName, lastName, email, password);
-        alert("Benutzer erfolgreich erstellt!");
+    await createUser(firstName, lastName, email, password, randomColor);
+    showCustomAlert("You Signed Up successfully");
+    setTimeout(() => {
         window.location.href = '../index.html';
-    });
+    }, 2000);
 }
 
-async function createUser(firstName, lastName, email, password) {
-    const newUser = { firstName, lastName, username: email, password };
+async function createUser(firstName, lastName, email, password, color) {
+    const newUser = { firstName, lastName, username: email, password, color };
     await postData('user', newUser);
     await postData('contacts', newUser);
 }
-
