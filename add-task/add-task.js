@@ -46,17 +46,24 @@ function getCategory() {
 
 function verticalSeparator(width, height, stroke) {
   return `
-		<svg width="${width}" height="${height}">
-			<line x1="0" y1="0" x2="0" y2="${height}" stroke="${stroke}" stroke-width="1"/>
-		</svg>
-	`;
+    <svg width="${width}" height="${height}">
+      <line x1="0" y1="0" x2="0" y2="${height}" stroke="${stroke}" stroke-width="1"/>
+    </svg>
+  `;
 }
 
 function createTaskJson() {
+  let assignedContactsDetails = assignedContacts.map(contactId => {
+    return {
+      id: contactId,
+      color: contacts[contactId].color || "#000000"
+    };
+  });
+
   let task = {
     title: getTitle(),
     description: getDescription(),
-    assignment: assignedContacts,
+    assignment: assignedContactsDetails,
     date: getDate(),
     priority: priority,
     category: getCategory(),
@@ -76,18 +83,20 @@ async function createTask(event) {
     alert("Bitte füllen Sie alle erforderlichen Felder (Titel, Fälligkeitsdatum, Kategorie) aus.");
     return;
   }
+
   let formattedSubtasks = [];
   if (Array.isArray(subtasks) && subtasks.length > 0) {
-    formattedSubtasks = JSON.stringify(subtasks);
-  } else {
-    formattedSubtasks = "[]";
+    formattedSubtasks = subtasks;
   }
-  let formattedAssignedContacts = "";
+
+  let formattedAssignedContacts = [];
   if (Array.isArray(assignedContacts) && assignedContacts.length > 0) {
-    formattedAssignedContacts = assignedContacts.join(",");
-  } else {
-    formattedAssignedContacts = "";
+    formattedAssignedContacts = assignedContacts.map(contactId => ({
+      id: contactId,
+      color: contacts[contactId].color || "#000000"
+    }));
   }
+
   const selectedPriority = priority || null;
   const newTask = {
     title: title,
@@ -156,4 +165,3 @@ function clearForm() {
   clearCheckboxes();
   clearDivs();
 }
-

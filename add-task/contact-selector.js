@@ -48,6 +48,7 @@ function assignContacts(event) {
       newSpan.className = "initials-span";
       newSpan.id = `${checkboxId}-${initials}`;
       newSpan.textContent = initials;
+      newSpan.style.backgroundColor = contacts[checkboxId].color; 
       assignments.appendChild(newSpan);
       addContacts(checkboxId);
     }
@@ -86,9 +87,10 @@ function renderCheckboxes() {
     if (!filterCheckboxes(id)) {
       continue;
     }
+    let color = contacts[id].color; // Farbe aus Firebase laden
     checkboxes.innerHTML += `
       <label for="${id}">
-        <span class="initials-span">${initials}</span>
+        <span class="initials-span" style="background-color: ${color};">${initials}</span>
         <span>${contacts[id]["firstName"]} ${contacts[id]["lastName"]}</span>
         <input type="checkbox" class="assigned-checkbox" id="${id}" onclick="assignContacts(event)">
       </label>

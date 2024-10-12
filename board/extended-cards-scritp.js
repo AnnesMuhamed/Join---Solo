@@ -144,9 +144,10 @@ function loadAssignees(task, assigneeContainer) {
   assignedContacts.forEach((contactId) => {
     let currentContact = contacts[contactId];
     if (currentContact) {
+      let contactColor = currentContact.color || "#000000"; // Verwende die gespeicherte Farbe oder Standardfarbe Schwarz
       assigneeContainer.innerHTML += `
         <div class="assignee-underContainer">
-          <div class="assignee-initials" style="background-color:${getRandomColor()}">
+          <div class="assignee-initials" style="background-color:${contactColor}">
             ${getAssignedContactInitials(currentContact.firstName, currentContact.lastName)}
           </div>
           <span class="assignee-name">${currentContact.firstName} ${currentContact.lastName}</span>
@@ -638,14 +639,12 @@ function renderCheckboxesWithColors() {
     let initials = getContactInitials(id); 
     let isChecked = selectedContacts.has(id);
 
-    if (!initialColors[id]) {
-      initialColors[id] = getRandomColor();
-    }
-    let randomColor = initialColors[id];
+    // Die Farbe des Kontakts wird aus den Kontaktdaten geladen
+    let contactColor = contact.color || "#000000"; // Verwende eine Standardfarbe, falls keine Farbe vorhanden ist
     let checkboxHTML = /*html*/` 
       <label class="popup-toggle-contacts ${isChecked ? 'highlighted' : ''}" onclick="popupHighlightContact(this, '${id}');">
         <div class="initials-names-toggle">
-          <span class="initials-span" id="initials-${id}" style="background-color:${randomColor};">${initials}</span>
+          <span class="initials-span" id="initials-${id}" style="background-color:${contactColor};">${initials}</span>
           <span class="popup-toggle-contact-names">${contact.firstName} ${contact.lastName}</span>
         </div>
         <input type="checkbox" id="checkbox-${id}" ${isChecked ? 'checked' : ''} style="display:none;">
@@ -692,7 +691,7 @@ function updateAssignedContacts() {
     const contact = contacts[id];
     if (contact) {
       let initials = getContactInitials(id);
-      let assignedColor = initialColors[id];  
+      let assignedColor = contact.color || "#000000";  // Verwende die Farbe aus den Kontaktdaten oder eine Standardfarbe
 
       assignedDiv.innerHTML += `<span class="initials-popup-span" id="assigned-${id}" style="background-color:${assignedColor};">${initials}</span>`;
     }

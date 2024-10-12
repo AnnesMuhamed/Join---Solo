@@ -37,15 +37,6 @@ async function sessionStoreTasks() {
   sessionStorage.setItem("tasks", JSON.stringify(tasksJson));
 }
 
-function getRandomColor() {
-  let letters = "0123456789ABCDEF";
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
-
 function getAssignedContactInitials(firstName, lastName) {
   return `${firstName.charAt(0)}${lastName.charAt(0)}`;
 }
@@ -68,21 +59,21 @@ function getContact(key, assignedContactsIds) {
   let contacts = JSON.parse(sessionStorage.getItem("contacts"));
   let assignedContacts = assignedContactsIds.split(",");
   let brokenContacts = [];
+  let resultContacts = [];
+
   for (let n = 0; n < assignedContacts.length; n++) {
     let currentContact = contacts[`${assignedContacts[n]}`];
     if (!currentContact) {
       brokenContacts.push(assignedContacts[n]);
       removeBrokenContact(key, assignedContacts[n]);
     } else {
-      assignedContacts[n] = `${getAssignedContactInitials(
-        currentContact["firstName"],
-        currentContact["lastName"]
-      )}`;
+      resultContacts.push({
+        initials: getAssignedContactInitials(currentContact["firstName"], currentContact["lastName"]),
+        color: currentContact.color || "#000000"
+      });
     }
   }
-  return assignedContacts.filter(
-    (contact) => !brokenContacts.includes(contact)
-  );
+  return resultContacts;
 }
 
 function formatDate(dateString) {
@@ -263,17 +254,17 @@ function createAssignedContactsContainer(key) {
 
 function createAssignedContacts(key, task) {
   let assignedContactsContainer = document.getElementById(`${key}-assigned-contacts`);
-  
+
   if (task["assignment"] !== "") {
     let assignedContacts = getContact(key, task["assignment"]);
     let contactCount = assignedContacts.length;
 
-    assignedContacts.slice(0, 4).forEach((initial) => {
+    assignedContacts.slice(0, 4).forEach((contact) => {
       let assignedContactsSpan = document.createElement("span");
-      assignedContactsSpan.id = `${key}-${initial}`;
+      assignedContactsSpan.id = `${key}-${contact.initials}`;
       assignedContactsSpan.className = "initials-span";
-      assignedContactsSpan.style.backgroundColor = getRandomColor();
-      assignedContactsSpan.textContent = `${initial}`;
+      assignedContactsSpan.style.backgroundColor = contact.color;
+      assignedContactsSpan.textContent = `${contact.initials}`;
       assignedContactsContainer.appendChild(assignedContactsSpan);
     });
 

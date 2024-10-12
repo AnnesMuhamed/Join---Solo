@@ -71,47 +71,50 @@ function renderBoardCheckboxes() {
     const contacts = JSON.parse(sessionStorage.getItem("contacts"));
 
     if (!contacts) {
-      console.error("Kontakte konnten nicht aus dem Session Storage geladen werden.");
-      return;
+        console.error("Kontakte konnten nicht aus dem Session Storage geladen werden.");
+        return;
     }
 
     const checkboxes = document.getElementById("board-checkboxes");
     checkboxes.innerHTML = "";
 
     for (let id in contacts) {
-      const contact = contacts[id];
-      const initials = `${contact.firstName.charAt(0)}${contact.lastName.charAt(0)}`;
-      const fullName = `${contact.firstName} ${contact.lastName}`;
+        const contact = contacts[id];
+        const initials = `${contact.firstName.charAt(0)}${contact.lastName.charAt(0)}`;
+        const fullName = `${contact.firstName} ${contact.lastName}`;
+        const contactColor = contact.color || "#000000";
 
-      const checkboxLabel = document.createElement("label");
-      checkboxLabel.className = "checkbox-label";
-      checkboxLabel.htmlFor = id;
+        const checkboxLabel = document.createElement("label");
+        checkboxLabel.className = "checkbox-label";
+        checkboxLabel.htmlFor = id;
 
-      const spanInitials = document.createElement("span");
-      spanInitials.className = "initials-span board-task";
-      spanInitials.textContent = initials;
+        const spanInitials = document.createElement("span");
+        spanInitials.className = "initials-span board-task";
+        spanInitials.textContent = initials;
+        spanInitials.style.backgroundColor = contactColor;
 
-      const spanFullName = document.createElement("span");
-      spanFullName.className = "contact-name";
-      spanFullName.textContent = fullName;
+        const spanFullName = document.createElement("span");
+        spanFullName.className = "contact-name";
+        spanFullName.textContent = fullName;
 
-      const checkbox = document.createElement("div");
-      checkbox.className = "custom-checkbox";
-      checkbox.id = `checkbox-${id}`;
+        const checkbox = document.createElement("div");
+        checkbox.className = "custom-checkbox";
+        checkbox.id = `checkbox-${id}`;
 
-      if (boardAssignedContacts.includes(id)) {
-        checkbox.classList.add("checked");
-        checkboxLabel.classList.add("checked");
-      }
+        if (boardAssignedContacts.includes(id)) {
+            checkbox.classList.add("checked");
+            checkboxLabel.classList.add("checked");
+        }
 
-      checkbox.onclick = (event) => boardAssignContacts(event, id);
+        checkbox.onclick = (event) => boardAssignContacts(event, id);
 
-      checkboxLabel.appendChild(spanInitials);
-      checkboxLabel.appendChild(spanFullName);
-      checkboxLabel.appendChild(checkbox);
-      checkboxes.appendChild(checkboxLabel);
+        checkboxLabel.appendChild(spanInitials);
+        checkboxLabel.appendChild(spanFullName);
+        checkboxLabel.appendChild(checkbox);
+        checkboxes.appendChild(checkboxLabel);
     }
 }
+
 
 function boardToggleCheckboxes() {
     const checkboxes = document.getElementById("board-checkboxes");
@@ -136,6 +139,7 @@ function boardAssignContacts(event, id) {
     const assignmentsContainer = document.getElementById("board-assigned-contacts");
     const contacts = JSON.parse(sessionStorage.getItem("contacts"));
     const initials = `${contacts[id].firstName.charAt(0)}${contacts[id].lastName.charAt(0)}`;
+    const contactColor = contacts[id].color || "#000000"; 
 
     if (!Array.isArray(boardAssignedContacts)) {
         boardAssignedContacts = [];
@@ -145,7 +149,7 @@ function boardAssignContacts(event, id) {
         checkbox.classList.remove("checked");
         label.classList.remove("checked");
         document.getElementById(`assigned-${id}`).remove();
-        removeBoardContacts(id);
+        removeBoardContact(id);
     } else {
         checkbox.classList.add("checked");
         label.classList.add("checked");
@@ -157,7 +161,7 @@ function boardAssignContacts(event, id) {
             newSpan.className = "initials-span board-task";
             newSpan.id = `assigned-${id}`;
             newSpan.textContent = initials;
-            newSpan.style.backgroundColor = getRandomColor();
+            newSpan.style.backgroundColor = contactColor;
             assignmentsContainer.appendChild(newSpan);
         }
     }
@@ -409,37 +413,39 @@ function boardFilterCheckboxes() {
     const contacts = JSON.parse(sessionStorage.getItem("contacts"));
     const checkboxes = document.getElementById("board-checkboxes");
     checkboxes.innerHTML = "";
-  
+
     for (let id in contacts) {
-      const contact = contacts[id];
-      const fullName = `${contact.firstName.toLowerCase()} ${contact.lastName.toLowerCase()}`;
-  
-      if (fullName.includes(filterValue)) {
-        const initials = `${contact.firstName.charAt(0)}${contact.lastName.charAt(0)}`;
-        const fullNameDisplay = `${contact.firstName} ${contact.lastName}`;
-  
-        const checkboxLabel = document.createElement("label");
-        checkboxLabel.className = "checkbox-label";
-        checkboxLabel.htmlFor = id;
-  
-        const spanInitials = document.createElement("span");
-        spanInitials.className = "initials-span board-task";
-        spanInitials.textContent = initials;
-  
-        const spanFullName = document.createElement("span");
-        spanFullName.className = "contact-name";
-        spanFullName.textContent = fullNameDisplay;
-  
-        const checkbox = document.createElement("div");
-        checkbox.className = "custom-checkbox";
-        checkbox.id = `checkbox-${id}`;
-        checkbox.onclick = () => boardAssignContacts(event, id);
-  
-        checkboxLabel.appendChild(spanInitials);
-        checkboxLabel.appendChild(spanFullName);
-        checkboxLabel.appendChild(checkbox);
-        checkboxes.appendChild(checkboxLabel);
-      }
+        const contact = contacts[id];
+        const fullName = `${contact.firstName.toLowerCase()} ${contact.lastName.toLowerCase()}`;
+
+        if (fullName.includes(filterValue)) {
+            const initials = `${contact.firstName.charAt(0)}${contact.lastName.charAt(0)}`;
+            const fullNameDisplay = `${contact.firstName} ${contact.lastName}`;
+            const contactColor = contact.color || "#000000";
+
+            const checkboxLabel = document.createElement("label");
+            checkboxLabel.className = "checkbox-label";
+            checkboxLabel.htmlFor = id;
+
+            const spanInitials = document.createElement("span");
+            spanInitials.className = "initials-span board-task";
+            spanInitials.textContent = initials;
+            spanInitials.style.backgroundColor = contactColor;
+
+            const spanFullName = document.createElement("span");
+            spanFullName.className = "contact-name";
+            spanFullName.textContent = fullNameDisplay;
+
+            const checkbox = document.createElement("div");
+            checkbox.className = "custom-checkbox";
+            checkbox.id = `checkbox-${id}`;
+            checkbox.onclick = (event) => boardAssignContacts(event, id);
+
+            checkboxLabel.appendChild(spanInitials);
+            checkboxLabel.appendChild(spanFullName);
+            checkboxLabel.appendChild(checkbox);
+            checkboxes.appendChild(checkboxLabel);
+        }
     }
 }
 
