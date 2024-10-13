@@ -25,46 +25,49 @@ function signUpInnerHTML() {
         <img src="../img/loginLogo.png" alt="Logo" class="main-logo">
     </div>
 
-    <div class="container">
-        <div class="header-container">
-            <a href="../index.html">    
-                <img src="../img/arrow-left-line.png" alt="Zurück" class="back-arrow">
-            </a>
-            <div class="header">
-                Sign Up
+    <div class="signup-container">
+        <div class="form-container">
+            <div class="header-container">
+                <a href="../index.html">    
+                    <img src="../img/arrow-left-line.png" alt="Zurück" class="back-arrow">
+                </a>
+                <div class="header">
+                    Sign Up
+                </div>
+                <div class="divider">
+                    <img class="blue-line" src="./img/Vector 5.png" alt="">
+                </div>
             </div>
-            <div class="divider">
-                <img class="blue-line" src="./img/Vector 5.png" alt="">
-            </div>
+            
+            <form id="sign-up-form" class="form">
+                <label class="input-container">
+                    <input type="text" id="first-name" placeholder="First Name Last Name" minlength="2" required>
+                    <img src="../img/person.png" alt="Name Icon" class="input-icon">
+                </label>
+                <label class="input-container">
+                    <input type="email" id="email" placeholder="Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" required>
+                    <img src="../img/mail.png" alt="Email Icon" class="input-icon">
+                </label>
+                <label class="input-container">
+                    <input type="password" id="password" placeholder="Password" minlength="4" required>
+                    <img src="../img/lock.png" alt="Password Icon" class="input-icon">
+                </label>
+                <label class="input-container">
+                    <input type="password" id="confirm-password" class="signup-password" placeholder="Confirm Password" minlength="4" required>
+                    <img src="../img/lock.png" alt="Password Icon" class="input-icon">
+                </label>
+            </form>
+            <div class="checkbox-container">
+                    <input type="checkbox" id="accept-policy" class="checkbox-hover-design" required>
+                    <label for="accept-policy">I accept the <a href="../privacy-policy/privacy-policy.html" class="privacy-policy checkbox-hover-design">Privacy policy</a></label>
+                </div>
+                <button class="sign-up-button" onclick="handleSignUp()">Sign Up</button>
         </div>
-        
-        <form id="sign-up-form" class="form">
-            <label class="input-container">
-                <input type="text" id="first-name" placeholder="First Name Last Name" minlength="2" required>
-                <img src="../img/person.png" alt="Name Icon" class="input-icon">
-            </label>
-            <label class="input-container">
-                <input type="email" id="email" placeholder="Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" required>
-                <img src="../img/mail.png" alt="Email Icon" class="input-icon">
-            </label>
-            <label class="input-container">
-                <input type="password" id="password" placeholder="Password" minlength="4" required>
-                <img src="../img/lock.png" alt="Password Icon" class="input-icon">
-            </label>
-            <label class="input-container">
-                <input type="password" id="confirm-password" class="signup-password" placeholder="Confirm Password" minlength="4" required>
-                <img src="../img/lock.png" alt="Password Icon" class="input-icon">
-            </label>
-        </form>
-        <div class="checkbox-container">
-                <input type="checkbox" id="accept-policy" class="checkbox-hover-design" required>
-                <label for="accept-policy">I accept the <a href="../privacy-policy/privacy-policy.html" class="privacy-policy checkbox-hover-design">Privacy policy</a></label>
-            </div>
-            <button class="sign-up-button" onclick="handleSignUp()">Sign Up</button>
     </div>
     <div class="link-container">
         <a class="policy-notice" href="#">Privacy Policy</a>
         <a class="policy-notice" href="#">Legal notice</a>
+    </div>
     `;
 }
 

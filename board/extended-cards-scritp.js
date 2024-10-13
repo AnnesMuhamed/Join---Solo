@@ -564,22 +564,22 @@ async function saveEditedTask(taskId) {
   createOrUpdateProgressBar(taskId);
 }
 
-
-
 function closePopup() {
   document.querySelector(".popup-container").classList.remove("show");
 }
 
-function deleteTask() {
-  let popup = document.getElementById("popup");
-  let taskKey = popup.dataset.taskKey;
-
+async function deleteTask(taskId) {
   if (confirm("Are you sure you want to delete this task?")) {
-    let tasks = JSON.parse(sessionStorage.getItem("tasks"));
-    delete tasks[taskKey];
-    sessionStorage.setItem("tasks", JSON.stringify(tasks));
-    closePopup();
-    renderCards();
+      try {
+          await deleteData(`tasks/${taskId}`);
+          let tasks = JSON.parse(sessionStorage.getItem("tasks"));
+          delete tasks[taskId];
+          sessionStorage.setItem("tasks", JSON.stringify(tasks));
+          closePopup();
+          renderCards();
+      } catch (error) {
+          console.error("Fehler beim Löschen der Aufgabe:", error);
+      }
   }
 }
 
@@ -609,7 +609,7 @@ function renderInfoPopup(taskId){
             </div>
           </div>
           <div class="popup-actions">
-            <button class="action-button" onclick="deleteTask()"><img src="../img/delete.png" alt="Delete" class="action-icon" /><span class="action-label">Delete</span></button>
+            <button class="action-button" onclick="deleteTask('${taskId}')"><img src="../img/delete.png" alt="Delete" class="action-icon" /><span class="action-label">Delete</span></button>
             <img src="../img/high-stroke-gray.png" alt="Separator" class="action-separator" />
             <button class="action-button" onclick="editTask('${taskId}')"><img src="../img/edit-black.png" alt="Edit" class="action-icon" /><span class="action-label">Edit</span></button>
         </div>`;
@@ -638,9 +638,7 @@ function renderCheckboxesWithColors() {
     let contact = contacts[id];
     let initials = getContactInitials(id); 
     let isChecked = selectedContacts.has(id);
-
-    // Die Farbe des Kontakts wird aus den Kontaktdaten geladen
-    let contactColor = contact.color || "#000000"; // Verwende eine Standardfarbe, falls keine Farbe vorhanden ist
+    let contactColor = contact.color || "#000000";
     let checkboxHTML = /*html*/` 
       <label class="popup-toggle-contacts ${isChecked ? 'highlighted' : ''}" onclick="popupHighlightContact(this, '${id}');">
         <div class="initials-names-toggle">
@@ -691,7 +689,7 @@ function updateAssignedContacts() {
     const contact = contacts[id];
     if (contact) {
       let initials = getContactInitials(id);
-      let assignedColor = contact.color || "#000000";  // Verwende die Farbe aus den Kontaktdaten oder eine Standardfarbe
+      let assignedColor = contact.color || "#000000";
 
       assignedDiv.innerHTML += `<span class="initials-popup-span" id="assigned-${id}" style="background-color:${assignedColor};">${initials}</span>`;
     }

@@ -1,10 +1,12 @@
 body {
+    background: #F6F7F8;
+}
+
+* {
     padding: 0;
-    margin: auto;
+    margin: 0;
     font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
-    max-width: 1440px;
-    max-height: 1024px;
+    box-sizing: border-box;
 }
 
 #sectionSignUp {
@@ -12,17 +14,15 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: 1440px;
-    height: 1024px;
-    background: #F6F7F8;
+    height: 100svh;
 }
 
 .logo-container {
-    display: flex;
-    align-items: flex-start;
-    width: 1360px;
-    height: 121.97px;
-    margin-left: 77px;
+    position: absolute;
+    top: 80px;
+    left: 70px;
+    width: 100px;
+    height: 122px;
 }
 
 .main-logo {
@@ -30,33 +30,39 @@ body {
     height: 121.97px;
 }
 
-.container {
+.signup-container {
+    width: 100%;
     display: flex;
-    align-items: center;
-    flex-direction: column;
+    justify-content: center;
+}
+
+.form-container {
     width: 598px;
     height: 630px;
-    padding: 48px;
-    gap: 32px;
+    background-color: white;
     border-radius: 30px;
-    box-shadow: 0px 0px 14px 3px #0000000A;
-    background: #fff;
-    margin-bottom: 95px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 48px 88px 48px 88px;
+    box-shadow: 0px 0px 14px 3px #0000000a;
+    position: relative;
 }
 
 .header-container {
-    position: relative;
-    width: 100%;
-    height: 89px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 16px;
+    margin-bottom: 34px;
 }
 
 .back-arrow {
     position: absolute;
-    left: 0;
+    left: 38px;
+    top: 74px;
     width: 32px;
     height: 32px;
     cursor: pointer;
@@ -84,24 +90,18 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 24px;
-    width: 422px;
-    height: 326px;
 }
 
 .input-container {
-    display: flex;
     position: relative;
-    width: 422px;
-    height: 48px;
-    gap: 8px;
 }
 
 .input-container input {
     display: flex;
     width: 100%;
     gap: 10px;
-    height: 22px;
-    padding: 12px;
+    height: 48px;
+    padding: 12px 62px 12px 12px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
     background: #FFFFFF;
@@ -114,7 +114,7 @@ body {
     right: 22px;
     top: 50%;
     transform: translateY(-50%);
-    width: 18px;
+    width: 16px;
     height: 18px;
     pointer-events: none;
 }
@@ -122,10 +122,11 @@ body {
 .checkbox-container {
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin-top: 34px;
     gap: 8px;
-    width: 242px;
+    width: 100%;
     height: 24px;
-    padding: 22px;
 }
 
 .checkbox-container input[type="checkbox"] {
@@ -157,7 +158,7 @@ transform: scale(1.1);
     width: 126px;
     height: 55px;
     padding: 15px;
-    gap: 10px;
+    margin-top: 34px;
     border-radius: 8px;
     background: #2A3647;
     color: white;
@@ -177,16 +178,16 @@ transform: scale(1.1);
 }
 
 .link-container {
-    justify-content: center;
     display: flex;
-    position: absolute;
-    top: 949px;
-    width: 246px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
     height: 35px;
+    position: fixed;
+    bottom: 60px;
     gap: 16px;
     opacity: 0.5;
     transition: opacity 500ms ease-in-out;
-    align-items: center;
 }
 
 .policy-notice {
@@ -196,42 +197,39 @@ transform: scale(1.1);
 
 /* alert button */
 
-/* Styling für den benutzerdefinierten Alert-Container */
 .custom-alert {
-    display: none; /* Versteckt den Alert-Container standardmäßig */
-    position: fixed; /* Fixiert den Container im sichtbaren Bereich */
-    bottom: -100px; /* Startet unten */
-    left: 50%; /* Zentriert horizontal */
-    transform: translateX(-50%); /* Korrigiert die horizontale Zentrierung */
-    z-index: 1000; /* Stellt sicher, dass der Alert über anderen Elementen liegt */
-    width: 312px; /* Breite des Containers */
-    height: 74px; /* Höhe des Containers */
+    display: none;
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%); 
+    z-index: 1000;
+    width: 312px;
+    height: 74px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #2A3647; /* Hintergrundfarbe */
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1); /* Schatten */
+    background: #2A3647;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
     border-radius: 25px;
 }
 
-/* Styling für den Inhalt des benutzerdefinierten Alerts */
 .custom-alert-content {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 262px; /* Breite des Inhalts */
-    height: 24px; /* Höhe des Inhalts */
-    opacity: 0; /* Standardmäßig unsichtbar */
-    animation: fade-in 0.5s forwards; /* Einblende-Animation */
-    animation-delay: 800ms; /* Verzögerung der Einblende-Animation */
+    width: 262px;
+    height: 24px;
+    opacity: 0;
+    animation: fade-in 0.5s forwards;
+    animation-delay: 800ms;
 }
 
-/* Textstyling */
 .custom-alert-content span {
-    font-size: 20px; /* Schriftgröße */
-    font-weight: 400; /* Schriftstärke */
-    line-height: 24px; /* Zeilenhöhe */
-    text-align: left; /* Textausrichtung */
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
     color: white;
 }
 
@@ -254,18 +252,16 @@ body.modal-open {
     overflow: hidden;
 }
 
-/* Animation für das Hochrutschen des Alerts */
 @keyframes slide-up {
     from {
-        bottom: -100px; /* Startposition außerhalb des Bildschirms */
+        bottom: -100px;
     }
     to {
-        bottom: 50%; /* Endposition in der Mitte des Bildschirms */
-        transform: translate(-50%, -50%); /* Vertikale und horizontale Zentrierung */
+        bottom: 50%;
+        transform: translate(-50%, -50%);
     }
 }
 
-/* Einblende-Animation */
 @keyframes fade-in {
     from {
         opacity: 0;
