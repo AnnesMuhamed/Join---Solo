@@ -109,6 +109,14 @@ body {
     font-size: 20px;
 }
 
+input[type="text"]:focus-visible,
+input[type="email"]:focus-visible,
+input[type="password"]:focus-visible {
+  outline: none;
+  border: 2px solid #29ABE2;
+  opacity: 1;
+}
+
 .input-icon {
     position: absolute;
     right: 22px;
@@ -145,8 +153,27 @@ body {
     line-height: 19.2px;
 }
 
-.checkbox-hover-design:hover {
-transform: scale(1.1);
+.custom-checkbox {
+    display: none;
+}
+
+.checkbox-custom {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url('../img/checkbox.png');
+    background-size: cover;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.custom-checkbox:checked + label .checkbox-custom {
+    background-image: url('../img/checked.png');
+}
+
+.checkbox-custom:hover {
+    filter: brightness(0.9);
+    transform: scale(1.1);
 }
 
 .privacy-policy {
@@ -193,7 +220,14 @@ transform: scale(1.1);
 .policy-notice {
     text-decoration: none;
     color: #A8A8A8;
+    font-weight: 400;
 }
+
+.policy-notice:hover {
+    font-weight: 700;
+    color: #29ABE2;
+    opacity: 1;
+  }
 
 /* alert button */
 

@@ -39,7 +39,7 @@ function signUpInnerHTML() {
                 </div>
             </div>
             
-            <form id="sign-up-form" class="form">
+            <form id="sign-up-form" class="form" onsubmit="handleSignUp(event)">
                 <label class="input-container">
                     <input type="text" id="first-name" placeholder="First Name Last Name" minlength="2" required>
                     <img src="../img/person.png" alt="Name Icon" class="input-icon">
@@ -58,8 +58,11 @@ function signUpInnerHTML() {
                 </label>
             </form>
             <div class="checkbox-container">
-                    <input type="checkbox" id="accept-policy" class="checkbox-hover-design" required>
-                    <label for="accept-policy">I accept the <a href="../privacy-policy/privacy-policy.html" class="privacy-policy checkbox-hover-design">Privacy policy</a></label>
+                    <input type="checkbox" id="accept-policy" class="custom-checkbox" required>
+                    <label for="accept-policy">
+                        <span class="checkbox-custom"></span>
+                        I accept the <a href="../privacy-policy/privacy-policy.html" class="privacy-policy">Privacy policy</a>
+                    </label>
                 </div>
                 <button class="sign-up-button" onclick="handleSignUp()">Sign Up</button>
         </div>

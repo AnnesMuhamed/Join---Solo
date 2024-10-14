@@ -9,21 +9,22 @@ function loginPage() {
         </div>
     </div>
     <div id="login-page" class="hidden">
-        <div>
+        <div class="login-headline-container">
             <h1 class="login-headline">Log in</h1>
             <img class="blue-line" src="./img/Vector 5.png" alt="">
         </div>
-        <form id="login-form">
+        <form id="login-form" onsubmit="handleLogin(event)">
             <label class="input-container">
-                <input type="email" id="username" minlength="9" placeholder="Email" required>
+                <input type="email" id="username" minlength="9" placeholder="Email" required oninput="validateInputs()">
                 <img src="./img/mail.png" alt="Email Icon" class="input-icon">
             </label>
             <label class="input-container">
-                <input type="password" id="password" minlength="4" placeholder="Password" class="login-password" required>
+                <input type="password" id="password" minlength="4" placeholder="Password" class="login-password" required oninput="validateInputs()">
                 <img src="./img/lock.png" alt="Password Icon" class="input-icon">
             </label>
             <label class="option" for="option">
-                <input type="checkbox" name="option" id="option"> Remember me
+                <input type="checkbox" name="option" id="option" class="custom-checkbox">
+                <span class="checkbox-custom"></span> Remember me
             </label>
         
             <div class="button-container">
@@ -43,62 +44,53 @@ function loginPage() {
         <a class="policy-notice" href="../legal-notice/legal-notice-external.html">Legal notice</a>
     </div>
     `;
+}
 
-    const loginForm = document.getElementById('login-form');
+function validateInputs() {
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
     const loginButton = document.querySelector('.login-button');
 
+    if (usernameInput.value.trim() !== "" && passwordInput.value.trim() !== "") {
+        loginButton.disabled = false;
+    } else {
+        loginButton.disabled = true;
+    }
+}
 
-    function validateInputs() {
-        if (usernameInput.value.trim() !== "" && passwordInput.value.trim() !== "") {
-            loginButton.disabled = false;
-        } else {
-            loginButton.disabled = true;
+async function handleLogin(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const rememberMe = document.getElementById('option').checked;
+
+    const users = await loadData('user');
+    let userFound = null;
+
+    for (const userId in users) {
+        const user = users[userId];
+        if (user.username === email && user.password === password) {
+            userFound = { ...user, id: userId };
+            break;
         }
     }
 
-    usernameInput.addEventListener('input', validateInputs);
-    passwordInput.addEventListener('input', validateInputs);
-
-    loginForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
-        const email = usernameInput.value;
-        const password = passwordInput.value;
-        const rememberMe = document.getElementById('option').checked;
-
-
-        const users = await loadData('user');
-        let userFound = null;
-
-
-        for (const userId in users) {
-            const user = users[userId];
-            if (user.username === email && user.password === password) {
-                userFound = { ...user, id: userId };
-                break;
-            }
-        }
-
-        if (userFound) {
-
-            if (rememberMe) {
-                localStorage.setItem('loggedInUser', JSON.stringify(userFound));
-            } else {
-                sessionStorage.setItem('loggedInUser', JSON.stringify(userFound));
-            }
-            window.location.href = '../summary/summary.html';
+    if (userFound) {
+        if (rememberMe) {
+            localStorage.setItem('loggedInUser', JSON.stringify(userFound));
         } else {
-            alert('Falscher Benutzername oder Passwort');
+            sessionStorage.setItem('loggedInUser', JSON.stringify(userFound));
         }
-    });
+        window.location.href = '../summary/summary.html';
+    } else {
+        alert('Falscher Benutzername oder Passwort');
+    }
 }
 
 function initialize() {
     loginPage();
 
-   
     setTimeout(() => {
         const overlay = document.getElementById('overlay');
         const logoContainer = document.getElementById('logo-container');
@@ -118,7 +110,3 @@ function initialize() {
         darkLogo.style.display = 'block';
     }, 3000);
 }
-
-
-
-document.addEventListener('DOMContentLoaded', initialize);
