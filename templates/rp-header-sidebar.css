@@ -88,6 +88,7 @@
         align-items: center;
         justify-content: space-around;
         flex-direction: row;
+        padding: 0;
     }
 
     .menu-button-design {
