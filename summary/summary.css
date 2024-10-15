@@ -280,6 +280,12 @@ html::-webkit-scrollbar {
     transition: color 0.3s ease;
 }
 
+.urgent-stroke {
+    width: 2px;
+    height: 102px;
+    background-color: #d1d1d1;
+}
+
 .date-container {
     display: flex;
     flex-direction: column;
