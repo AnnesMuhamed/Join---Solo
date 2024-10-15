@@ -27,37 +27,41 @@
         </div>
     </section>
     <section class="content" id="content">
+        <div class="summary-headline">
+            <span class="first-headline">Join 360</span>
+            <img class="stroke-image" src="../img/high-stroke.png" alt="">
+            <span class="second-headline">Key Metrics a Glance</span>
+            <img class="blue-stroke-image" src="../img/rp-bluestroke.png" alt="">
+        </div>
         <div class="headline-cards-container">
-            <div class="summary-headline">
-                <span class="first-headline">Join 360</span>
-                <img class="stroke-image" src="../img/high-stroke.png" alt="">
-                <span class="second-headline">Key Metrics a Glance</span>
-                <img class="blue-stroke-image" src="../img/rp-bluestroke.png" alt="">
-            </div>
             <div class="summary-cards">
                 <div class="first-card-section">
-                    <div class="card-one">
-                        <div class="edit">
-                            <div class="edit-circle">
-                                <img class="edit-image" src="../img/edit.png" alt="">
+                    <a class="link-card-one" href="../board/board.html?scrollTo=Todo">
+                        <div class="card-one">
+                            <div class="edit">
+                                <div class="edit-circle">
+                                    <img class="edit-image" src="../img/edit.png" alt="">
+                                </div>
+                            </div>
+                            <div class="todo-container">
+                                <span id="open-tasks" class="todo-number"></span>
+                                <span class="todo-span">To-do</span>
                             </div>
                         </div>
-                        <div class="todo-container">
-                            <span id="open-tasks" class="todo-number"></span>
-                            <span class="todo-span">To-do</span>
-                        </div>
-                    </div>
-                    <div class="card-two">
-                        <div class="hook">
-                            <div class="hook-circle">
-                                <img class="hook-image" src="../img/hook.png" alt="">
+                    </a>
+                    <a class="link-card-two" href="../board/board.html?scrollTo=Todo">
+                        <div class="card-two">
+                            <div class="hook">
+                                <div class="hook-circle">
+                                    <img class="hook-image" src="../img/hook.png" alt="">
+                                </div>
+                            </div>
+                            <div class="done-container">
+                                <span id="done-tasks" class="done-number"></span>
+                                <span class="done-span">Done</span>
                             </div>
                         </div>
-                        <div class="done-container">
-                            <span id="done-tasks" class="done-number"></span>
-                            <span class="done-span">Done</span>
-                        </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="second-card-section">
                     <div class="card-three">
@@ -94,11 +98,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <div id="greet" class="greet">
-            <span class="gm">Good morning</span>
-            <span id="sofia" class="sofia d-none">Sofia Müller</span>
+            <div id="greet" class="greet">
+                <span class="gm">Good morning</span>
+                <span id="sofia" class="sofia d-none">Sofia Müller</span>
+            </div>
         </div>
     </section>
 </body>

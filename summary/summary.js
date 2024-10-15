@@ -43,7 +43,7 @@ function greetUser() {
 }
 
 window.onload = function () {
-  if (window.innerWidth <= 475) {
+  if (window.innerWidth <= 1280) {
     document.getElementById("sectionGreet").style.display = "flex";
     document.getElementById("content").style.display = "none";
 
@@ -53,7 +53,7 @@ window.onload = function () {
     }, 3000);
   } else {
     document.getElementById("sectionGreet").style.display = "none";
-    document.getElementById("content").style.display = "flex";
+    document.getElementById("content").style.display = "block";
   }
 };
 
