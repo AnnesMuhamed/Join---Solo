@@ -326,31 +326,42 @@ function createCard(key, taskCardsContainer, task) {
 function renderCards() {
   let tasks = JSON.parse(sessionStorage.getItem("tasks"));
   let allTaskCardsContainer = document.querySelectorAll(".drag-area");
-
   if (!allTaskCardsContainer || allTaskCardsContainer.length === 0) {
-    console.error("Es wurden keine Container mit der Klasse 'drag-area' gefunden.");
-    return;
+      console.error("Es wurden keine Container mit der Klasse 'drag-area' gefunden.");
+      return;
   }
-
   allTaskCardsContainer.forEach((column) => {
-    if (!column) {
-      console.error("Ein Container ist null. Überprüfe, ob die IDs oder Klassen korrekt gesetzt wurden.");
-    } else {
-      column.innerHTML = "";
-    }
+      if (!column) {
+          console.error("Ein Container ist null. Überprüfe, ob die IDs oder Klassen korrekt gesetzt wurden.");
+      } else {
+          column.innerHTML = "";
+      }
   });
-
+  let columns = {
+      "open": "No tasks To do",
+      "in-progress": "No tasks In Progress",
+      "closed": "No tasks Await Feedback",
+      "done": "No tasks Done"
+  };
   Object.keys(tasks).forEach((key) => {
-    let task = tasks[key];
-    let stateColumn = document.getElementById(task.state);
-    if (stateColumn) {
-      createCard(key, stateColumn, task);
-    } else {
-      console.error(`Container für Zustand ${task.state} nicht gefunden.`);
-    }
+      let task = tasks[key];
+      let stateColumn = document.getElementById(task.state);
+      if (stateColumn) {
+          createCard(key, stateColumn, task);
+      } else {
+          console.error(`Container für Zustand ${task.state} nicht gefunden.`);
+      }
+  });
+  Object.keys(columns).forEach((columnId) => {
+      let column = document.getElementById(columnId);
+      if (column && column.children.length === 0) {
+          let emptyContainer = document.createElement("div");
+          emptyContainer.classList.add("empty-task-container");
+          emptyContainer.textContent = columns[columnId];
+          column.appendChild(emptyContainer);
+      }
   });
 }
-
 
 function moveTo(event, state) {
   event.preventDefault();
@@ -397,7 +408,7 @@ function closeBoardAddTaskForm() {
 
 function openForm(formId) {
   document.getElementById(formId).classList.add("show");
-  document.getElementById("overlay").style.display = "block";
+  document.getElementById("overlay").style.display = "flex";
   document.body.classList.add("modal-open");
 }
 
@@ -409,7 +420,7 @@ function closeForm(formId) {
 
 function openForm(id) {
   document.getElementById(id).classList.add('show');
-  document.getElementById("overlay").style.display = "block";
+  document.getElementById("overlay").style.display = "flex";
   document.body.classList.add("modal-open");
 }
 
