@@ -398,8 +398,27 @@ function searchCards() {
   });
 }
 
+function checkScreenSizeAndRedirect() {
+  const popup = document.getElementById("board-newTask");
+  const screenWidth = window.innerWidth;
+  if (screenWidth <= 920 && popup && popup.classList.contains("show")) {
+      closeBoardAddTaskForm();
+      window.location.href = "../add-task/add-task.html";
+  }
+}
+
+function handleResize() {
+  const popup = document.getElementById("board-newTask");
+  if (popup && popup.classList.contains("show")) {
+      checkScreenSizeAndRedirect();
+  }
+}
+
+window.onresize = handleResize;
+
 function openBoardAddTaskForm() {
   openForm("board-newTask");
+  checkScreenSizeAndRedirect();
 }
 
 function closeBoardAddTaskForm() {

@@ -200,194 +200,272 @@ border-right: none;
 /* .checkbox-label:hover */
 
 .popup-toggle-contacts {
-display: flex;
-align-items: center;
-justify-content: space-between;
-cursor: pointer;
-height: 56px;
-border-radius: 10px;
-padding: 12px 16px;
-margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  height: 56px;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 2px;
 }
 
 .popup-toggle-contacts:hover {
-background: rgba(238, 238, 238, 1);
+  background: rgba(238, 238, 238, 1);
 }
 
 .popup-contact-checkboxImg {
-width: 20px;
-height: 20px;
-background-size: cover;
-display: inline-block;
-background-image: url('../img/checkbox.png');
-background-size: cover;
-cursor: pointer;
-display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-size: cover;
+  display: inline-block;
+  background-image: url('../img/checkbox.png');
+  background-size: cover;
+  cursor: pointer;
+  display: inline-block;
 }
 
 input[type="checkbox"]:checked + .popup-contact-checkboxImg {
-background-image: url('../img/checked-white.png');
+  background-image: url('../img/checked-white.png');
 }
 
 .dropdown-arrow {
-width: 24px;
-height: 24px;
-background-image: url('../img/arrow_dropdown.png');
-background-size: contain;
-background-repeat: no-repeat;
-cursor: pointer;
+  width: 24px;
+  height: 24px;
+  background-image: url('../img/arrow_dropdown.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 .dropdown-arrow.active {
-background-image: url('../img/arrow_dropup.png');
+  background-image: url('../img/arrow_dropup.png');
 }
 
 .d-none {
-display: none;
+  display: none;
 }
 
 #assigned-contacts1 {
-display: flex;
-flex-wrap: nowrap;
-overflow-x: auto;
-overflow-y: hidden;
-max-width: 100%;
-min-height: 50px;
-white-space: nowrap;
-padding: 5px;
-box-sizing: border-box;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  min-height: 50px;
+  white-space: nowrap;
+  padding: 5px;
+  box-sizing: border-box;
 }
 
 .initials-popup-span {
-width: 42px;
-height: 42px;
-border-radius: 45px;
-background: #ff7a00;
-display: flex;
-align-items: center;
-justify-content: center;
-font-weight: bold;
-border: 2px solid #ffffff;
-color: white;
-font-size: 12px;
-font-weight: 400;
-line-height: 14.4px;
-text-align: center;
-flex-shrink: 0;
-margin-left: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 45px;
+  background: #ff7a00;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  border: 2px solid #ffffff;
+  color: white;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.4px;
+  text-align: center;
+  flex-shrink: 0;
+  margin-left: 0;
 }
 
 .initials-names-toggle {
-display: flex;
-align-items: center;
-width: 192px;
-gap: 16px
+  display: flex;
+  align-items: center;
+  width: 192px;
+  gap: 16px
 }
 
 .popup-toggle-contacts.highlighted {
-background-color: #2A3647;
-color: white;
+  background-color: #2A3647;
+  color: white;
 }
 
 .highlighted {
-background-color: #2A3647;
-color: white;
+  background-color: #2A3647;
+  color: white;
 }
 
 .subtask-list1 {
-width: 100%;
-margin: 0;
-list-style: none;
-padding: 0 10px 10px 10px !important;
-height: 152px;
+  width: 100%;
+  margin: 0;
+  list-style: none;
+  padding: 0 10px 10px 10px !important;
+  height: 152px;
 }
 
 .sutbtask-hover-btn {
-border: none;
-cursor: pointer;
-background-color: transparent;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
 }
 
 .edit-input {
-width: 100%;
-height: 32px;
-padding: 4px 16px;
-background: rgba(255, 255, 255, 1);
-font-family: Inter;
-font-size: 16px;
-font-weight: 400;
-line-height: 19.2px;
-text-align: left;
-gap: 0px;
-border-bottom: 1px solid rgba(0, 93, 255, 1);
-display: flex;
-position: relative;
+  width: 100%;
+  height: 32px;
+  padding: 4px 16px;
+  background: rgba(255, 255, 255, 1);
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  text-align: left;
+  gap: 0px;
+  border-bottom: 1px solid rgba(0, 93, 255, 1);
+  display: flex;
+  position: relative;
 }
 
 .subtask-list-item {
-display: flex;
-justify-content: space-between;
-align-items: center;
-font-size: 16px;
-line-height: 19.2px;
-font-weight: 400;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 16px;
+  line-height: 19.2px;
+  font-weight: 400;
 }
 
 .subtask-list-item:hover {
-background-color: #f2f0f5;
-border-radius: 10px;
+  background-color: #f2f0f5;
+  border-radius: 10px;
 }
 
 .edit-input.editing:hover {
-background-color: transparent;
+  background-color: transparent;
 }
 
 .edit-input {
-flex-grow: 1;
-border-left: none;
-border-right: none;
-border-top: none;
-border-bottom: 1px solid #000;
-background-color: white;
-border-radius: 10px;
-padding-right: 60px;
-padding: 10px;
-width: 100%;
-outline: none; 
-box-sizing: border-box;
+  flex-grow: 1;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #000;
+  background-color: white;
+  border-radius: 10px;
+  padding-right: 60px;
+  padding: 10px;
+  width: 100%;
+  outline: none; 
+  box-sizing: border-box;
 }
 
 .edit-input:focus {
-border-left: none;
-border-right: none;
-border-top: none;
-border-bottom: 1px solid #000;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #000;
 }
 
 .save-button {
-display: flex;
-position: absolute;
-left: 330px;
-cursor: pointer;
-border: none;
-background: none;
-font-size: 16px;
-cursor: pointer;
+  display: flex;
+  position: absolute;
+  left: 330px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .delete-button {
-display: flex;
-position: absolute;
-left: 359px;
-gap: 5px;
-cursor: pointer;
-border: none;
-background: none;
-font-size: 16px;
-cursor: pointer;
+  display: flex;
+  position: absolute;
+  left: 359px;
+  gap: 5px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .subtask-li-btn-container {
-display: flex;
+  display: flex;
+}
+
+@media(max-width: 760px) {
+  .popup {
+    width: 340px;
+  }
+
+  .popup-title {
+    font-size: 32px;
+    line-height: 53.2px;
+  }
+
+  .popup-subtitle, .label, .subtasks-label {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .value, #priority-label {
+    font-size: 13px;
+    line-height: 18.8px;
+  }
+
+  .assignee-initials, .initials-popup-span {
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+
+  .assignee-name {
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .subtask-popup {
+    font-size: 14px;
+    line-height: 10px;
+  }
+
+  .radio-label1 {
+    width: 34%;
+    height: 40px;
+  }
+
+  .radio-label1 span {
+    font-size: 12px;
+  }
+
+  .rp-prio-img {
+    width: 12px;
+  }
+
+  #title1, #due-date1, #search1 {
+    font-size: 14px;
+  }
+
+  .category, .subtask-container {
+    width: 100%;
+  }
+
+  .popup-save-button {
+    margin-left: 168px;
+  }
+
+  .subtask-list-element {
+    width: 100%;
+  }
+
+  .subtask-list-element span {
+    font-size: 14px;
+  }
+
+  .popup-cencel-button {
+    margin-left: 235px;
+  }
+
+  .assignment-selector::placeholder, .popup-subtaskinput::placeholder {
+    font-size: 14px;
+  }
 
 }

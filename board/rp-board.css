@@ -248,7 +248,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 641px;
+        width: 100%;
         height: 928px;
     }
 
@@ -502,7 +502,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 428px;
+        width: 100%;
         height: 928px;
     }
 
