@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="extended-cards-style.css" />
     <link rel="icon" type="image/x-icon" href="../img/favicon.png" />
     <link rel="stylesheet" href="../templates/rp-header-sidebar.css" />
-    <link rel="stylesheet" href="rp-board.css" />
     <link rel="stylesheet" href="rp-extendedcard.css">
     <link rel="stylesheet" href="rp-new-task.css">
     <link rel="stylesheet" href="boardTask-popup.css">
@@ -169,7 +168,8 @@
     <main class="board-main-container">
         <div class="headline-and-input">
           <div onclick="window.location.href = '../add-task/add-task.html';" class="headline-rp-add-button">
-            <span class="headline-board">Board</span><button class="add-button-rp"><img src="../img/board/add-button-rp.png" alt="" /></button>
+            <span class="headline-board">Board</span>
+            <button class="add-button-rp"><img src="../img/board/add-button-rp.png" alt="" /></button>
           </div>
           <div class="input-and-add-button">
             <div class="input-container">
@@ -178,19 +178,23 @@
               <img src="../img/board/search.icon.png" alt="Search" class="search-icon" />
             </div>
             <button onclick="openBoardAddTaskForm()" class="add-button">Add task +</button>
+            <button class="open-task-plus"><img src="../img/plus-task-mobile.png" alt="" /></button>
           </div>
       </div>
       <div class="card-container">
         <div>
-          <span class="column-title">To do<img onclick="openAddTaskForm()" src="../img/board/plus-button.png" alt="add icon" class="add-button-img-column" /></span>
+          <span class="column-title-responsiv">To do<a href="../add-task/add-task.html"><img src="../img/board/plus-button.png" alt="add icon" class="add-button-img-column-responsiv" /></a></span> 
+          <span class="column-title">To do<img onclick="openBoardAddTaskForm()" src="../img/board/plus-button.png" alt="add icon" class="add-button-img-column" /></span>
           <div class="drag-area" id="open" ondrop="moveTo(event, 'open')" ondragover="allowDrop(event);"></div>
         </div>
         <div>
-          <span class="column-title">In Progress<img onclick="openAddTaskForm()" src="../img/board/plus-button.png" alt="add icon" class="add-button-img-column" /></span>
+          <span class="column-title-responsiv">To do<a href="../add-task/add-task.html"><img src="../img/board/plus-button.png" alt="add icon" class="add-button-img-column-responsiv" /></a></span> 
+          <span class="column-title">In Progress<img onclick="openBoardAddTaskForm()" src="../img/board/plus-button.png" alt="add icon" class="add-button-img-column" /></span>
           <div class="drag-area" id="in-progress" ondrop="moveTo(event, 'in-progress')" ondragover="allowDrop(event);"></div>
         </div>
         <div>
-          <span class="column-title">Await feedback<img onclick="openAddTaskForm()" src="../img/board/plus-button.png" alt="add icon" class="add-button-img-column" /></span>
+          <span class="column-title-responsiv">To do<a href="../add-task/add-task.html"><img src="../img/board/plus-button.png" alt="add icon" class="add-button-img-column-responsiv" /></a></span> 
+          <span class="column-title">Await feedback<img onclick="openBoardAddTaskForm()" src="../img/board/plus-button.png" alt="add icon" class="add-button-img-column" /></span>
           <div class="drag-area" id="closed" ondrop="moveTo(event, 'closed')" ondragover="allowDrop(event);"></div>
         </div>
         <div>
