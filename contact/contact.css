@@ -135,6 +135,12 @@ body.modal-open {
 .contacts {
     background: #F6F7F8;
     display: flex;
+    margin-top: 97px;
+    margin-left: 232px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    height: calc(100vh - 97px);
+    width: calc(100vw - 232px);
 }
 
 #contactSection {
@@ -202,7 +208,6 @@ body.modal-open {
     display: flex;
     align-items: center;
     width: 352px;
-    height: 78px;
     gap: 35px;
     border-radius: 10px;
     animation-timing-function: ease-in-out;
@@ -355,17 +360,15 @@ body.modal-open {
 
 #addContact.show {
     left: 716px;
-    z-index: 1;
+    z-index: 40;
 }
 
 #editContact.show {
     left: 716px;
-    z-index: 1;
+    z-index: 40;
 }
 
 #contactLeft {
-    width: 360px;
-    height: 460px;
     padding: 66px;
     background: #2A3647;
     display: flex;
@@ -448,12 +451,20 @@ body.modal-open {
     cursor: pointer;
 }
 
+.superior-person-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 592px;
+    width: 238px;
+}
+
 .person-container {
-    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 120px;
     height: 120px;
-    top: 204px;
-    left: 550px;
     border-radius: 70px;
     background: cadetblue;
     border: 3px solid #FFFFFF;
@@ -461,11 +472,8 @@ body.modal-open {
 }
 
 .person-icon {
-    position: absolute;
     width: 42.67px;
     height: 42.67px;
-    top: 38.67px;
-    left: 38.67px;
 }
 
 #inputFields {
@@ -474,7 +482,7 @@ body.modal-open {
     position: absolute;
     width: 422px;
     height: 215px;
-    top: 137px;
+    top: 138px;
     left: 742px;
     gap: 32px;
 }
@@ -482,7 +490,7 @@ body.modal-open {
 .inputField {
     display: flex;
     flex-direction: column;
-    width: 422px;
+    width: 100%;
     gap: 8px;
 }
 
@@ -494,8 +502,8 @@ body.modal-open {
 }
 
 .inputField input {
-    width: 395px;
-    height: 28px;
+    width: 100%;
+    height: 48px;
     padding: 13px;
     border-radius: 10px;
     border: 1px solid #D1D1D1;
@@ -511,7 +519,7 @@ body.modal-open {
     position: absolute;
     width: 16px;
     height: 16px;
-    top: 28px;
+    top: 24px;
     left: 384px;
 }
 
@@ -519,7 +527,7 @@ body.modal-open {
     position: absolute;
     width: 20px;
     height: 16px;
-    top: 124px;
+    top: 114px;
     left: 384px;
 }
 
@@ -527,7 +535,7 @@ body.modal-open {
     position: absolute;
     width: 18px;
     height: 18px;
-    top: 218.5px;
+    top: 199.5px;
     left: 384px;
 }
 

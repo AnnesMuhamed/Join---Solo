@@ -204,7 +204,6 @@ input::invalid {
   justify-content: space-between;
   position: relative;
   height: 40px;
-  padding: 6px 16px;
   box-sizing: border-box;
 }
 
@@ -215,12 +214,18 @@ input::invalid {
 .subtask-list-element::before {
   content: "•";
   position: absolute;
-  left: 16px;
   color: inherit;
 }
 
-.subtask-list-element:hover,
-.subtask-list-element:focus-within {
+.subtask-list-element:focus {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #000;
+  width: 400px;
+}
+
+.subtask-list-element:hover {
   border-radius: 10px;
   background-color: #eeeeee;
 }
@@ -237,12 +242,18 @@ input::invalid {
 }
 
 .subtask-list-element:hover .subtaskli-buttons-container button,
-.subtask-list-element:focus-within .subtaskli-buttons-container button {
+.subtask-list-element:focus .subtaskli-buttons-container button {
   background-color: #eeeeee;
 }
 
 .subtaskli-buttons-container button:hover {
   background-color: #eeeeee;
+}
+
+.edit-subtask-buttons-container {
+  display: flex;
+  position: fixed;
+  right: 63px;
 }
 
 .in-line-btn {
@@ -319,6 +330,18 @@ input::invalid {
   gap: 10px;
   width: 100%;
 }
+
+.subtask-list-element input:focus, .addTask-subtasks:focus {
+  outline: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #000;
+}
+
+
+
+
 
 @media(max-width: 1440px) {
   .content {

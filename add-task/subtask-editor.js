@@ -147,8 +147,8 @@ function removeEmptyListElements() {
 
 function createInputElement(value) {
   const input = document.createElement("input");
+  input.classList.add("addTask-subtasks");  // Klasse hinzufügen
   input.type = "text";
-  input.style = "box-sizing: border-box; width: 100%; padding: 6px 16px;";
   input.value = value;
   return input;
 }

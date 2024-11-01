@@ -99,14 +99,14 @@ body.modal-open {
 .board-definition {
     display: flex;
     flex-direction: column;
-    width: 440px;
+    width: 50%;
     gap: 20px;
 }
 
 .board-properties {
     display: flex;
     flex-direction: column;
-    width: 440px;
+    width: 50%;
     gap: 16px;
 }
 

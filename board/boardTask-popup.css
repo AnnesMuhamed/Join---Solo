@@ -362,6 +362,7 @@ input[type="checkbox"]:checked + .popup-contact-checkboxImg {
   border-right: none;
   border-top: none;
   border-bottom: 1px solid #000;
+  min-width: 400px;
 }
 
 .save-button {
@@ -389,6 +390,28 @@ input[type="checkbox"]:checked + .popup-contact-checkboxImg {
 
 .subtask-li-btn-container {
   display: flex;
+}
+
+.edit-subtask-input {
+  flex-grow: 1;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #000;
+  background-color: white;
+  border-radius: 10px;
+  padding-right: 60px;
+  padding: 10px;
+  width: 100%;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.edit-subtask-input{
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #000;
 }
 
 @media(max-width: 760px) {
@@ -466,6 +489,18 @@ input[type="checkbox"]:checked + .popup-contact-checkboxImg {
 
   .assignment-selector::placeholder, .popup-subtaskinput::placeholder {
     font-size: 14px;
+  }
+
+  .save-button {
+    left: 165px;
+  }
+
+  .delete-button {
+    left: 190px;
+  }
+
+  .edit-input:focus {
+    min-width: 0;
   }
 
 }

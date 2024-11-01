@@ -1,8 +1,4 @@
 @media screen and (max-width: 1440px) {
-    .contacts {
-        padding-left: 200px;
-    }
-
     .first-headline {
         font-size: 54px;
     }
@@ -32,17 +28,13 @@
         font-size: 37px;
     }
 
-    #contactSection {
-        width: 314px;
-    }
-
     .add-contact-button, .alphabet-container,
     .contact-item {
         width: 240px;
     }
 
     .contact-list-container {
-        width: 258px;
+        width: 400px;
     }
 
     .initials-container {
@@ -60,27 +52,29 @@
     }
 }
 
-@media screen and (max-width: 1040px) {
-    .contacts {
-        padding-left: 160px;
-    }
-
+@media screen and (max-width: 1180px) {
     .contacts-headline {
-        gap: 18px;
-        margin-left: 36px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0;
     }
 
-    .first-headline {
-        font-size: 38px;
+    .stroke-image {
+        display: none;
     }
 
-    .second-headline {
-        font-size: 18px;
+    .rpContact-blueStroke {
+        display: block;
     }
 
     .first-container {
         gap: 24px;
     }
+}
+
+@media screen and (max-width: 1040px) {
+    
 
     .popup-initiale-container, .initiale-circle, .popup-initiale {
         width: 80px;
@@ -99,7 +93,9 @@
 
 @media screen and (max-width: 920px) {
     .contacts {
-        padding-left: 0;
+        margin-top: 81px;
+        margin-left: 0;
+        width: 100%;
     }
 
     .sidebar {
@@ -107,26 +103,13 @@
     }
 
     #contactSection {
-        height: 856px;
+        height: 100%;
+        width: 100%;
     }
 }
 
 @media screen and (max-width: 780px) {
-    .contacts-headline {
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 0;
-    }
-
-    .stroke-image {
-        display: none;
-    }
-
-    .rpContact-blueStroke {
-        display: block;
-    }
-
+    
     .first-container {
         align-items: flex-start;
         flex-direction: column;
@@ -141,7 +124,7 @@
     }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 700px) {
     body {
         margin: 0;
         width: 100%;
@@ -171,10 +154,6 @@
 
     .header {
         font-size: 16px;
-    }
-
-    #contactSection {
-        width: 640px;
     }
 
     /* POPUP */
@@ -575,11 +554,5 @@
         width: 96px;
         height: 40px;
         padding: 8px;
-    }
-}
-
-@media screen and (max-width: 350px) {
-    #contactSection {
-        width: 350px !important;
     }
 }
