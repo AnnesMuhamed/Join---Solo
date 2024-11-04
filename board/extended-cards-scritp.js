@@ -47,6 +47,7 @@ function getPriorityLabel(priority) {
 
 function openPopup(key) {
   document.getElementById('popup').innerHTML = renderInfoPopup(key);
+  document.getElementById('popup-container').classList.add('show');
   let [
     popupContainer,
     popup,
@@ -565,7 +566,7 @@ async function saveEditedTask(taskId) {
 }
 
 function closePopup() {
-  document.querySelector(".popup-container").classList.remove("show");
+  document.getElementById('popup-container').classList.remove('show');
 }
 
 async function deleteTask(taskId) {
