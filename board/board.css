@@ -7,6 +7,7 @@ body {
 * {
     box-sizing: border-box;
     scrollbar-width: none;
+    transition: all 0.5s ease-in-out;
     /* Firefox */
 }
 
@@ -35,30 +36,32 @@ body.modal-open {
     z-index: 1;
 }
 
-.new-task.show {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    display: block;
-    z-index: 33;
-}
-
-/* newtask popup */
-
+/* Grundzustand: Popup startet rechts außerhalb des Bildschirms */
 .new-task {
-    position: absolute;
+    position: fixed;
+    top: 50%;
+    right: -100%; /* Start vollständig rechts außerhalb des Bildschirms */
     width: 1116px;
     height: 870px;
-    top: 50%;
-    left: 50%;
     padding: 60px;
     border-radius: 30px;
     background: rgba(255, 255, 255, 1);
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
-    display: none;
-    transform: translate(-50%, -50%);
+    opacity: 0; /* Start transparent */
+    transform: translateY(-50%); /* Vertikal zentriert */
+    z-index: 33;
+    transition: right 0.8s ease-in-out, opacity 0.8s ease-in-out; /* Langsamere, sanfte Animation */
 }
+
+/* Aktivierungszustand: Popup gleitet langsam in den sichtbaren Bereich */
+.new-task.show {
+    right: 10%; /* Verschiebt das Popup in den sichtbaren Bereich */
+    opacity: 1; /* Macht das Popup sichtbar */
+    display: block;
+}
+
+
+
 
 .board-task-headline {
     font-size: 61px;
