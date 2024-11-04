@@ -1,7 +1,7 @@
 .popup-container {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 100%;
   width: 100%;
   height: 1024px;
   background-color: rgba(0, 0, 0, 0.5);
@@ -11,10 +11,12 @@
   z-index: 999;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
+  transition: all 0.5s ease-in-out;
 }
 
 .popup-container.show {
+  left: 50%;
+  transform: translateX(-50%);
   opacity: 1;
   visibility: visible;
 }
