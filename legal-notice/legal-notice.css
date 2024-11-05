@@ -84,6 +84,11 @@ a:hover {
         padding: 90px 64px;
     }
 
+    .dropdown-content {
+        top: 80px;
+        right: 15px;
+    }
+
     .headline-p {
         font-size: 37px;
     }

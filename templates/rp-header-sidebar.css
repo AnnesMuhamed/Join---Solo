@@ -114,10 +114,6 @@
         font-size: 14px;
     }
 
-    .dropdown-content a:not(#logout-link) {
-        padding: 8px 0px;
-    }
-
     .menu-button.active {
         border-radius: 16px;
       }
@@ -206,10 +202,6 @@
 
     .font-size {
         font-size: 14px;
-    }
-
-    .dropdown-content a:not(#logout-link) {
-        padding: 8px 0px;
     }
 
     .menu-button.active {
@@ -326,10 +318,6 @@
 
     .font-size {
         font-size: 14px;
-    }
-
-    .dropdown-content a:not(#logout-link) {
-        padding: 8px 0px;
     }
 
     .menu-button.active {
