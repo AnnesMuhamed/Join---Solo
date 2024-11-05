@@ -19,8 +19,9 @@ function loginPage() {
                 <img src="./img/mail.png" alt="Email Icon" class="input-icon">
             </label>
             <label class="input-container">
-                <input type="password" id="password" minlength="4" placeholder="Password" class="login-password" required oninput="validateInputs()">
-                <img src="./img/lock.png" alt="Password Icon" class="input-icon">
+                <input type="password" id="password" placeholder="Password" minlength="4" required oninput="toggleIconOnInput(this)">
+                <span class="lock-icon"></span> <!-- Schloss-Icon -->
+                <span class="password-icon hidden" onclick="togglePasswordVisibility('password', this)"></span> <!-- Augen-Icon -->
             </label>
             <label class="option" for="option">
                 <input type="checkbox" name="option" id="option" class="custom-checkbox">
@@ -44,6 +45,27 @@ function loginPage() {
         <a class="policy-notice" href="../legal-notice/legal-notice-external.html">Legal notice</a>
     </div>
     `;
+}
+
+function toggleIconOnInput(inputField) {
+    const lockIcon = inputField.parentElement.querySelector('.lock-icon');
+    const passwordIcon = inputField.parentElement.querySelector('.password-icon');
+    
+    if (inputField.value.length > 0) {
+        lockIcon.classList.add('hidden');
+        passwordIcon.classList.remove('hidden');
+    } else {
+        lockIcon.classList.remove('hidden');
+        passwordIcon.classList.add('hidden');
+    }
+}
+
+function togglePasswordVisibility(inputId, icon) {
+    const passwordInput = document.getElementById(inputId);
+    const isPasswordVisible = passwordInput.type === 'text';
+    
+    passwordInput.type = isPasswordVisible ? 'password' : 'text';
+    icon.classList.toggle('password-visible', !isPasswordVisible);
 }
 
 function validateInputs() {

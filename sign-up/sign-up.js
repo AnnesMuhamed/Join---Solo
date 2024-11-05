@@ -50,11 +50,13 @@ function signUpInnerHTML() {
                 </label>
                 <label class="input-container">
                     <input type="password" id="password" placeholder="Password" minlength="4" required>
-                    <img src="../img/lock.png" alt="Password Icon" class="input-icon">
+                    <input type="checkbox" id="toggle-password" class="toggle-password-checkbox" onchange="togglePassword('password', 'toggle-password')">
+                    <label for="toggle-password" class="password-icon"></label>
                 </label>
                 <label class="input-container">
-                    <input type="password" id="confirm-password" class="signup-password" placeholder="Confirm Password" minlength="4" required>
-                    <img src="../img/lock.png" alt="Password Icon" class="input-icon">
+                    <input type="password" id="confirm-password" placeholder="Confirm Password" minlength="4" required>
+                    <input type="checkbox" id="toggle-confirm-password" class="toggle-password-checkbox" onchange="togglePassword('confirm-password', 'toggle-confirm-password')">
+                    <label for="toggle-confirm-password" class="password-icon"></label>
                 </label>
             </form>
             <div class="checkbox-container">
@@ -72,6 +74,13 @@ function signUpInnerHTML() {
         <a class="policy-notice" href="#">Legal notice</a>
     </div>
     `;
+}
+
+function togglePassword(inputId, checkboxId) {
+    const passwordField = document.getElementById(inputId);
+    const checkbox = document.getElementById(checkboxId);
+
+    passwordField.type = checkbox.checked ? 'text' : 'password';
 }
 
 async function handleSignUp() {

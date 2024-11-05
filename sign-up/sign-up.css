@@ -105,9 +105,42 @@ body {
     border-radius: 10px;
     border: 1px solid #D1D1D1;
     background: #FFFFFF;
-    opacity: 0.5;
     font-size: 20px;
 }
+
+.toggle-password-checkbox {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.password-icon {
+    position: absolute;
+    right: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 18px;
+    background: url('../img/lock.png') no-repeat center;
+    background-size: contain;
+    cursor: pointer;
+}
+
+input[type="password"]:not(:placeholder-shown) ~ .password-icon {
+    background: url('../img/visibility_off.png') no-repeat center;
+    background-size: contain;
+}
+
+.toggle-password-checkbox:checked ~ .password-icon {
+    background: url('../img/visibility.png') no-repeat center;
+    background-size: contain;
+}
+
 
 input[type="text"]:focus-visible,
 input[type="email"]:focus-visible,
