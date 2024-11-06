@@ -87,8 +87,13 @@ border-right: none;
   gap: 8px;
   margin-left: 424px;
   cursor: pointer;
-  width: 24px;
-  height: 40px;
+  width: 32px;
+  height: 60px;;
+}
+
+.action-icon-x {
+  margin-top: 1px;
+  margin-left: 9px;
 }
 
 .popup-cencel-button:hover {

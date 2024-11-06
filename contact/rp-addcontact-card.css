@@ -324,7 +324,7 @@
 
     .addButton-container {
         position: fixed;
-        top: 840px;
+        top: 762px;
         height: 56px;
         width: 100%;
         display: flex;
@@ -336,7 +336,7 @@
         display: flex;
         position: fixed;
         gap: 10px;
-        top: 840px;
+        top: 762px;
         width: 56px;
         height: 56px;
         border-radius: 46px;
