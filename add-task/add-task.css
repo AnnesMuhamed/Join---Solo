@@ -339,14 +339,9 @@ input::invalid {
   border-bottom: 1px solid #000;
 }
 
-
-
-
-
 @media(max-width: 1440px) {
   .content {
-    margin-left: 270px;
-    padding-right: 46px;
+    
   }
 
   .definition, .properties {

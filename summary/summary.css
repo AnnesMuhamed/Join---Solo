@@ -393,3 +393,211 @@ html::-webkit-scrollbar {
 .d-none {
     display: none;
 }
+
+@media(max-width: 1280px) {
+    .greet {
+        display: none;
+    }
+}
+
+@media(max-width: 1024px) {
+    .content {
+        padding-right: 16px !important;
+    }
+    .summary-headline {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        height: unset;
+        gap: 8px;
+        width: 100%;
+        max-width: 560px;
+    }
+
+    .stroke-image {
+        display: none;
+    }
+
+    .blue-stroke-image {
+        display: block;
+    }
+}
+
+@media(max-width: 920px) {
+    .content {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        height: calc(100svh - 160px);
+        margin-left: 0px;
+        margin-top: 80px;
+        overflow: hidden;
+        padding: 48px 16px 24px 16px;
+    }
+
+    .summary-headline {
+        max-width: 470px;
+    }
+
+    .headline-cards-container {
+        margin-top: 40px;
+    }
+
+    .summary-cards {
+        max-width: 470px;
+    }
+
+    .first-card-section {
+        height: 134px;
+    }
+
+    .todo-number, .one-urgen, .number {
+        font-size: 47px;
+        line-height: 56.4px;
+    }
+
+    .link-card-one, .link-card-two {
+        width: 224px;
+    }
+
+    .second-card-section {
+        height: 134px;
+    }
+
+    .urgent-link {
+        border-radius: 20px;
+        gap: 54px;
+    }
+
+    .urgent-img {
+        width: 50px;
+    }
+
+    .urgent-stroke {
+        height: 82px;
+    }
+
+    .date, .date-container span {
+        font-size: 18px;
+        line-height: 21.6px;
+    }
+
+    .task-card-link {
+        border-radius: 20px;
+    }
+
+    .card-underline {
+        font-size: 16px;
+        line-height: 19.2px;
+    }
+}
+
+@media(max-width: 620px) {
+    .summary-headline {
+        max-width: 396px;
+    }
+
+    .first-headline {
+        font-size: 47px;
+        line-height: 56.4px;
+    }
+
+    .second-headline {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .summary-cards {
+        max-width: 396px;
+    }
+
+    .first-card-section, .second-card-section,
+    .third-card-section {
+        height: 110px;
+    }
+
+    .link-card-one, .link-card-two {
+        width: 186px;
+    }
+
+    .card-one, .card-two {
+        gap: 10px;
+    }
+
+    .edit-circle {
+        width: 59px;
+        height: 59px;
+    }
+
+    .edit-image {
+        width: 18.94px;
+        height: 18.13px;
+    }
+
+    .todo-number {
+        height: 56px;
+    }
+
+    .urgent-link {
+        gap: 40px;
+    }
+
+    .urgent-img {
+        width: 44px;
+    }
+
+    .urgent-stroke {
+        height: 68px;
+    }
+
+    .card-three {
+        gap: 8px;
+    }
+
+    .one-urgent {
+        font-size: 47px;
+        line-height: 56.4px;
+        height: 56px;
+    }
+
+    .date, .date-container span {
+        font-size: 16px;
+        line-height: 19.2px;
+    }
+
+    .card-underline {
+        font-size: 14px;
+        line-height: 16.8px;
+    }
+}
+
+@media(max-width: 475px) {
+    .headline-cards-container {
+        max-width: 396px;
+        width: 100%;
+    }
+
+    .summary-cards {
+        gap: 29px;
+        max-width: unset;
+        width: 100%;
+    }
+}
+
+@media(max-width: 425px) {
+    .urgent-link {
+        gap: 22px;
+    }
+}
+
+@media(max-width: 390px) {
+    .urgent-link {
+        gap: 12px;
+    }
+}
+
+@media(max-width: 390px) {
+    .urgent-link {
+        gap: 8px;
+    }
+}

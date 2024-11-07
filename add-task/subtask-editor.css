@@ -1,3 +1,5 @@
+/* Subtask-Editor */
+
 * {
   box-sizing: border-box;
 }
@@ -41,4 +43,189 @@
 .subtasks:focus {
   outline: none;
 }
+
+/* Prio-Buttons */
+
+.radio-button-group {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+.radio-button {
+  display: none;
+}
+
+.radio-label {
+  display: flex;
+  padding: 16px 10px 16px 10px;
+  width: 136px;
+  height: 56px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 10px;
+  box-shadow: 0 0 4px 0 #0000004a;
+}
+
+.radio-label:hover {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.radio-label span {
+  font-size: 20px;
+}
+
+#prio-high:checked + .radio-label,
+#prio-high-edit:checked + .radio-label {
+  background-color: #ff3d00;
+}
+
+#prio-med:checked + .radio-label,
+#prio-med-edit:checked + .radio-label {
+  background-color: #ffa800;
+}
+
+#prio-low:checked + .radio-label,
+#prio-low-edit:checked + .radio-label {
+  background-color: #7ae229;
+}
+
+.radio-button:not(:checked) + .radio-label {
+  background-color: white;
+}
+
+.radio-button-group1 {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.radio-button1 {
+  display: none;
+}
+
+.radio-label1 {
+  display: flex;
+  padding: 16px 10px;
+  width: 136px;
+  height: 56px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  box-shadow: 0 0 4px 0 #0000004a;
+}
+
+.radio-label1:hover {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.radio-label1 span {
+  font-size: 20px;
+}
+
+#prio-high1:checked + .radio-label1,
+#prio-high-edit1:checked + .radio-label1 {
+  background-color: #ff3d00;
+}
+
+#prio-med1:checked + .radio-label1,
+#prio-med1-edit:checked + .radio-label1 {
+  background-color: #ffa800;
+}
+
+#prio-low1:checked + .radio-label1,
+#prio-low-edit1:checked + .radio-label1 {
+  background-color: #7ae229;
+}
+
+.radio-button1:not(:checked) + .radio-label1 {
+  background-color: white;
+}
+
+/* Contact-Selector */
+
+.assignment-container {
+  height: 128px;
+}
+
+.select-box {
+  position: relative;
+  width: 100%;
+}
+
+#checkboxes {
+  display: none;
+  border: 1px solid #dadada;
+  border-radius: 10px;
+  background-color: white;
+  height: 240px;
+  width: 100%;
+  overflow-y: auto;
+}
+
+#checkboxes label {
+  padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.assigned-checkbox {
+  margin-left: auto;
+}
+
+.initial-contactName-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.contact-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  height: 56px;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 2px;
+  transition: background-image 0.3s, background-color 0.3s;
+  cursor: pointer;
+}
+
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  background-image: url('../img/checkbox.png');
+  background-size: cover;
+}
+
+.custom-checkbox.checked {
+  background-image: url('../img/checked-white.png');
+}
+
+.contact-label.highlighted {
+  background-color: #2A3647;
+  color: white;
+}
+
+.contact-label:not(.highlighted):hover {
+  background-color: #f0f0f0;
+}
+
+.contact-label.highlighted:hover {
+  background-color: #2A3647;
+  cursor: default;
+}
+
 

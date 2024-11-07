@@ -18,12 +18,12 @@
         width: 1043px;
     }
 
-    .headline-and-input {
+    .headline-and-input,
+    .headline-add-task-container {
         width: 0;
     }
 
     .headline-add-task-container {
-        width: 0;
         padding-top: 74px;
     }
 }
@@ -40,19 +40,13 @@
 
     .card-container {
         gap: 8px;
+        flex-direction: column;
+        width: 820px;
     }
 
     .drag-area {
         height: auto;
         flex-direction: row;
-    }
-
-    .card-container {
-        flex-direction: column;
-    }
-
-    .card-container {
-        width: 820px;
     }
 }
 
@@ -126,27 +120,20 @@
 }
 
 @media screen and (max-width: 780px) {
-
     body {
         width: 100%;
         margin: 0 auto;
     }
 
-    .sidebar {
-        width: 100%;
-    }
-
-    .sidebar-nav {
-        width: 100%;
-    }
-
+    .sidebar,
+    .sidebar-nav,
     .menu {
         width: 100%;
         justify-content: space-around;
     }
 
     .header {
-        padding: 20px 12px 20px 12px;
+        padding: 20px 12px;
     }
 
     .header-right {
@@ -157,7 +144,7 @@
         overflow: auto;
         width: 100%;
         height: 766px;
-        padding: 0px 16px 0px 16px;
+        padding: 0 16px;
     }
 
     .headline-and-input {
@@ -169,22 +156,21 @@
         flex-direction: column;
         align-items: normal;
         gap: 8px;
-        padding: 8px 0px 8px 0px;
+        padding: 8px 0;
         width: 396px;
     }
 
-    .search-input {
+    .search-input,
+    .headline-add-task-container {
         width: 396px;
     }
 
     .headline-add-task-container {
-        width: 396px;
         margin-top: 50px;
         padding: 0;
     }
 
     .add-button-rp {
-        display: block;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -224,8 +210,7 @@
 
     .done-container,
     .awaitFeedback-container,
-    .inProgress-container,
-    .card-container {
+    .inProgress-container {
         display: flex;
         flex-direction: column;
     }
@@ -236,13 +221,10 @@
 
     .headline-board {
         width: 136px;
-        height: 56px;
         font-size: 47px;
         font-weight: 700;
         line-height: 56.4px;
     }
-
-    /* Big Cards */
 
     .popup-container {
         position: fixed;
@@ -268,7 +250,6 @@
         justify-content: space-between;
         align-items: center;
         width: 348px;
-        height: 32px;
     }
 
     .tag-container {
@@ -278,16 +259,6 @@
         padding: 4px 16px;
         border-radius: 8px;
         width: 113px;
-        height: 27px;
-        gap: 10px;
-    }
-
-    .tag {
-        font-size: 16px;
-        font-weight: 400;
-        color: #FFFFFF;
-        line-height: 19.2px;
-        width: 81px;
     }
 
     .popup-title {
@@ -304,31 +275,6 @@
         margin: 0;
     }
 
-    .label {
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19.2px;
-    }
-
-    .value {
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19.2px;
-    }
-
-    .priority-container {
-        display: flex;
-        width: 124px;
-        height: 27px;
-        padding: 4px 18px;
-        gap: 10px;
-    }
-
-    .priority-label {
-        font-size: 16px;
-        line-height: 12.2px;
-    }
-
     .info-item-assigned {
         display: flex;
         flex-direction: column;
@@ -336,68 +282,28 @@
         width: 348px;
     }
 
-    .label {
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19.2px;
-    }
-
     .assignee-container {
-        width: 348px;
         display: flex;
-        align-items: baseline;
         gap: 12px;
         flex-direction: column;
-    }
-
-    .assignee-underContainer {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .assignee-name {
-        width: 167px;
-        height: 24px;
-        font-size: 16px;
-        line-height: 19.2px;
-        font-weight: 400;
     }
 
     .popup-subtasks {
         display: flex;
         flex-direction: column;
-        width: 348px;
         gap: 8px;
-    }
-
-    .subtasks-label {
-        width: 348px;
-        height: 19px;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 19.2px;
-        text-align: left;
     }
 
     .subtasks-list {
         display: flex;
         flex-direction: column;
-        width: 348px;
         gap: 4px;
     }
 
     .popup-actions {
         display: flex;
         justify-content: flex-end;
-        width: 348px;
-        height: 24px;
         gap: 8px;
-    }
-
-    .priority-icon {
-        width: 16px;
-        height: 12px;
     }
 }
 
@@ -411,7 +317,7 @@
         overflow: auto;
         width: 100%;
         height: 766px;
-        padding: 0px 16px 0px 16px;
+        padding: 0 16px;
     }
 
     .headline-and-input {
@@ -423,7 +329,6 @@
         flex-direction: column;
         align-items: normal;
         gap: 8px;
-        padding: 8px 0px 8px 0px;
         width: 396px;
     }
 
@@ -434,219 +339,6 @@
     .headline-add-task-container {
         width: 396px;
         margin-top: 50px;
-        padding: 0;
-    }
-
-    .add-button-rp {
-        display: block;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .add-button-rp:hover {
-        cursor: pointer;
-        background-color: #29ABE2;
-        border-color: #29ABE2;
-    }
-
-    .headline-rp-add-button {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .card-container {
-        display: flex;
-        justify-content: flex-start;
-        flex-direction: column;
-        height: 688px;
-        gap: 26px;
-        overflow: auto;
-        width: auto;
-        padding-bottom: 96px;
-    }
-
-    .drag-area {
-        height: auto;
-        flex-direction: row;
-    }
-
-    .add-button {
-        display: none;
-    }
-
-    .done-container,
-    .awaitFeedback-container,
-    .inProgress-container,
-    .card-container {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .column-title {
-        width: 396px;
-    }
-
-    .headline-board {
-        width: 136px;
-        height: 56px;
-        font-size: 47px;
-        font-weight: 700;
-        line-height: 56.4px;
-    }
-
-    /* Big Cards */
-
-    .popup-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 928px;
-    }
-
-    .popup {
-        width: 348px;
-        padding: 32px 24px;
-        border-radius: 30px;
-        box-shadow: 0px 0px 4px 0px #00000029;
-        background: #FFFFFF;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
-
-    .popup-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 348px;
-        height: 32px;
-    }
-
-    .tag-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 4px 16px;
-        border-radius: 8px;
-        width: 113px;
-        height: 27px;
-        gap: 10px;
-    }
-
-    .tag {
-        font-size: 16px;
-        font-weight: 400;
-        color: #FFFFFF;
-        line-height: 26.2px;
-        width: 81px;
-    }
-
-    .popup-title {
-        font-size: 36px;
-        font-weight: 700;
-        line-height: 43.2px;
-        margin: 0;
-    }
-
-    .popup-subtitle {
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 19.2px;
-        margin: 0;
-    }
-
-    .label {
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19.2px;
-    }
-
-    .value {
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19.2px;
-    }
-
-    .priority-container {
-        display: flex;
-        width: 124px;
-        height: 27px;
-        padding: 4px 18px;
-        gap: 10px;
-    }
-
-    .priority-label {
-        font-size: 16px;
-        line-height: 12.2px;
-    }
-
-    .info-item-assigned {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        width: 348px;
-    }
-
-    .label {
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19.2px;
-    }
-
-    .assignee-container {
-        width: 348px;
-        display: flex;
-        align-items: baseline;
-        gap: 12px;
-        flex-direction: column;
-    }
-
-    .assignee-underContainer {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .assignee-name {
-        width: 167px;
-        height: 24px;
-        font-size: 16px;
-        line-height: 19.2px;
-        font-weight: 400;
-    }
-
-    .popup-subtasks {
-        display: flex;
-        flex-direction: column;
-        width: 348px;
-        gap: 8px;
-    }
-
-    .subtasks-label {
-        width: 348px;
-        height: 19px;
-        font-size: 16px;
-        font-weight: 400;
-        line-height: 19.2px;
-        text-align: left;
-    }
-
-    .subtasks-list {
-        display: flex;
-        flex-direction: column;
-        width: 348px;
-        gap: 4px;
-    }
-
-    .popup-actions {
-        display: flex;
-        justify-content: flex-end;
-        width: 348px;
-        height: 24px;
-        gap: 8px;
     }
 }
 
@@ -663,11 +355,10 @@
         margin: 0 auto;
     }
 
-    .input-and-add-button, .headline-rp-add-button {
+    .input-and-add-button,
+    .headline-rp-add-button {
         width: 311px;
     }
-
-
 }
 
 @media screen and (max-width: 375px) {

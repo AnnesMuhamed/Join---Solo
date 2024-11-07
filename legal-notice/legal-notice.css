@@ -94,6 +94,31 @@ a:hover {
     }
 }
 
+@media screen and (max-width: 780px) {
+
+    body {
+        margin: 0;
+    }
+
+    .pl {
+
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .rp-ul-overflow {
+        overflow: auto;
+    }
+
+    .headline-p{
+        font-size: 47px;
+    }
+
+    .headline-img-container{
+        padding-right: 16px;
+    }
+}
+
 @media screen and (max-width: 700px) {
     .headline-img-container {
         padding-right: 0;
