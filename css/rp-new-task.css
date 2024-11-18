@@ -1,0 +1,49 @@
+@media screen and (max-width: 1280px) {
+    .new-task {
+        width: 864px;
+    }
+
+    .close-btn {
+        left: 800px;
+    }
+
+    .add-task-form {
+        margin-left: 50px;
+    }
+
+    .due-date {
+        width: 250px;
+    }
+
+    .radio-button-group {
+        justify-content: flex-start;
+        gap: 19px;
+    }
+
+    .category, .subtask-container {
+        width: 100%;
+    }
+
+    .subtask-list {
+        padding-left: 400px;
+    }
+
+    .edit-subtask-input:focus {
+        outline: none;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        border-bottom: 1px solid #000;
+    }
+
+    .edit-subtask-buttons-container {
+        display: flex;
+        position: fixed;
+    }
+
+    .buttons {
+        justify-content: space-between;
+        width: 500px;
+        align-items: center;
+    }
+}

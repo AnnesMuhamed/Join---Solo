@@ -1,0 +1,152 @@
+body,
+html {
+    background: #F6F7F8;
+    overflow: auto !important;
+    scrollbar-width: none !important;
+    /* Firefox */
+    -ms-overflow-style: none !important;
+    /* Internet Explorer 10+ */
+}
+
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+    display: none !important;
+    /* Chrome, Safari, Opera */
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 64px;
+    margin-top: 97px;
+    margin-left: 232px;
+    overflow-y: auto;
+    height: calc(100vh - 97px);
+    width: calc(100vw - 232px);
+}
+
+.main-container::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari, Opera */
+}
+
+.span-container, .rp-ul-overflow {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.headline-and-arrow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arrow {
+    width: 21.33px;
+    height: 20.74px;
+}
+
+.arrow:hover {
+    width: 23.93px;
+    height: 20.74px;
+    background-color: rgb(233, 233, 233);
+    border-radius: 50%;
+    padding: 1px;
+    cursor: pointer;
+}
+
+.help-button {
+    display: none;
+}
+
+.arrow:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.headline-main {
+    font-size: 61px;
+    font-weight: 700;
+    line-height: 73.2px;
+    margin: 0;
+}
+
+.sub-headline {
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 32.4px;
+}
+
+.sub-sub-headline {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.number {
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 32.4px;
+}
+
+.join {
+    color: #82CCEC;
+}
+
+.number-and-headline {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.li-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.li-flexbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 35px;
+}
+
+p {
+    margin-top: 0;
+}
+
+@media screen and (max-width: 920px) {
+    .content {
+        margin-top: 0;
+        margin-left: 0;
+        height: 100vh;
+        width: 100vw;
+        padding: 90px 64px;
+    }
+
+    .headline-p {
+        font-size: 37px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .headline-img-container {
+        padding-right: 0;
+    }
+
+    .headline-p {
+        font-size: 27px;
+    }
+
+    .subtitle-p {
+        font-weight: 700;
+        font-size: 20px;
+    }
+}

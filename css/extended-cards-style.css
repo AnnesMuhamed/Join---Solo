@@ -1,0 +1,279 @@
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.popup-container.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.popup {
+  position: fixed;
+  top: 50%;
+  right: -100%;
+  transform: translateY(-50%);
+  width: 500px;
+  height: auto;
+  background: white;
+  border-radius: 10px;
+  opacity: 1;
+  transition: right 0.5s ease-in-out;
+}
+
+.popup-container.show .popup {
+  right: 25%;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 36px;
+}
+
+.tag-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 24px;
+  border-radius: 8px;
+  width: auto;
+  height: 36px;
+  gap: 10px;
+}
+
+.user-story {
+  background: rgba(0, 56, 255, 1);
+  font-size: 23px;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 27.6px;
+}
+
+.technical-task {
+  background: rgba(31, 215, 193, 1);
+  font-size: 23px;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 27.6px;
+}
+
+.close-button {
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border: none;
+  background-color: #F6F7F8;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  border-radius: 56px;
+  background-color: #efebeb;
+}
+
+.close-icon {
+  width: 13.15px;
+  height: 13.15px;
+  margin-top: 3px;
+  margin-left: 1px;
+}
+
+.popup-title {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 73.2px;
+  margin: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.popup-subtitle {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: 0;
+}
+
+.popup-info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-x: scroll;
+}
+
+.label {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.value {
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 22.8px;
+}
+
+.info-item-date {
+  display: flex;
+  gap: 25px;
+}
+
+.info-item-prio {
+  display: flex;
+  align-items: center;
+}
+
+.priority-container {
+  display: flex;
+  padding: 4px 18px;
+  gap: 10px;
+}
+
+.priority-lable-container {
+  width: 124px;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 18px 4px 18px;
+}
+
+.info-item-assigned {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.assignee-container {
+  width: 445px;
+  display: flex;
+  align-items: baseline;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.assignee-undercontainer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.assignee-initials {
+  display: flex;
+  gap: 10px;
+  width: 42px;
+  height: 42px;
+  border-radius: 45px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.assignee-name {
+  width: 167px;
+  height: 24px;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+#edit-assigned-contacts {
+  display: flex;
+  overflow-x: auto;
+  height: 171px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0px 10px 0px;
+}
+
+.popup-subtasks {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 8px;
+}
+
+.subtasks-label {
+  width: 100%;
+  height: 24px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+
+.subtasks-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 4px;
+}
+
+.subtask-item {
+  display: flex;
+  width: 282px;
+  height: 32px;
+  padding: 6px 16px 6px 16px;
+  gap: 16px;
+}
+
+.subtask-checkbox {
+  cursor: pointer;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  border: 0;
+  background: 0;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.action-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.action-icon-hook {
+  width: 15.49px;
+  height: 11.23px;
+}
+
+.action-button:hover {
+  filter: brightness(0) saturate(1000%) invert(59%) sepia(45%) saturate(3434%) hue-rotate(161deg) brightness(95%) contrast(89%);
+  font-weight: 700;
+}
+
+.editable {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.subtask-input {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.d-none {
+  display: none;
+}
+
+

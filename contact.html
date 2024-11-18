@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/fonts/fonts.css">
+    <link rel="stylesheet" href="css/template.css" />
+    <link rel="stylesheet" href="contact.css" />
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
+    <script src="js/header.js"></script>
+    <link rel="stylesheet" href="css/rp-header-sidebar.css">
+    <link rel="stylesheet" href="rp-contact.css">
+    <link rel="stylesheet" href="rp-addcontact-card.css">
+    <script src="js/firebase.js"></script>
+    <script src="contact.js"></script>
+    <title>Contact</title>
+  </head>
+  <body onload="initContact()">
+    <header
+      class="header"
+      w3-include-html="../templates/header.html"
+    ></header>
+    <aside
+      class="sidebar"
+      w3-include-html="../templates/sidebar.html"
+    ></aside>
+    <div id="Overlay" class="overlay"></div>
+    
+    <div class="contacts">
+      <div id="Contactsection" class="content"></div>
+        <div class="pop-up">
+          <div class="contacts-headline">
+            <span class="first-headline">Contacts</span>
+            <img class="stroke-image" src="assets/img/high-stroke.png" alt="">
+            <span class="second-headline">Better with a team!</span>
+            <img class="rpcontact-bluestroke" src="assets/img/rp-bluestroke.png" alt="">
+          </div>
+          <button class="back-button">
+            <a class="left-arrow" href="../contact/contact.html"><img src="assets/img/arrow-left-line.png" alt=""></a>
+          </button>
+          
+          <div id="popup-section"></div>
+
+          <div class="popup-option-container">
+            <div id="popup-option" class="option" onclick="togglePopupOption()">
+              <img class="option-point-img" src="assets/img/optionpoint.png" alt="">
+            </div>
+          </div>
+
+        </div>
+    </div>
+    
+    <div id="Addcontact" class="add-contact-form">
+        <div id="Contactleft">
+            <div id="Joinlogocontainer">
+                <img class="addcontact-logo" src="assets/img/logo.png" alt="Join Logo">
+            </div>
+            <div id="Addcontacttextcontainer">
+                <span id="Addcontactheader">Add contact</span>
+                <span id="Addcontactsubheader">Tasks are better with a team</span>
+                <div id="Blueline"></div>
+            </div>
+        </div>
+        <div id="Closebuttoncontainer">
+          <button id="Closebutton" onclick="closeContactForm()">X</button>
+      </div>
+      <div class="superior-person-container">
+        <div class="person-container">
+          <img class="person-icon" src="assets/img/person.png" alt="">
+        </div>
+      </div>
+      <div id="Inputfields">
+          <div class="inputfield">
+              <label for="name"></label>
+              <input type="text" id="Name" placeholder="Name">
+              <img class="inputfield-icon-name" src="assets/img/gray-person.png" alt="">
+          </div>
+          <div class="inputfield">
+              <label for="email"></label>
+              <input type="email" id="Email" placeholder="Email">
+              <img class="inputfield-icon-email" src="assets/img/mail.png" alt="">
+          </div>
+          <div class="inputfield">
+              <label for="phone"></label>
+              <input type="tel" id="Phone" placeholder="Phone">
+              <img class="inputfield-icon-tel" src="assets/img/call.png" alt="">
+          </div>
+      </div>
+      <div id="Buttons">
+          <button class="cancelbutton" onclick="closeContactForm()">
+            <span class="cancel">Cancel</span>
+            <img class="x-png" src="assets/img/x.png" alt="">
+          </button>
+          <button class="createbutton" onclick="createContact()">
+            <span class="create-contact">Create contact</span>
+            <img class="hook-png" src="assets/img/hook.png" alt="">
+          </button>
+      </div>
+    </div>
+
+    <div id="Editcontact" class="add-contact-form">
+      <div id="Contactleft">
+          <div id="Joinlogocontainer">
+              <img class="addcontact-logo" src="assets/img/logo.png" alt="Join Logo">
+          </div>
+          <div id="Addcontacttextcontainer">
+              <span id="Addcontactheader">Edit contact</span>
+              <div id="Blueline"></div>
+          </div>
+      </div>
+      <div id="Closebuttoncontainer">
+        <button id="Closebutton" onclick="closeEditForm()">X</button>
+      </div>
+      <div class="superior-person-container">
+      <div class="person-container" id="Personcontainer">
+        <span id="Editforminitials"></span>
+      </div>
+    </div>
+      <div id="Inputfields">
+          <div class="inputfield">
+              <label for="name"></label>
+              <input type="text" id="Editname" placeholder="Name">
+              <img class="inputfield-icon-name" src="assets/img/gray-person.png" alt="">
+          </div>
+          <div class="inputfield">
+              <label for="email"></label>
+              <input type="email" id="Editemail" placeholder="Email">
+              <img class="inputfield-icon-email" src="assets/img/mail.png" alt="">
+          </div>
+          <div class="inputfield">
+              <label for="phone"></label>
+              <input type="tel" id="Editphone" placeholder="Phone">
+              <img class="inputfield-icon-tel" src="assets/img/call.png" alt="">
+          </div>
+      </div>
+      <input type="hidden" id="Editcontactid">
+      <div id="Editbuttons">
+          <button class="editcancelbutton" onclick="closeEditForm()">
+            <span class="cancel">Cancel</span>
+            <img class="x-png" src="assets/img/x.png" alt="">
+          </button>
+          <button class="savebutton" onclick="saveContact()">
+            <span class="create-contact">Save</span>
+            <img class="hook-png" src="assets/img/hook.png" alt="">
+          </button>
+      </div>
+    </div>
+    
+
+    
+
+  </body>
+</html>

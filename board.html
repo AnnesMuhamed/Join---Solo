@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="./css/template.css" />
+    <link rel="stylesheet" href="./css/add-task.css" />
+    <link rel="stylesheet" href="./css/subtask-editor.css" />
+    <link rel="stylesheet" href="./css/board.css" />
+    <link rel="stylesheet" href="./css/extended-cards-style.css" />
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+    <link rel="stylesheet" href="./css/rp-header-sidebar.css" />
+    <link rel="stylesheet" href="./css/rp-extendedcard.css">
+    <link rel="stylesheet" href="./css/rp-new-task.css">
+    <link rel="stylesheet" href="./css/boardTask-popup.css">
+    
+    <title>Board</title>
+  </head>
+
+  <body onload="initBoard()">
+    <header class="header" w3-include-html="./header.html"></header>
+    <aside class="sidebar" w3-include-html="./sidebar.html"></aside>
+   
+    <div id="Overlay" class="overlay"></div>
+    <div id="board-newTask" class="new-task">
+      <button onclick="closeBoardAddTaskForm()" class="close-btn">
+        <img class="close-button-icon" src="assets/img/close.png" alt="Close Button" />
+      </button>
+      <h1 class="board-task-headline">Add Task</h1>
+      <form id="board-add-task-form" class="board-task-form">
+        <!-- Definition Section -->
+        <div class="board-definition">
+          <div class="board-d-flex-col">
+            <label for="board-title" class="required">
+              Title <span style="color: red">*</span>
+            </label>
+            <input
+              class="board-title definition-entry-field"
+              type="text"
+              id="board-title"
+              name="title"
+              placeholder="Enter a title"
+              required
+            />
+          </div>
+          <div class="board-d-flex-col">
+            <label for="board-description">Description</label>
+            <textarea
+              class="description definition-entry-field"
+              id="board-description"
+              name="description"
+              placeholder="Enter a Description"
+            ></textarea>
+          </div>
+          <div class="board-d-flex-col assignment-container">
+            <label for="board-assignment">Assigned to</label>
+            <div class="select-box">
+              <input id="board-search" class="board-assigned-selector definition-entry-field" type="text" name="assignment" placeholder="Select contacts to assign" onkeyup="boardFilterCheckboxes()" />
+              <div class="dropdown-arrow" onclick="boardToggleCheckboxes()"></div>
+            </div>
+            <div id="board-checkboxes" class="checkboxes-container d-none"></div>
+            <div id="board-assigned-contacts" class="assigned-contacts-container"></div>            
+          </div>
+        </div>
+        <svg height="424px" width="2" class="seperator">
+          <line
+            x1="1"
+            y1="0"
+            x2="1"
+            y2="424"
+            style="stroke: #D1D1D1; stroke-width: 1"
+          />
+        </svg>
+        <!-- Properties Section -->
+        <div class="board-properties">
+          <div class="board-d-flex-col">
+            <label for="board-date" class="required">
+              Due date <span style="color: red">*</span>
+            </label>
+            <input
+              class="properties-entry-field board-due-date"
+              type="date"
+              id="board-date"
+              name="date"
+              required
+            />
+          </div>
+          <div class="board-d-flex-col">
+            <label for="radio-button-group">Prio</label>
+            <div id="board-radio-button-group" class="radio-button-group">
+              <input type="radio" id="board-prio-high" name="board-prios" value="3" class="radio-button" />
+              <label for="board-prio-high" class="radio-label" onclick="boardSetPrio('high')">
+                <span>Urgent</span>
+                <img src="assets/img/prio-high.png" />
+              </label>
+          
+              <input type="radio" id="board-prio-med" name="board-prios" value="2" class="radio-button" />
+              <label for="board-prio-med" class="radio-label" onclick="boardSetPrio('medium')">
+                <span>Medium</span>
+                <img src="assets/img/prio-med.png" />
+              </label>
+          
+              <input type="radio" id="board-prio-low" name="board-prios" value="1" class="radio-button" />
+              <label for="board-prio-low" class="radio-label" onclick="boardSetPrio('low')">
+                <span>Low</span>
+                <img src="assets/img/prio-low.png" />
+              </label>
+            </div>
+          </div>          
+          <div class="board-d-flex-col">
+            <label for="board-category" class="required">
+              Category <span style="color: red">*</span>
+            </label>
+            <select
+              class="category properties-entry-field"
+              id="board-category"
+              name="category"
+              required
+            >
+              <option disabled selected hidden>Select Task category</option>
+              <option>Technical Task</option>
+              <option>User Story</option>
+            </select>
+          </div>
+          <div class="board-d-flex-col">
+            <label for="board-subtasks">Subtasks</label>
+            <!-- HTML für das Subtask-Feld und die Buttons -->
+            <div class="subtask-container">
+              <input class="subtasks properties-entry-field" type="text" id="board-subtasks" name="subtasks" placeholder="Add new subtask" />
+              <div id="board-subtask-buttons-container" class="add-subtask-button">
+                <button id="board-add-subtask-button" class="in-line-btn" type="button" onclick="boardConfirmOrCancelSubtask()">
+                  <img src="assets/img/add.png" />
+                </button>
+              </div>
+            </div>
+            <div id="board-subtask-list-container" class="board-subtask-list-container">
+              <ul id="board-subtask-list" class="board-subtask-list"></ul>
+            </div>
+          </div>
+        </div>
+      </form>
+      <!-- Buttons -->
+      <div id="board-buttons" class="board-buttons">
+        <span id="board-requirement" class="requirement">
+          <span style="color: red">*</span>This field is required
+        </span>
+        <div class="btn-container">
+          <button id="board-clear-btn" class="add-task-btn clear-btn" type="button" onclick="boardClearForm()">
+            Clear
+          </button>
+          <button id="board-create-btn" class="add-task-btn create-task-btn" onclick="boardCreateTask(event)">
+            Create Task
+        </button>        
+        </div>
+      </div>
+    </div>    
+    <main class="board-main-container">
+        <div class="headline-and-input">
+          <div onclick="window.location.href = './add-task.html';" class="headline-rp-add-button">
+            <span class="headline-board">Board</span>
+            <button class="add-button-rp"><img src="assets/img/add-button-rp.png" alt="" /></button>
+          </div>
+          <div class="input-and-add-button">
+            <div class="input-container">
+              <input id="Findcards" oninput="searchCards()"  type="text" placeholder="Find Task" class="search-input" />
+              <div class="placeholder"></div>
+              <img src="assets/img/search.icon.png" alt="Search" class="search-icon" />
+            </div>
+            <button onclick="openBoardAddTaskForm()" class="add-button">Add task +</button>
+            <a href="./add-task.html"><button class="open-task-plus"><img src="assets/img/plus-task-mobile.png" alt="" /></button></a>
+          </div>
+      </div>
+      <div class="card-container">
+        <div>
+          <span class="column-title-responsiv">To do<a href="./add-task.html"><img src="assets/img/plus-button.png" alt="add icon" class="add-button-img-column-responsiv" /></a></span> 
+          <span class="column-title">To do<img onclick="openBoardAddTaskForm()" src="assets/img/plus-button.png" alt="add icon" class="add-button-img-column" /></span>
+          <div class="drag-area" id="open" ondrop="moveTo(event, 'open')" ondragover="allowDrop(event);"></div>
+        </div>
+        <div>
+          <span class="column-title-responsiv">To do<a href="./add-task.html"><img src="assets/img/plus-button.png" alt="add icon" class="add-button-img-column-responsiv" /></a></span> 
+          <span class="column-title">In Progress<img onclick="openBoardAddTaskForm()" src="assets/img/plus-button.png" alt="add icon" class="add-button-img-column" /></span>
+          <div class="drag-area" id="in-progress" ondrop="moveTo(event, 'in-progress')" ondragover="allowDrop(event);"></div>
+        </div>
+        <div>
+          <span class="column-title-responsiv">To do<a href="./add-task.html"><img src="assets/img/plus-button.png" alt="add icon" class="add-button-img-column-responsiv" /></a></span> 
+          <span class="column-title">Await feedback<img onclick="openBoardAddTaskForm()" src="assets/img/plus-button.png" alt="add icon" class="add-button-img-column" /></span>
+          <div class="drag-area" id="closed" ondrop="moveTo(event, 'closed')" ondragover="allowDrop(event);"></div>
+        </div>
+        <div>
+          <span class="column-title">Done</span>
+          <div class="drag-area" id="done" ondrop="moveTo(event, 'done')" ondragover="allowDrop(event);"></div>
+        </div>
+      </div>
+      <!-- Pop-Up-Cards start -->
+      <div class="popup-container" id="popup-container" onclick="closePopup()">
+        <div class="popup" id="popup" onclick="event.stopPropagation()">
+        </div>
+      </div>
+      <!-- Pop-Up-Cards end -->
+    </main>
+    <script src="./js/board.js"></script>
+    <script src="./js/subtask-editor.js"></script>
+    <script src="./js/extended-cards-scritp.js"></script>
+    <script src="./js/prio-buttons.js"></script>
+    <script src="./js/add-task.js"></script>
+    <script src="./js/templates/header.js"></script>
+    <script src="./js/firebase.js"></script>
+    <script src="./js/board-add-task.js"></script>
+    
+  </body>
+</html>

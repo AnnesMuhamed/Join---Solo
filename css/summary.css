@@ -1,0 +1,603 @@
+body {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    background-color: #f6f7f8;
+}
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    transition: all 75ms ease-in-out;
+}
+
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+    display: none !important;
+    /* Chrome, Safari, Opera */
+}
+
+/* Summary */
+
+.content {
+    height: calc(100svh - 96px);
+    margin-left: 232px;
+    margin-top: 96px;
+    padding-left: 96px;
+    padding-right: 96px;
+    padding-bottom: 24px;
+    padding-top: 110px;
+    overflow: auto;
+}
+
+.summary-headline {
+    display: flex;
+    height: 73px;
+    gap: 30px;
+    align-items: center;
+}
+
+.stroke-image {
+    height: 59px;
+    border: 3px;
+}
+
+.blue-stroke-image {
+    display: none;
+}
+
+.first-headline {
+    font-weight: 700;
+    font-size: 61px;
+}
+
+.second-headline {
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 32.4px;
+}
+
+.headline-cards-container {
+    display: flex;
+    margin-top: 56px;
+}
+
+.summary-cards {
+    display: flex;
+    flex-direction: column;
+    max-width: 560px;
+    width: 100%;
+    gap: 28px;
+}
+
+.first-card-section {
+    display: flex;
+    height: 168px;
+    gap: 32px;
+}
+
+.link-card-one, .link-card-two {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    width: 264px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0px 0px 4px 0px #0000001a;
+}
+
+.card-one, .card-two {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.link-card-one:hover {
+    background: #2A3647;
+    transform: scale(1.05);
+}
+
+.link-card-one:hover .edit-circle {
+    background: #FFFFFF;
+    border-color: #2A3647;
+}
+
+.link-card-one:hover .edit-image {
+    filter: brightness(0) saturate(100%) invert(19%) sepia(14%) saturate(1161%) hue-rotate(176deg) brightness(93%) contrast(92%);
+}
+
+.link-card-one:hover .todo-container span,
+.link-card-one:hover .todo-container .todo-number {
+    color: #FFFFFF;
+}
+
+.link-card-two:hover {
+    background: #2A3647;
+    transform: scale(1.05);
+}
+
+.link-card-two .hook-circle {
+    background: #FFFFFF;
+    border-color: #2A3647;
+}
+
+.link-card-two:hover .hook-image {
+    filter: invert(29%) sepia(56%) saturate(403%) hue-rotate(168deg) brightness(96%) contrast(95%);
+}
+
+.link-card-two:hover .done-container span,
+.link-card-two:hover .done-container .done-number {
+    color: #FFFFFF;
+}
+
+.edit-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 69px;
+    display: flex;
+    height: 69px;
+    border: 7px solid #FFFFFF;
+    background: #2A3647;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.edit-image {
+    width: 29.94px;
+    height: 22.13px;
+    transition: all 0.3s ease;
+}
+
+.todo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.todo-number {
+    width: 50px;
+    height: 77px;
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 76.8px;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.todo-container span {
+    transition: color 0.3s ease;
+}
+
+.hook-circle {
+    width: 69px;
+    display: flex;
+    height: 69px;
+    border: 7px solid #FFFFFF;
+    background: #2A3647;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.hook-image {
+    display: flex;
+    position: relative;
+    width: 29.94px;
+    height: 22.13px;
+    top: 23.43px;
+    left: 19.53px;
+    transition: all 0.3s ease;
+}
+
+.done-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.done-number {
+    width: 50px;
+    height: 77px;
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 76.8px;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.done-container span {
+    transition: color 0.3s ease;
+}
+
+
+.second-card-section {
+    display: flex;
+    height: 168px;
+    gap: 61px;
+}
+
+.urgent-link {
+    width: 100%;
+    gap: 60px;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0px 0px 4px 0px #0000001a;
+    display: flex;
+    text-decoration: none;
+    color: black;
+}
+
+.urgent-link:hover {
+    background: #2A3647;
+    transform: scale(1.05);
+}
+
+.urgent-link:hover .one-urgent,
+.urgent-link:hover .urgent,
+.urgent-link:hover .date,
+.urgent-link:hover .date-container span {
+    color: #FFFFFF;
+}
+
+.urgent-link:hover img[src="assets/img/high-stroke-gray.png"] {
+    filter: brightness(0) invert(1);
+}
+
+.card-three {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.urgent-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.one-urgent {
+    width: 50px;
+    height: 77px;
+    font-family: Inter;
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 76.8px;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.urgent {
+    transition: color 0.3s ease;
+}
+
+.urgent-stroke {
+    width: 2px;
+    height: 102px;
+    background-color: #d1d1d1;
+}
+
+.date-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 13px;
+}
+
+.date {
+    width: 178px;
+    height: 25px;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 25.2px;
+    text-align: left;
+    transition: color 0.3s ease;
+}
+
+.date-container span {
+    transition: color 0.3s ease;
+}
+
+.second-card-section img {
+    transition: filter 0.3s ease;
+}
+
+.third-card-section {
+    display: flex;
+    height: 168px;
+    gap: 32px;
+}
+
+.task-card-link {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 168px;
+    height: 100%;
+    background-color: white;
+    border-radius: 30px;
+    box-shadow: 0px 0px 4px 0px #0000001a;
+    text-decoration: none;
+    color: black;
+}
+
+.card-four,
+.card-five,
+.card-six {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-card-link:hover {
+    color: white;
+    background: #2A3647;
+    transform: scale(1.05);
+}
+
+.number {
+    font-size: 64px;
+    font-weight: 600;
+    line-height: 76.8px;
+    text-align: center;
+    transition: color 0s ease;
+}
+
+.card-underline {
+    width: 83px;
+    height: 48px;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+    transition: color 0s ease;
+}
+
+
+.greet {
+    display: flex;
+    align-items: center;
+    margin-left: 67px;
+    gap: 3px;
+}
+
+.gm {
+    width: 338px;
+    height: 56px;
+    font-size: 47px;
+    font-weight: 500;
+    line-height: 56.4px;
+    text-align: left;
+}
+
+.sofia {
+    width: 485px;
+    height: 77px;
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 76.8px;
+    text-align: left;
+    color: #29ABE2;
+}
+
+.d-none {
+    display: none;
+}
+
+@media(max-width: 1280px) {
+    .greet {
+        display: none;
+    }
+}
+
+@media(max-width: 1024px) {
+    .content {
+        padding-right: 16px !important;
+    }
+    .summary-headline {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        height: unset;
+        gap: 8px;
+        width: 100%;
+        max-width: 560px;
+    }
+
+    .stroke-image {
+        display: none;
+    }
+
+    .blue-stroke-image {
+        display: block;
+    }
+}
+
+@media(max-width: 920px) {
+    .content {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        height: calc(100svh - 160px);
+        margin-left: 0px;
+        margin-top: 80px;
+        overflow: hidden;
+        padding: 48px 16px 24px 16px;
+    }
+
+    .summary-headline {
+        max-width: 470px;
+    }
+
+    .headline-cards-container {
+        margin-top: 40px;
+    }
+
+    .summary-cards {
+        max-width: 470px;
+    }
+
+    .first-card-section {
+        height: 134px;
+    }
+
+    .todo-number, .one-urgen, .number {
+        font-size: 47px;
+        line-height: 56.4px;
+    }
+
+    .link-card-one, .link-card-two {
+        width: 224px;
+    }
+
+    .second-card-section {
+        height: 134px;
+    }
+
+    .urgent-link {
+        border-radius: 20px;
+        gap: 54px;
+    }
+
+    .urgent-img {
+        width: 50px;
+    }
+
+    .urgent-stroke {
+        height: 82px;
+    }
+
+    .date, .date-container span {
+        font-size: 18px;
+        line-height: 21.6px;
+    }
+
+    .task-card-link {
+        border-radius: 20px;
+    }
+
+    .card-underline {
+        font-size: 16px;
+        line-height: 19.2px;
+    }
+}
+
+@media(max-width: 620px) {
+    .summary-headline {
+        max-width: 396px;
+    }
+
+    .first-headline {
+        font-size: 47px;
+        line-height: 56.4px;
+    }
+
+    .second-headline {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .summary-cards {
+        max-width: 396px;
+    }
+
+    .first-card-section, .second-card-section,
+    .third-card-section {
+        height: 110px;
+    }
+
+    .link-card-one, .link-card-two {
+        width: 186px;
+    }
+
+    .card-one, .card-two {
+        gap: 10px;
+    }
+
+    .edit-circle {
+        width: 59px;
+        height: 59px;
+    }
+
+    .edit-image {
+        width: 18.94px;
+        height: 18.13px;
+    }
+
+    .todo-number {
+        height: 56px;
+    }
+
+    .urgent-link {
+        gap: 40px;
+    }
+
+    .urgent-img {
+        width: 44px;
+    }
+
+    .urgent-stroke {
+        height: 68px;
+    }
+
+    .card-three {
+        gap: 8px;
+    }
+
+    .one-urgent {
+        font-size: 47px;
+        line-height: 56.4px;
+        height: 56px;
+    }
+
+    .date, .date-container span {
+        font-size: 16px;
+        line-height: 19.2px;
+    }
+
+    .card-underline {
+        font-size: 14px;
+        line-height: 16.8px;
+    }
+}
+
+@media(max-width: 475px) {
+    .headline-cards-container {
+        max-width: 396px;
+        width: 100%;
+    }
+
+    .summary-cards {
+        gap: 29px;
+        max-width: unset;
+        width: 100%;
+    }
+}
+
+@media(max-width: 425px) {
+    .urgent-link {
+        gap: 22px;
+    }
+}
+
+@media(max-width: 390px) {
+    .urgent-link {
+        gap: 12px;
+    }
+}
+
+@media(max-width: 390px) {
+    .urgent-link {
+        gap: 8px;
+    }
+}
