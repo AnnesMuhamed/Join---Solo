@@ -177,25 +177,6 @@ function getAssignedContactInitials(firstName, lastName) {
 
 function loadAssignees(task, assigneeContainer) {
   let contacts = JSON.parse(sessionStorage.getItem("contacts"));
-  assigneeContainer.innerHTML = ""; 
-  let assignedContacts = task.assignment ? task.assignment.split(",") : [];
-  assignedContacts.forEach((contactId) => {
-    let currentContact = contacts[contactId];
-    if (currentContact) {
-      let contactColor = currentContact.color || "#000000"; // Verwende die gespeicherte Farbe oder Standardfarbe Schwarz
-      assigneeContainer.innerHTML += `
-        <div class="assignee-undercontainer">
-          <div class="assignee-initials" style="background-color:${contactColor}">
-            ${getAssignedContactInitials(currentContact.firstname, currentContact.lastname)}
-          </div>
-          <span class="assignee-name">${currentContact.firstname} ${currentContact.lastname}</span>
-        </div>`;
-    }
-  });
-}
-
-function loadAssignees(task, assigneeContainer) {
-  let contacts = JSON.parse(sessionStorage.getItem("contacts"));
   assigneeContainer.innerHTML = "";
 
   if (!contacts) {
@@ -381,7 +362,7 @@ function editTask(taskId, idSuffix = '1') {
           </button>
       `;
         populateTaskForm(taskId, idSuffix);
-        popupContainer.classlist.add('show');
+        popupContainer.classList.add('show');
       });
 }
 
@@ -424,18 +405,6 @@ function confirmSubtask(idSuffix) {
   subtaskInput.value = "";
   resetSubtaskButtons(idSuffix);
 }
-
-function saveSelectedContacts() {
-  sessionStorage.setItem("selectedContacts", JSON.stringify(Array.from(selectedContactsSet)));
-}
-
-function loadSelectedContacts() {
-  const storedContacts = JSON.parse(sessionStorage.getItem("selectedContacts")) || [];
-  selectedContacts = new Set(storedContacts);
-  updateAssignedContacts();
-  renderCheckboxesWithColors();
-}
-
 
 function editSubtask(button) {
   const listItem = button.closest('li');
@@ -696,21 +665,6 @@ function toggleCheckboxes() {
   }
 }
 
-function renderCheckboxes() {
-  let contacts = JSON.parse(sessionStorage.getItem('contacts')) || {};
-  let checkboxes = document.getElementById("checkboxes1");
-  checkboxes.innerHTML = "";
-
-  Object.keys(contacts).forEach(id => {
-      let contact = contacts[id];
-      checkboxes.innerHTML += `
-          <label>
-              <input type="checkbox" id="contact-${id}" />
-              ${contact.firstname} ${contact.lastname}
-          </label>`;
-  });
-}
-
 function renderCheckboxesWithColors() {
   const contacts = JSON.parse(sessionStorage.getItem("contacts")) || {};
   const checkboxesContainer = document.getElementById("checkboxes1");
@@ -795,22 +749,6 @@ function removeContactFromAssigned(contactId) {
   if (span) {
     span.remove();
   }
-}
-
-function popupHighlightContact(element, contactId) {
-  const checkbox = document.getElementById(`checkbox-${contactId}`);
-  const checkboxImg = document.getElementById(`checkbox-img-${contactId}`);
-  checkbox.checked = !checkbox.checked;
-  if (checkbox.checked) {
-    selectedContacts.add(contactId);
-    element.classlist.add('highlighted'); 
-    checkboxImg.classlist.add('checked');
-  } else {
-    selectedContacts.delete(contactId);
-    element.classlist.remove('highlighted'); 
-    checkboxImg.classlist.remove('checked'); 
-  }
-  updateAssignedContacts();
 }
 
 function updateAssignedContacts() {
