@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/fonts/fonts.css" />
+    <link rel="stylesheet" href="./css/template.css" />
+    <link rel="stylesheet" href="./css/summary.css">
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
+    <link rel="stylesheet" href="./css/rp-summary.css">
+    <link rel="stylesheet" href="./css/rp-header-sidebar.css">
+    <script src="./js/templates/header.js"></script>
+    <script src="./js/firebase.js"></script>
+    <script src="./js/summary.js" defer></script>
+    <title>Summary User</title>
+</head>
+
+<body onload="init()">
+    <header class="header" w3-include-html="./header.html"></header>
+    
+
+    <section class="section-greet" id="sectionGreet">
+        <div id="greet" class="rp-greet">
+            <span class="rp-gm">Good morning</span>
+            <span id="sofia" class="rp-sofia d-none">Sofia Müller</span>
+        </div>
+    </section>
+    <section class="content" id="content">
+        <div class="summary-headline">
+            <span class="first-headline">Join 360</span>
+            <img class="stroke-image" src="assets/img/high-stroke.png" alt="">
+            <span class="second-headline">Key Metrics a Glance</span>
+            <img class="blue-stroke-image" src="assets/img/rp-bluestroke.png" alt="">
+        </div>
+        <div class="headline-cards-container">
+            <div class="summary-cards">
+                <div class="first-card-section">
+                    <a class="link-card-one" href="board.html?scrollTo=Todo">
+                        <div class="card-one">
+                            <div class="edit">
+                                <div class="edit-circle">
+                                    <img class="edit-image" src="assets/img/edit.png" alt="">
+                                </div>
+                            </div>
+                            <div class="todo-container">
+                                <span id="open-tasks" class="todo-number"></span>
+                                <span class="todo-span">To-do</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a class="link-card-one" href="board.html?scrollTo=Todo">
+                        <div class="card-one">
+                            <div class="edit">
+                                <div class="edit-circle">
+                                    <img class="edit-image" src="assets/img/hook.png" alt="">
+                                </div>
+                            </div>
+                            <div class="todo-container">
+                                <span id="done-tasks" class="todo-number"></span>
+                                <span class="todo-span">Done</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="second-card-section">
+                    <a class="urgent-link" href="board.html?scrollTo=Todo">
+                        <div class="card-three">
+                            <div class="urgent-img-container">
+                                <img class="urgent-img" src="assets/img/Frame 59.png" alt="">
+                            </div>
+                            <div class="urgent-container">
+                                <span id="urgent-tasks" class="one-urgent"></span>
+                                <span class="urgent">Urgent</span>
+                            </div>
+                        </div>
+        
+                        <div class="urgent-stroke">
+                        </div>
+                        <div class="date-container">
+                            <span id="date-tasks" class="date"></span>
+                            <!-- October 16, 2022 -->
+                            <span class="upcoming-span">Upcoming deadline</span>
+                        </div>
+                    </a>
+                </div>
+                <div class="third-card-section">
+                    <a class="task-card-link" href="board.html?scrollTo=Todo">
+                        <div class="card-four">
+                            <span id="total-tasks" class="number"></span>
+                            <span class="card-underline">Tasks in Board</span>
+                        </div>
+                    </a>
+                    <a class="task-card-link" href="board.html?scrollTo=Todo">
+                        <div class="card-five">
+                            <span id="in-progress-tasks" class="number"></span>
+                            <span class="card-underline">Tasks In Progress</span>
+                        </div>
+                    </a>
+                    <a class="task-card-link" href="board.html?scrollTo=Todo">
+                        <div class="card-six">
+                            <span id="closed-tasks" class="number"></span>
+                            <span class="card-underline">Awaiting Feedback</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div id="greet" class="greet">
+                <span class="gm">Good morning</span>
+                <span id="sofia" class="sofia d-none">Sofia Müller</span>
+            </div>
+        </div>
+    </section>
+    <aside class="sidebar" w3-include-html="../sidebar.html"></aside>
+</body>
+
+</html>
