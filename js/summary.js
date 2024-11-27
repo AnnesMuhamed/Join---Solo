@@ -3,11 +3,11 @@
 const PATH_TO_TASKS = "tasks";
 
 async function init() {
-  await includeHTML(); // Lädt Header und Sidebar ein
-  greetUser();         // Begrüßt den Benutzer
-  const tasks = getTasksFromSession(); // Holt die Tasks aus dem Session Storage
+  await includeHTML();
+  greetUser();
+  const tasks = getTasksFromSession();
   if (tasks) {
-    showMetrics(tasks); // Zeigt die Metriken an
+    showMetrics(tasks);
   } else {
     console.error("Keine Aufgaben im Session Storage gefunden.");
   }
