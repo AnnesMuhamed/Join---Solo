@@ -25,7 +25,7 @@
         top: 220px;
     }
 
-    .inputField-icon-name {
+    .inputfield-icon-name {
         left: 300px;
         top: 24px;
     }
@@ -37,12 +37,12 @@
         gap: 22px;
     }
 
-    .inputField-icon-tel {
+    .inputfield-icon-tel {
         top: 179.5px;
         left: 300px;
     }
 
-    .inputField-icon-email {
+    .inputfield-icon-email {
         top: 102px;
         left: 299px;
     }
@@ -99,18 +99,18 @@
         width: 305px;
     }
 
-    .inputField-icon-name, .inputField-icon-name {
+    .inputfield-icon-name, .inputfield-icon-name {
         width: 16px;
         height: 16px;
         left: 274px;
     }
 
-    .inputField-icon-email {
+    .inputfield-icon-email {
         top: 98px;
         left: 274px;
     }
 
-    .inputField-icon-tel {
+    .inputfield-icon-tel {
         top: 171.5px;
         left: 274px;
     }
@@ -160,7 +160,7 @@
     #editContact, #addContact {
         width: 396px;
         height: 760px;
-        top: 500px;
+        top: 444px;
         left: 176%;
         box-shadow: 0px 0px 4px 0px #0000001A;
         flex-direction: column;
@@ -220,7 +220,7 @@
         gap: 12px;
     }
 
-    .inputField {
+    .inputfield {
         display: flex;
         flex-direction: column;
         width: 364px;
@@ -233,7 +233,7 @@
         padding: 13px 21px 13px 21px;
     }
 
-    .inputField-icon-name {
+    .inputfield-icon-name {
         position: absolute;
         width: 16px;
         height: 16px;
@@ -241,7 +241,7 @@
         left: 353px;
     }
 
-    .inputField-icon-email {
+    .inputfield-icon-email {
         position: absolute;
         width: 20px;
         height: 16px;
@@ -249,7 +249,7 @@
         left: 349px;
     }
 
-    .inputField-icon-tel {
+    .inputfield-icon-tel {
         position: absolute;
         width: 18px;
         height: 18px;
@@ -257,7 +257,7 @@
         left: 349px;
     }
 
-    .inputField {
+    .inputfield {
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -366,7 +366,7 @@
         left: 101px;
     }
 
-    .inputField-icon-name, .inputField-icon-email, .inputField-icon-tel {
+    .inputfield-icon-name, .inputfield-icon-email, .inputfield-icon-tel {
         left: 285px;
     }
 

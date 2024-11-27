@@ -488,7 +488,6 @@ body.modal-open {
 .inputfield {
     display: flex;
     flex-direction: column;
-    width: 100%;
     gap: 8px;
 }
 
@@ -559,7 +558,7 @@ body.modal-open {
     left: 742px;
 }
 
-.cancelbutton {
+.cancelButton {
     display: flex;
     width: 126px;
     height: 56px;
@@ -572,7 +571,7 @@ body.modal-open {
     transition: all 0.1s ease;
 }
 
-.cancelbutton:hover {
+.cancelButton:hover {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
     border-color: #29ABE2;
     color: #29ABE2;
@@ -621,7 +620,7 @@ body.modal-open {
 
 
 
-.createbutton {
+.createButton {
     width: 214px;
     height: 57px;
     padding: 16px;
@@ -641,7 +640,7 @@ body.modal-open {
     justify-content: center;
 }
 
-.createbutton:hover {
+.createButton:hover {
     background: #29ABE2;
     border-color: none;
     box-shadow: 0px 4px 0px 0px #0000001A;
@@ -780,7 +779,7 @@ body.modal-open {
     border-width: 0px;
 }
 
-.rpcontact-bluestroke {
+.rpcontact-blueStroke {
     display: none;
 }
 
