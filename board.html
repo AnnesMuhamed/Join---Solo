@@ -22,36 +22,23 @@
     <header class="header" w3-include-html="./header.html"></header>
     <aside class="sidebar" w3-include-html="./sidebar.html"></aside>
    
-    <div id="Overlay" class="overlay"></div>
+    <div id="overlay" class="overlay"></div>
     <div id="board-newTask" class="new-task">
       <button onclick="closeBoardAddTaskForm()" class="close-btn">
         <img class="close-button-icon" src="assets/img/close.png" alt="Close Button" />
       </button>
       <h1 class="board-task-headline">Add Task</h1>
       <form id="board-add-task-form" class="board-task-form">
-        <!-- Definition Section -->
         <div class="board-definition">
           <div class="board-d-flex-col">
             <label for="board-title" class="required">
               Title <span style="color: red">*</span>
             </label>
-            <input
-              class="board-title definition-entry-field"
-              type="text"
-              id="board-title"
-              name="title"
-              placeholder="Enter a title"
-              required
-            />
+            <input class="board-title definition-entry-field" type="text" id="board-title" name="title" placeholder="Enter a title" required />
           </div>
           <div class="board-d-flex-col">
             <label for="board-description">Description</label>
-            <textarea
-              class="description definition-entry-field"
-              id="board-description"
-              name="description"
-              placeholder="Enter a Description"
-            ></textarea>
+            <textarea class="description definition-entry-field" id="board-description" name="description" placeholder="Enter a Description"></textarea>
           </div>
           <div class="board-d-flex-col assignment-container">
             <label for="board-assignment">Assigned to</label>
@@ -64,27 +51,14 @@
           </div>
         </div>
         <svg height="424px" width="2" class="seperator">
-          <line
-            x1="1"
-            y1="0"
-            x2="1"
-            y2="424"
-            style="stroke: #D1D1D1; stroke-width: 1"
-          />
+          <line x1="1" y1="0"  x2="1" y2="424" style="stroke: #D1D1D1; stroke-width: 1" />
         </svg>
-        <!-- Properties Section -->
         <div class="board-properties">
           <div class="board-d-flex-col">
             <label for="board-date" class="required">
               Due date <span style="color: red">*</span>
             </label>
-            <input
-              class="properties-entry-field board-due-date"
-              type="date"
-              id="board-date"
-              name="date"
-              required
-            />
+            <input class="properties-entry-field board-due-date" type="date" id="board-date" name="date" required />
           </div>
           <div class="board-d-flex-col">
             <label for="radio-button-group">Prio</label>
@@ -112,12 +86,7 @@
             <label for="board-category" class="required">
               Category <span style="color: red">*</span>
             </label>
-            <select
-              class="category properties-entry-field"
-              id="board-category"
-              name="category"
-              required
-            >
+            <select class="category properties-entry-field" id="board-category" name="category" required>
               <option disabled selected hidden>Select Task category</option>
               <option>Technical Task</option>
               <option>User Story</option>
@@ -125,7 +94,6 @@
           </div>
           <div class="board-d-flex-col">
             <label for="board-subtasks">Subtasks</label>
-            <!-- HTML für das Subtask-Feld und die Buttons -->
             <div class="subtask-container">
               <input class="subtasks properties-entry-field" type="text" id="board-subtasks" name="subtasks" placeholder="Add new subtask" />
               <div id="board-subtask-buttons-container" class="add-subtask-button">
@@ -140,7 +108,6 @@
           </div>
         </div>
       </form>
-      <!-- Buttons -->
       <div id="board-buttons" class="board-buttons">
         <span id="board-requirement" class="requirement">
           <span style="color: red">*</span>This field is required
@@ -192,12 +159,10 @@
           <div class="drag-area" id="done" ondrop="moveTo(event, 'done')" ondragover="allowDrop(event);"></div>
         </div>
       </div>
-      <!-- Pop-Up-Cards start -->
       <div class="popup-container" id="popup-container" onclick="closePopup()">
         <div class="popup" id="popup" onclick="event.stopPropagation()">
         </div>
       </div>
-      <!-- Pop-Up-Cards end -->
     </main>
     <script src="./js/board.js"></script>
     <script src="./js/subtask-editor.js"></script>
@@ -207,6 +172,5 @@
     <script src="./js/templates/header.js"></script>
     <script src="./js/firebase.js"></script>
     <script src="./js/board-add-task.js"></script>
-    
   </body>
 </html>
