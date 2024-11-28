@@ -126,18 +126,18 @@ body {
     transform: translateY(-50%);
     width: 16px;
     height: 18px;
-    background: url('../img/lock.png') no-repeat center;
+    background: url('../assets/img/lock.png') no-repeat center;
     background-size: contain;
     cursor: pointer;
 }
 
 input[type="password"]:not(:placeholder-shown) ~ .password-icon {
-    background: url('../img/visibility_off.png') no-repeat center;
+    background: url('../assets/img/visibility_off.png') no-repeat center;
     background-size: contain;
 }
 
 .toggle-password-checkbox:checked ~ .password-icon {
-    background: url('../img/visibility.png') no-repeat center;
+    background: url('../assets/img/visibility.png') no-repeat center;
     background-size: contain;
 }
 
@@ -164,7 +164,6 @@ input[type="password"]:focus-visible {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 34px;
     gap: 8px;
     width: 100%;
     height: 24px;
@@ -194,14 +193,14 @@ input[type="password"]:focus-visible {
     display: inline-block;
     width: 20px;
     height: 20px;
-    background-image: url('../img/checkbox.png');
+    background-image: url('../assets/img/checkbox.png');
     background-size: cover;
     cursor: pointer;
     margin-right: 5px;
 }
 
 .custom-checkbox:checked + label .checkbox-custom {
-    background-image: url('../img/checked.png');
+    background-image: url('../assets/img/checked.png');
 }
 
 .checkbox-custom:hover {
@@ -218,7 +217,6 @@ input[type="password"]:focus-visible {
     width: 126px;
     height: 55px;
     padding: 15px;
-    margin-top: 34px;
     border-radius: 8px;
     background: #2A3647;
     color: white;
