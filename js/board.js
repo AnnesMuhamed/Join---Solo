@@ -293,9 +293,9 @@ function createPrio(key, task) {
 
   if (task.priority != null) {
     const images = {
-      1: "../assets/img/prio-low.png",
-      2: "../assets/img/Prio media.png",
-      3: "../assets/img/prio-high.png",
+      1: "./assets/img/prio-low.png",
+      2: "./assets/img/Prio media.png",
+      3: "./assets/img/prio-high.png",
     };
     prioImage.src = images[task.priority];
     prioImage.alt = `Priority ${task.priority}`;

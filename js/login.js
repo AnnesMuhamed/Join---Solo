@@ -9,19 +9,19 @@ function loginPage() {
     logInPage.innerHTML = /*html*/ `
     <div id="overlay" class="overlay">
         <div id="logo-container">
-            <img class="dark-logo" src="../assets/img/loginLogo.png" alt="Logo" id="main-logo-dark">
-            <img class="white-logo" src="../assets/img/login-logo-rp.png" alt="Logo" id="main-logo-white">
+            <img class="dark-logo" src="./assets/img/loginLogo.png" alt="Logo" id="main-logo-dark">
+            <img class="white-logo" src="./assets/img/login-logo-rp.png" alt="Logo" id="main-logo-white">
         </div>
     </div>
     <div id="login-page" class="hidden">
         <div class="login-headline-container">
             <h1 class="login-headline">Log in</h1>
-            <img class="blue-line" src="../assets/img/Vector 5.png" alt="">
+            <img class="blue-line" src="./assets/img/Vector 5.png" alt="">
         </div>
         <form id="login-form" onsubmit="handleLogin(event)">
             <label class="input-container">
                 <input type="email" id="username" minlength="9" placeholder="Email" required oninput="validateInputs()">
-                <img src="../assets/img/mail.png" alt="Email Icon" class="input-icon">
+                <img src="./assets/img/mail.png" alt="Email Icon" class="input-icon">
             </label>
             <label class="input-container">
                 <input type="password" id="password" placeholder="Password" minlength="4" required oninput="toggleIconOnInput(this)">

@@ -8,7 +8,7 @@ function getSubtask() {
 function inlineSubtaskButton(type) {
   return `
 		<button id="${type}-subtask-button" class="in-line-btn" type="button">
-			<img src="../assets/img/${type}.png"/>
+			<img src="./assets/img/${type}.png"/>
 		</button>
 	`;
 }
@@ -16,7 +16,7 @@ function inlineSubtaskButton(type) {
 function inSubtaskListButton(type) {
   return `
 		<button class="${type}-subtask-button in-line-btn" type="button">
-			<img src="../assets/img/${type}.png"/>
+			<img src="./assets/img/${type}.png"/>
 		</button>
 	`;
 }
@@ -36,7 +36,7 @@ function clearSubtaskInput() {
   // Buttons für neue Subtasks zurücksetzen
   subtaskButtonContainer.innerHTML = `
     <button id="add-subtask-button" class="in-line-btn" type="button" onclick="confirmOrCancelSubtask()">
-      <img src="../assets/img/add.png"/>
+      <img src="./assets/img/add.png"/>
     </button>
   `;
 }
@@ -53,11 +53,11 @@ function confirmOrCancelSubtask() {
   if (subtaskInput.value.trim() !== "") {
     subtaskButtonContainer.innerHTML = `
       <button class="in-line-btn" type="button" onclick="clearSubtaskInput()">
-        <img src="../assets/img/clear.png"/>
+        <img src="./assets/img/clear.png"/>
       </button>
       ${verticalSeparator("1px", "24px", "#D1D1D1")}
       <button class="in-line-btn" type="button" onclick="renderSubtask()">
-        <img src="../assets/img/check.png"/>
+        <img src="./assets/img/check.png"/>
       </button>
     `;
   }
@@ -77,11 +77,11 @@ function renderSubtask() {
       <span>${subtask}</span>
       <div class="subtaskli-buttons-container">
         <button class="in-line-btn" type="button" onclick="editSubtask(this)">
-          <img src="../assets/img/edit.png"/>
+          <img src="./assets/img/edit.png"/>
         </button>
         ${verticalSeparator("1px", "24px", "#A8A8A8")}
         <button class="in-line-btn" type="button" onclick="deleteSubtask(this)">
-          <img src="../assets/img/delete.png"/>
+          <img src="./assets/img/delete.png"/>
         </button>
       </div>
     `;

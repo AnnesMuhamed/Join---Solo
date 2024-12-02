@@ -96,7 +96,7 @@ function loadSubtasks(task, subtasksList, taskId) {
     subtasks.forEach((subtask, index) => {
       let key = Object.keys(subtask)[0];
       let isChecked = subtask[key] === "done";
-      let checkboxImg = isChecked ? "../assets/img/checked.png" : "../assets/img/checkbox.png";
+      let checkboxImg = isChecked ? "./assets/img/checked.png" : "./assets/img/checkbox.png";
       subtasksList.innerHTML += `
         <div class="subtask-popup ${isChecked ? 'checked' : ''}" data-subtask-id="${taskId}-${index}">
           <div class="subtask-checkbox" onclick="toggleSubtaskCheck('${taskId}', ${index});">
@@ -158,11 +158,11 @@ function determineTaskPriority(task, priorityLabel, priorityIcon) {
 function getPriorityIcon(priority) {
   switch (priority) {
     case "1":
-      return "../assets/img/prio-low.png";
+      return "./assets/img/prio-low.png";
     case "2":
-      return "../assets/img/Prio media.png";
+      return "./assets/img/Prio media.png";
     case "3":
-      return "../assets/img/prio-high.png";
+      return "./assets/img/prio-high.png";
     default:
       return "";
   }
@@ -219,8 +219,8 @@ function toggleSubtaskCheck(taskId, subtaskIndex) {
   sessionStorage.setItem('tasks', JSON.stringify(tasks));
 
   let checkboxImg = subtasks[subtaskIndex][subtaskKey] === "done"
-      ? "../assets/img/checked.png"
-      : "../assets/img/checkbox.png";
+      ? "./assets/img/checked.png"
+      : "./assets/img/checkbox.png";
   
   let checkboxElement = document.getElementById(`checkbox-img-${taskId}-${subtaskIndex}`);
   if (checkboxElement) {
@@ -302,7 +302,7 @@ function editTask(taskId, idSuffix = '1') {
     .then(function () {
         popupContent.innerHTML = /*html*/ `
       <button class="popup-cencel-button" onclick="closePopup()">
-            <img src="../assets/img/close.png" alt="Close" class="action-icon-x">
+            <img src="./assets/img/close.png" alt="Close" class="action-icon-x">
           </button>
         <form id="edit-task-form${idSuffix}" class="edit-task-form">
           <div class="d-flex-col inpopup">
@@ -325,11 +325,11 @@ function editTask(taskId, idSuffix = '1') {
             <label>Priority</label>
             <div id="radio-button-group-edit${idSuffix}" class="radio-button-group${idSuffix}">
               <input type="radio" id="prio-high${idSuffix}" name="prios" value="3" class="radio-button${idSuffix}">
-              <label for="prio-high" class="radio-label${idSuffix}"><span>Urgent</span><img class="rp-prio-img" src="../assets/img/prio-high.png"></label>
+              <label for="prio-high" class="radio-label${idSuffix}"><span>Urgent</span><img class="rp-prio-img" src="./assets/img/prio-high.png"></label>
               <input type="radio" id="prio-med${idSuffix}" name="prios" value="2" class="radio-button${idSuffix}">
-              <label for="prio-med" class="radio-label${idSuffix}"><span>Medium</span><img class="rp-prio-img" src="../assets/img/prio-med.png"></label>
+              <label for="prio-med" class="radio-label${idSuffix}"><span>Medium</span><img class="rp-prio-img" src="./assets/img/prio-med.png"></label>
               <input type="radio" id="prio-low${idSuffix}" name="prios" value="1" class="radio-button${idSuffix}">
-              <label for="prio-low" class="radio-label${idSuffix}"><span>Low</span><img class="rp-prio-img" src="../assets/img/prio-low.png"></label>
+              <label for="prio-low" class="radio-label${idSuffix}"><span>Low</span><img class="rp-prio-img" src="./assets/img/prio-low.png"></label>
             </div>
           </div>
           <div class="d-flex-col assignment-container inpopup">
@@ -349,7 +349,7 @@ function editTask(taskId, idSuffix = '1') {
             <input class="properties-entry-field popup-subtaskinput" type="text" id="subtask-input${idSuffix}" placeholder="Add new subtask">
           <div id="subtask-buttons-container${idSuffix}" class="add-subtask-button">
           <button id="add-subtask-button${idSuffix}" class="in-line-btn" type="button" onclick="showSubtaskButtons('${idSuffix}')">
-            <img src="../assets/img/add.png">
+            <img src="./assets/img/add.png">
           </button>
           </div>
         </div>
@@ -358,7 +358,7 @@ function editTask(taskId, idSuffix = '1') {
         </form>
         <button class="popup-save-button" onclick="saveEditedTask('${taskId}')">
           <span class="action-label">Ok</span>
-          <img src="../assets/img/hook.png" alt="Save" class="action-icon-hook"> 
+          <img src="./assets/img/hook.png" alt="Save" class="action-icon-hook"> 
           </button>
       `;
         populateTaskForm(taskId, idSuffix);
@@ -371,8 +371,8 @@ function showSubtaskButtons(idSuffix) {
   const buttonsContainer = document.getElementById(`subtask-buttons-container${idSuffix}`);
   if (subtaskInput.value.trim()) {
     buttonsContainer.innerHTML = `
-      <button class="sutbtask-hover-btn" onclick="clearSubtaskInput('${idSuffix}')"><img src="../assets/img/close.png" alt="Save" class=""></button>
-      <button class="sutbtask-hover-btn" onclick="confirmSubtask('${idSuffix}', event)"><img src="../assets/img/success.png" alt="Save" class=""> </button>
+      <button class="sutbtask-hover-btn" onclick="clearSubtaskInput('${idSuffix}')"><img src="./assets/img/close.png" alt="Save" class=""></button>
+      <button class="sutbtask-hover-btn" onclick="confirmSubtask('${idSuffix}', event)"><img src="./assets/img/success.png" alt="Save" class=""> </button>
     `;
   } else {
   }
@@ -392,11 +392,11 @@ function confirmSubtask(idSuffix) {
     <span>${newSubtaskValue}</span>
     <div class="subtask-li-btn-container">
       <button class="sutbtask-hover-btn" onclick="editSubtask(this, event)">
-        <img src="../assets/img/edit-black.png" alt="Edit">
+        <img src="./assets/img/edit-black.png" alt="Edit">
       </button>
       ${verticalSeparator("1px", "24px", "#A8A8A8")}
       <button class="sutbtask-hover-btn" onclick="deleteSubtask(this)">
-        <img src="../assets/img/delete.png" alt="Delete">
+        <img src="./assets/img/delete.png" alt="Delete">
       </button>
     </div>
   `;
@@ -421,7 +421,7 @@ function editSubtask(button) {
   input.value = subtaskText; 
   input.classList.add("edit-input");
   const saveButton = document.createElement("button");
-  saveButton.innerHTML = `<img src="../assets/img/success.png" alt="Save">`;
+  saveButton.innerHTML = `<img src="./assets/img/success.png" alt="Save">`;
   saveButton.classList.add("save-button");
   saveButton.onclick = function (event) {
     event.preventDefault();
@@ -429,7 +429,7 @@ function editSubtask(button) {
   };
 
   const deleteButton = document.createElement("button");
-  deleteButton.innerHTML = `<img src="../assets/img/delete.png" alt="Delete">`;
+  deleteButton.innerHTML = `<img src="./assets/img/delete.png" alt="Delete">`;
   deleteButton.classList.add("delete-button");
   deleteButton.onclick = function (event) {
     event.preventDefault();
@@ -459,7 +459,7 @@ function resetSubtaskButtons(idSuffix) {
   const subtaskButtonsContainer = document.getElementById(`subtask-buttons-container${idSuffix}`);
   subtaskButtonsContainer.innerHTML = `
     <button id="add-subtask-button${idSuffix}" class="in-line-btn" type="button" onclick="showSubtaskButtons('${idSuffix}')">
-      <img src="../assets/img/add.png">
+      <img src="./assets/img/add.png">
     </button>
   `;
 }
@@ -499,9 +499,9 @@ function populateTaskForm(taskId, idSuffix) {
         <li class="subtask-list-element">
           <span>${key}</span>
           <div class="subtask-li-btn-container">
-            <button class="sutbtask-hover-btn" onclick="editSubtask(this, '${idSuffix}')"><img src="../assets/img/edit-black.png" alt="Edit"></button>
+            <button class="sutbtask-hover-btn" onclick="editSubtask(this, '${idSuffix}')"><img src="./assets/img/edit-black.png" alt="Edit"></button>
             ${verticalSeparator("1px", "24px", "#A8A8A8")}
-            <button class="sutbtask-hover-btn" onclick="deleteSubtask(this, '${idSuffix}')"><img src="../assets/img/delete.png" alt="Delete"></button>
+            <button class="sutbtask-hover-btn" onclick="deleteSubtask(this, '${idSuffix}')"><img src="./assets/img/delete.png" alt="Delete"></button>
           </div>
         </li>
       `;
@@ -623,7 +623,7 @@ function renderInfoPopup(taskId){
   return /*html*/`
       <div class="popup-header">
             <div class="tag-container" id="tag-container"><span class="tag" id="Tag"></span></div>
-            <button class="close-button" onclick="closePopup()"><img src="../assets/img/close.png" alt="Close" class="close-icon" /></button>
+            <button class="close-button" onclick="closePopup()"><img src="./assets/img/close.png" alt="Close" class="close-icon" /></button>
           </div>
           <div class="popup-info">
           <h1 class="popup-title" id="popup-title"></h1>
@@ -645,9 +645,9 @@ function renderInfoPopup(taskId){
             </div>
           </div>
           <div class="popup-actions">
-            <button class="action-button" onclick="deleteTask('${taskId}')"><img src="../assets/img/delete.png" alt="Delete" class="action-icon" /><span class="action-label">Delete</span></button>
-            <img src="../assets/img/high-stroke-gray.png" alt="Separator" class="action-separator" />
-            <button class="action-button" onclick="editTask('${taskId}')"><img src="../assets/img/edit-black.png" alt="Edit" class="action-icon" /><span class="action-label">Edit</span></button>
+            <button class="action-button" onclick="deleteTask('${taskId}')"><img src="./assets/img/delete.png" alt="Delete" class="action-icon" /><span class="action-label">Delete</span></button>
+            <img src="./assets/img/high-stroke-gray.png" alt="Separator" class="action-separator" />
+            <button class="action-button" onclick="editTask('${taskId}')"><img src="./assets/img/edit-black.png" alt="Edit" class="action-icon" /><span class="action-label">Edit</span></button>
         </div>`;
 }
 
@@ -797,11 +797,11 @@ function saveSubtask(listItem, newValue) {
     <span>${newValue}</span>
     <div class="subtask-li-btn-container">
       <button class="sutbtask-hover-btn" onclick="editSubtask(this, '1')">
-        <img src="../assets/img/edit-black.png" alt="Edit">
+        <img src="./assets/img/edit-black.png" alt="Edit">
       </button>
       ${verticalSeparator("1px", "24px", "#A8A8A8")}
       <button class="sutbtask-hover-btn" onclick="deleteSubtask(this)">
-        <img src="../assets/img/delete.png" alt="Delete">
+        <img src="./assets/img/delete.png" alt="Delete">
       </button>
     </div>
   `;

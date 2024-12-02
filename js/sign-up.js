@@ -22,14 +22,14 @@ function signUpInnerHTML() {
     const signUp = document.getElementById('sectionSignUp');
     signUp.innerHTML = /*html*/`
     <div class="logo-container">
-        <img src="../assets/img/loginLogo.png" alt="Logo" class="main-logo">
+        <img src="./assets/img/loginLogo.png" alt="Logo" class="main-logo">
     </div>
 
     <div class="signup-container">
         <div class="form-container">
             <div class="header-container">
                 <a href="../index.html">    
-                    <img src="../assets/img/arrow-left-line.png" alt="Zurück" class="back-arrow">
+                    <img src="./assets/img/arrow-left-line.png" alt="Zurück" class="back-arrow">
                 </a>
                 <div class="header">Sign Up</div>
                 <div class="divider">
@@ -39,11 +39,11 @@ function signUpInnerHTML() {
             <form id="sign-up-form" class="form" onsubmit="handleSignUp(event)">
                 <label class="input-container">
                     <input type="text" id="first-name" placeholder="First Name Last Name" minlength="2" required>
-                    <img src="../assets/img/gray-person.png" alt="Name Icon" class="input-icon">
+                    <img src="./assets/img/gray-person.png" alt="Name Icon" class="input-icon">
                 </label>
                 <label class="input-container">
                     <input type="email" id="email" placeholder="Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$" required>
-                    <img src="../assets/img/mail.png" alt="Email Icon" class="input-icon">
+                    <img src="./assets/img/mail.png" alt="Email Icon" class="input-icon">
                 </label>
                 <label class="input-container">
                     <input type="password" id="password" placeholder="Password" minlength="4" required>

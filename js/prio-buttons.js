@@ -27,22 +27,22 @@ function radioButtonsSelectState() {
 function changeRadioImg(radio) {
   let img = radio.nextElementSibling.querySelector("img");
   if (radio.value === "3") {
-    img.src = "../assets/img/prio-high-selected.png";
+    img.src = "./assets/img/prio-high-selected.png";
   } else if (radio.value === "2") {
-    img.src = "../assets/img/prio-med-selected.png";
+    img.src = "./assets/img/prio-med-selected.png";
   } else if (radio.value === "1") {
-    img.src = "../assets/img/prio-low-selected.png";
+    img.src = "./assets/img/prio-low-selected.png";
   }
 }
 
 function resetRadioImg(radio) {
   let img = radio.nextElementSibling.querySelector("img");
   if (radio.value === "3") {
-    img.src = "../assets/img/prio-high.png";
+    img.src = "./assets/img/prio-high.png";
   } else if (radio.value === "2") {
-    img.src = "../assets/img/prio-med.png";
+    img.src = "./assets/img/prio-med.png";
   } else if (radio.value === "1") {
-    img.src = "../assets/img/prio-low.png";
+    img.src = "./assets/img/prio-low.png";
   }
 }
 
