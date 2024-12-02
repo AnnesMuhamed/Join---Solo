@@ -4,32 +4,23 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Help</title>
 		<link rel="stylesheet" href="assets/fonts/fonts.css">
-		<link rel="stylesheet" href="css/template.css" />
-		<link rel="stylesheet" href="help.css">
+		<link rel="stylesheet" href="./css/template.css" />
+		<link rel="stylesheet" href="./css/help.css">
 		<link rel="icon" type="image/x-icon" href="assets/img/favicon.png">
-		<script src="js/header.js"></script>
-		<link rel="stylesheet" href="css/rp-header-sidebar.css">
-		<link rel="stylesheet" href="rp-help.css">
-		<script src="js/firebase.js"></script>
-		<script src="help.js"></script>
+		<link rel="stylesheet" href="./css/rp-header-sidebar.css">
+		<link rel="stylesheet" href="./css/rp-help.css">
+		<title>Help</title>
 	</head>
 
 	<body onload="initHelp()">
-		<header
-				class="header"
-				w3-include-html="../templates/header.html"
-				></header>
-		<aside
-				class="sidebar"
-				w3-include-html="../templates/sidebar.html"
-				></aside>
+		<header class="header" w3-include-html="./header.html"></header>
+		<aside class="sidebar" w3-include-html="./sidebar.html"></aside>
 
 		<div class="main-container content">
 			<div class="headline-and-arrow">
 				<p class="headline-main">Help</p>
-				<img onclick="goBack()" class="arrow" src="assets/img/help/back-arrow-help.png">
+				<img onclick="goBack()" class="arrow" src="assets/img/arrow-left-line.png">
 			</div>
 			<div class="span-container">
 				<p>Welcome to the help page for <span class="join">Join</span>, your guide to using our kanban project
@@ -120,6 +111,10 @@
 			</div>
 		</div>
 		</div>
-	</body>
 
+		
+		<script src="./js/help.js"></script>
+		<script src="./js/templates/header.js"></script>
+		<script src="./js/firebase.js"></script>
+	</body>
 </html>

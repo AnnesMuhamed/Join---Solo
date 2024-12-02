@@ -20,7 +20,7 @@ function showCustomAlert(message) {
 
 function signUpInnerHTML() {
     const signUp = document.getElementById('sectionSignUp');
-    signUp.innerHTML = `
+    signUp.innerHTML = /*html*/`
     <div class="logo-container">
         <img src="../assets/img/loginLogo.png" alt="Logo" class="main-logo">
     </div>
@@ -67,8 +67,8 @@ function signUpInnerHTML() {
         </div>
     </div>
     <div class="link-container">
-        <a class="policy-notice" href="#">Privacy Policy</a>
-        <a class="policy-notice" href="#">Legal notice</a>
+        <a class="policy-notice" href="./privacy-policy.html">Privacy Policy</a>
+        <a class="policy-notice" href="./legal-notice.html">Legal notice</a>
     </div>
     `;
 }
