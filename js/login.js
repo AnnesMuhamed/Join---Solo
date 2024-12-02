@@ -1,11 +1,16 @@
-function loginPage() {
-    let logInPage = document.getElementById('sectionLogin');
+function initIndex() {
+    loginPage();
+    initialize();
+}
 
-    logInPage.innerHTML = `
+function loginPage() {
+    let logInPage = document.getElementById('sectionlogin');
+
+    logInPage.innerHTML = /*html*/ `
     <div id="overlay" class="overlay">
         <div id="logo-container">
             <img class="dark-logo" src="../assets/img/loginLogo.png" alt="Logo" id="main-logo-dark">
-            <img class="white-logo" src="../assets/img/template/login-logo-rp.png" alt="Logo" id="main-logo-white">
+            <img class="white-logo" src="../assets/img/login-logo-rp.png" alt="Logo" id="main-logo-white">
         </div>
     </div>
     <div id="login-page" class="hidden">

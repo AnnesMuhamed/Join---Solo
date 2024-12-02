@@ -10,7 +10,7 @@ html {
   box-sizing: border-box;
 }
 
-#sectionLogin {
+#sectionlogin {
   display: flex;
   flex-direction: column;
   align-items: center;
