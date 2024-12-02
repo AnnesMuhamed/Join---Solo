@@ -25,8 +25,8 @@ function loginPage() {
             </label>
             <label class="input-container">
                 <input type="password" id="password" placeholder="Password" minlength="4" required oninput="toggleIconOnInput(this)">
-                <span class="lock-icon"></span> <!-- Schloss-Icon -->
-                <span class="password-icon hidden" onclick="togglePasswordVisibility('password', this)"></span> <!-- Augen-Icon -->
+                <span class="lock-icon"></span>
+                <span class="password-icon hidden" onclick="togglePasswordVisibility('password', this)"></span>
             </label>
             <label class="option" for="option">
                 <input type="checkbox" name="option" id="option" class="custom-checkbox">
