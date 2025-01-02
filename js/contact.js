@@ -19,52 +19,31 @@ async function renderContacts() {
     let contacts = await loadData('contacts');
     let contactSection = document.getElementById('contactSection');
     let currentLetter = '';
-
+  
     let contactsArray = Object.entries(contacts).map(([id, contact]) => ({ id, ...contact }));
     contactsArray = contactsArray.filter(contact => contact && contact.firstName);
     contactsArray.sort((a, b) => a.firstName.localeCompare(b.firstName));
-
+  
     let alphabetSections = [];
-
-    for (let i = 0; i < contactsArray.length; i++) {
-        let contact = contactsArray[i];
-        let firstLetter = contact.firstName.charAt(0).toUpperCase();
-        
-        if (firstLetter !== currentLetter) {
-            if (currentLetter !== '') {
-                alphabetSections.push(`<div class="separator"></div>`);
-            }
-            currentLetter = firstLetter;
-            alphabetSections.push(`
-                <div class="alphabet-container">
-                    <span>${currentLetter}</span>
-                </div>
-            `);
+  
+    for (let contact of contactsArray) {
+      let firstLetter = contact.firstName.charAt(0).toUpperCase();
+      
+      if (firstLetter !== currentLetter) {
+        if (currentLetter !== '') {
+          alphabetSections.push(generateSeparatorTemplate());
         }
-        let color = contact.color;
-        alphabetSections.push(`
-            <div class="contact-item" data-id="${contact.id}" data-first-name="${contact.firstName}" data-last-name="${contact.lastName}" data-username="${contact.username}" data-phone="${contact.phone}" data-color="${color}" onclick="highlightContact(this); contactPopUp('${contact.id}', '${contact.firstName}', '${contact.lastName}', '${contact.username}', '${contact.phone}', '${color}')">
-                <div class="initials-container" style="background-color: ${color};">${getInitials(contact.firstName, contact.lastName)}</div>
-                <div class="contact-info-item">
-                    <div class="contact-info">
-                        <div class="contact-names">${contact.firstName} ${contact.lastName}</div>
-                        <div class="contact-email">${contact.username}</div>
-                    </div>
-                </div>
-            </div>
-        `);
+        currentLetter = firstLetter;
+        alphabetSections.push(generateAlphabetContainerTemplate(currentLetter));
+      }
+      alphabetSections.push(generateContactItemTemplate(contact));
     }
-
+  
     contactSection.innerHTML = `
-        <div class="addButton-container">
-            <button id="addContactButton" onclick="openContactForm()" class="add-contact-button">
-                <span class="button-text">Add a new contact</span>
-                <img src="assets/img/person_add.png" alt="Add Icon" class="button-icon">
-            </button>
-        </div>
-        <div class="contact-list-container">
-            ${alphabetSections.join('')}
-        </div>
+      ${generateAddContactButtonTemplate()}
+      <div class="contact-list-container">
+        ${alphabetSections.join('')}
+      </div>
     `;
 }
 
@@ -139,59 +118,19 @@ function updatePopUpDetails(firstName, lastName, email, phone) {
 
 function contactPopUp(id, firstName, lastName, email, phone, color) {
     const popUpSection = document.getElementById('popup-section');
-    popUpSection.innerHTML = `
-        <div class="popup-container">
-            <div class="first-container">
-                <div class="popup-initiale-container">
-                    <div class="initiale-circle" style="background-color: ${color};">
-                        <span class="popup-initiale">${getInitials(firstName, lastName)}</span>
-                    </div>
-                </div>
-                <div class="button-name-container">
-                    <span class="popup-name">${firstName} ${lastName}</span>
-                    <div class="overlay-popup-container">
-                        <div class="popup-button-container" id="popup-button">
-                            <button class="popup-buttons" onclick="openEditContact('${id}', '${firstName}', '${lastName}', '${email}', '${phone}')">
-                                <img class="edit-icon" src="assets/img/edit-black.png" alt="">
-                                <span class="edit">Edit</span>
-                            </button>
-                            <button class="popup-buttons" onclick="deleteContact('${id}')">
-                                <img class="delete-icon" src="assets/img/delete.png" alt="">
-                                <span class="delete">Delete</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="popup-contact-info">
-                <span class="popup-headline">Contact Information</span>
-            </div>
-            <div class="popup-email-phone">
-                <div class="popup-email">
-                    <span class="popup-name-span">Email</span>
-                    <span class="popup-email-span">${email}</span>
-                </div>
-                <div class="popup-phone">
-                    <span class="popup-phone-span">Phone</span>
-                    <span class="popup-phoneNr-span">${phone}</span>
-                </div>
-            </div>
-        </div>
-    `;
+    popUpSection.innerHTML = generateContactPopUpTemplate(id, firstName, lastName, email, phone, color);
     setEditFormValues(id, firstName, lastName, email, phone);
     popUpSection.classList.add('show');
-    movePopupToPosition(popUpSection);
-
-
+  
     if (window.innerWidth <= 640) {
-        document.getElementById('contactSection').style.display = 'none';
+      document.getElementById('contactSection').style.display = 'none';
     }
-
+  
     const popUpElement = document.querySelector('.pop-up');
     if (popUpElement) {
-        popUpElement.classList.add('show');
+      popUpElement.classList.add('show');
     } else {
-        console.error("Popup-Element '.pop-up' nicht gefunden.");
+      console.error("Popup-Element '.pop-up' nicht gefunden.");
     }
 }
 
@@ -207,10 +146,6 @@ function setEditFormValues(id, firstName, lastName, email, phone) {
     document.getElementById('editName').value = `${firstName} ${lastName}`;
     document.getElementById('editEmail').value = email;
     document.getElementById('editPhone').value = phone;
-}
-
-function movePopupToPosition(popupElement) {
-    // Diese Funktion kann angepasst werden, um das Popup zu position
 }
 
 function openContactForm() {

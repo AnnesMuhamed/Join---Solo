@@ -183,56 +183,33 @@ function removeBoardContact(contactId) {
 }
 
 function boardConfirmOrCancelSubtask() {
-    let subtaskButtonContainer = document.getElementById('board-subtask-buttons-container');
-    let subtask = document.getElementById('board-subtasks').value.trim();
-    
-    if (subtask) {
-      subtaskButtonContainer.innerHTML = `
-        <button class="in-line-btn" type="button" onclick="boardClearSubtaskInput()">
-          <img src="./assets/img/clear.png"/>
-        </button>
-        ${verticalSeparator("1px", "24px", "#D1D1D1")}
-        <button class="in-line-btn" type="button" onclick="boardRenderSubtask()">
-          <img src="./assets/img/check.png"/>
-        </button>
-      `;
-    }
-} 
+  const subtaskButtonContainer = document.getElementById('board-subtask-buttons-container');
+  const subtask = document.getElementById('board-subtasks').value.trim();
+
+  if (subtask) {
+    subtaskButtonContainer.innerHTML = generateBoardSubtaskButtonsTemplate();
+  }
+}
 
 function boardRenderSubtask() {
-    let unsortedList = document.getElementById("board-subtask-list");
-    let subtask = document.getElementById("board-subtasks").value.trim();
-  
-    if (subtask) {
-      boardSubtasks.push({ [subtask]: "open" });
-      let newListElement = document.createElement("li");
-      newListElement.classList.add("subtask-list-element");
-      newListElement.innerHTML = `
-        <span>${subtask}</span>
-        <div class="subtaskli-buttons-container">
-          <button class="in-line-btn" type="button" onclick="boardEditSubtask(this)">
-            <img src="./assets/img/edit.png"/>
-          </button>
-          ${verticalSeparator("1px", "24px", "#A8A8A8")}
-          <button class="in-line-btn" type="button" onclick="boardDeleteSubtask(this)">
-            <img src="./assets/img/delete.png"/>
-          </button>
-        </div>
-      `;
-      unsortedList.appendChild(newListElement);
-      boardClearSubtaskInput();
-    }
+  let unsortedList = document.getElementById("board-subtask-list");
+  let subtask = document.getElementById("board-subtasks").value.trim();
+
+  if (subtask) {
+    boardSubtasks.push({ [subtask]: "open" });
+    let newListElement = document.createElement("li");
+    newListElement.classList.add("subtask-list-element");
+    newListElement.innerHTML = generateBoardSubtaskTemplate(subtask);
+    unsortedList.appendChild(newListElement);
+    boardClearSubtaskInput();
+  }
 }
 
 function boardClearSubtaskInput() {
-    let subtaskButtonContainer = document.getElementById("board-subtask-buttons-container");
-    let subtask = document.getElementById("board-subtasks");
-    subtask.value = "";
-    subtaskButtonContainer.innerHTML = `
-        <button id="board-add-subtask-button" class="in-line-btn" type="button" onclick="boardConfirmOrCancelSubtask()">
-        <img src="./assets/img/add.png" />
-        </button>
-    `;
+  const subtaskButtonContainer = document.getElementById("board-subtask-buttons-container");
+  const subtask = document.getElementById("board-subtasks");
+  subtask.value = "";
+  subtaskButtonContainer.innerHTML = generateBoardClearSubtaskTemplate();
 }
 
 function getBoardTitle() {
@@ -304,28 +281,20 @@ function boardClearForm() {
 }
 
 function boardEditSubtask(button) {
-    const li = button.closest("li");
-    const span = li.querySelector("span");
-    const input = document.createElement("input");
-    input.type = "text";
-    input.value = span.textContent;
-    input.classList.add("edit-subtask-input");
-  
-    li.innerHTML = "";
-    li.appendChild(input);
-  
-    const buttonsContainer = document.createElement("div");
-    buttonsContainer.className = "edit-subtask-buttons-container";
-    buttonsContainer.innerHTML = `
-      <button class="in-line-btn" type="button" onclick="boardUpdateSubtask(this, '${span.textContent}')">
-        <img src="./assets/img/check.png"/>
-      </button>
-      ${verticalSeparator("1px", "24px", "#A8A8A8")}
-      <button class="in-line-btn" type="button" onclick="boardCancelEditSubtask(this, '${span.textContent}')">
-        <img src="./assets/img/clear.png"/>
-      </button>
-    `;
-    li.appendChild(buttonsContainer);
+  const li = button.closest("li");
+  const span = li.querySelector("span");
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = span.textContent;
+  input.classList.add("edit-subtask-input");
+
+  li.innerHTML = "";
+  li.appendChild(input);
+
+  const buttonsContainer = document.createElement("div");
+  buttonsContainer.className = "edit-subtask-buttons-container";
+  buttonsContainer.innerHTML = generateBoardEditSubtaskButtonsTemplate(span.textContent);
+  li.appendChild(buttonsContainer);
 }
 
 function boardUpdateSubtask(button, oldSubtask) {
@@ -343,62 +312,22 @@ function boardUpdateSubtask(button, oldSubtask) {
 }
 
 function boardRenderSubtaskList() {
-    const listContainer = document.getElementById("board-subtask-list");
-    listContainer.innerHTML = "";
-  
-    boardSubtasks.forEach(subtask => {
-      const subtaskName = Object.keys(subtask)[0];
-      const newListElement = document.createElement("li");
-      newListElement.classList.add("subtask-list-element");
-      newListElement.innerHTML = `
-        <span>${subtaskName}</span>
-        <div class="subtaskli-buttons-container">
-          <button class="in-line-btn" type="button" onclick="boardEditSubtask(this)">
-            <img src="./assets/img/edit.png"/>
-          </button>
-          ${verticalSeparator("1px", "24px", "#A8A8A8")}
-          <button class="in-line-btn" type="button" onclick="boardDeleteSubtask(this)">
-            <img src="./assets/img/delete.png"/>
-          </button>
-        </div>
-      `;
-      listContainer.appendChild(newListElement);
-    });
+  const listContainer = document.getElementById("board-subtask-list");
+  listContainer.innerHTML = generateBoardSubtaskListTemplate(boardSubtasks);
 }
 
 function boardCancelEditSubtask(button, originalText) {
-    const li = button.closest("li");
-    li.innerHTML = `
-      <span>${originalText}</span>
-      <div class="subtaskli-buttons-container">
-        <button class="in-line-btn" type="button" onclick="boardEditSubtask(this)">
-          <img src="./assets/img/edit.png"/>
-        </button>
-        ${verticalSeparator("1px", "24px", "#A8A8A8")}
-        <button class="in-line-btn" type="button" onclick="boardDeleteSubtask(this)">
-          <img src="./assets/img/delete.png"/>
-        </button>
-      </div>
-    `;
+  const li = button.closest("li");
+  li.innerHTML = generateBoardCancelEditSubtaskTemplate(originalText);
 }
 
 function boardSaveEditedSubtask(input, li) {
-    const updatedText = input.value.trim();
-    if (updatedText !== "") {
-      li.innerHTML = `
-        <span>${updatedText}</span>
-        <div class="subtask-buttons-container">
-          <button class="in-line-btn edit-subtask-button" type="button" onclick="boardEditSubtask(this)">
-            <img src="./assets/img/edit.png" alt="Edit Subtask"/>
-          </button>
-          <button class="in-line-btn delete-subtask-button" type="button" onclick="boardDeleteSubtask(this)">
-            <img src="./assets/img/delete.png" alt="Delete Subtask"/>
-          </button>
-        </div>
-      `;
-    } else {
-      li.remove();
-    }
+  const updatedText = input.value.trim();
+  if (updatedText !== "") {
+    li.innerHTML = generateBoardSaveSubtaskTemplate(updatedText);
+  } else {
+    li.remove();
+  }
 }
 
 function boardDeleteSubtask(button) {
@@ -422,25 +351,20 @@ function boardFilterCheckboxes() {
             const initials = `${contact.firstName.charAt(0)}${contact.lastName.charAt(0)}`;
             const fullNameDisplay = `${contact.firstName} ${contact.lastName}`;
             const contactColor = contact.color || "#000000";
-
             const checkboxLabel = document.createElement("label");
             checkboxLabel.className = "checkbox-label";
             checkboxLabel.htmlFor = id;
-
             const spanInitials = document.createElement("span");
             spanInitials.className = "initials-span board-task";
             spanInitials.textContent = initials;
             spanInitials.style.backgroundColor = contactColor;
-
             const spanFullName = document.createElement("span");
             spanFullName.className = "contact-name";
             spanFullName.textContent = fullNameDisplay;
-
             const checkbox = document.createElement("div");
             checkbox.className = "custom-checkbox";
             checkbox.id = `checkbox-${id}`;
             checkbox.onclick = (event) => boardAssignContacts(event, id);
-
             checkboxLabel.appendChild(spanInitials);
             checkboxLabel.appendChild(spanFullName);
             checkboxLabel.appendChild(checkbox);

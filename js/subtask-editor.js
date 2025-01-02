@@ -5,40 +5,17 @@ function getSubtask() {
   return subtask.value;
 }
 
-function inlineSubtaskButton(type) {
-  return `
-		<button id="${type}-subtask-button" class="in-line-btn" type="button">
-			<img src="./assets/img/${type}.png"/>
-		</button>
-	`;
-}
-
-function inSubtaskListButton(type) {
-  return `
-		<button class="${type}-subtask-button in-line-btn" type="button">
-			<img src="./assets/img/${type}.png"/>
-		</button>
-	`;
-}
-
-function clearSubtaskInput() {
-  const subtaskButtonContainer = document.getElementById("subtask-buttons-container");
-  const subtaskInput = document.getElementById("subtasks");
+function clearSubtaskInput(idSuffix) {
+  const subtaskButtonContainer = document.getElementById(`subtask-buttons-container${idSuffix}`);
+  const subtaskInput = document.getElementById(`subtask-input${idSuffix}`);
 
   if (!subtaskInput || !subtaskButtonContainer) {
-    console.error("Das Element 'subtasks' oder 'subtask-buttons-container' wurde nicht gefunden.");
+    console.error("Das Element 'subtask-input' oder 'subtask-buttons-container' wurde nicht gefunden.");
     return;
   }
 
-  // Eingabefeld leeren
   subtaskInput.value = "";
-
-  // Buttons für neue Subtasks zurücksetzen
-  subtaskButtonContainer.innerHTML = `
-    <button id="add-subtask-button" class="in-line-btn" type="button" onclick="confirmOrCancelSubtask()">
-      <img src="./assets/img/add.png"/>
-    </button>
-  `;
+  subtaskButtonContainer.innerHTML = generateClearSubtaskButtonTemplate(idSuffix);
 }
 
 function confirmOrCancelSubtask() {
@@ -51,15 +28,7 @@ function confirmOrCancelSubtask() {
   }
 
   if (subtaskInput.value.trim() !== "") {
-    subtaskButtonContainer.innerHTML = `
-      <button class="in-line-btn" type="button" onclick="clearSubtaskInput()">
-        <img src="./assets/img/clear.png"/>
-      </button>
-      ${verticalSeparator("1px", "24px", "#D1D1D1")}
-      <button class="in-line-btn" type="button" onclick="renderSubtask()">
-        <img src="./assets/img/check.png"/>
-      </button>
-    `;
+    subtaskButtonContainer.innerHTML = generateConfirmOrCancelSubtaskTemplate();
   }
 }
 
@@ -69,25 +38,11 @@ function renderSubtask() {
 
   if (subtask.trim() !== "") {
     addSubtask(subtask);
-
-    // Neuen Listeneintrag erstellen
     const newListElement = document.createElement("li");
     newListElement.classList.add("subtask-list-element");
-    newListElement.innerHTML = `
-      <span>${subtask}</span>
-      <div class="subtaskli-buttons-container">
-        <button class="in-line-btn" type="button" onclick="editSubtask(this)">
-          <img src="./assets/img/edit.png"/>
-        </button>
-        ${verticalSeparator("1px", "24px", "#A8A8A8")}
-        <button class="in-line-btn" type="button" onclick="deleteSubtask(this)">
-          <img src="./assets/img/delete.png"/>
-        </button>
-      </div>
-    `;
+    newListElement.innerHTML = generateSubtaskTemplate(subtask);
     unsortedList.appendChild(newListElement);
 
-    // Eingabefeld und Buttons zurücksetzen
     clearSubtaskInput();
   }
 }
