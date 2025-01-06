@@ -32,7 +32,7 @@ function generateContactItemTemplate(contact) {
 function generateAddContactButtonTemplate() {
     return `
       <div class="addButton-container">
-        <button id="addContactButton" onclick="openContactForm()" class="add-contact-button">
+        <button type="button" id="addContactButton" onclick="openContactForm()" class="add-contact-button">
           <span class="button-text">Add a new contact</span>
           <img src="assets/img/person_add.png" alt="Add Icon" class="button-icon">
         </button>
@@ -53,11 +53,11 @@ function generateContactPopUpTemplate(id, firstName, lastName, email, phone, col
             <span class="popup-name">${firstName} ${lastName}</span>
             <div class="overlay-popup-container">
               <div class="popup-button-container" id="popup-button">
-                <button class="popup-buttons" onclick="openEditContact('${id}', '${firstName}', '${lastName}', '${email}', '${phone}')">
+                <button type="button" class="popup-buttons" onclick="openEditContact('${id}', '${firstName}', '${lastName}', '${email}', '${phone}')">
                   <img class="edit-icon" src="assets/img/edit-black.png" alt="">
                   <span class="edit">Edit</span>
                 </button>
-                <button class="popup-buttons" onclick="deleteContact('${id}')">
+                <button type="button" class="popup-buttons" onclick="deleteContact('${id}')">
                   <img class="delete-icon" src="assets/img/delete.png" alt="">
                   <span class="delete">Delete</span>
                 </button>

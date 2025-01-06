@@ -316,52 +316,48 @@ function confirmSubtask(idSuffix) {
 
 function editSubtask(button) {
   const listItem = button.closest('li');
-  if (!listItem) {
-    return;
-  }
+  if (!listItem) return;
 
   listItem.classList.add('editing');
   const subtaskText = listItem.querySelector('span').textContent;
   const inputContainer = document.createElement("div");
   inputContainer.classList.add('input-container');
+
   const input = document.createElement("input");
   input.type = "text";
-  input.value = subtaskText; 
+  input.value = subtaskText;
   input.classList.add("edit-input");
+
   const saveButton = document.createElement("button");
   saveButton.innerHTML = `<img src="./assets/img/success.png" alt="Save">`;
   saveButton.classList.add("save-button");
-  saveButton.onclick = function (event) {
+  saveButton.onclick = function(event) {
     event.preventDefault();
     saveSubtask(listItem, input.value);
   };
-
+  
   const deleteButton = document.createElement("button");
   deleteButton.innerHTML = `<img src="./assets/img/delete.png" alt="Delete">`;
   deleteButton.classList.add("delete-button");
-  deleteButton.onclick = function (event) {
-    event.preventDefault();
-    deleteSubtask(button);
+  deleteButton.onclick = (event) => {
+    event.stopPropagation();
+    deleteSubtask(listItem);
   };
 
   inputContainer.appendChild(input);
   inputContainer.appendChild(saveButton);
   inputContainer.appendChild(deleteButton);
-  listItem.innerHTML = "";
+  listItem.innerHTML = ""; 
   listItem.appendChild(inputContainer);
   input.focus();
 }
 
-function deleteSubtask(button, event) {
-  if (event) event.preventDefault();
-
+function deleteSubtask(button) {
   const listItem = button.closest('li');
-  if (!listItem) {
-    return;
-  }
-
+  if (!listItem) return;
   listItem.remove();
 }
+
 
 function resetSubtaskButtons(idSuffix) {
   const subtaskButtonsContainer = document.getElementById(`subtask-buttons-container${idSuffix}`);

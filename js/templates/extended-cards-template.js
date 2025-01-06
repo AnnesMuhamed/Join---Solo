@@ -1,5 +1,5 @@
 function editTaskInnerHTML(taskId, idSuffix = '1') {
-    return` <button class="popup-cencel-button" onclick="closePopup()">
+    return` <button class="popup-cencel-button"  type="button" onclick="closePopup()">
           <img src="./assets/img/close.png" alt="Close" class="action-icon-x">
             </button>
         <form id="edit-task-form${idSuffix}" class="edit-task-form">
@@ -54,7 +54,7 @@ function editTaskInnerHTML(taskId, idSuffix = '1') {
             </div>
             <ul id="subtask-list${idSuffix}" class="subtask-list1"></ul>
         </form>
-        <button class="popup-save-button" onclick="saveEditedTask('${taskId}')">
+        <button class="popup-save-button" type="button" onclick="saveEditedTask('${taskId}')">
             <span class="action-label">Ok</span>
             <img src="./assets/img/hook.png" alt="Save" class="action-icon-hook"> 
         </button>
@@ -65,7 +65,7 @@ function renderInfoPopup(taskId){
     return /*html*/`
         <div class="popup-header">
               <div class="tag-container" id="tag-container"><span class="tag" id="Tag"></span></div>
-              <button class="close-button" onclick="closePopup()"><img src="./assets/img/close.png" alt="Close" class="close-icon" /></button>
+              <button class="close-button" type="button" onclick="closePopup()"><img src="./assets/img/close.png" alt="Close" class="close-icon" /></button>
             </div>
             <div class="popup-info">
             <h1 class="popup-title" id="popup-title"></h1>
@@ -87,9 +87,9 @@ function renderInfoPopup(taskId){
               </div>
             </div>
             <div class="popup-actions">
-              <button class="action-button" onclick="deleteTask('${taskId}')"><img src="./assets/img/delete.png" alt="Delete" class="action-icon" /><span class="action-label">Delete</span></button>
+              <button class="action-button" type="button" onclick="deleteTask('${taskId}')"><img src="./assets/img/delete.png" alt="Delete" class="action-icon" /><span class="action-label">Delete</span></button>
               <img src="./assets/img/high-stroke-gray.png" alt="Separator" class="action-separator" />
-              <button class="action-button" onclick="editTask('${taskId}')"><img src="./assets/img/edit-black.png" alt="Edit" class="action-icon" /><span class="action-label">Edit</span></button>
+              <button class="action-button" type="button" onclick="editTask('${taskId}')"><img src="./assets/img/edit-black.png" alt="Edit" class="action-icon" /><span class="action-label">Edit</span></button>
         </div>`;
 }
 
@@ -97,11 +97,11 @@ function generateSubtaskHTML(subtaskValue, idSuffix) {
     return `
       <span>${subtaskValue}</span>
       <div class="subtask-li-btn-container">
-        <button class="sutbtask-hover-btn" onclick="editSubtask(this, event)">
+        <button class="sutbtask-hover-btn" type="button" onclick="editSubtask(this, event)">
           <img src="./assets/img/edit-black.png" alt="Edit">
         </button>
         ${verticalSeparator("1px", "24px", "#A8A8A8")}
-        <button class="sutbtask-hover-btn" onclick="deleteSubtask(this)">
+        <button class="sutbtask-hover-btn" type="button" onclick="deleteSubtask(this, event)">
           <img src="./assets/img/delete.png" alt="Delete">
         </button>
       </div>
@@ -112,11 +112,11 @@ function generateSubtaskHTML(subtaskValue, idSuffix) {
     return `
       <span>${subtaskValue}</span>
       <div class="subtask-li-btn-container">
-        <button class="sutbtask-hover-btn" onclick="editSubtask(this, event)">
+        <button class="sutbtask-hover-btn" type="button" onclick="editSubtask(this, event)">
           <img src="./assets/img/edit-black.png" alt="Edit">
         </button>
         ${verticalSeparator("1px", "24px", "#A8A8A8")}
-        <button class="sutbtask-hover-btn" onclick="deleteSubtask(this)">
+        <button class="sutbtask-hover-btn" type="button" onclick="deleteSubtask(this, event)">
           <img src="./assets/img/delete.png" alt="Delete">
         </button>
       </div>
@@ -156,11 +156,11 @@ function generateSubtaskItemTemplate(subtaskKey, idSuffix) {
       <li class="subtask-list-element">
         <span>${subtaskKey}</span>
         <div class="subtask-li-btn-container">
-          <button class="sutbtask-hover-btn" onclick="editSubtask(this, '${idSuffix}')">
+          <button class="sutbtask-hover-btn" type="button" onclick="editSubtask(this, '${idSuffix}')">
             <img src="./assets/img/edit-black.png" alt="Edit">
           </button>
           ${verticalSeparator("1px", "24px", "#A8A8A8")}
-          <button class="sutbtask-hover-btn" onclick="deleteSubtask(this, '${idSuffix}')">
+          <button class="sutbtask-hover-btn" type="button" onclick="deleteSubtask(this, '${idSuffix}')">
             <img src="./assets/img/delete.png" alt="Delete">
           </button>
         </div>
@@ -177,10 +177,10 @@ function generateSubtaskButtonTemplate(idSuffix) {
 }
 function generateSubtaskButtonsTemplate(idSuffix) {
     return `
-      <button class="sutbtask-hover-btn" onclick="clearSubtaskInput('${idSuffix}')">
+      <button class="sutbtask-hover-btn" type="button" onclick="clearSubtaskInput('${idSuffix}')">
         <img src="./assets/img/close.png" alt="Save" class="">
       </button>
-      <button class="sutbtask-hover-btn" onclick="confirmSubtask('${idSuffix}', event)">
+      <button class="sutbtask-hover-btn" type="button" onclick="confirmSubtask('${idSuffix}', event)">
         <img src="./assets/img/success.png" alt="Save" class=""> 
       </button>
     `;
