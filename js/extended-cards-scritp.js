@@ -634,5 +634,3 @@ function saveSubtask(listItem, newValue) {
   listItem.classList.remove('editing');
   listItem.innerHTML = subtaskTemplate(newValue);
 }
-
-
