@@ -22,14 +22,14 @@
 .popup {
   position: fixed;
   top: 50%;
-  right: -100%;
-  transform: translateY(-50%);
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 500px;
   height: auto;
   background: white;
   border-radius: 10px;
   opacity: 1;
-  transition: right 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
 .popup-container.show .popup {
@@ -277,3 +277,8 @@
 }
 
 
+@media (max-width: 768px) {
+  .popup {
+    width: 90%;  /* Reduziere die Breite des Popups auf 90% des Bildschirms */
+  }
+}

@@ -150,6 +150,7 @@ function endDragging() {
  */
 function allowDrop(event) {
   event.preventDefault();
+  event.target.classList.add('over'); // Umriss aktivieren
 }
 
 /**
@@ -160,6 +161,8 @@ function allowDrop(event) {
  */
 function moveTo(event, state) {
   event.preventDefault();
+  event.target.classList.remove('over');
+
   let tasks = JSON.parse(sessionStorage.getItem("tasks"));
   let element = tasks[`${currentDraggedElement}`];
 
@@ -170,6 +173,25 @@ function moveTo(event, state) {
   }
 
   renderCards();
+}
+
+function updateEmptyColumns() {
+  const columns = ['open', 'in-progress', 'await-feedback', 'done']; // Deine Kategorien
+  columns.forEach((columnId) => {
+      const column = document.getElementById(columnId);
+      const tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
+      const tasksInColumn = Object.values(tasks).filter(task => task.state === columnId);
+      
+      if (tasksInColumn.length === 0) {
+          column.innerHTML = '<p>No Tasks To-Do</p>';
+      } else {
+          column.innerHTML = ''; // Entferne den Platzhalter, wenn Aufgaben vorhanden sind
+          tasksInColumn.forEach((task) => {
+              // Funktion um Task-Karten zu erstellen
+              createCard(task);
+          });
+      }
+  });
 }
 
 /**
@@ -599,15 +621,17 @@ function moveTo(event, state) {
  * @throws {Error} If no task containers are found, it clears the columns before rendering matched tasks.
  */
 function searchCards() {
-  let searchQuery = document.getElementById("findCards").value.toLowerCase();
+  let searchQuery = document.getElementById("Findcards").value.toLowerCase(); // ID sollte 'Findcards' sein
   if (searchQuery.length < 3) {
     renderCards();
     return;
   }
 
   let tasks = JSON.parse(sessionStorage.getItem("tasks"));
+
   let allTaskCardsContainer = document.querySelectorAll(".drag-area");
   allTaskCardsContainer.forEach((column) => (column.innerHTML = ""));
+
   Object.keys(tasks).forEach((key) => {
     let task = tasks[key];
     let taskTitle = task["title"].toLowerCase();

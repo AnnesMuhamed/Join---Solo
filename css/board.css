@@ -36,7 +36,7 @@ body.modal-open {
 .new-task {
     position: fixed;
     top: 50%;
-    right: -100%;
+    right: -300%;
     width: 1116px;
     height: 870px;
     padding: 60px;
@@ -273,6 +273,7 @@ body.modal-open {
     width: 252px;
     gap: 10px;
     padding-top: 10px;
+    border: 1px dashed #ccc;
 }
 
 .delete {

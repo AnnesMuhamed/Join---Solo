@@ -1,13 +1,27 @@
+/**
+ * Initializes the index page by displaying the login page and running additional initialization logic.
+ */
 function initIndex() {
     loginPage();
     initialize();
 }
 
+/**
+ * Displays the login page by setting the inner HTML of the login section 
+ * with the login page template.
+ */
 function loginPage() {
-    const logInPage = document.getElementById('sectionlogin');
+    let logInPage = document.getElementById('sectionlogin');
     logInPage.innerHTML = generateLoginPageTemplate();
 }
 
+/**
+ * Toggles the visibility of the lock and password icons based on the input field's value.
+ * When the input field is not empty, the lock icon is hidden, and the password icon is shown.
+ * When the input field is empty, the lock icon is shown, and the password icon is hidden.
+ * 
+ * @param {HTMLInputElement} inputField - The input field being monitored for changes.
+ */
 function toggleIconOnInput(inputField) {
     const lockIcon = inputField.parentElement.querySelector('.lock-icon');
     const passwordIcon = inputField.parentElement.querySelector('.password-icon');
@@ -21,6 +35,13 @@ function toggleIconOnInput(inputField) {
     }
 }
 
+/**
+ * Toggles the visibility of the password input field by switching between 
+ * "text" and "password" input types. Updates the icon's class to reflect the visibility state.
+ * 
+ * @param {string} inputId - The ID of the password input field.
+ * @param {HTMLElement} icon - The icon element indicating the visibility state of the password.
+ */
 function togglePasswordVisibility(inputId, icon) {
     const passwordInput = document.getElementById(inputId);
     const isPasswordVisible = passwordInput.type === 'text';
@@ -29,6 +50,10 @@ function togglePasswordVisibility(inputId, icon) {
     icon.classList.toggle('password-visible', !isPasswordVisible);
 }
 
+/**
+ * Validates the username and password input fields. If both fields are non-empty, 
+ * enables the login button; otherwise, disables it.
+ */
 function validateInputs() {
     const usernameInput = document.getElementById('username');
     const passwordInput = document.getElementById('password');
@@ -41,6 +66,12 @@ function validateInputs() {
     }
 }
 
+/**
+ * Handles the login process by validating the user's credentials, storing their session data,
+ * and redirecting them to the summary page if successful. Alerts the user if the credentials are invalid.
+ * 
+ * @param {Event} event - The event object from the login form submission.
+ */
 async function handleLogin(event) {
     event.preventDefault();
 
@@ -60,17 +91,27 @@ async function handleLogin(event) {
     }
 
     if (userFound) {
-        if (rememberMe) {
-            localStorage.setItem('loggedInUser', JSON.stringify(userFound));
-        } else {
-            sessionStorage.setItem('loggedInUser', JSON.stringify(userFound));
-        }
+        // Speichern des Benutzers im localStorage oder sessionStorage
+        const userToSave = { 
+            firstname: userFound.firstName, 
+            lastname: userFound.lastName 
+        };
+    
+        // Zum localStorage oder sessionStorage hinzufügen
+        localStorage.setItem('loggedInUser', JSON.stringify(userToSave));
+        sessionStorage.setItem('loggedInUser', JSON.stringify(userToSave));
+    
+        // Weiterleitung zur Summary-Seite
         window.location.href = 'summary.html';
     } else {
         alert('Falscher Benutzername oder Passwort');
-    }
+    }    
 }
 
+/**
+ * Initializes the login page with a transition effect by displaying the login form and adjusting the UI elements.
+ * Moves the logo to the corner, displays the login form, and toggles the visibility of logos and containers.
+ */
 function initialize() {
     loginPage();
 
