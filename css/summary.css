@@ -88,6 +88,7 @@ html::-webkit-scrollbar {
     background-color: white;
     border-radius: 30px;
     box-shadow: 0px 0px 4px 0px #0000001a;
+    transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .card-one, .card-two {
@@ -96,37 +97,20 @@ html::-webkit-scrollbar {
     gap: 18px;
 }
 
-.link-card-one:hover {
+.link-card-one:hover, .link-card-two:hover {
     background: #2A3647;
     transform: scale(1.05);
 }
 
-.link-card-one:hover .edit-circle {
+.link-card-one:hover .edit-circle,
+.link-card-two:hover .hook-circle {
     background: #FFFFFF;
     border-color: #2A3647;
-}
-
-.link-card-one:hover .edit-image {
-    filter: brightness(0) saturate(100%) invert(19%) sepia(14%) saturate(1161%) hue-rotate(176deg) brightness(93%) contrast(92%);
 }
 
 .link-card-one:hover .todo-container span,
-.link-card-one:hover .todo-container .todo-number {
+.link-card-two:hover .done-container span {
     color: #FFFFFF;
-}
-
-.link-card-two:hover {
-    background: #2A3647;
-    transform: scale(1.05);
-}
-
-.link-card-two .hook-circle {
-    background: #FFFFFF;
-    border-color: #2A3647;
-}
-
-.link-card-two:hover .hook-image {
-    filter: invert(29%) sepia(56%) saturate(403%) hue-rotate(168deg) brightness(96%) contrast(95%);
 }
 
 .link-card-two:hover .done-container span,
@@ -134,7 +118,14 @@ html::-webkit-scrollbar {
     color: #FFFFFF;
 }
 
-.edit-circle {
+.edit-image-white, .edit-image-blue {
+    position: absolute;
+    width: 29.94px;
+    height: 22.13px;
+    transition: opacity 0.3s ease;
+}
+
+.edit-circle, .hook-circle {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -147,10 +138,50 @@ html::-webkit-scrollbar {
     transition: all 0.3s ease;
 }
 
-.edit-image {
+/* Weißes Stift-Icon und Haken-Icon (immer sichtbar) */
+.edit-image-white, .hook-image-white {
+    position: absolute;
     width: 29.94px;
     height: 22.13px;
-    transition: all 0.3s ease;
+    opacity: 1; /* Standard sichtbar */
+    transition: opacity 0.3s ease;
+}
+
+.edit-image-blue, .hook-image-blue {
+    position: absolute;
+    width: 29.94px;
+    height: 22.13px;
+    opacity: 0; /* Standard unsichtbar */
+    transition: opacity 0.3s ease;
+}
+
+/* Hover-Effekt für das Stift-Icon */
+.link-card-one:hover .edit-image-white {
+    opacity: 0; /* Weißes Icon wird unsichtbar */
+}
+
+.link-card-one:hover .edit-image-blue {
+    opacity: 1; /* Blaues Icon wird sichtbar */
+}
+
+/* Hover-Effekt für den Haken */
+.link-card-two:hover .hook-image-white {
+    opacity: 0; /* Weißer Haken wird unsichtbar */
+}
+
+.link-card-two:hover .hook-image-blue {
+    opacity: 1; /* Blauer Haken wird sichtbar */
+}
+
+/* Sicherstellen, dass das blaue Icon im Vordergrund liegt */
+.link-card-one:hover .edit-image-blue,
+.link-card-two:hover .hook-image-blue {
+    z-index: 1; /* Blauer Stift und Haken oben */
+}
+
+/* Sicherstellen, dass das weiße Icon immer im Hintergrund bleibt */
+.edit-image-white, .hook-image-white {
+    z-index: 0; /* Weißes Icon bleibt unten */
 }
 
 .todo-container {
@@ -172,16 +203,6 @@ html::-webkit-scrollbar {
 
 .todo-container span {
     transition: color 0.3s ease;
-}
-
-.hook-circle {
-    width: 69px;
-    display: flex;
-    height: 69px;
-    border: 7px solid #FFFFFF;
-    background: #2A3647;
-    border-radius: 50px;
-    transition: all 0.3s ease;
 }
 
 .hook-image {
@@ -363,8 +384,11 @@ html::-webkit-scrollbar {
     transition: color 0s ease;
 }
 
+.section-greet {
+    display: flex;
+}
 
-.greet {
+.rp-greet {
     display: flex;
     align-items: flex-start;
     margin-left: 67px;
@@ -373,8 +397,8 @@ html::-webkit-scrollbar {
     justify-content: center;
 }
 
-.gm {
-    width: 338px;
+.rp-gm {
+    width: 100%;
     height: 56px;
     font-size: 47px;
     font-weight: 500;
@@ -382,8 +406,8 @@ html::-webkit-scrollbar {
     text-align: left;
 }
 
-.sofia {
-    width: 485px;
+.rp-sofia {
+    width: 100%;
     height: 77px;
     font-size: 64px;
     font-weight: 700;
@@ -392,12 +416,32 @@ html::-webkit-scrollbar {
     color: #29ABE2;
 }
 
-/* .hidden {
+.hidden {
     display: none;
-} */
+}
 
-@media(max-width: 1280px) {
-    .greet {
+@media(max-width: 1440px) {
+    .rp-gm {
+        font-size: 37px;
+    }
+
+    .rp-sofia {
+        font-size: 40px;
+    }
+}
+
+@media(max-width: 1300px) {
+    .rp-gm {
+        font-size: 29px;
+    }
+
+    .rp-sofia {
+        font-size: 32px;
+    }
+}
+
+@media(max-width: 1250px) {
+    .rp-greet {
         display: none;
     }
 }

@@ -9,7 +9,7 @@ const PATH_TO_TASKS = "tasks";
  */
 async function init() {
   await includeHTML();
-  greetUser();
+  greetUser();  // Diese Funktion wird sicherstellen, dass der Benutzer begrüßt wird
   const tasks = await getTasksFromSession();
   if (tasks) {
     showMetrics(tasks);
@@ -61,14 +61,22 @@ async function includeHTML() {
  * along with a "Good morning" greeting.
  */
 function greetUser() {
+  // Benutzer aus dem localStorage oder sessionStorage holen
   let user = JSON.parse(localStorage.getItem("loggedInUser")) || JSON.parse(sessionStorage.getItem("loggedInUser"));
 
+  // Das Element für die Begrüßung holen
+  const greetElement = document.querySelector(".rp-gm");
+  const greetedUserField = document.querySelector("#sofia");  // ID für den Benutzernamen holen
+
   if (user) {
-    const userName = `${user.firstname} ${user.lastname}`;
-    document.querySelector(".rp-gm").textContent = "Good morning,";
-    const greetedUserField = document.querySelector(".rp-sofia");
-    greetedUserField.classList.remove("hidden");
-    greetedUserField.textContent = userName;
+      // Benutzername erstellen
+      const userName = `${user.firstname} ${user.lastname}`;
+      greetElement.textContent = `Good morning`; // Benutzer wird mit „Good morning“ begrüßt
+      greetedUserField.classList.remove("hidden");  // Benutzername sichtbar machen
+      greetedUserField.textContent = userName;      // Benutzername im HTML setzen
+  } else {
+      greetElement.textContent = "Good morning"; // Nur „Good morning“ für Gäste
+      greetedUserField.classList.add("hidden");  // Verstecke den Benutzernamen, wenn der Benutzer ein Gast ist
   }
 }
 

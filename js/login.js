@@ -10,10 +10,16 @@ function initIndex() {
  * Displays the login page by setting the inner HTML of the login section 
  * with the login page template.
  */
+// function loginPage() {
+//     let logInPage = document.getElementById('sectionlogin');
+//     logInPage.innerHTML = generateLoginPageTemplate();
+// }
+
 function loginPage() {
     let logInPage = document.getElementById('sectionlogin');
     logInPage.innerHTML = generateLoginPageTemplate();
 }
+
 
 /**
  * Toggles the visibility of the lock and password icons based on the input field's value.
@@ -77,9 +83,9 @@ async function handleLogin(event) {
 
     const email = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-    const rememberMe = document.getElementById('option').checked;
 
     const users = await loadData('user');
+
     let userFound = null;
 
     for (const userId in users) {
@@ -91,21 +97,17 @@ async function handleLogin(event) {
     }
 
     if (userFound) {
-        // Speichern des Benutzers im localStorage oder sessionStorage
         const userToSave = { 
             firstname: userFound.firstName, 
             lastname: userFound.lastName 
         };
-    
-        // Zum localStorage oder sessionStorage hinzufügen
         localStorage.setItem('loggedInUser', JSON.stringify(userToSave));
         sessionStorage.setItem('loggedInUser', JSON.stringify(userToSave));
-    
-        // Weiterleitung zur Summary-Seite
+
         window.location.href = 'summary.html';
     } else {
         alert('Falscher Benutzername oder Passwort');
-    }    
+    }
 }
 
 /**
@@ -113,7 +115,7 @@ async function handleLogin(event) {
  * Moves the logo to the corner, displays the login form, and toggles the visibility of logos and containers.
  */
 function initialize() {
-    loginPage();
+    
 
     setTimeout(() => {
         const overlay = document.getElementById('overlay');
@@ -133,4 +135,6 @@ function initialize() {
         whiteLogo.style.display = 'none';
         darkLogo.style.display = 'block';
     }, 3000);
+
+    loginPage();
 }

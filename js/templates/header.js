@@ -17,44 +17,53 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function loadUserData() {
-    let user = JSON.parse(localStorage.getItem('loggedInUser'));
-    if (!user) {
-        user = JSON.parse(sessionStorage.getItem('loggedInUser'));
-    }
-
+    let user = JSON.parse(localStorage.getItem('loggedInUser')) || JSON.parse(sessionStorage.getItem('loggedInUser'));
+    
     if (user) {
-		let logOutButton = document.getElementById('logout-link');
-		logOutButton.classList.remove('d-none');
-		logOutButton.classList.add('show');
-        displayUserInitials(user.firstName, user.lastName);
+        let logOutButton = document.getElementById('logout-link');
+        logOutButton.classList.remove('d-none');
+        logOutButton.classList.add('show');
+        
+        if (user.firstname && user.lastname) {
+            displayUserInitials(user.firstname, user.lastname);
+        } else {
+            console.error('Vorname oder Nachname fehlen in den Benutzerdaten', user);
+        }
+    } else {
+        console.error('Kein Benutzer im LocalStorage oder SessionStorage gefunden.');
     }
 }
 
 function getInitials(firstName, lastName) {
+    if (!firstName || !lastName) return '';
     return `${firstName.charAt(0).toUpperCase()}${lastName.charAt(0).toUpperCase()}`;
 }
 
 function displayUserInitials(firstName, lastName) {
     const initials = getInitials(firstName, lastName);
     const userDiv = document.getElementById('user');
-    userDiv.textContent = initials;
+    
+    if (userDiv) {
+        userDiv.textContent = initials;
+    } else {
+        console.error('Element mit id "user" wurde nicht gefunden!');
+    }
 }
 
 function toggleDropdown() {
     document.getElementById("user-dropdown").classList.toggle("show");
 }
 
-window.onclick = function (event) {
+window.onclick = function(event) {
     if (!event.target.matches('#user')) {
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        for (var i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
+        let dropdowns = document.getElementsByClassName("dropdown-content");
+        for (let i = 0; i < dropdowns.length; i++) {
+            let openDropdown = dropdowns[i];
             if (openDropdown.classList.contains('show')) {
                 openDropdown.classList.remove('show');
             }
         }
     }
-
 }
 
 function assignButtons() {

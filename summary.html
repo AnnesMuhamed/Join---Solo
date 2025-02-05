@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="assets/fonts/fonts.css" />
     <link rel="stylesheet" href="./css/template.css" />
     <link rel="stylesheet" href="./css/summary.css">
-    
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.png" />
     <link rel="stylesheet" href="./css/rp-header-sidebar.css">
     <title>Summary User</title>
@@ -15,14 +14,6 @@
 
 <body onload="init()">
     <header class="header" w3-include-html="./header.html"></header>
-    
-
-    <section class="section-greet" id="sectionGreet">
-        <div id="greet" class="rp-greet">
-            <span class="rp-gm">Good morning</span>
-            <span id="sofia" class="rp-sofia hidden">Sofia Müller</span>
-        </div>
-    </section>
     <section class="content" id="content">
         <div class="summary-headline">
             <span class="first-headline">Join 360</span>
@@ -37,7 +28,8 @@
                         <div class="card-one">
                             <div class="edit">
                                 <div class="edit-circle">
-                                    <img class="edit-image" src="assets/img/edit.png" alt="">
+                                    <img class="edit-image-white" src="assets/img/white edit.png" alt="White Pencil">
+                                    <img class="edit-image-blue" src="assets/img/edit.png" alt="Blue Pencil">
                                 </div>
                             </div>
                             <div class="todo-container">
@@ -49,8 +41,9 @@
                     <a class="link-card-one" href="board.html?scrollTo=Todo">
                         <div class="card-one">
                             <div class="edit">
-                                <div class="edit-circle">
-                                    <img class="edit-image" src="assets/img/hook.png" alt="">
+                                <div class="hook-circle">
+                                <img class="hook-image-white" src="assets/img/hook.png" alt="White Check">
+                                <img class="hook-image-blue" src="assets/img/blue hook.png" alt="Blue Check">
                                 </div>
                             </div>
                             <div class="todo-container">
@@ -102,10 +95,14 @@
                     </a>
                 </div>
             </div>
-            <div id="greet" class="greet">
-                <span class="gm">Good morning</span>
-                <span id="sofia" class="sofia hidden">Sofia Müller</span>
-            </div>
+            <section class="section-greet" id="sectionGreet">
+                <div id="greet" class="rp-greet">
+                    <span class="rp-gm">Good morning</span>
+                    <span id="sofia" class="rp-sofia hidden"></span>
+                </div>
+            </section>            
+              
+            
         </div>
     </section>
     <aside class="sidebar" w3-include-html="./sidebar.html"></aside>
