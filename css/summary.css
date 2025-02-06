@@ -138,12 +138,11 @@ html::-webkit-scrollbar {
     transition: all 0.3s ease;
 }
 
-/* Weißes Stift-Icon und Haken-Icon (immer sichtbar) */
 .edit-image-white, .hook-image-white {
     position: absolute;
     width: 29.94px;
     height: 22.13px;
-    opacity: 1; /* Standard sichtbar */
+    opacity: 1;
     transition: opacity 0.3s ease;
 }
 
@@ -151,37 +150,33 @@ html::-webkit-scrollbar {
     position: absolute;
     width: 29.94px;
     height: 22.13px;
-    opacity: 0; /* Standard unsichtbar */
+    opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-/* Hover-Effekt für das Stift-Icon */
 .link-card-one:hover .edit-image-white {
-    opacity: 0; /* Weißes Icon wird unsichtbar */
+    opacity: 0;
 }
 
 .link-card-one:hover .edit-image-blue {
-    opacity: 1; /* Blaues Icon wird sichtbar */
+    opacity: 1;
 }
 
-/* Hover-Effekt für den Haken */
 .link-card-two:hover .hook-image-white {
-    opacity: 0; /* Weißer Haken wird unsichtbar */
+    opacity: 0; 
 }
 
 .link-card-two:hover .hook-image-blue {
-    opacity: 1; /* Blauer Haken wird sichtbar */
+    opacity: 1;
 }
 
-/* Sicherstellen, dass das blaue Icon im Vordergrund liegt */
 .link-card-one:hover .edit-image-blue,
 .link-card-two:hover .hook-image-blue {
-    z-index: 1; /* Blauer Stift und Haken oben */
+    z-index: 1;
 }
 
-/* Sicherstellen, dass das weiße Icon immer im Hintergrund bleibt */
 .edit-image-white, .hook-image-white {
-    z-index: 0; /* Weißes Icon bleibt unten */
+    z-index: 0; 
 }
 
 .todo-container {

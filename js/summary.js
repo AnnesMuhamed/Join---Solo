@@ -61,22 +61,19 @@ async function includeHTML() {
  * along with a "Good morning" greeting.
  */
 function greetUser() {
-  // Benutzer aus dem localStorage oder sessionStorage holen
   let user = JSON.parse(localStorage.getItem("loggedInUser")) || JSON.parse(sessionStorage.getItem("loggedInUser"));
 
-  // Das Element für die Begrüßung holen
   const greetElement = document.querySelector(".rp-gm");
-  const greetedUserField = document.querySelector("#sofia");  // ID für den Benutzernamen holen
+  const greetedUserField = document.querySelector("#sofia"); 
 
   if (user) {
-      // Benutzername erstellen
       const userName = `${user.firstname} ${user.lastname}`;
-      greetElement.textContent = `Good morning`; // Benutzer wird mit „Good morning“ begrüßt
-      greetedUserField.classList.remove("hidden");  // Benutzername sichtbar machen
-      greetedUserField.textContent = userName;      // Benutzername im HTML setzen
+      greetElement.textContent = `Good morning`; 
+      greetedUserField.classList.remove("hidden"); 
+      greetedUserField.textContent = userName;   
   } else {
-      greetElement.textContent = "Good morning"; // Nur „Good morning“ für Gäste
-      greetedUserField.classList.add("hidden");  // Verstecke den Benutzernamen, wenn der Benutzer ein Gast ist
+      greetElement.textContent = "Good morning"; 
+      greetedUserField.classList.add("hidden"); 
   }
 }
 
