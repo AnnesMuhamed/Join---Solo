@@ -1,52 +1,38 @@
 /**
- * Initializes the page by loading the header content, user data, and dropdown functionality once the DOM is fully loaded.
- * Also highlights the current page in the navigation bar.
- * Handles any errors that occur during the loading process.
+ * Lädt externe HTML-Dateien für Header und Sidebar dynamisch in die aktuelle Seite.
+ * Ruft nach dem Laden die Initialen-Anzeige und Dropdown-Funktion auf.
  */
-document.addEventListener('DOMContentLoaded', () => {
-    includeHTML()
-        .then(() => loadUserData())
-        .then(() => setUpDropdown())
-        .catch((error) => console.error('Fehler beim Laden des Headers:', error));
-
-    highlightCurrentPage();
-});
-
-/**
- * Loads external HTML content into the page based on the "w3-include-html" attribute of elements.
- * It fetches the content of each file specified in the attribute, inserts it into the corresponding element,
- * and ensures all content is loaded before resolving the promise.
- * In case of an error, it sets the inner HTML of the element to an error message.
- */
-function includeHTML() {
-    return new Promise((resolve, reject) => {
-        const includeElements = document.querySelectorAll("[w3-include-html]");
-        let loadedCount = 0;
-        const totalElements = includeElements.length;
-
-        includeElements.forEach(element => {
-            const file = element.getAttribute("w3-include-html");
-            if (file) {
-                fetch(file)
-                    .then(response => {
-                        if (!response.ok) throw new Error('Page not found');
-                        return response.text();
-                    })
-                    .then(text => {
-                        element.innerHTML = text;
-                        loadedCount++;
-                        if (loadedCount === totalElements) {
-                            resolve();
-                        }
-                    })
-                    .catch(err => {
-                        element.innerHTML = "Error loading content.";
-                        reject(err);
-                    });
+function loadExternalHTML() {
+    fetch("header.html")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Header konnte nicht geladen werden");
             }
-        });
-    });
+            return response.text();
+        })
+        .then(html => {
+            document.querySelector("header").innerHTML = html;
+
+            setTimeout(() => {
+                setUpDropdown();
+                loadUserData(); 
+            }, 50);
+        })
+        .catch(error => console.error("Fehler beim Laden des Headers:", error));
+
+    fetch("sidebar.html")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Sidebar konnte nicht geladen werden");
+            }
+            return response.text();
+        })
+        .then(html => {
+            document.querySelector("aside").innerHTML = html;
+        })
+        .catch(error => console.error("Fehler beim Laden der Sidebar:", error));
 }
+document.addEventListener("DOMContentLoaded", loadExternalHTML);
 
 /**
  * Toggles the visibility of the dropdown menu by adding or removing the "show" class.
@@ -57,25 +43,42 @@ function toggleDropdown() {
 }
 
 /**
- * Sets up the event listener for the user element, triggering the dropdown toggle on click.
- * If the user element is not found, it logs an error to the console.
+ * Aktiviert das Dropdown-Menü für den Benutzer.
+ * Stellt sicher, dass Klicks außerhalb das Menü schließen.
  */
 function setUpDropdown() {
-    const userElement = document.getElementById("user");
+    setTimeout(() => {
+        const userElement = document.getElementById("user");
+        const dropdownMenu = document.getElementById("user-dropdown");
 
-    if (userElement) {
-        userElement.addEventListener('click', toggleDropdown);
-    } else {
-        console.error("Das Benutzer-Element '#user' wurde nicht gefunden.");
-    }
+        if (userElement && dropdownMenu) {
+            userElement.removeEventListener('click', toggleDropdown);
+            document.removeEventListener('click', closeDropdown);
+
+            // Dropdown öffnen/schließen
+            userElement.addEventListener('click', function (event) {
+                event.stopPropagation();
+                dropdownMenu.classList.toggle("show");
+            });
+
+            document.addEventListener("click", function (event) {
+                if (!dropdownMenu.contains(event.target) && !userElement.contains(event.target)) {
+                    dropdownMenu.classList.remove("show");
+                }
+            });
+
+            console.log("Dropdown setup completed.");
+        } else {
+            console.error("Dropdown-Menü oder Benutzer-Element nicht gefunden.");
+        }
+    }, 100);
 }
 
 /**
- * Displays the initials of the user (first letter of first and last name) in the specified element.
- * If the first and last name are available, the initials are displayed; otherwise, an error is logged.
+ * Zeigt die Initialen des Users im Header an.
  * 
- * @param {string} firstName - The user's first name.
- * @param {string} lastName - The user's last name.
+ * @param {string} firstName - Der Vorname des Users.
+ * @param {string} lastName - Der Nachname des Users.
  */
 function displayUserInitials(firstName, lastName) {
     const initialsElement = document.getElementById('user');
@@ -91,8 +94,7 @@ function displayUserInitials(firstName, lastName) {
 }
 
 /**
- * Loads the user data from localStorage or sessionStorage and displays the user's initials.
- * If a user is found, it calls the function to display the initials. Otherwise, an error message is logged.
+ * Lädt den User aus dem Speicher und zeigt die Initialen im Header an.
  */
 function loadUserData() {
     let user = JSON.parse(localStorage.getItem('loggedInUser')) || JSON.parse(sessionStorage.getItem('loggedInUser'));

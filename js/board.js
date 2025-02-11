@@ -16,24 +16,6 @@ async function initBoard() {
 }
 
 /**
- * Dynamically includes HTML content into elements with the `w3-include-html` attribute.
- * @async
- */
-async function includeHTML() {
-  let includeElements = document.querySelectorAll("[w3-include-html]");
-  for (let i = 0; i < includeElements.length; i++) {
-    const element = includeElements[i];
-    let file = element.getAttribute("w3-include-html");
-    let resp = await fetch(file);
-    if (resp.ok) {
-      element.innerHTML = await resp.text(); // Injects fetched HTML content.
-    } else {
-      element.innerHTML = "Page not found";  // Displays an error message if the fetch fails.
-    }
-  }
-}
-
-/**
  * Loads contact data from the server and stores it in the session storage.
  * @async
  */
