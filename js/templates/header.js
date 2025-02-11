@@ -3,35 +3,42 @@
  * Ruft nach dem Laden die Initialen-Anzeige und Dropdown-Funktion auf.
  */
 function loadExternalHTML() {
+    const currentPage = window.location.pathname.split("/").pop();
+
+    if (currentPage === "login.html" || currentPage === "") {
+        return; // Funktion beenden, damit nichts geladen wird
+    }
+
     fetch("header.html")
         .then(response => {
-            if (!response.ok) {
-                throw new Error("Header konnte nicht geladen werden");
-            }
+            if (!response.ok) throw new Error();
             return response.text();
         })
         .then(html => {
-            document.querySelector("header").innerHTML = html;
-
-            setTimeout(() => {
-                setUpDropdown();
-                loadUserData(); 
-            }, 50);
+            const headerElement = document.querySelector("header");
+            if (headerElement) {
+                headerElement.innerHTML = html;
+                setTimeout(() => {
+                    loadUserData();
+                }, 50);
+            }
         })
-        .catch(error => console.error("Fehler beim Laden des Headers:", error));
+        .catch(() => { /* Fehler unterdrücken */ });
 
     fetch("sidebar.html")
         .then(response => {
-            if (!response.ok) {
-                throw new Error("Sidebar konnte nicht geladen werden");
-            }
+            if (!response.ok) throw new Error();
             return response.text();
         })
         .then(html => {
-            document.querySelector("aside").innerHTML = html;
+            const sidebarElement = document.querySelector("aside");
+            if (sidebarElement) {
+                sidebarElement.innerHTML = html;
+            }
         })
-        .catch(error => console.error("Fehler beim Laden der Sidebar:", error));
+        .catch(() => { /* Fehler unterdrücken */ });
 }
+
 document.addEventListener("DOMContentLoaded", loadExternalHTML);
 
 /**
@@ -40,38 +47,6 @@ document.addEventListener("DOMContentLoaded", loadExternalHTML);
  */
 function toggleDropdown() {
     document.getElementById("user-dropdown").classList.toggle("show");
-}
-
-/**
- * Aktiviert das Dropdown-Menü für den Benutzer.
- * Stellt sicher, dass Klicks außerhalb das Menü schließen.
- */
-function setUpDropdown() {
-    setTimeout(() => {
-        const userElement = document.getElementById("user");
-        const dropdownMenu = document.getElementById("user-dropdown");
-
-        if (userElement && dropdownMenu) {
-            userElement.removeEventListener('click', toggleDropdown);
-            document.removeEventListener('click', closeDropdown);
-
-            // Dropdown öffnen/schließen
-            userElement.addEventListener('click', function (event) {
-                event.stopPropagation();
-                dropdownMenu.classList.toggle("show");
-            });
-
-            document.addEventListener("click", function (event) {
-                if (!dropdownMenu.contains(event.target) && !userElement.contains(event.target)) {
-                    dropdownMenu.classList.remove("show");
-                }
-            });
-
-            console.log("Dropdown setup completed.");
-        } else {
-            console.error("Dropdown-Menü oder Benutzer-Element nicht gefunden.");
-        }
-    }, 100);
 }
 
 /**
