@@ -3,6 +3,7 @@
 const PATH_TO_CONTACTS = "contacts";
 const PATH_TO_TASKS = "tasks";
 
+let sourceColumn = null;
 let currentDraggedElement;
 
 /**
@@ -112,6 +113,10 @@ function formatDate(dateString) {
  * @param {DragEvent} event - The dragstart event triggered by dragging an element.
  */
 function startDragging(event) {
+  sourceColumn = event.target.closest('.drag-area'); // Speichert die Ursprungs-Spalte
+  if (sourceColumn) {
+      sourceColumn.classList.add('highlight-border'); // Hebt Ursprungs-Spalte hervor
+  }
   currentDraggedElement = event.target.id;
   event.target.classList.add("tilted");
 }
@@ -120,9 +125,17 @@ function startDragging(event) {
  * Removes the "tilted" effect from the currently dragged element after dragging ends.
  */
 function endDragging() {
-  if (currentDraggedElement) {
-    document.getElementById(currentDraggedElement).classList.remove("tilted"); 
-  }
+    if (currentDraggedElement) {
+        let draggedElement = document.getElementById(currentDraggedElement);
+        if (draggedElement) {
+            draggedElement.classList.remove("tilted");
+        }
+
+        // Entfernt den Umriss aus der Ursprungs-Spalte
+        if (sourceColumn) {
+            sourceColumn.classList.remove("highlight-border");
+        }
+    }
 }
 
 /**
@@ -132,7 +145,10 @@ function endDragging() {
  */
 function allowDrop(event) {
   event.preventDefault();
-  event.target.classList.add('over'); // Umriss aktivieren
+  let dropColumn = event.target.closest('.drag-area');
+  if (dropColumn) {
+      dropColumn.classList.add('highlight-border'); // Hebt Ziel-Spalte hervor
+  }
 }
 
 /**
@@ -143,35 +159,55 @@ function allowDrop(event) {
  */
 function moveTo(event, state) {
   event.preventDefault();
-  event.target.classList.remove('over');
+  
+  let dropColumn = event.target.closest('.drag-area');
+
+  // Entferne den Umriss nach 300ms für einen Highlight-Effekt
+  setTimeout(() => {
+      if (sourceColumn) {
+          sourceColumn.classList.remove('highlight-border');
+      }
+      if (dropColumn) {
+          dropColumn.classList.remove('highlight-border');
+      }
+  }, 300); // Verzögerung für kurze Hervorhebung
 
   let tasks = JSON.parse(sessionStorage.getItem("tasks"));
   let element = tasks[`${currentDraggedElement}`];
 
   if (element) {
-    element.state = state;
-    sessionStorage.setItem("tasks", JSON.stringify(tasks));
-    updateData(PATH_TO_TASKS, tasks);
+      element.state = state;
+      sessionStorage.setItem("tasks", JSON.stringify(tasks));
+      updateData(PATH_TO_TASKS, tasks);
   }
 
   renderCards();
 }
 
 function updateEmptyColumns() {
-  const columns = ['open', 'in-progress', 'await-feedback', 'done']; // Deine Kategorien
-  columns.forEach((columnId) => {
-      const column = document.getElementById(columnId);
-      const tasks = JSON.parse(sessionStorage.getItem('tasks')) || {};
-      const tasksInColumn = Object.values(tasks).filter(task => task.state === columnId);
-      
-      if (tasksInColumn.length === 0) {
-          column.innerHTML = '<p>No Tasks To-Do</p>';
+  const columns = document.querySelectorAll('.drag-area'); // Alle Task-Spalten auswählen
+
+  columns.forEach(column => {
+      // Prüfen, ob die Spalte leer ist
+      if (column.children.length === 0) {
+          // Falls leer, eine neue div für den Platzhalter erstellen
+          let placeholderContainer = document.createElement('div');
+          placeholderContainer.classList.add('empty-task-container');
+
+          // Eine span für den Text erstellen
+          let placeholderText = document.createElement('span');
+          placeholderText.classList.add('empty-message');
+          placeholderText.textContent = 'No Tasks to do';
+
+          // span in div einfügen und div in column
+          placeholderContainer.appendChild(placeholderText);
+          column.appendChild(placeholderContainer);
       } else {
-          column.innerHTML = ''; // Entferne den Platzhalter, wenn Aufgaben vorhanden sind
-          tasksInColumn.forEach((task) => {
-              // Funktion um Task-Karten zu erstellen
-              createCard(task);
-          });
+          // Falls nicht leer, bestehende Platzhalter entfernen
+          let existingPlaceholder = column.querySelector('.empty-task-container');
+          if (existingPlaceholder) {
+              existingPlaceholder.remove();
+          }
       }
   });
 }
@@ -523,36 +559,18 @@ function createCard(key, taskCardsContainer, task) {
  * @throws {Error} Logs errors if task containers or columns are not found.
  */
 function renderCards() {
-  // Get the tasks from session storage.
-  let tasks = JSON.parse(sessionStorage.getItem("tasks"));
+  let tasks = JSON.parse(sessionStorage.getItem("tasks")) || {};
 
-  // Get all task cards containers (columns).
   let allTaskCardsContainer = document.querySelectorAll(".drag-area");
 
-  // Check if any task containers exist.
   if (!allTaskCardsContainer || allTaskCardsContainer.length === 0) {
       console.error("Es wurden keine Container mit der Klasse 'drag-area' gefunden.");
       return;
   }
 
-  // Clear the contents of all task containers.
-  allTaskCardsContainer.forEach((column) => {
-      if (!column) {
-          console.error("Ein Container ist null. Überprüfe, ob die IDs oder Klassen korrekt gesetzt wurden.");
-      } else {
-          column.innerHTML = "";
-      }
-  });
+  // Alle Spalten leeren
+  allTaskCardsContainer.forEach(column => column.innerHTML = "");
 
-  // Define messages for empty columns.
-  let columns = {
-      "open": "No tasks To do",
-      "in-progress": "No tasks In Progress",
-      "closed": "No tasks Await Feedback",
-      "done": "No tasks Done"
-  };
-
-  // Loop through the tasks and create a card for each task, appending it to the appropriate column.
   Object.keys(tasks).forEach((key) => {
       let task = tasks[key];
       let stateColumn = document.getElementById(task.state);
@@ -563,16 +581,8 @@ function renderCards() {
       }
   });
 
-  // Check for empty columns and display a placeholder message if necessary.
-  Object.keys(columns).forEach((columnId) => {
-      let column = document.getElementById(columnId);
-      if (column && column.children.length === 0) {
-          let emptyContainer = document.createElement("div");
-          emptyContainer.classList.add("empty-task-container");
-          emptyContainer.textContent = columns[columnId];
-          column.appendChild(emptyContainer);
-      }
-  });
+  // **Nach dem Rendern leere Spalten überprüfen**
+  updateEmptyColumns();
 }
 
 /**
@@ -584,16 +594,17 @@ function renderCards() {
  */
 function moveTo(event, state) {
   event.preventDefault();
-  let tasks = JSON.parse(sessionStorage.getItem("tasks"));
-  let element = tasks[`${currentDraggedElement}`];
+  let tasks = JSON.parse(sessionStorage.getItem("tasks")) || {};
+  let element = tasks[currentDraggedElement];
 
   if (element) {
-    element.state = state;
-    sessionStorage.setItem("tasks", JSON.stringify(tasks));
-    updateData(PATH_TO_TASKS, tasks);
+      element.state = state;
+      sessionStorage.setItem("tasks", JSON.stringify(tasks));
+      updateData(PATH_TO_TASKS, tasks);
   }
 
-  renderCards();
+  renderCards(); 
+  updateEmptyColumns(); // **Leere Spalten nach Verschieben aktualisieren**
 }
 
 /**
