@@ -57,22 +57,6 @@ function togglePasswordVisibility(inputId, icon) {
 }
 
 /**
- * Validates the username and password input fields. If both fields are non-empty, 
- * enables the login button; otherwise, disables it.
- */
-function validateInputs() {
-    const usernameInput = document.getElementById('username');
-    const passwordInput = document.getElementById('password');
-    const loginButton = document.querySelector('.login-button');
-
-    if (usernameInput.value.trim() !== "" && passwordInput.value.trim() !== "") {
-        loginButton.disabled = false;
-    } else {
-        loginButton.disabled = true;
-    }
-}
-
-/**
  * Handles the login process by validating the user's credentials, storing their session data,
  * and redirecting them to the summary page if successful. Alerts the user if the credentials are invalid.
  * 

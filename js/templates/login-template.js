@@ -28,7 +28,7 @@ function generateLoginPageTemplate() {
             </label>
 
             <div class="button-container">
-                <button type="submit" class="login-button" disabled>Log in</button>
+                <button type="submit" class="login-button">Log in</button>
                 <a href="summary.html">
                     <button type="button" class="guest-button">Guest Log in</button>
                 </a>
