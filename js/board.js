@@ -113,9 +113,9 @@ function formatDate(dateString) {
  * @param {DragEvent} event - The dragstart event triggered by dragging an element.
  */
 function startDragging(event) {
-  sourceColumn = event.target.closest('.drag-area'); // Speichert die Ursprungs-Spalte
+  sourceColumn = event.target.closest('.drag-area');
   if (sourceColumn) {
-      sourceColumn.classList.add('highlight-border'); // Hebt Ursprungs-Spalte hervor
+      sourceColumn.classList.add('highlight-border');
   }
   currentDraggedElement = event.target.id;
   event.target.classList.add("tilted");
@@ -131,7 +131,6 @@ function endDragging() {
             draggedElement.classList.remove("tilted");
         }
 
-        // Entfernt den Umriss aus der Ursprungs-Spalte
         if (sourceColumn) {
             sourceColumn.classList.remove("highlight-border");
         }
@@ -147,7 +146,7 @@ function allowDrop(event) {
   event.preventDefault();
   let dropColumn = event.target.closest('.drag-area');
   if (dropColumn) {
-      dropColumn.classList.add('highlight-border'); // Hebt Ziel-Spalte hervor
+      dropColumn.classList.add('highlight-border');
   }
 }
 
@@ -162,7 +161,6 @@ function moveTo(event, state) {
   
   let dropColumn = event.target.closest('.drag-area');
 
-  // Entferne den Umriss nach 300ms für einen Highlight-Effekt
   setTimeout(() => {
       if (sourceColumn) {
           sourceColumn.classList.remove('highlight-border');
@@ -170,7 +168,7 @@ function moveTo(event, state) {
       if (dropColumn) {
           dropColumn.classList.remove('highlight-border');
       }
-  }, 300); // Verzögerung für kurze Hervorhebung
+  }, 300);
 
   let tasks = JSON.parse(sessionStorage.getItem("tasks"));
   let element = tasks[`${currentDraggedElement}`];
@@ -188,22 +186,17 @@ function updateEmptyColumns() {
   const columns = document.querySelectorAll('.drag-area'); // Alle Task-Spalten auswählen
 
   columns.forEach(column => {
-      // Prüfen, ob die Spalte leer ist
       if (column.children.length === 0) {
-          // Falls leer, eine neue div für den Platzhalter erstellen
           let placeholderContainer = document.createElement('div');
           placeholderContainer.classList.add('empty-task-container');
 
-          // Eine span für den Text erstellen
           let placeholderText = document.createElement('span');
           placeholderText.classList.add('empty-message');
           placeholderText.textContent = 'No Tasks to do';
 
-          // span in div einfügen und div in column
           placeholderContainer.appendChild(placeholderText);
           column.appendChild(placeholderContainer);
       } else {
-          // Falls nicht leer, bestehende Platzhalter entfernen
           let existingPlaceholder = column.querySelector('.empty-task-container');
           if (existingPlaceholder) {
               existingPlaceholder.remove();
