@@ -128,6 +128,9 @@ body.modal-open {
 }
 
 .pop-up {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     width: 751px;
     height: 100vh;
 }
