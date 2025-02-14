@@ -94,7 +94,7 @@
 
 @media screen and (max-width: 920px) {
     .contacts {
-        margin-top: 81px;
+        margin-top: 97px;
         margin-left: 0;
         width: 100%;
     }
@@ -104,33 +104,12 @@
     }
 }
 
-@media screen and (max-width: 780px) {
-    
-    .first-container {
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .popup-contact-info {
-        margin-top: 137px;
-    }
-
-    .overlay {
-        height: 1008px;
-    }
-}
-
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 920px) {
     body {
         margin: 0;
         width: 100%;
-        height: 926px;
         display: flex;
         flex-direction: column;
-    }
-
-    .overlay {
-        height: 1008px !important;
     }
 
     * {
@@ -169,7 +148,6 @@
         position: fixed;
         top: 80px;
         width: 100%;
-        height: 848px;
         background: #F6F7F8;
         box-shadow: none;
     }
@@ -307,14 +285,6 @@
         border: 3px;
     }
 
-    .overlay-popup-container {
-        width: 100%;
-        position: fixed;
-        top: 662px;
-        height: 124px;
-        text-align: -webkit-center;
-    }
-
     .popup-button-container {
         display: none;
         width: 116px;
@@ -349,11 +319,20 @@
     }
 
     .popup-option-container {
-        width: 100%;
-        height: 60px;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: flex-end;
         position: fixed;
-        top: 762px;
+        top: 575px;
+        right: 0;
+        width: 100%;
+        height: 156px;
         text-align: -webkit-right;
+    }
+
+    .overlay-popup-container {
+        margin-right: 50px;
+        text-align: -webkit-center;
     }
 
     .option {
@@ -377,6 +356,18 @@
     }
 }
 
+@media screen and (max-width: 780px) {
+    
+    .first-container {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .popup-contact-info {
+        margin-top: 137px;
+    }
+}
+
 @media screen and (max-width: 430px)  {
     body {
         margin: 0;
@@ -384,10 +375,6 @@
         height: 926px;
         display: flex;
         flex-direction: column;
-    }
-
-    .overlay {
-        height: 1008px !important;
     }
 
     * {
@@ -408,7 +395,6 @@
         display: none;
         position: fixed;
         top: 80px;
-        height: 848px;
         background: #F6F7F8;
         box-shadow: none;
     }

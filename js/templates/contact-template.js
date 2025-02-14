@@ -41,43 +41,51 @@ function generateAddContactButtonTemplate() {
 }
 
 function generateContactPopUpTemplate(id, firstName, lastName, email, phone, color) {
-    return `
-      <div class="popup-container">
-        <div class="first-container">
-          <div class="popup-initiale-container">
-            <div class="initiale-circle" style="background-color: ${color};">
-              <span class="popup-initiale">${getInitials(firstName, lastName)}</span>
-            </div>
+  return `
+    <div class="popup-container">
+      <div class="first-container">
+        <div class="popup-initiale-container">
+          <div class="initiale-circle" style="background-color: ${color};">
+            <span class="popup-initiale">${getInitials(firstName, lastName)}</span>
           </div>
-          <div class="button-name-container">
-            <span class="popup-name">${firstName} ${lastName}</span>
+        </div>
+
+        <div class="button-name-container">
+          <span class="popup-name">${firstName} ${lastName}</span>
+          <div class="popup-option-container">
+            <div id="popup-option" class="option" onclick="togglePopupOption()">
+              <img class="option-point-img" src="assets/img/optionpoint.png" alt="">
+            </div>
             <div class="overlay-popup-container">
-              <div class="popup-button-container" id="popup-button">
-                <button type="button" class="popup-buttons" onclick="openEditContact('${id}', '${firstName}', '${lastName}', '${email}', '${phone}')">
-                  <img class="edit-icon" src="assets/img/edit-black.png" alt="">
-                  <span class="edit">Edit</span>
-                </button>
-                <button type="button" class="popup-buttons" onclick="deleteContact('${id}')">
-                  <img class="delete-icon" src="assets/img/delete.png" alt="">
-                  <span class="delete">Delete</span>
-                </button>
-              </div>
+            <div class="popup-button-container" id="popup-button">
+              <button type="button" class="popup-buttons" onclick="openEditContact('${id}', '${firstName}', '${lastName}', '${email}', '${phone}')">
+                <img class="edit-icon" src="assets/img/edit-black.png" alt="">
+                <span class="edit">Edit</span>
+              </button>
+              <button type="button" class="popup-buttons" onclick="deleteContact('${id}')">
+                <img class="delete-icon" src="assets/img/delete.png" alt="">
+                <span class="delete">Delete</span>
+              </button>
             </div>
           </div>
-        </div>
-        <div class="popup-contact-info">
-          <span class="popup-headline">Contact Information</span>
-        </div>
-        <div class="popup-email-phone">
-          <div class="popup-email">
-            <span class="popup-name-span">Email</span>
-            <span class="popup-email-span">${email}</span>
           </div>
-          <div class="popup-phone">
-            <span class="popup-phone-span">Phone</span>
-            <span class="popup-phoneNr-span">${phone}</span>
-          </div>
+        </div>
+
+      </div>
+      <div class="popup-contact-info">
+        <span class="popup-headline">Contact Information</span>
+      </div>
+      <div class="popup-email-phone">
+        <div class="popup-email">
+          <span class="popup-name-span">Email</span>
+          <span class="popup-email-span">${email}</span>
+        </div>
+        <div class="popup-phone">
+          <span class="popup-phone-span">Phone</span>
+          <span class="popup-phoneNr-span">${phone}</span>
         </div>
       </div>
-    `;
+          
+    </div>
+  `;
 }

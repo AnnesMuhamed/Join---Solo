@@ -53,9 +53,6 @@
 }
 
 @media screen and (max-width: 1280px) {
-    #editContact.show, #addContact.show {
-        left: 50%;
-    }
 
     #editContact, #addContact {
         width: 874px;
@@ -132,15 +129,11 @@
 }
 
 @media screen and (max-width: 920px) {
-    .overlay {
-        height: 1008px;
-    }
 
     .add-contact-form, #addContact, #editContact {
         position: fixed;
-        bottom: -100%;
-        left: 50%;
-        transform: translate(-50%, 100%);
+        bottom: 0;
+        transform: translate(0%, 100%);
         width: 90vw;
         height: auto;
         background: white;
@@ -152,7 +145,7 @@
     }
 
     .add-contact-form.show, #addContact.show, #editContact.show {
-        transform: translate(-50%, -50%);
+        transform: translate(0%, -30%);
         opacity: 1;
         display: block;
     }
@@ -324,7 +317,7 @@
 
     .addButton-container {
         position: fixed;
-        top: 762px;
+        top: 685px;
         height: 56px;
         width: 100%;
         display: flex;
@@ -334,9 +327,7 @@
 
     #contactSection button {
         display: flex;
-        position: fixed;
         gap: 10px;
-        top: 762px;
         width: 56px;
         height: 56px;
         border-radius: 46px;

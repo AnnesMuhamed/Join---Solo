@@ -129,7 +129,7 @@ body.modal-open {
 
 .pop-up {
     width: 751px;
-    height: 926px;
+    height: 100vh;
 }
 
 .contacts {
@@ -318,9 +318,8 @@ body.modal-open {
     width: 1212px;
     height: 592px;
     position: absolute;
-    top: 513px;
     left: 160%;
-    transform: translate(-50%, -50%);
+    transform: translate(0%, -50%);
     border-radius: 30px;
     background: #FFFFFF;
     display: flex;
@@ -335,7 +334,7 @@ body.modal-open {
     position: absolute;
     top: 513px;
     left: 160%;
-    transform: translate(-50%, -50%);
+    transform: translate(0%, -50%);
     border-radius: 30px;
     background: #FFFFFF;
     display: flex;
@@ -345,13 +344,17 @@ body.modal-open {
 }
 
 #addContact.show {
-    left: 716px;
+    left: 0px;
+    right: 0;
+    margin: auto;
     z-index: 40;
 }
 
 #editContact.show {
-    left: 716px;
+    left: 0;
     z-index: 40;
+    right: 0;
+    margin: auto;
 }
 
 #contactLeft {
@@ -680,7 +683,6 @@ body.modal-open {
 #popup-section {
     width: 461px;
     height: 361px;
-    margin-top: 30px;
     margin-left: 50px;
 }
 
