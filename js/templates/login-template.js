@@ -41,8 +41,8 @@ function generateLoginPageTemplate() {
           <a href="sign-up.html"><button class="signup-button">Sign up</button></a>
       </div>
       <div class="link-container hidden">
-          <a class="policy-notice" href="privacy-policy.html">Privacy Policy</a>
-          <a class="policy-notice" href="legal-notice.html">Legal notice</a>
+          <a class="policy-notice" href="public-privacy-policy.html">Privacy Policy</a>
+          <a class="policy-notice" href="public-legal-notice.html">Legal notice</a>
       </div>
     `;
 }

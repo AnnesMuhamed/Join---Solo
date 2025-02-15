@@ -7,7 +7,7 @@ function generateSignUpPageTemplate() {
       <div class="signup-container">
           <div class="form-container">
               <div class="header-container">
-                  <a href="../index.html">    
+                  <a href="./index.html">    
                       <img src="./assets/img/arrow-left-line.png" alt="Zurück" class="back-arrow">
                   </a>
                   <div class="header">Sign Up</div>
@@ -37,7 +37,7 @@ function generateSignUpPageTemplate() {
                       <input type="checkbox" id="accept-policy" class="custom-checkbox" required>
                       <label for="accept-policy">
                           <span class="checkbox-custom"></span>
-                          I accept the <a href="privacy-policy.html" class="privacy-policy">Privacy policy</a>
+                          I accept the <a href="public-privacy-policy.html" class="privacy-policy">Privacy policy</a>
                       </label>
                   </div>
                   <button type="submit" class="sign-up-button">Sign Up</button>
@@ -45,8 +45,8 @@ function generateSignUpPageTemplate() {
           </div>
       </div>
       <div class="link-container">
-          <a class="policy-notice" href="./privacy-policy.html">Privacy Policy</a>
-          <a class="policy-notice" href="./legal-notice.html">Legal notice</a>
+          <a class="policy-notice" href="./public-privacy-policy.html">Privacy Policy</a>
+          <a class="policy-notice" href="./public-legal-notice.html">Legal notice</a>
       </div>
     `;
   }
