@@ -94,29 +94,44 @@ function highlightContact(element) {
 /**
  * Creates a new contact by validating input fields, constructing a contact object,
  * and sending it to the server. Renders the updated contact list and closes the contact form.
+ * Ensures all required fields are filled before submission.
+ * Clears input fields when reopening the form.
  * 
  * @async
  */
 async function createContact() {
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
 
-    if (!name || !email || !phone) {
-        alert('Bitte alle Felder ausfüllen');
+    if (!nameInput.checkValidity() || !emailInput.checkValidity() || !phoneInput.checkValidity()) {
+        return; 
+    }
+
+    const nameParts = nameInput.value.trim().split(' ');
+    if (nameParts.length < 2) {
+        nameInput.setCustomValidity('Bitte geben Sie Vor- und Nachnamen ein.');
+        nameInput.reportValidity();
         return;
     }
 
-    const [firstName, lastName] = name.split(' ');
-    if (!lastName) {
-        alert('Bitte geben Sie sowohl Vor- als auch Nachnamen ein');
-        return;
-    }
-    const newContact = { firstName, lastName, username: email, phone };
+    nameInput.setCustomValidity(''); 
+
+    const [firstName, lastName] = nameParts;
+    const newContact = { firstName, lastName, username: emailInput.value.trim(), phone: phoneInput.value.trim() };
 
     await postData('contacts', newContact);
     await renderContacts();
     closeContactForm();
+}
+
+/**
+ * Clears all input fields in the contact form when reopened.
+ */
+function clearInputFields() {
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('phone').value = '';
 }
 
 /**
@@ -233,6 +248,7 @@ function openContactForm() {
  */
 function closeContactForm() {
     closeForm('addContact');
+    clearInputFields();
 }
 
 /**
