@@ -316,7 +316,7 @@
 
     .addButton-container {
         position: fixed;
-        top: 685px;
+        bottom: 100px;
         height: 56px;
         width: 100%;
         display: flex;
@@ -366,5 +366,48 @@
 
     #buttons {
         left: 63.5px;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    #editContact, #addContact {
+        height: 621px;
+        top: 365px;
+    }
+
+    #contactLeft {
+        height: 250px;
+    }
+
+    .superior-person-container {
+        top: 216px;
+        height: 85px;
+    }
+
+    .person-container {
+        width: 85px;
+        height: 85px;
+    }
+
+    .person-icon {
+        width: 22.67px;
+        height: 22.67px;
+    }
+
+    #inputFields {
+        top: 316px;
+    }
+
+    #buttons, #editButtons {
+        top: 538px;
+    }
+
+    #editFormInitials {
+        font-size: 30px;
+    }
+
+    .popup-container {
+        height: 286px;
+        gap: 27px;
     }
 }

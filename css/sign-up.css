@@ -406,3 +406,18 @@ body.modal-open {
        margin-top: auto;
     }
 }
+
+@media (max-width: 375px) {
+    .form-container {
+        height: 448px;
+        bottom: 30px;
+    }
+
+    .header-container {
+        gap: 0;
+    }
+
+    .form {
+        gap: 12px;
+    }
+}

@@ -668,6 +668,10 @@ background-size: 16px;
     .add-button-img-column-responsiv:hover {
         filter: brightness(0) saturate(1000%) invert(59%) sepia(45%) saturate(3434%) hue-rotate(161deg) brightness(95%) contrast(89%);
     }
+
+    .card-container {
+        padding-bottom: 94px;
+    }
 }
 
 
